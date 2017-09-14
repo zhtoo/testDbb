@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x590"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y420"
+        android:background="@drawable/ic_menu_header"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/menu_person_name"
+            android:layout_width="@dimen/x260"
+            android:layout_height="@dimen/y105"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x270"
+            android:background="@drawable/ic_menu_name_bg"
+            android:gravity="center"
+            android:text="客服大倩"/>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_menu">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- ScrollView只能有一个直接的子孩子 -->
+            <LinearLayout
+                android:layout_marginTop="@dimen/x59"
+                android:id="@+id/ll_menu"
+                android:layout_width="@dimen/x555"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="@string/risk_control"
+                    android:drawableLeft="@drawable/ic_risk_selector"
+                    style="@style/menu_item_text_style"/>
+
+                <TextView
+                    android:text="@string/general_manager"
+                    android:drawableLeft="@drawable/ic_manager_selector"
+                    style="@style/menu_item_text_style"/>
+
+                <TextView
+                    android:text="@string/invalid_list"
+                    android:drawableLeft="@drawable/ic_invalid_selector"
+                    style="@style/menu_item_text_style"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <TextView
+            android:onClick="onExit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/x20"
+            android:text="退出"
+            android:textSize="18sp"
+            android:textColor="@drawable/menu_text_selector"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

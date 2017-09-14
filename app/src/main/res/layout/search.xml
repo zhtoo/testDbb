@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="@dimen/x467"
+              android:layout_height="@dimen/x652"
+              android:layout_marginBottom="@dimen/x10"
+              android:layout_marginLeft="@dimen/x10"
+              android:layout_marginRight="@dimen/x10"
+              android:background="@drawable/ic_search_menu_bg"
+              android:focusable="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
+
+    <TextView
+        style="@style/main_search_text_style"
+        android:text="客户姓名"/>
+
+    <EditText
+        android:id="@+id/editText"
+        style="@style/main_search_edittext_style"
+        android:hint="搜索客户姓名"/>
+
+    <TextView
+        style="@style/main_search_text_style"
+        android:text="客户经理"/>
+
+    <EditText
+        style="@style/main_search_edittext_style"
+        android:hint="搜索客户经理"/>
+
+    <TextView
+        style="@style/main_search_text_style"
+        android:text="电话号码"/>
+
+    <EditText
+        style="@style/main_search_edittext_style"
+        android:hint="搜索电话号码"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/y30"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View style="@style/autoFillStyle"/>
+
+        <Button
+            android:layout_width="@dimen/x181"
+            android:layout_height="@dimen/y56"
+            android:background="@drawable/ic_reset_bt_selector"
+            android:onClick="resetSearch"
+            android:text="重置"/>
+
+        <View
+            style="@style/autoFillStyle"/>
+
+        <Button
+            android:layout_width="@dimen/x181"
+            android:layout_height="@dimen/y56"
+            android:background="@drawable/ic_complete_bt_selector"
+            android:onClick="startSearch"
+            android:text="完成"/>
+
+        <View
+            style="@style/autoFillStyle"/>
+
+    </LinearLayout>
+
+</LinearLayout>

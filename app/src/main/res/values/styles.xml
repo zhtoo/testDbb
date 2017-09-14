@@ -1,0 +1,78 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--菜单条目文字-->
+    <style name="menu_item_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x80</item>
+        <item name="android:layout_marginTop">@dimen/x20</item>
+        <item name="android:onClick">onMenuItemClick</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@drawable/menu_text_selector</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:drawablePadding">@dimen/x22</item>
+        <item name="android:paddingLeft">@dimen/x160</item>
+    </style>
+
+    <!-- 横向线条 -->
+    <style name="horizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">@color/lineBackground</item>
+    </style>
+
+
+    <!-- 横向线条 -->
+    <style name="verticalLine">
+        <item name="android:layout_width">1dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/lineBackground</item>
+    </style>
+
+    <style name="detail_item_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/bg_detail_selector</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@drawable/detail_text_selector</item>
+
+    </style>
+
+    <style name="main_search_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/x25</item>
+        <item name="android:layout_marginLeft">@dimen/x25</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="main_search_edittext_style">
+        <item name="android:layout_width">@dimen/x400</item>
+        <item name="android:layout_height">@dimen/x60</item>
+        <item name="android:layout_marginTop">@dimen/x19</item>
+        <item name="android:layout_marginLeft">@dimen/x25</item>
+        <item name="android:drawableLeft">@drawable/ic_search</item>
+        <item name="android:drawablePadding">@dimen/x14</item>
+        <item name="android:background">@drawable/bg_edit_text_corner</item>
+    </style>
+
+    <style name="autoFillStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+</resources>

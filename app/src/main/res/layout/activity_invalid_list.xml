@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!--分割线-->
+    <View style="@style/horizontalLine"/>
+    <!--内容-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/invalid_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grayBackground"/>
+
+        <com.hs.doubaobao.view.MyRelativeLayout
+            android:id="@+id/invalid_search_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundGrey"
+            android:onClick="onMenuSearchContainerClick">
+
+            <LinearLayout
+                android:id="@+id/invalid_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <include layout="@layout/search"/>
+
+            </LinearLayout>
+
+        </com.hs.doubaobao.view.MyRelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
