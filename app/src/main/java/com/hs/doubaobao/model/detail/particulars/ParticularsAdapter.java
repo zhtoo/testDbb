@@ -27,9 +27,9 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
 
     private Context context;
     //存放标题
-    private List<String> mTitles;
+    private     List<String> mTitles;
     //存放内容
-    private List<Map> mMap;
+    private     List<Map> mMap;
 
     public ParticularsAdapter(Context context, List<String> mTitles, List<Map> mMap) {
         this.context = context;

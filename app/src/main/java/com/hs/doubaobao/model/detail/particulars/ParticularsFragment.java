@@ -8,6 +8,10 @@ import android.widget.LinearLayout;
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.BaseFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 作者：zhanghaitao on 2017/9/12 15:11
  * 邮箱：820159571@qq.com
@@ -32,7 +36,10 @@ public class ParticularsFragment extends BaseFragment {
 
         mRecycler.setLayoutManager(llm);
 
-        ParticularsAdapter adapter = new ParticularsAdapter();
+        List<String> mTitles = new ArrayList<>();
+        List<Map> mMap =new ArrayList<>();
+
+        ParticularsAdapter adapter = new ParticularsAdapter(getContext() ,mTitles,mMap);
 
         mRecycler.setAdapter(adapter);
     }
