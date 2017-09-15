@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/backgroundGrey"
+              android:orientation="vertical">
+
+    <View
+        style="@style/horizontalLine"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_marginTop="@dimen/y21"
+        android:gravity="center_vertical"
+        android:background="@color/whiteBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x36"
+            android:text="客户姓名："
+            android:textColor="@color/textGray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x350"
+            android:text="王麻子"
+            android:textColor="@color/textAggravating"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_marginTop="@dimen/y10"
+        android:gravity="center_vertical"
+        android:background="@color/whiteBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x36"
+            android:background="@color/whiteBackground"
+            android:text="客户经理："
+            android:textColor="@color/textGray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x350"
+            android:text="李四"
+            android:textColor="@color/textAggravating"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_marginTop="@dimen/y10"
+        android:gravity="center_vertical"
+        android:background="@color/whiteBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x36"
+            android:text="理由填写人："
+            android:textColor="@color/textGray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x350"
+            android:text="张三"
+            android:textColor="@color/textAggravating"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_marginTop="@dimen/y10"
+        android:gravity="center_vertical"
+        android:background="@color/whiteBackground">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x36"
+            android:text="填写时间："
+            android:textColor="@color/textGray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x350"
+            android:text="2017-09-15"
+            android:textColor="@color/textAggravating"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="@dimen/y15"
+        android:background="@color/whiteBackground"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x500"
+        android:paddingTop="@dimen/y42"
+        android:paddingLeft="@dimen/x36"
+        android:paddingRight="@dimen/x20"
+        android:text="asjdhajfhajsd fad急啊的哈岁的的差距扩大化叫阿三的系将会发生回到家就会撒娇哈岁的撒娇你几号放假啊是司法部啊实践活动计划 就是经济沙皇的大家好sdac bsdfjasdfas\n  as是多久啊是大家就卡死的经济的卡的放假啊是看到ask大家ask点击阿拉山口大家啊的空间阿德健康；利空打击咯多久啊付款就懒的借口南京啊双方纠纷加把劲啊上班几百年的就杀ds "/>
+
+</LinearLayout>

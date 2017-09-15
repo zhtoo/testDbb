@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/grayBackground"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grayBackground"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x26"
+            android:layout_marginTop="@dimen/y26"
+            android:text="风控意见:"
+            android:textColor="@color/textAggravating"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:layout_width="@dimen/x716"
+            android:layout_height="@dimen/y431"
+            android:layout_marginTop="@dimen/x15"
+            android:background="@color/whiteBackground"
+            android:gravity="center|left|top"
+            android:hint="请输入"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/x716"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y31"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="风控定额："
+                android:textColor="@color/textAggravating"/>
+
+            <EditText
+                android:layout_width="@dimen/x271"
+                android:layout_height="@dimen/y73"
+                android:background="@color/whiteBackground"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="万元"
+                android:textColor="@color/textAggravating"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="@dimen/x529"
+            android:layout_height="@dimen/y97"
+            android:layout_marginTop="@dimen/y80"
+            android:background="@drawable/ic_pass_selector"
+            android:gravity="center"
+            android:text="通过"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:layout_width="@dimen/x529"
+            android:layout_height="@dimen/y97"
+            android:layout_marginTop="@dimen/y15"
+            android:background="@drawable/ic_save_selector"
+            android:gravity="center"
+            android:text="保存"
+            android:textColor="@color/textGray"/>
+
+        <Button
+            android:id="@+id/approval_not_pass"
+            android:layout_width="@dimen/x529"
+            android:layout_height="@dimen/y97"
+            android:layout_marginTop="@dimen/y15"
+            android:background="@drawable/ic_not_pass_selector"
+            android:gravity="center"
+            android:text="不通过"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/approval_not_pass_reason"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundGrey">
+
+        <include layout="@layout/dialog_reason_not_pass"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

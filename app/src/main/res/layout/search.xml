@@ -49,6 +49,7 @@
             android:layout_height="@dimen/y56"
             android:background="@drawable/ic_reset_bt_selector"
             android:onClick="resetSearch"
+            android:id="@+id/search_reset"
             android:text="重置"/>
 
         <View
@@ -59,6 +60,7 @@
             android:layout_height="@dimen/y56"
             android:background="@drawable/ic_complete_bt_selector"
             android:onClick="startSearch"
+            android:id="@+id/search_start"
             android:text="完成"/>
 
         <View

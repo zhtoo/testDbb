@@ -24,7 +24,6 @@ import java.util.Map;
 
 public class ParticularsAdapter extends RecyclerView.Adapter {
 
-
     private Context context;
     //存放标题
     private     List<String> mTitles;
@@ -96,6 +95,7 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
                     }else if(key.equals("*申请借款金额")){
                         container+="万元";
                     }
+
                     if (TextUtils.isEmpty(itemMap.get(key)) || container.contains("null")) {
                         container = "暂无数据";
                     }
@@ -133,13 +133,14 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
                 text.setLayoutParams(lp);
                 text.setPadding(dp2px(context, 15),dp2px(context, 15),dp2px(context, 15),dp2px(context, 15));
                 text.setText(container);
+
                 mLayout.setGravity(Gravity.CENTER);
                 mLayout.addView(text);
                 return mLayout;
             }
 
             //画分割线
-            if ("line".equals(container)) {
+            if ("line".equals(container)||"line".equals(name)) {
                 View line = new View(context);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,//mText的宽度
@@ -147,25 +148,11 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
                 lp.setMargins(dp2px(context, 16), 0, 0, 0);
                 line.setLayoutParams(lp);
                 line.setBackgroundResource(R.color.lineBackground);
+
                 mLayout.setGravity(Gravity.RIGHT);
                 mLayout.addView(line);
                 return mLayout;
             }
-
-            if ("container".equals(name)) {
-                TextView text = new TextView(context);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,//mText的宽度
-                        LinearLayout.LayoutParams.WRAP_CONTENT);
-                lp.setMargins(dp2px(context, 16), 0, 0, 0);
-                text.setLayoutParams(lp);
-                text.setPadding(dp2px(context, 15),dp2px(context, 15),dp2px(context, 15),dp2px(context, 15));
-                text.setText("说明");
-                mLayout.setGravity(Gravity.CENTER);
-                mLayout.addView(text);
-                return mLayout;
-            }
-
 
             //设置条目的padding
             mLayout.setPadding(dp2px(context, 3), dp2px(context, 3), dp2px(context, 3), dp2px(context, 3));
@@ -173,11 +160,11 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
             TextView mText = new TextView(context);
             mText.setText(name + ":");
             mText.setTextSize(12);
-            mText.setTextColor(0x55000000);
+            mText.setTextColor(context.getResources().getColor(R.color.textGray));
             // 为子View设置布局参数
             if (name.length() < 10) {
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                        dp2px(context, 150), //mText的宽度
+                        dp2px(context, 130), //mText的宽度
                         LinearLayout.LayoutParams.WRAP_CONTENT);
                 mText.setLayoutParams(lp);
             }
@@ -186,7 +173,8 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
             TextView mContainer = new TextView(context);
             mContainer.setText(container);
             mContainer.setTextSize(12);
-            mContainer.setTextColor(0xFF000000);
+            mContainer.setTextColor(context.getResources().getColor(R.color.textAggravating));
+            mContainer.setPadding(0, 0, dp2px(context, 5), 0);
             mLayout.addView(mText);
             mLayout.addView(mContainer);
             return mLayout;

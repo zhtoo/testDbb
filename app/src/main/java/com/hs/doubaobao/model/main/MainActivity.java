@@ -75,7 +75,6 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
 
         mSearchContainer = (MyRelativeLayout) findViewById(R.id.main_search_container);
 
-
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
         mSearchContainer.setVisibility(View.GONE);
         initState();

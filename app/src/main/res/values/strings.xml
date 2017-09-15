@@ -5,6 +5,7 @@
     <string name="risk_control">风控审批</string>
     <string name="general_manager">总经理审批</string>
     <string name="invalid_list">无效列表</string>
+    <string name="invalid_reason">无效理由</string>
 
     <!--标题-->
     <string name="read_data">资料查看</string>
