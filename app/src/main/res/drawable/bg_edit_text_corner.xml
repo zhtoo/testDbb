@@ -4,7 +4,7 @@
     >
 
     <!-- 填充 -->
-    <solid android:color="@color/whiteBackground" /> <!-- 定义填充的颜色值 -->
+    <solid android:color="@color/white" /> <!-- 定义填充的颜色值 -->
 
     <size android:height="20dp" />
     <!-- 描边 -->

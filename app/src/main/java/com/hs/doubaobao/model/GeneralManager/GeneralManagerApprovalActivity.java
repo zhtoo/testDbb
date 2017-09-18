@@ -23,7 +23,6 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_general_manager_approval);
-        setContentView(R.layout.activity_risk_control_approval);
         setTitle(getString(R.string.general_manager));
         setTitleTextColor(R.color.textAggravating);
         isShowRightView(false);

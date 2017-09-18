@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/x590"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
@@ -29,8 +29,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/bg_menu">
+        android:background="@drawable/bg_menu"
+        android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -39,41 +39,83 @@
 
             <!-- ScrollView只能有一个直接的子孩子 -->
             <LinearLayout
-                android:layout_marginTop="@dimen/x59"
                 android:id="@+id/ll_menu"
-                android:layout_width="@dimen/x555"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x59"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:text="@string/risk_control"
-                    android:drawableLeft="@drawable/ic_risk_selector"
-                    style="@style/menu_item_text_style"/>
+                <LinearLayout
+                    android:onClick="onRiskClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x80"
+                    android:layout_marginTop="@dimen/x20"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:text="@string/general_manager"
-                    android:drawableLeft="@drawable/ic_manager_selector"
-                    style="@style/menu_item_text_style"/>
+                    <TextView
+                        android:id="@+id/menu_risk"
+                        style="@style/menu_item_text_style"
+                        android:drawableLeft="@drawable/ic_risk_selector"
+                        android:text="@string/risk_control"/>
 
-                <TextView
-                    android:text="@string/invalid_list"
-                    android:drawableLeft="@drawable/ic_invalid_selector"
-                    style="@style/menu_item_text_style"/>
+                    <com.hs.doubaobao.view.DotView
+                        android:id="@+id/menu_risk_dot"
+                        android:layout_marginTop="@dimen/y15"
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y20"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:onClick="onManagerClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x80"
+                    android:layout_marginTop="@dimen/x20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/menu_manager"
+                        style="@style/menu_item_text_style"
+                        android:drawableLeft="@drawable/ic_manager_selector"
+                        android:text="@string/general_manager"/>
+
+                    <com.hs.doubaobao.view.DotView
+                        android:layout_marginTop="@dimen/y15"
+                        android:id="@+id/menu_manager_dot"
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y20"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:onClick="onInvalidClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x80"
+                    android:layout_marginTop="@dimen/x20"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/menu_invalid"
+                        style="@style/menu_item_text_style"
+                        android:drawableLeft="@drawable/ic_invalid_selector"
+                        android:text="@string/invalid_list"/>
+                </LinearLayout>
 
             </LinearLayout>
 
         </ScrollView>
 
         <TextView
-            android:onClick="onExit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:onClick="onExit"
             android:padding="@dimen/x20"
             android:text="退出"
-            android:textSize="18sp"
             android:textColor="@drawable/menu_text_selector"
+            android:textSize="18sp"
             />
 
     </LinearLayout>

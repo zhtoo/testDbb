@@ -9,6 +9,8 @@
 
 
     <color name="white">#fff</color>
+    <!--透明色-->
+    <color name="transparent">#00000000</color>
 
     <!--黑色遮挡背景色-->
     <color name="backgroundGrey">#33000000</color>
@@ -24,10 +26,12 @@
     <color name="textAggravating">#333333</color>
     <!--用于一般文字信息-->
     <color name="textGray">#999999</color>
+    <color name="textBrown">#6b5549</color>
     <!--白色背景-->
     <color name="whiteBackground">#F9F9F9</color>
 
     <color name="grayBackground">#EEEEEE</color>
+    <color name="RED">#FF0000</color>
 
 
 

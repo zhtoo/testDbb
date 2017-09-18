@@ -37,4 +37,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //图片查阅框架
     compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    //json解析
+    compile 'com.google.code.gson:gson:2.6'
+    //okHttp3的依赖
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
 }

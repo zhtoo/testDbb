@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class GMAPresener implements GMAContract.Presenter {
 
-    private static final String TAG ="GMAPresener" ;
+    private static final String TAG ="LoginPresener" ;
     GMAContract.View viewRoot;
 
     public GMAPresener(GMAContract.View viewRoot) {

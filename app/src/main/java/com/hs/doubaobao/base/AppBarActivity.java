@@ -210,6 +210,15 @@ public class AppBarActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    public void hideTitleBar() {
+        if (mTitleStatusBar != null) {
+            mTitleStatusBar.setVisibility(View.GONE);
+        }
+        if (mTransparentStatusBar != null) {
+            mTransparentStatusBar.setVisibility(View.GONE);
+        }
+    }
+
     // 让标题栏显示
     public void showTitleBar() {
         if (mAppBar != null) {

@@ -15,6 +15,7 @@ import android.widget.Scroller;
 public class SlidingMenu extends ViewGroup {
 
     private static final String TAG = "SlidingMenu";
+    private final Context context;
     private View menu;//菜单
     private View main;//主界面
     private int menuWidth;//菜单的宽度
@@ -27,6 +28,7 @@ public class SlidingMenu extends ViewGroup {
 
     public SlidingMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
         scroller = new Scroller(context);
     }
 
@@ -35,7 +37,7 @@ public class SlidingMenu extends ViewGroup {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);    // 测量容器自己的宽高
         menu = getChildAt(0); // 获取菜单容器
         main = getChildAt(1); // 获取主界面容器
-        menuWidth = menu.getLayoutParams().width;     // 获取菜单的宽
+        menuWidth = 810;     // 获取菜单的宽
         // 测量菜单
         menu.measure(menuWidth, heightMeasureSpec);
         // 测量主界面
@@ -45,7 +47,7 @@ public class SlidingMenu extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // 对菜单进行排版
-        int menuLeft = -menuWidth;    // 菜单的left位置为菜单的宽的负数
+        int menuLeft = -menuWidth ;    // 菜单的left位置为菜单的宽的负数
         int menuTop = 0;
         int menuRight = 0;
         int menuBottom = bottom - top;        // 菜单的bottom位置为容器的高
@@ -118,7 +120,7 @@ public class SlidingMenu extends ViewGroup {
                 int adsX = Math.abs(dX);
 
                 if (dX > 0) {//向右
-                    Log.e(TAG,"误伤向右");
+                    Log.e(TAG, "误伤向右");
                     if (adsX > menuWidth / 4) {
                         // 把菜单完全滑出来
                         startScroll(menuWidth);
@@ -127,8 +129,8 @@ public class SlidingMenu extends ViewGroup {
                     }
                 }
                 if (dX < 0) {//向左
-                    Log.e(TAG,"误伤向左");
-                    Log.e(TAG,"误伤向左"+"adsX-"+adsX+"menuWidth / 4-"+menuWidth / 4);
+                    Log.e(TAG, "误伤向左");
+                    Log.e(TAG, "误伤向左" + "adsX-" + adsX + "menuWidth / 4-" + menuWidth / 4);
                     if (adsX > menuWidth / 4) {
                         //菜单完全隐藏
                         startScroll(0);

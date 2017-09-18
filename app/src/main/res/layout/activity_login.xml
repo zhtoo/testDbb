@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login_page"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <!--这个是隐藏的布局，然后通过动态的设置高度达到效果-->
+        <LinearLayout
+            android:id="@+id/ll_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/x150"
+            android:src="@drawable/ic_login_logo" />
+
+        <EditText
+            android:id="@+id/login_username"
+            android:layout_width="@dimen/x528"
+            android:layout_height="@dimen/y84"
+            android:layout_marginTop="@dimen/x164"
+            android:background="@drawable/bg_edit_text_corner"
+            android:hint="请输入用户名"
+            android:lines="1"
+            android:paddingLeft="@dimen/x30"
+            android:text=""
+            android:textSize="15sp" />
+
+
+        <EditText
+            android:id="@+id/login_pwd"
+            android:layout_width="@dimen/x528"
+            android:layout_height="@dimen/y84"
+            android:layout_marginTop="@dimen/y56"
+            android:background="@drawable/bg_edit_text_corner"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:paddingLeft="@dimen/x30"
+            android:text=""
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/login_btn_sure"
+            android:layout_width="@dimen/x528"
+            android:layout_height="@dimen/y96"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/x25"
+            android:layout_marginRight="@dimen/x25"
+            android:layout_marginTop="@dimen/y55"
+            android:background="@drawable/ic_login_button_selector"
+            android:text="登录"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,6 +1,9 @@
 package com.hs.doubaobao.model.main;
 
-import android.util.Log;
+import com.hs.doubaobao.base.BaseParams;
+import com.hs.doubaobao.http.OKHttpWrap;
+import com.hs.doubaobao.threadpool.ThreadPoolProxyFactory;
+import com.hs.doubaobao.utils.log.LogWrap;
 
 import java.util.Map;
 
@@ -22,12 +25,30 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
     @Override
-    public void getData(Map mapParameter) {
-        String  o =(String) mapParameter.get("1");
+    public void getData(final Map mapParameter) {
 
-        Log.d(TAG,o);
-        viewRoot.setError(o);
-        viewRoot.setData("大家好");
+        //利用线程池管理类开启线程
+        ThreadPoolProxyFactory.getNormalThreadPoolProxy().submit(new Runnable() {
+            @Override
+            public void run() {
+                String result = OKHttpWrap.requestPost(BaseParams.HOME_URL, mapParameter);
+                LogWrap.d(TAG,result);
+//                LoginBean bean = OKHttpWrap.getObject(result, LoginBean.class);
+//                if(bean!=null){
+//                    if(bean.getResCode() == 1){
+//                        viewRoot.setData(bean);
+//                    }else {
+//                        viewRoot.setError(bean.getResMsg());
+//                    }
+//                }else {
+//                    viewRoot.setError("Json解析异常");
+//                }
+            }
+        });
+
+
+
+
 
     }
 }

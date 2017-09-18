@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_guide_page"
+    android:orientation="vertical">
+
+    <View
+        style="@style/autoFillStyle"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+           style="@style/autoFillStyle"/>
+
+        <Button
+            android:onClick="pass"
+            android:text="跳过"
+            android:textSize="14sp"
+            android:textColor="@color/textBrown"
+            android:layout_width="@dimen/x99"
+            android:layout_height="@dimen/y58"
+            android:background="@drawable/bg_guide_passed_bt"
+            android:layout_marginBottom="@dimen/y63"
+            android:layout_marginRight="@dimen/x24"
+            android:id="@+id/passed"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

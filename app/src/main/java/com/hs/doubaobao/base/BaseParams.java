@@ -18,17 +18,47 @@ import java.io.File;
 
 public class BaseParams {
 
+/*--常量--------------------------------------------------------------------------------------------*/
 
+    //是否debug
     public static boolean isDebug = true;
+
+    public static final String APP_KEY = "59CC8095F69F3F9F1D31935C771F1957";
+    public static final String APP_SECRET = "875FF994A2CA061AB1634A6E7296DC94";
+    // App端类型  ios:1  Android:2
+    public static final String MOBILE_TYPE = "2";
+    //测试地址
+    public static final String TEST_URL = "http://192.168.1.246:8081/";
+    //真实测试
+    public static final String TRUE_URL = "http://manage.ahbabybean.com:8081/";
+    //http路径
+    public static final String BASE_URL = isDebug ? TEST_URL : TRUE_URL;
+
+
+
+
+
+    public static String USER_ID = "";
+    public static String OPERATOR_NAME = "";
+
 
     /**
      * 根路径
      */
-    public static final  String  ROOT_PATH                = getSDPath() + "/Ultron";
+    public static final String ROOT_PATH = getSDPath() + "/Ultron";
     /**
      * crash文件保存路径
      */
-    public static final  String  CRASH_PATH               = ROOT_PATH + "/crashLog";
+    public static final String CRASH_PATH = ROOT_PATH + "/crashLog";
+
+
+/*--URL常量--------------------------------------------------------------------------------------------------*/
+
+    //登陆地址
+    public static final String LOGIN_URL = BASE_URL + "app/user/doLogin.html";
+
+    //首页地址
+    public static final String HOME_URL = BASE_URL + "app/common/list.html";
 
 
 
@@ -38,7 +68,7 @@ public class BaseParams {
 
 
 
-
+/*--获取常规值方法---------------------------------------------------------------------------------------*/
 
     /**
      * 获取SD卡的根目录
@@ -64,8 +94,8 @@ public class BaseParams {
     public static int getVersion() {
         try {
             Context context = MyApplication.getContext();
-            PackageManager pm      = context.getPackageManager();//context为当前Activity上下文
-            PackageInfo pi      = pm.getPackageInfo(context.getPackageName(), 0);
+            PackageManager pm = context.getPackageManager();//context为当前Activity上下文
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
             return pi.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             return 1;
@@ -77,12 +107,14 @@ public class BaseParams {
      */
     public static String getVersionName() {
         try {
-            Context        context = MyApplication.getContext();
-            PackageManager pm      = context.getPackageManager();//context为当前Activity上下文
-            PackageInfo    pi      = pm.getPackageInfo(context.getPackageName(), 0);
+            Context context = MyApplication.getContext();
+            PackageManager pm = context.getPackageManager();//context为当前Activity上下文
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
             return pi.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             return "--";
         }
     }
+
+
 }

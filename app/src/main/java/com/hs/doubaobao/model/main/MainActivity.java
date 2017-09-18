@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
@@ -20,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
@@ -47,19 +47,41 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
     private MyRelativeLayout mSearchContainer;
     private LinearLayout mStatusBar;
     private MainContract.Presenter presenter;
+    private TextView mName;
+    private TextView mMenuName;
+    private TextView mMenuRisk;
+    private TextView mMenuManager;
+    private TextView mMenuInvalid;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);    // 隐藏标题
+       
         setContentView(R.layout.activity_main);
         initView();
 
-
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        mName.setText(name);
+        mMenuName.setText(name);
+/**
+ * userId	是	long	操作员id
+ page	否	Int	当前页数
+ rows	否	int	每页总数
+ cusName	否	String	搜索客户姓名
+ opeName	否	String	搜索客户经理名
+ phone	否	String	搜索客户电话
+ */
         new MainPresenter(this);
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("1", "6");
+        map.put("userId", BaseParams.USER_ID);
+//        map.put("page", "6");
+//        map.put("rows", "6");
+//        map.put("cusName", "6");
+//        map.put("opeName", "6");
+//        map.put("phone", "6");
+
         presenter.getData(map);
 
     }
@@ -76,6 +98,15 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
         mSearchContainer = (MyRelativeLayout) findViewById(R.id.main_search_container);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
+
+        mName = (TextView) findViewById(R.id.home_person_name);
+
+        mMenuName = (TextView) findViewById(R.id.menu_person_name);
+
+        mMenuRisk = (TextView) findViewById(R.id.menu_risk);
+        mMenuManager = (TextView) findViewById(R.id.menu_manager);
+        mMenuInvalid = (TextView) findViewById(R.id.menu_invalid);
+
         mSearchContainer.setVisibility(View.GONE);
         initState();
         //设置状态栏的背景
@@ -234,18 +265,7 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
     /**
      * 菜单列表中的某个菜单项被单击了
      */
-    public void onMenuItemClick(View v) {
-        TextView textView = (TextView) v;
-        String text = textView.getText().toString();
-        String[] aar = {getString(R.string.risk_control),
-                        getString(R.string.general_manager),
-                        getString(R.string.invalid_list)};
-        int type = -1;
-        for (int i = 0; i < aar.length; i++) {
-            if (text.equals(aar[i])) {
-                type = i;
-            }
-        }
+    public void onMenuItemClick(int type) {
         Class[] classes = {RiskControlApprovalActivity.class,
                 GeneralManagerApprovalActivity.class,
                 InvalidListActivity.class};
@@ -253,6 +273,19 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
             Intent intent = new Intent(this, classes[type]);
             startActivity(intent);
         }
+    }
+
+
+    public void onRiskClick(View v) {
+        onMenuItemClick(0) ;
+    }
+
+    public void onManagerClick(View v) {
+        onMenuItemClick(1) ;
+    }
+
+    public void onInvalidClick(View v) {
+        onMenuItemClick(2) ;
     }
 
     /**
