@@ -35,9 +35,6 @@ public class BaseParams {
     public static final String BASE_URL = isDebug ? TEST_URL : TRUE_URL;
 
 
-
-
-
     public static String USER_ID = "";
     public static String OPERATOR_NAME = "";
 
@@ -59,6 +56,12 @@ public class BaseParams {
 
     //首页地址
     public static final String HOME_URL = BASE_URL + "app/common/list.html";
+    //风控列表地址
+    public static final String RISK_URL = BASE_URL + "app/riskControl/list.html";
+    //总经理列表地址
+    public static final String MANAGER_URL = BASE_URL + "app/manager/list.html";
+    //总经理列表地址
+    public static final String INVALID_URL = BASE_URL + "app/manager/nopass.html";
 
 
 

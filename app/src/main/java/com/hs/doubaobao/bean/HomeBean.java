@@ -1,7 +1,5 @@
 package com.hs.doubaobao.bean;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
@@ -13,9 +11,10 @@ import java.util.List;
 
 public class HomeBean {
 
+
     /**
      * resCode : 1
-     * resData : {"messageCount":{"1":1},"pageDataList":{"list":[],"page":{"currentPage":1,"currentPageSum":0,"end":0,"pages":0,"pernum":0,"start":0,"total":0},"type":0},"roleIdList":[1]}
+     * resData : {"messageCount":{"messageRole1":1,"messageRole2":1,"messageRole3":1,"messageRole4":1,"messageRole5":1,"messageRole6":1,"messageRole7":1,"messageRole8":1},"pageDataList":{"list":[{"account":20000,"applydate":"2017-09-06","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"张三","id":1,"mobilephone":"13033333333","operName":"平台","period":1,"purpose":"旅游","status":"30","type":"3"},{"account":30000,"applydate":"2017-09-11","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"李四","id":2,"mobilephone":"15555555555","operName":"平台","period":2,"purpose":"环球","status":"30","type":"2"},{"account":1000,"applydate":"2017-9-18","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"张三","id":3,"mobilephone":"13033333333","operName":"平台","period":1,"purpose":"玩","status":"30","type":"3"}],"page":{"currentPage":1,"currentPageSum":0,"end":0,"pages":2147483647,"pernum":0,"start":0,"total":3},"type":0},"roleIdList":[1]}
      * resMsg : SUCCESS
      */
 
@@ -49,8 +48,8 @@ public class HomeBean {
 
     public static class ResDataBean {
         /**
-         * messageCount : {"1":1}
-         * pageDataList : {"list":[],"page":{"currentPage":1,"currentPageSum":0,"end":0,"pages":0,"pernum":0,"start":0,"total":0},"type":0}
+         * messageCount : {"messageRole1":1,"messageRole2":1,"messageRole3":1,"messageRole4":1,"messageRole5":1,"messageRole6":1,"messageRole7":1,"messageRole8":1}
+         * pageDataList : {"list":[{"account":20000,"applydate":"2017-09-06","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"张三","id":1,"mobilephone":"13033333333","operName":"平台","period":1,"purpose":"旅游","status":"30","type":"3"},{"account":30000,"applydate":"2017-09-11","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"李四","id":2,"mobilephone":"15555555555","operName":"平台","period":2,"purpose":"环球","status":"30","type":"2"},{"account":1000,"applydate":"2017-9-18","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"张三","id":3,"mobilephone":"13033333333","operName":"平台","period":1,"purpose":"玩","status":"30","type":"3"}],"page":{"currentPage":1,"currentPageSum":0,"end":0,"pages":2147483647,"pernum":0,"start":0,"total":3},"type":0}
          * roleIdList : [1]
          */
 
@@ -84,31 +83,100 @@ public class HomeBean {
 
         public static class MessageCountBean {
             /**
-             * 1 : 1
+             * messageRole1 : 1   平台角色（超级管理）
+             * messageRole2 : 1
+             * messageRole3 : 1
+             * messageRole4 : 1
+             * messageRole5 : 1
+             * messageRole6 : 1
+             * messageRole7 : 1  风控角色
+             * messageRole8 : 1  总经理角色
              */
 
-            @SerializedName("1")
-            private int _$1;
+            private int messageRole1;
+            private int messageRole2;
+            private int messageRole3;
+            private int messageRole4;
+            private int messageRole5;
+            private int messageRole6;
+            private int messageRole7;
+            private int messageRole8;
 
-            public int get_$1() {
-                return _$1;
+            public int getMessageRole1() {
+                return messageRole1;
             }
 
-            public void set_$1(int _$1) {
-                this._$1 = _$1;
+            public void setMessageRole1(int messageRole1) {
+                this.messageRole1 = messageRole1;
+            }
+
+            public int getMessageRole2() {
+                return messageRole2;
+            }
+
+            public void setMessageRole2(int messageRole2) {
+                this.messageRole2 = messageRole2;
+            }
+
+            public int getMessageRole3() {
+                return messageRole3;
+            }
+
+            public void setMessageRole3(int messageRole3) {
+                this.messageRole3 = messageRole3;
+            }
+
+            public int getMessageRole4() {
+                return messageRole4;
+            }
+
+            public void setMessageRole4(int messageRole4) {
+                this.messageRole4 = messageRole4;
+            }
+
+            public int getMessageRole5() {
+                return messageRole5;
+            }
+
+            public void setMessageRole5(int messageRole5) {
+                this.messageRole5 = messageRole5;
+            }
+
+            public int getMessageRole6() {
+                return messageRole6;
+            }
+
+            public void setMessageRole6(int messageRole6) {
+                this.messageRole6 = messageRole6;
+            }
+
+            public int getMessageRole7() {
+                return messageRole7;
+            }
+
+            public void setMessageRole7(int messageRole7) {
+                this.messageRole7 = messageRole7;
+            }
+
+            public int getMessageRole8() {
+                return messageRole8;
+            }
+
+            public void setMessageRole8(int messageRole8) {
+                this.messageRole8 = messageRole8;
             }
         }
 
         public static class PageDataListBean {
             /**
-             * list : []
-             * page : {"currentPage":1,"currentPageSum":0,"end":0,"pages":0,"pernum":0,"start":0,"total":0}
+             * list : [{"account":20000,"applydate":"2017-09-06","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"张三","id":1,"mobilephone":"13033333333","operName":"平台","period":1,"purpose":"旅游","status":"30","type":"3"},{"account":30000,"applydate":"2017-09-11","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"李四","id":2,"mobilephone":"15555555555","operName":"平台","period":2,"purpose":"环球","status":"30","type":"2"},{"account":1000,"applydate":"2017-9-18","approveStatus":0,"auditor":"","auditorTime":"","content":"","cusName":"张三","id":3,"mobilephone":"13033333333","operName":"平台","period":1,"purpose":"玩","status":"30","type":"3"}]
+             * page : {"currentPage":1,"currentPageSum":0,"end":0,"pages":2147483647,"pernum":0,"start":0,"total":3}
              * type : 0
              */
 
             private PageBean page;
             private int type;
-            private List<?> list;
+            private List<ListBean> list;
 
             public PageBean getPage() {
                 return page;
@@ -126,11 +194,11 @@ public class HomeBean {
                 this.type = type;
             }
 
-            public List<?> getList() {
+            public List<ListBean> getList() {
                 return list;
             }
 
-            public void setList(List<?> list) {
+            public void setList(List<ListBean> list) {
                 this.list = list;
             }
 
@@ -139,10 +207,10 @@ public class HomeBean {
                  * currentPage : 1
                  * currentPageSum : 0
                  * end : 0
-                 * pages : 0
+                 * pages : 2147483647
                  * pernum : 0
                  * start : 0
-                 * total : 0
+                 * total : 3
                  */
 
                 private int currentPage;
@@ -207,6 +275,152 @@ public class HomeBean {
 
                 public void setTotal(int total) {
                     this.total = total;
+                }
+            }
+
+            public static class ListBean {
+                /**
+                 * account : 20000
+                 * applydate : 2017-09-06
+                 * approveStatus : 0
+                 * auditor :
+                 * auditorTime :
+                 * content :
+                 * cusName : 张三
+                 * id : 1
+                 * mobilephone : 13033333333
+                 * operName : 平台
+                 * period : 1
+                 * purpose : 旅游
+                 * status : 30
+                 * type : 3
+                 */
+
+                private double account;
+                private String applydate;
+                private int approveStatus;
+                private String auditor;
+                private String auditorTime;
+                private String content;
+                private String cusName;
+                private int id;
+                private String mobilephone;
+                private String operName;
+                private int period;
+                private String purpose;
+                private String status;
+                private String type;
+
+                public double getAccount() {
+                    return account;
+                }
+
+                public void setAccount(double account) {
+                    this.account = account;
+                }
+
+                public String getApplydate() {
+                    return applydate;
+                }
+
+                public void setApplydate(String applydate) {
+                    this.applydate = applydate;
+                }
+
+                public int getApproveStatus() {
+                    return approveStatus;
+                }
+
+                public void setApproveStatus(int approveStatus) {
+                    this.approveStatus = approveStatus;
+                }
+
+                public String getAuditor() {
+                    return auditor;
+                }
+
+                public void setAuditor(String auditor) {
+                    this.auditor = auditor;
+                }
+
+                public String getAuditorTime() {
+                    return auditorTime;
+                }
+
+                public void setAuditorTime(String auditorTime) {
+                    this.auditorTime = auditorTime;
+                }
+
+                public String getContent() {
+                    return content;
+                }
+
+                public void setContent(String content) {
+                    this.content = content;
+                }
+
+                public String getCusName() {
+                    return cusName;
+                }
+
+                public void setCusName(String cusName) {
+                    this.cusName = cusName;
+                }
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getMobilephone() {
+                    return mobilephone;
+                }
+
+                public void setMobilephone(String mobilephone) {
+                    this.mobilephone = mobilephone;
+                }
+
+                public String getOperName() {
+                    return operName;
+                }
+
+                public void setOperName(String operName) {
+                    this.operName = operName;
+                }
+
+                public int getPeriod() {
+                    return period;
+                }
+
+                public void setPeriod(int period) {
+                    this.period = period;
+                }
+
+                public String getPurpose() {
+                    return purpose;
+                }
+
+                public void setPurpose(String purpose) {
+                    this.purpose = purpose;
+                }
+
+                public String getStatus() {
+                    return status;
+                }
+
+                public void setStatus(String status) {
+                    this.status = status;
+                }
+
+                public String getType() {
+                    return type;
+                }
+
+                public void setType(String type) {
+                    this.type = type;
                 }
             }
         }

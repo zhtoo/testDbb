@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/list_time"
             android:layout_width="@dimen/x159"
             android:layout_height="@dimen/y53"
             android:background="@drawable/bg_main_time"
@@ -38,7 +39,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/item_main_text"
+                    android:id="@+id/list_purpose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x30"
@@ -49,6 +50,7 @@
                 <View style="@style/autoFillStyle"/>
 
                 <TextView
+                    android:id="@+id/list_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/x16"
@@ -81,7 +83,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/list_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
@@ -113,6 +115,7 @@
             android:paddingLeft="@dimen/x30">
 
             <TextView
+                android:id="@+id/list_load_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y5"
@@ -128,9 +131,10 @@
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/list_custom_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13800000100"
+                android:text="13812345678"
                 android:textColor="@color/textAggravating"
                 android:textSize="14sp"/>
 
@@ -152,6 +156,7 @@
             android:paddingLeft="@dimen/x30">
 
             <TextView
+                android:id="@+id/list_loan_periods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y5"
@@ -167,6 +172,7 @@
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/list_custom_manager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="李小艺"
@@ -185,15 +191,29 @@
         <View style="@style/autoFillStyle"/>
         
         <ImageView
+            android:visibility="gone"
+            android:id="@+id/list_main"
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/y30"
             android:layout_marginRight="@dimen/x64"
             android:src="@drawable/ic_right_arrow_selector"/>
 
+        <TextView
+            android:id="@+id/list_approval"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y48"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/x15"
+            android:text="审批"
+            android:textSize="@dimen/x20"
+            android:textColor="@color/textAggravating"
+            android:background="@drawable/ic_approval_button_selector"/>
+
         <View style="@style/verticalLine"/>
 
     </LinearLayout>
 
-    <View style="@style/horizontalLine"/>
+    <View style="@style/horizontalLine"
+          android:id="@+id/view"/>
 
 </LinearLayout>

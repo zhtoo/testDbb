@@ -16,9 +16,15 @@ import android.widget.Toast;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
+import com.hs.doubaobao.bean.HomeBean;
+import com.hs.doubaobao.model.main.ListAdapter;
+import com.hs.doubaobao.model.main.ListBean;
 import com.hs.doubaobao.view.MyRelativeLayout;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 作者：zhanghaitao on 2017/9/11 17:44
@@ -27,7 +33,7 @@ import java.util.LinkedHashMap;
  * @describe:
  */
 
-public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, InvalidListAdapter.onItemClickListener {
+public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, ListAdapter.onItemClickListener {
 
     private InvalidListContract.Presenter presenter;
     private RecyclerView mRecycler;
@@ -36,6 +42,10 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     private boolean isShowing = false;
     private Button reset;
     private Button start;
+    private ListAdapter adapter;
+    private List<ListBean> mList =new ArrayList<>();
+    private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
+    private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +60,20 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         initView();
 
         new InvalidListPresenter(this);
-        presenter.getData(new LinkedHashMap());
+        /**
+         page	否	int	当前页数
+         rows	否	int	每页总数
+         cusName	否	String	客户姓名
+         opeName	否	String	客户经理
+         phone	否	String	客户电话
+         */
+        Map<String,String> map = new LinkedHashMap<>();
+        map.put("page","1");
+        map.put("rows","10");
+        map.put("cusName","");
+        map.put("opeName","");
+        map.put("phone","");
+        presenter.getData(map);
 
     }
 
@@ -59,7 +82,8 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayout.VERTICAL);
         mRecycler.setLayoutManager(llm);
-        InvalidListAdapter adapter = new InvalidListAdapter(this);
+
+        adapter = new ListAdapter(this, mList,4);
         adapter.setOnItemClickListener(this);
         mRecycler.setAdapter(adapter);
 
@@ -77,12 +101,6 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         start.setOnClickListener(this);
     }
 
-    @Override
-    public void onItemClick(int postion) {
-        Intent intent = new Intent(this, InvalidReasonActivity.class);
-        startActivity(intent);
-       // Alert  dialog
-    }
 
     @Override
     public void onClick(View v) {
@@ -167,8 +185,29 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     }
 
     @Override
-    public void setData(String text) {
-
+    public void setData(HomeBean bean) {
+        //分页
+        pageBean = bean.getResData().getPageDataList().getPage();
+        //list内容
+        listBeen = bean.getResData().getPageDataList().getList();
+        mList.clear();
+        if (listBeen != null && listBeen.size() > 0) {
+            for (int i = 0; i < listBeen.size(); i++) {
+                ListBean mBean = new ListBean();
+                mBean.setName(listBeen.get(i).getCusName());
+                mBean.setTime(listBeen.get(i).getApplydate());
+                mBean.setPurpose(listBeen.get(i).getPurpose());
+                mBean.setLoanAmount(listBeen.get(i).getAccount());
+                mBean.setCustomPhone(listBeen.get(i).getMobilephone());
+                mBean.setCustomManager(listBeen.get(i).getOperName());
+                mBean.setLoanPeriods(listBeen.get(i).getPeriod());
+                mBean.setStatus(listBeen.get(i).getStatus());
+                mList.add(mBean);
+            }
+        }else{
+            //TODO:空视图
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -197,4 +236,11 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     }
 
 
+
+    @Override
+    public void onItemClick(int postion) {
+            Intent intent = new Intent(this, InvalidReasonActivity.class);
+            startActivity(intent);
+            // Alert  dialog
+    }
 }

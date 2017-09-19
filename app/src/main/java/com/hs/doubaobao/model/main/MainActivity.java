@@ -20,22 +20,26 @@ import android.widget.Toast;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.BaseParams;
+import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
+import com.hs.doubaobao.utils.log.LogWrap;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * 主界面
  * rectification by zht on 2017/9/11  16:51
  */
-public class MainActivity extends Activity implements MainContract.View, MainAdapter.onItemClickListener, View.OnClickListener {
+public class MainActivity extends Activity implements MainContract.View, ListAdapter.onItemClickListener, View.OnClickListener {
 
 
     private static final String TAG = "MainActivity";
@@ -52,12 +56,18 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
     private TextView mMenuRisk;
     private TextView mMenuManager;
     private TextView mMenuInvalid;
+    private HomeBean.ResDataBean.MessageCountBean messageCount;
+    private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
+    private List<Integer> roleIdList;
+    private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
+    private List<ListBean> mList = new ArrayList<>();
+    private ListAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       
+
         setContentView(R.layout.activity_main);
         initView();
 
@@ -153,7 +163,7 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
 
         mRecyclerView.setLayoutManager(llm);
 
-        MainAdapter adapter = new MainAdapter(this);
+        adapter = new ListAdapter(this,mList,0);
 
         adapter.setOnItemClickListener(this);
 
@@ -277,15 +287,15 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
 
 
     public void onRiskClick(View v) {
-        onMenuItemClick(0) ;
+        onMenuItemClick(0);
     }
 
     public void onManagerClick(View v) {
-        onMenuItemClick(1) ;
+        onMenuItemClick(1);
     }
 
     public void onInvalidClick(View v) {
-        onMenuItemClick(2) ;
+        onMenuItemClick(2);
     }
 
     /**
@@ -310,14 +320,52 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
         Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
     }
 
+
+    /**
+     * 请求回来的数据处理
+     *
+     * @param bean
+     */
     @Override
-    public void setData(String text) {
-        Log.e(TAG, text);
+    public void setData(HomeBean bean) {
+        //角色权限
+        roleIdList = bean.getResData().getRoleIdList();
+        //角色的消息
+        messageCount = bean.getResData().getMessageCount();
+        //分页
+        pageBean = bean.getResData().getPageDataList().getPage();
+        //list内容
+        listBeen = bean.getResData().getPageDataList().getList();
+        mList.clear();
+        if (listBeen != null && listBeen.size() > 0) {
+            for (int i = 0; i < listBeen.size(); i++) {
+                ListBean mBean = new ListBean();
+                mBean.setName(listBeen.get(i).getCusName());
+                mBean.setTime(listBeen.get(i).getApplydate());
+                mBean.setPurpose(listBeen.get(i).getPurpose());
+                mBean.setLoanAmount(listBeen.get(i).getAccount());
+                mBean.setCustomPhone(listBeen.get(i).getMobilephone());
+                mBean.setCustomManager(listBeen.get(i).getOperName());
+                mBean.setLoanPeriods(listBeen.get(i).getPeriod());
+                mBean.setStatus(listBeen.get(i).getStatus());
+                mList.add(mBean);
+            }
+        }else{
+            //TODO:空视图
+        }
+        adapter.notifyDataSetChanged();
     }
 
+    /**
+     * 数据错误
+     *
+     * @param text
+     */
     @Override
     public void setError(String text) {
         Log.e(TAG, text);
+        LogWrap.e(TAG, text);
+        Toast.makeText(this, "网络不给力", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -325,18 +373,17 @@ public class MainActivity extends Activity implements MainContract.View, MainAda
         this.presenter = presenter;
     }
 
-    /**
-     * recyclerView 条目点击返回
-     * @param postion
-     */
+
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, DetailActivity.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }

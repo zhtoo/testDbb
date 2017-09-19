@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.base.BaseParams;
@@ -112,8 +113,8 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
     @Override
     public void setError(String text) {
+        Toast.makeText(MyApplication.getContext(), "网络不给力", Toast.LENGTH_SHORT).show();
         LogWrap.e(TAG,text);
-        Toast.makeText(LoginActivity.this, "网络不给力", Toast.LENGTH_SHORT).show();
     }
 
     @Override

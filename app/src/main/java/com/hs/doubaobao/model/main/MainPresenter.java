@@ -1,11 +1,15 @@
 package com.hs.doubaobao.model.main;
 
 import com.hs.doubaobao.base.BaseParams;
+import com.hs.doubaobao.bean.HomeBean;
+import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
-import com.hs.doubaobao.threadpool.ThreadPoolProxyFactory;
+import com.hs.doubaobao.http.requestCallBack;
 import com.hs.doubaobao.utils.log.LogWrap;
 
 import java.util.Map;
+
+import okhttp3.Call;
 
 /**
  * 作者：zhanghaitao on 2017/9/12 14:12
@@ -16,8 +20,10 @@ import java.util.Map;
 
 public class MainPresenter implements MainContract.Presenter {
 
-    private static final String TAG ="MainPresenter" ;
+    private static final String TAG = "MainPresenter";
     MainContract.View viewRoot;
+    private String result;
+    private HomeBean bean;
 
     public MainPresenter(MainContract.View viewRoot) {
         this.viewRoot = viewRoot;
@@ -26,29 +32,27 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getData(final Map mapParameter) {
-
-        //利用线程池管理类开启线程
-        ThreadPoolProxyFactory.getNormalThreadPoolProxy().submit(new Runnable() {
+        OKHttpWrap.getOKHttpWrap()
+                .requestPost(BaseParams.HOME_URL, mapParameter, new requestCallBack() {
             @Override
-            public void run() {
-                String result = OKHttpWrap.requestPost(BaseParams.HOME_URL, mapParameter);
-                LogWrap.d(TAG,result);
-//                LoginBean bean = OKHttpWrap.getObject(result, LoginBean.class);
-//                if(bean!=null){
-//                    if(bean.getResCode() == 1){
-//                        viewRoot.setData(bean);
-//                    }else {
-//                        viewRoot.setError(bean.getResMsg());
-//                    }
-//                }else {
-//                    viewRoot.setError("Json解析异常");
-//                }
+            public void onError(Call call, Exception e) {
+                viewRoot.setError(e.getLocalizedMessage());
+            }
+            @Override
+            public void onResponse(String response) {
+                LogWrap.e(TAG,response);
+                bean = JsonWrap.getObject(response, HomeBean.class);
+                //回到不能在子线程中
+                if(bean!=null){
+                    if(bean.getResCode() == 1){
+                        viewRoot.setData(bean);
+                    }else {
+                        viewRoot.setError(bean.getResMsg());
+                    }
+                }else {
+                    viewRoot.setError("Json解析异常");
+                }
             }
         });
-
-
-
-
-
     }
 }
