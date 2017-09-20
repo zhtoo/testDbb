@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
     compileSdkVersion 25
@@ -41,4 +42,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.6'
     //okHttp3的依赖
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    // butterknife 库的引用
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

@@ -60,9 +60,14 @@ public class BaseParams {
     public static final String RISK_URL = BASE_URL + "app/riskControl/list.html";
     //总经理列表地址
     public static final String MANAGER_URL = BASE_URL + "app/manager/list.html";
-    //总经理列表地址
-    public static final String INVALID_URL = BASE_URL + "app/manager/nopass.html";
-
+    //无效列表地址
+    public static final String INVALID_URL = BASE_URL + "/app/common/disableList.html";
+    //无效详情列表地址
+    public static final String INVALID_REASON_URL = BASE_URL + "app/common/disableDetail.html";
+    //详情地址
+    public static final String PARTICULARS_URL = BASE_URL + "app/common/infoDetail.html";
+    //参考表
+    public static final String REFRERNCE_URL = BASE_URL + "app/common/reference.html";
 
 
 

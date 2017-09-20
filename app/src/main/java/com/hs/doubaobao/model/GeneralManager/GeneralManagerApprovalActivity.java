@@ -6,9 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.adapter.ManagerAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.bean.HomeBean;
-import com.hs.doubaobao.model.main.ListAdapter;
+import com.hs.doubaobao.adapter.ListAdapter;
 import com.hs.doubaobao.model.main.ListBean;
 
 import java.util.ArrayList;
@@ -23,11 +24,11 @@ import java.util.Map;
  * @describe:
  */
 
-public class GeneralManagerApprovalActivity extends AppBarActivity implements GMAContract.View, ListAdapter.onItemClickListener {
+public class GeneralManagerApprovalActivity extends AppBarActivity implements GMAContract.View, ManagerAdapter.onItemClickListener, ListAdapter.onItemClickListener {
 
     private GMAContract.Presenter presenter;
     private RecyclerView mRecyclerView;
-    private ListAdapter adapter;
+    private ManagerAdapter adapter;
     private List<ListBean> mList = new ArrayList<>();
     private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
@@ -46,7 +47,7 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayout.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
-        adapter = new ListAdapter(this, mList,1);
+        adapter = new ManagerAdapter(this, mList,1);
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
 
@@ -99,11 +100,8 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
     }
 
 
-
     @Override
     public void onItemClick(int postion) {
 
     }
-
-
 }

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/backgroundGrey"
+              android:background="@color/grayBackground"
               android:orientation="vertical">
 
     <View
@@ -24,6 +24,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/invalid_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x350"
@@ -50,6 +51,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/invalid_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x350"
@@ -75,6 +77,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/invalid_writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x350"
@@ -100,6 +103,7 @@
             android:textSize="16sp"/>
 
         <TextView
+            android:id="@+id/invalid_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x350"
@@ -110,6 +114,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/invalid_reason"
         android:layout_marginTop="@dimen/y15"
         android:background="@color/whiteBackground"
         android:layout_width="match_parent"

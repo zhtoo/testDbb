@@ -19,16 +19,16 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/14 16:43
  * 邮箱：820159571@qq.com
  *
- * @describe:  详情界面的适配器，动态添加每一个条目
+ * @describe: 详情界面的适配器，动态添加每一个条目
  */
 
 public class ParticularsAdapter extends RecyclerView.Adapter {
 
     private Context context;
     //存放标题
-    private     List<String> mTitles;
+    private List<String> mTitles;
     //存放内容
-    private     List<Map> mMap;
+    private List<Map> mMap;
 
     public ParticularsAdapter(Context context, List<String> mTitles, List<Map> mMap) {
         this.context = context;
@@ -74,41 +74,35 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             mTitle.setText(mTitles.get(position));
             Map<String, String> itemMap = mMap.get(position);
-            if(itemMap.size() == 0){
+            if (itemMap.size() == 0) {
                 mContainer.addView(setNewItem("空", "暂无数据"));
-            }else {
+            } else {
                 for (String key : itemMap.keySet()) {
                     String container = itemMap.get(key);
 
-                    if(key.equals("现住房居住时间")|| key.equals("现单位工龄")|| key.equals("建筑年限")){
-                        container+="年";
-                    }else if(key.equals("现住房面积")|| key.equals("自有房产面积")|| key.equals("房屋建筑面积")){
-                        container+="m²";
-                    }else if(key.equals("所在楼层")|| key.equals("总楼层")){
-                        container+="层";
-                    }else if(key.equals("月均工资收入")){
-                        container+="元";
-                    } else if(key.equals("部门人数")) {
-                        container+="人";
-                    }else if(key.equals("所在部门")) {
-                        container+="部";
-                    }else if(key.equals("*申请借款金额")){
-                        container+="万元";
+                    if (key.equals("现住房居住时间") || key.equals("现单位工龄") || key.equals("建筑年限")) {
+                        container += "年";
+                    } else if (key.equals("现住房面积") || key.equals("自有房产面积") || key.equals("房屋建筑面积")) {
+                        container += "m²";
+                    } else if (key.equals("所在楼层") || key.equals("总楼层")) {
+                        container += "层";
+                    } else if (key.equals("月均工资收入")) {
+                        container += "元";
+                    } else if (key.equals("部门人数")) {
+                        container += "人";
+                    } else if (key.equals("所在部门")) {
+                        container += "部";
+                    } else if (key.equals("*申请借款金额")) {
+                        container += "万元";
                     }
 
-                    if (TextUtils.isEmpty(itemMap.get(key)) || container.contains("null")) {
+
+
+
+                    if (TextUtils.isEmpty(itemMap.get(key))) {
                         container = "暂无数据";
                     }
-
-                    if(!key.equals("customerId")&&
-                            !key.equals("spouseId")&&
-                            !key.equals("contactId")&&
-                            !key.equals("applyLoanId")&&
-                            !key.equals("houseId")&&
-                            !key.equals("carId")
-                            ){
-                        mContainer.addView(setNewItem(key, container));
-                    }
+                    mContainer.addView(setNewItem(key, container));
                 }
             }
         }
@@ -121,18 +115,34 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
          * @return
          */
         private LinearLayout setNewItem(String name, String container) {
+
+            if(name.contains("姓名")){
+                name = "姓名";
+            }
+            if(name.contains("关系")){
+                name = "关系";
+            }
+            if(name.contains("手机号码")){
+                name = "手机号码";
+            }
+            if(name.contains("是否知晓贷款")){
+                name = "是否知晓贷款";
+            }
+
             LinearLayout mLayout = new LinearLayout(context);
             mLayout.setOrientation(LinearLayout.HORIZONTAL);
             //空数据仅仅显示内容
-            if ("空".equals(name)) {
+            if ("空".equals(name)||name.contains("空")) {
                 TextView text = new TextView(context);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,//mText的宽度
                         LinearLayout.LayoutParams.WRAP_CONTENT);
                 lp.setMargins(dp2px(context, 16), 0, 0, 0);
                 text.setLayoutParams(lp);
-                text.setPadding(dp2px(context, 15),dp2px(context, 15),dp2px(context, 15),dp2px(context, 15));
+                text.setPadding(0, 0, dp2px(context, 5),0);
                 text.setText(container);
+                text.setTextSize(12);
+                text.setTextColor(context.getResources().getColor(R.color.textGray));
 
                 mLayout.setGravity(Gravity.CENTER);
                 mLayout.addView(text);
@@ -140,7 +150,7 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
             }
 
             //画分割线
-            if ("line".equals(container)||"line".equals(name)) {
+            if ("line".equals(container) || "line".equals(name)) {
                 View line = new View(context);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,//mText的宽度

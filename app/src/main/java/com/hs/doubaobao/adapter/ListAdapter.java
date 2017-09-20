@@ -1,4 +1,4 @@
-package com.hs.doubaobao.model.main;
+package com.hs.doubaobao.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.model.main.ListBean;
 
 import java.util.List;
 
@@ -41,13 +42,13 @@ public class ListAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_mian, parent, false);
-        return new MyViewHolder(view);
+        return new MyListViewHolder(view);
 
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        MyViewHolder viewHolder = (MyViewHolder) holder;
+        MyListViewHolder viewHolder = (MyListViewHolder) holder;
         viewHolder.setData(position);
     }
 
@@ -56,34 +57,33 @@ public class ListAdapter extends RecyclerView.Adapter {
         return mList != null ? mList.size() : 0;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyListViewHolder extends RecyclerView.ViewHolder {
 
-        private LinearLayout item;
+        public LinearLayout item;
         //客户姓名
-        private TextView name;
+        public TextView name;
         //借款时间
-        private TextView time;
+        public TextView time;
         //借款用途
-        private TextView purpose;
+        public TextView purpose;
         //借款金额
-        private TextView loanAmount;
+        public TextView loanAmount;
         //客户电话
-        private TextView customPhone;
+        public TextView customPhone;
         //借款期数
-        private TextView loanPeriods;
+        public TextView loanPeriods;
         //客户经理
-        private TextView customManager;
+        public TextView customManager;
         //审批状态
-        private TextView status;
+        public TextView status;
 
-        private TextView approval;
-        private ImageView main;
+        public TextView approval;
+        public ImageView main;
 
 
-        public MyViewHolder(View itemView) {
+        public MyListViewHolder(View itemView) {
             super(itemView);
             item = (LinearLayout) itemView.findViewById(R.id.item_all);
-
             name = (TextView) itemView.findViewById(R.id.list_name);
             time = (TextView) itemView.findViewById(R.id.list_time);
             purpose = (TextView) itemView.findViewById(R.id.list_purpose);
@@ -137,7 +137,7 @@ public class ListAdapter extends RecyclerView.Adapter {
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(/**/View v) {
                     if (listener != null) {
                         listener.onItemClick(position);
                     }

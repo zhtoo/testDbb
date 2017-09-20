@@ -31,7 +31,7 @@ public class InvalidListPresenter implements InvalidListContract.Presenter {
     @Override
     public void getData(Map mapParameter) {
         OKHttpWrap.getOKHttpWrap()
-                .requestPost(BaseParams.RISK_URL, mapParameter, new requestCallBack() {
+                .requestPost(BaseParams.INVALID_URL, mapParameter, new requestCallBack() {
 
                     private HomeBean bean;
 

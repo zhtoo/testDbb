@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -19,13 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.adapter.HomeAdapter;
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
-import com.hs.doubaobao.utils.log.LogWrap;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
 
@@ -39,7 +38,7 @@ import java.util.Map;
  * 主界面
  * rectification by zht on 2017/9/11  16:51
  */
-public class MainActivity extends Activity implements MainContract.View, ListAdapter.onItemClickListener, View.OnClickListener {
+public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener {
 
 
     private static final String TAG = "MainActivity";
@@ -61,7 +60,7 @@ public class MainActivity extends Activity implements MainContract.View, ListAda
     private List<Integer> roleIdList;
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
     private List<ListBean> mList = new ArrayList<>();
-    private ListAdapter adapter;
+    private HomeAdapter adapter;
 
 
     @Override
@@ -163,7 +162,7 @@ public class MainActivity extends Activity implements MainContract.View, ListAda
 
         mRecyclerView.setLayoutManager(llm);
 
-        adapter = new ListAdapter(this,mList,0);
+        adapter = new HomeAdapter(this,mList,0);
 
         adapter.setOnItemClickListener(this);
 
@@ -363,8 +362,7 @@ public class MainActivity extends Activity implements MainContract.View, ListAda
      */
     @Override
     public void setError(String text) {
-        Log.e(TAG, text);
-        LogWrap.e(TAG, text);
+       // LogWrap.e(TAG, text);
         Toast.makeText(this, "网络不给力", Toast.LENGTH_SHORT).show();
     }
 
@@ -383,6 +381,7 @@ public class MainActivity extends Activity implements MainContract.View, ListAda
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("ID",listBeen.get(postion).getId()+"");
         startActivity(intent);
     }
 

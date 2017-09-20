@@ -1,5 +1,6 @@
 package com.hs.doubaobao.model.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -34,6 +35,7 @@ public class DetailActivity extends AppBarActivity {
     private PictrueFragment mPictrueFragment;
     private VideoFragment mVideoFragment;
     private ReferenceFragment mReferenceFragment;
+    public String id;
 
 
     @Override
@@ -43,6 +45,9 @@ public class DetailActivity extends AppBarActivity {
         setTitle(getString(R.string.read_data));
         isShowRightView(false);
         setStatusBarBackground(R.drawable.ic_battery_bg);
+
+        Intent intent = getIntent();
+        id = intent.getStringExtra("ID");
 
         mFragmentManager = getSupportFragmentManager();
 

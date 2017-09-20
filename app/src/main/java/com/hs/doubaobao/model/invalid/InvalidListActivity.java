@@ -15,9 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.adapter.InvalidAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.bean.HomeBean;
-import com.hs.doubaobao.model.main.ListAdapter;
 import com.hs.doubaobao.model.main.ListBean;
 import com.hs.doubaobao.view.MyRelativeLayout;
 
@@ -33,7 +33,7 @@ import java.util.Map;
  * @describe:
  */
 
-public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, ListAdapter.onItemClickListener {
+public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, InvalidAdapter.onItemClickListener {
 
     private InvalidListContract.Presenter presenter;
     private RecyclerView mRecycler;
@@ -42,8 +42,8 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     private boolean isShowing = false;
     private Button reset;
     private Button start;
-    private ListAdapter adapter;
-    private List<ListBean> mList =new ArrayList<>();
+    private InvalidAdapter adapter;
+    private List<ListBean> mList = new ArrayList<>();
     private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
 
@@ -67,12 +67,12 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
          opeName	否	String	客户经理
          phone	否	String	客户电话
          */
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("page","1");
-        map.put("rows","10");
-        map.put("cusName","");
-        map.put("opeName","");
-        map.put("phone","");
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("page", "1");
+        map.put("rows", "10");
+        map.put("cusName", "");
+        map.put("opeName", "");
+        map.put("phone", "");
         presenter.getData(map);
 
     }
@@ -83,7 +83,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         llm.setOrientation(LinearLayout.VERTICAL);
         mRecycler.setLayoutManager(llm);
 
-        adapter = new ListAdapter(this, mList,4);
+        adapter = new InvalidAdapter(this, mList, 4);
         adapter.setOnItemClickListener(this);
         mRecycler.setAdapter(adapter);
 
@@ -204,7 +204,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 mBean.setStatus(listBeen.get(i).getStatus());
                 mList.add(mBean);
             }
-        }else{
+        } else {
             //TODO:空视图
         }
         adapter.notifyDataSetChanged();
@@ -223,6 +223,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
 
     /**
      * 隐藏软键盘
+     *
      * @param view
      */
     private void hideInput(View view) {
@@ -236,11 +237,11 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     }
 
 
-
     @Override
     public void onItemClick(int postion) {
-            Intent intent = new Intent(this, InvalidReasonActivity.class);
-            startActivity(intent);
-            // Alert  dialog
+        Intent intent = new Intent(this, InvalidReasonActivity.class);
+        intent.putExtra("invalidId", "" + listBeen.get(postion).getId());
+        startActivity(intent);
+        // Alert  dialog
     }
 }

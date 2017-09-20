@@ -6,9 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.adapter.RiskAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.bean.HomeBean;
-import com.hs.doubaobao.model.main.ListAdapter;
 import com.hs.doubaobao.model.main.ListBean;
 
 import java.util.ArrayList;
@@ -23,11 +23,11 @@ import java.util.Map;
  * @describe:
  */
 
-public  class RiskControlApprovalActivity extends AppBarActivity implements RiskApprovalContract.View, ListAdapter.onItemClickListener {
+public  class RiskControlApprovalActivity extends AppBarActivity implements RiskApprovalContract.View, RiskAdapter.onItemClickListener {
 
     private RiskApprovalContract.Presenter presenter;
     private RecyclerView mRecyclerView;
-    private ListAdapter adapter;
+    private RiskAdapter adapter;
     private List<ListBean> mList = new ArrayList<>();
     private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
@@ -47,7 +47,7 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
 
         mRecyclerView.setLayoutManager(llm);
 
-        adapter = new ListAdapter(this, mList,1);
+        adapter = new RiskAdapter(this, mList,1);
 
         adapter.setOnItemClickListener(this);
 
