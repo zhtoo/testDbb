@@ -14,7 +14,7 @@ public class ParticularBean {
 
     /**
      * resCode : 1
-     * resData : {"approves":[{"content":"是否梵蒂冈梵蒂冈更广泛的风格","id":1,"managerRation":500000,"riskControl":400000,"type":1}],"borrow":{"account":20000,"applydate":"2017-09-06","finishdate":"2017-09-06","fundStatus":1,"grantdate":"2017-09-06","id":1,"operatorName":"admin123","period":1,"purpose":"旅游","status":"30","type":"01"},"borrowContants":[{"id":1,"name":"1","notice":1,"phone":"1","relation":"1","type":1}],"carInfo":{"brand":"1","buyDate":"2017-09-06","cardid":"1","color":"1","id":1,"monthlyMoney":1,"otherInfo":"1","owner":"1","price":1,"status":1},"coborrow":{"birth":"2017-09-06","cardid":"1","coname":"1","crelationship":"1","domicile":"1","exitingBuildAddr":"1","extPhone":"1","id":1,"isBusinessOwner":1,"mobilephone":"1","monthlyIncome":1,"phone":"1","sex":1,"workunitAddr":"","workunitAge":"1","workunitDepartment":"1","workunitName":"1","workunitNatureString":"事业单位/政府机关"},"customerInfo":{"alipay":"1","birth":"2017-09-06","buildStauts":"1","carStauts":"1","cardId":"1","cname":"张三","domicile":"1","exitingBuildAcreage":1,"exitingBuildAddr":"1","exitingBuildLivetime":"1","id":1,"isBusinessOwner":1,"jobdepartment":"1","jobdepartmentCount":"1","marriageString":"未婚","mobilephone":"13033333333","monthlyWage":1,"opinion":"1","otherBuildAcreage":1,"otherBuildInfo":"111","otherBuildProperty":"1","ownBuildAcreage":1,"ownBuildAddr":"1","ownBuildPropertyString":"有房无贷款","qq":"11","sexString":"男","workunitAddr":"","workunitAge":"1","workunitExtPhone":"1","workunitName":"1","workunitNatureString":"事业单位/政府机关","workunitPhone":"1"}}
+     * resData : {"approves":{"homeVisitContent":"","managerContent":"登记客户挂机","managerRation":0,"riskControl":0,"riskControlContent":""},"borrow":{"account":200000,"applydate":"2017-09-19","finishdate":"2017-09-19","fundStatus":1,"grantdate":"2017-09-19","id":3,"operatorName":"apptest123","period":3,"purpose":"吃饭","status":"30","type":"03"},"borrowContants":[{"id":3,"name":"3号联系人","notice":1,"phone":"15656565656","relation":"2","type":2}],"carInfo":{"brand":"","buyDate":"","cardid":"","color":"","id":0,"monthlyMoney":0,"otherInfo":"","owner":"","price":0,"status":-1},"coborrow":{"birth":"2017-09-06","cardid":"148465165468","coname":"fgg","crelationship":"的饭","domicile":"第三个","exitingBuildAddr":"光电股份","extPhone":"16845","id":3,"isBusinessOwner":1,"mobilephone":"16856458459","monthlyIncome":864615,"phone":"1468465","sex":1,"workunitAddr":"","workunitAge":"1","workunitDepartment":"郭德纲","workunitName":"僧","workunitNatureString":"事业单位/政府机关"},"customerInfo":{"alipay":"417845444@qq.com","birth":"2017-09-19","buildStauts":"1","carStauts":"1","cardId":"342222199999999999","cname":"王五","domicile":"安徽合肥","exitingBuildAcreage":2000,"exitingBuildAddr":"绿地中心","exitingBuildLivetime":"1","id":3,"isBusinessOwner":1,"jobdepartment":"技术部","jobdepartmentCount":"30","marriageString":"已婚","mobilephone":"15555555555","monthlyWage":1000,"opinion":"没有","otherBuildAcreage":2,"otherBuildInfo":"没有","otherBuildProperty":"2","ownBuildAcreage":2000,"ownBuildAddr":"绿地中心","ownBuildPropertyString":"有房无贷款","qq":"125646854","sexString":"男","workunitAddr":"","workunitAge":"2","workunitExtPhone":"055156565656","workunitName":"汇生科技","workunitNatureString":"国有企业/上市公司","workunitPhone":"055155555555"}}
      * resMsg : SUCCESS
      */
 
@@ -48,20 +48,28 @@ public class ParticularBean {
 
     public static class ResDataBean {
         /**
-         * approves : [{"content":"是否梵蒂冈梵蒂冈更广泛的风格","id":1,"managerRation":500000,"riskControl":400000,"type":1}]
-         * borrow : {"account":20000,"applydate":"2017-09-06","finishdate":"2017-09-06","fundStatus":1,"grantdate":"2017-09-06","id":1,"operatorName":"admin123","period":1,"purpose":"旅游","status":"30","type":"01"}
-         * borrowContants : [{"id":1,"name":"1","notice":1,"phone":"1","relation":"1","type":1}]
-         * carInfo : {"brand":"1","buyDate":"2017-09-06","cardid":"1","color":"1","id":1,"monthlyMoney":1,"otherInfo":"1","owner":"1","price":1,"status":1}
-         * coborrow : {"birth":"2017-09-06","cardid":"1","coname":"1","crelationship":"1","domicile":"1","exitingBuildAddr":"1","extPhone":"1","id":1,"isBusinessOwner":1,"mobilephone":"1","monthlyIncome":1,"phone":"1","sex":1,"workunitAddr":"","workunitAge":"1","workunitDepartment":"1","workunitName":"1","workunitNatureString":"事业单位/政府机关"}
-         * customerInfo : {"alipay":"1","birth":"2017-09-06","buildStauts":"1","carStauts":"1","cardId":"1","cname":"张三","domicile":"1","exitingBuildAcreage":1,"exitingBuildAddr":"1","exitingBuildLivetime":"1","id":1,"isBusinessOwner":1,"jobdepartment":"1","jobdepartmentCount":"1","marriageString":"未婚","mobilephone":"13033333333","monthlyWage":1,"opinion":"1","otherBuildAcreage":1,"otherBuildInfo":"111","otherBuildProperty":"1","ownBuildAcreage":1,"ownBuildAddr":"1","ownBuildPropertyString":"有房无贷款","qq":"11","sexString":"男","workunitAddr":"","workunitAge":"1","workunitExtPhone":"1","workunitName":"1","workunitNatureString":"事业单位/政府机关","workunitPhone":"1"}
+         * approves : {"homeVisitContent":"","managerContent":"登记客户挂机","managerRation":0,"riskControl":0,"riskControlContent":""}
+         * borrow : {"account":200000,"applydate":"2017-09-19","finishdate":"2017-09-19","fundStatus":1,"grantdate":"2017-09-19","id":3,"operatorName":"apptest123","period":3,"purpose":"吃饭","status":"30","type":"03"}
+         * borrowContants : [{"id":3,"name":"3号联系人","notice":1,"phone":"15656565656","relation":"2","type":2}]
+         * carInfo : {"brand":"","buyDate":"","cardid":"","color":"","id":0,"monthlyMoney":0,"otherInfo":"","owner":"","price":0,"status":-1}
+         * coborrow : {"birth":"2017-09-06","cardid":"148465165468","coname":"fgg","crelationship":"的饭","domicile":"第三个","exitingBuildAddr":"光电股份","extPhone":"16845","id":3,"isBusinessOwner":1,"mobilephone":"16856458459","monthlyIncome":864615,"phone":"1468465","sex":1,"workunitAddr":"","workunitAge":"1","workunitDepartment":"郭德纲","workunitName":"僧","workunitNatureString":"事业单位/政府机关"}
+         * customerInfo : {"alipay":"417845444@qq.com","birth":"2017-09-19","buildStauts":"1","carStauts":"1","cardId":"342222199999999999","cname":"王五","domicile":"安徽合肥","exitingBuildAcreage":2000,"exitingBuildAddr":"绿地中心","exitingBuildLivetime":"1","id":3,"isBusinessOwner":1,"jobdepartment":"技术部","jobdepartmentCount":"30","marriageString":"已婚","mobilephone":"15555555555","monthlyWage":1000,"opinion":"没有","otherBuildAcreage":2,"otherBuildInfo":"没有","otherBuildProperty":"2","ownBuildAcreage":2000,"ownBuildAddr":"绿地中心","ownBuildPropertyString":"有房无贷款","qq":"125646854","sexString":"男","workunitAddr":"","workunitAge":"2","workunitExtPhone":"055156565656","workunitName":"汇生科技","workunitNatureString":"国有企业/上市公司","workunitPhone":"055155555555"}
          */
 
+        private ApprovesBean approves;
         private BorrowBean borrow;
         private CarInfoBean carInfo;
         private CoborrowBean coborrow;
         private CustomerInfoBean customerInfo;
-        private List<ApprovesBean> approves;
         private List<BorrowContantsBean> borrowContants;
+
+        public ApprovesBean getApproves() {
+            return approves;
+        }
+
+        public void setApproves(ApprovesBean approves) {
+            this.approves = approves;
+        }
 
         public BorrowBean getBorrow() {
             return borrow;
@@ -95,14 +103,6 @@ public class ParticularBean {
             this.customerInfo = customerInfo;
         }
 
-        public List<ApprovesBean> getApproves() {
-            return approves;
-        }
-
-        public void setApproves(List<ApprovesBean> approves) {
-            this.approves = approves;
-        }
-
         public List<BorrowContantsBean> getBorrowContants() {
             return borrowContants;
         }
@@ -111,19 +111,75 @@ public class ParticularBean {
             this.borrowContants = borrowContants;
         }
 
+        public static class ApprovesBean {
+            /**
+             * homeVisitContent :
+             * managerContent : 登记客户挂机
+             * managerRation : 0
+             * riskControl : 0
+             * riskControlContent :
+             */
+
+            private String homeVisitContent;
+            private String managerContent;
+            private int managerRation;
+            private int riskControl;
+            private String riskControlContent;
+
+            public String getHomeVisitContent() {
+                return homeVisitContent;
+            }
+
+            public void setHomeVisitContent(String homeVisitContent) {
+                this.homeVisitContent = homeVisitContent;
+            }
+
+            public String getManagerContent() {
+                return managerContent;
+            }
+
+            public void setManagerContent(String managerContent) {
+                this.managerContent = managerContent;
+            }
+
+            public int getManagerRation() {
+                return managerRation;
+            }
+
+            public void setManagerRation(int managerRation) {
+                this.managerRation = managerRation;
+            }
+
+            public int getRiskControl() {
+                return riskControl;
+            }
+
+            public void setRiskControl(int riskControl) {
+                this.riskControl = riskControl;
+            }
+
+            public String getRiskControlContent() {
+                return riskControlContent;
+            }
+
+            public void setRiskControlContent(String riskControlContent) {
+                this.riskControlContent = riskControlContent;
+            }
+        }
+
         public static class BorrowBean {
             /**
-             * account : 20000
-             * applydate : 2017-09-06
-             * finishdate : 2017-09-06
+             * account : 200000
+             * applydate : 2017-09-19
+             * finishdate : 2017-09-19
              * fundStatus : 1
-             * grantdate : 2017-09-06
-             * id : 1
-             * operatorName : admin123
-             * period : 1
-             * purpose : 旅游
+             * grantdate : 2017-09-19
+             * id : 3
+             * operatorName : apptest123
+             * period : 3
+             * purpose : 吃饭
              * status : 30
-             * type : 01
+             * type : 03
              */
 
             private int account;
@@ -229,16 +285,16 @@ public class ParticularBean {
 
         public static class CarInfoBean {
             /**
-             * brand : 1
-             * buyDate : 2017-09-06
-             * cardid : 1
-             * color : 1
-             * id : 1
-             * monthlyMoney : 1
-             * otherInfo : 1
-             * owner : 1
-             * price : 1
-             * status : 1
+             * brand :
+             * buyDate :
+             * cardid :
+             * color :
+             * id : 0
+             * monthlyMoney : 0
+             * otherInfo :
+             * owner :
+             * price : 0
+             * status : -1
              */
 
             private String brand;
@@ -336,22 +392,22 @@ public class ParticularBean {
         public static class CoborrowBean {
             /**
              * birth : 2017-09-06
-             * cardid : 1
-             * coname : 1
-             * crelationship : 1
-             * domicile : 1
-             * exitingBuildAddr : 1
-             * extPhone : 1
-             * id : 1
+             * cardid : 148465165468
+             * coname : fgg
+             * crelationship : 的饭
+             * domicile : 第三个
+             * exitingBuildAddr : 光电股份
+             * extPhone : 16845
+             * id : 3
              * isBusinessOwner : 1
-             * mobilephone : 1
-             * monthlyIncome : 1
-             * phone : 1
+             * mobilephone : 16856458459
+             * monthlyIncome : 864615
+             * phone : 1468465
              * sex : 1
              * workunitAddr :
              * workunitAge : 1
-             * workunitDepartment : 1
-             * workunitName : 1
+             * workunitDepartment : 郭德纲
+             * workunitName : 僧
              * workunitNatureString : 事业单位/政府机关
              */
 
@@ -521,38 +577,38 @@ public class ParticularBean {
 
         public static class CustomerInfoBean {
             /**
-             * alipay : 1
-             * birth : 2017-09-06
+             * alipay : 417845444@qq.com
+             * birth : 2017-09-19
              * buildStauts : 1
              * carStauts : 1
-             * cardId : 1
-             * cname : 张三
-             * domicile : 1
-             * exitingBuildAcreage : 1
-             * exitingBuildAddr : 1
+             * cardId : 342222199999999999
+             * cname : 王五
+             * domicile : 安徽合肥
+             * exitingBuildAcreage : 2000
+             * exitingBuildAddr : 绿地中心
              * exitingBuildLivetime : 1
-             * id : 1
+             * id : 3
              * isBusinessOwner : 1
-             * jobdepartment : 1
-             * jobdepartmentCount : 1
-             * marriageString : 未婚
-             * mobilephone : 13033333333
-             * monthlyWage : 1
-             * opinion : 1
-             * otherBuildAcreage : 1
-             * otherBuildInfo : 111
-             * otherBuildProperty : 1
-             * ownBuildAcreage : 1
-             * ownBuildAddr : 1
+             * jobdepartment : 技术部
+             * jobdepartmentCount : 30
+             * marriageString : 已婚
+             * mobilephone : 15555555555
+             * monthlyWage : 1000
+             * opinion : 没有
+             * otherBuildAcreage : 2
+             * otherBuildInfo : 没有
+             * otherBuildProperty : 2
+             * ownBuildAcreage : 2000
+             * ownBuildAddr : 绿地中心
              * ownBuildPropertyString : 有房无贷款
-             * qq : 11
+             * qq : 125646854
              * sexString : 男
              * workunitAddr :
-             * workunitAge : 1
-             * workunitExtPhone : 1
-             * workunitName : 1
-             * workunitNatureString : 事业单位/政府机关
-             * workunitPhone : 1
+             * workunitAge : 2
+             * workunitExtPhone : 055156565656
+             * workunitName : 汇生科技
+             * workunitNatureString : 国有企业/上市公司
+             * workunitPhone : 055155555555
              */
 
             private String alipay;
@@ -845,70 +901,14 @@ public class ParticularBean {
             }
         }
 
-        public static class ApprovesBean {
-            /**
-             * content : 是否梵蒂冈梵蒂冈更广泛的风格
-             * id : 1
-             * managerRation : 500000
-             * riskControl : 400000
-             * type : 1
-             */
-
-            private String content;
-            private int id;
-            private int managerRation;
-            private int riskControl;
-            private int type;
-
-            public String getContent() {
-                return content;
-            }
-
-            public void setContent(String content) {
-                this.content = content;
-            }
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public int getManagerRation() {
-                return managerRation;
-            }
-
-            public void setManagerRation(int managerRation) {
-                this.managerRation = managerRation;
-            }
-
-            public int getRiskControl() {
-                return riskControl;
-            }
-
-            public void setRiskControl(int riskControl) {
-                this.riskControl = riskControl;
-            }
-
-            public int getType() {
-                return type;
-            }
-
-            public void setType(int type) {
-                this.type = type;
-            }
-        }
-
         public static class BorrowContantsBean {
             /**
-             * id : 1
-             * name : 1
+             * id : 3
+             * name : 3号联系人
              * notice : 1
-             * phone : 1
-             * relation : 1
-             * type : 1
+             * phone : 15656565656
+             * relation : 2
+             * type : 2
              */
 
             private int id;

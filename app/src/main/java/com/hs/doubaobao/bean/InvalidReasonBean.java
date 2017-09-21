@@ -9,10 +9,9 @@ package com.hs.doubaobao.bean;
 
 public class InvalidReasonBean {
 
-
     /**
      * resCode : 1
-     * resData : {"disableDetail":{"account":0,"auditor":"admin123","auditorTime":"2017-09-19","operatorName":"admin123","remark":""}}
+     * resData : {"disableDetail":{"auditor":"admin123","auditorTime":"2017-09-19","cname":"张三","operatorName":"admin123","remark":""}}
      * resMsg : SUCCESS
      */
 
@@ -46,7 +45,7 @@ public class InvalidReasonBean {
 
     public static class ResDataBean {
         /**
-         * disableDetail : {"account":0,"auditor":"admin123","auditorTime":"2017-09-19","operatorName":"admin123","remark":""}
+         * disableDetail : {"auditor":"admin123","auditorTime":"2017-09-19","cname":"张三","operatorName":"admin123","remark":""}
          */
 
         private DisableDetailBean disableDetail;
@@ -61,26 +60,18 @@ public class InvalidReasonBean {
 
         public static class DisableDetailBean {
             /**
-             * account : 0
              * auditor : admin123
              * auditorTime : 2017-09-19
+             * cname : 张三
              * operatorName : admin123
              * remark :
              */
 
-            private int account;
             private String auditor;
             private String auditorTime;
+            private String cname;
             private String operatorName;
             private String remark;
-
-            public int getAccount() {
-                return account;
-            }
-
-            public void setAccount(int account) {
-                this.account = account;
-            }
 
             public String getAuditor() {
                 return auditor;
@@ -96,6 +87,14 @@ public class InvalidReasonBean {
 
             public void setAuditorTime(String auditorTime) {
                 this.auditorTime = auditorTime;
+            }
+
+            public String getCname() {
+                return cname;
+            }
+
+            public void setCname(String cname) {
+                this.cname = cname;
             }
 
             public String getOperatorName() {

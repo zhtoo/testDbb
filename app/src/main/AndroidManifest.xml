@@ -23,6 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".model.Login.GuideActivity">
+            <!--.model.Login.GuideActivity-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -38,6 +39,7 @@
         <activity android:name=".model.invalid.InvalidListActivity"/>
         <activity android:name=".model.invalid.InvalidReasonActivity"/>
         <activity android:name=".model.detail.DetailActivity"/>
+        <activity android:name=".model.detail.pictrue.ImagePagerActivity"/>
 
     </application>
 

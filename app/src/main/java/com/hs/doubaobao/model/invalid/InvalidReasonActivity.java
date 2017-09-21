@@ -42,13 +42,13 @@ public class InvalidReasonActivity extends AppBarActivity implements InvalidReas
 
 
         Intent intent = getIntent();
-        intent.getStringExtra("invalidId");
+        String invalidId = intent.getStringExtra("invalidId");
 
         initView();
 
         new InvalidReasonPresener(this);
         Map<String, String> map = new LinkedHashMap<>();
-        map.put("id", "1");
+        map.put("id", invalidId);
         presenter.getData(map);
 
     }
@@ -65,7 +65,7 @@ public class InvalidReasonActivity extends AppBarActivity implements InvalidReas
     public void setData(InvalidReasonBean bean) {
         InvalidReasonBean.ResDataBean.DisableDetailBean detail = bean.getResData().getDisableDetail();
 
-        mName.setText(detail.getAccount()+"");
+        mName.setText(detail.getCname());
         mManager.setText(detail.getOperatorName());
         mWriter.setText(detail.getAuditor());
         mTime.setText(detail.getAuditorTime());

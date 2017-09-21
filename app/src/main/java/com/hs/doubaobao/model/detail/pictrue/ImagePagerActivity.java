@@ -14,14 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
 
@@ -32,19 +34,18 @@ import java.util.List;
 /**
  * Created by zht on 2017/9/13.
  */
-public class ImagePagerActivity extends AppBarActivity{
+public class ImagePagerActivity extends AppBarActivity {
     public static final String INTENT_IMGURLS = "imgurls";
     public static final String INTENT_POSITION = "position";
     public static final String INTENT_IMAGESIZE = "imagesize";
 
-    private List<View> guideViewList = new ArrayList<View>();
-    private LinearLayout guideGroup;
     public ImageSize imageSize;
     private int startPos;
     private ArrayList<String> imgUrls;
+    private TextView guidePercent;
 
 
-    public static void startImagePagerActivity(Context context, List<String> imgUrls, int position, ImageSize imageSize){
+    public static void startImagePagerActivity(Context context, List<String> imgUrls, int position, ImageSize imageSize) {
         Intent intent = new Intent(context, ImagePagerActivity.class);
         intent.putStringArrayListExtra(INTENT_IMGURLS, new ArrayList<String>(imgUrls));
         intent.putExtra(INTENT_POSITION, position);
@@ -56,8 +57,14 @@ public class ImagePagerActivity extends AppBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagepager);
+
+        setTitle("图片预览");
+        isShowRightView(false);
+        hideTitleBar();
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        guideGroup = (LinearLayout) findViewById(R.id.guideGroup);
+
+        guidePercent = (TextView) findViewById(R.id.guide_percent);
 
         getIntentData();
 
@@ -74,9 +81,7 @@ public class ImagePagerActivity extends AppBarActivity{
 
             @Override
             public void onPageSelected(int position) {
-                for(int i=0; i<guideViewList.size(); i++){
-                    guideViewList.get(i).setSelected(i==position ? true : false);
-                }
+                guidePercent.setText((position + 1) + "/" + imgUrls.size());
             }
 
             @Override
@@ -84,9 +89,9 @@ public class ImagePagerActivity extends AppBarActivity{
 
             }
         });
+        addGuideView(guidePercent, startPos, imgUrls);
         viewPager.setCurrentItem(startPos);
 
-        addGuideView(guideGroup, startPos, imgUrls);
 
     }
 
@@ -98,37 +103,28 @@ public class ImagePagerActivity extends AppBarActivity{
 
     /**
      * 添加数字
-     * @param guideGroup
+     *
+     * @param guidePercent
      * @param startPos
      * @param imgUrls
      */
-    private void addGuideView(LinearLayout guideGroup, int startPos, ArrayList<String> imgUrls) {
-        if(imgUrls!=null && imgUrls.size()>0){
-            guideViewList.clear();
-            for (int i=0; i<imgUrls.size(); i++){
-                View view = new View(this);
-               // view.setBackgroundResource(R.drawable.selector_guide_bg);
-                view.setSelected(i==startPos ? true : false);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout
-                        .LayoutParams(10, 10);
-                layoutParams.setMargins(10, 0, 0, 0);
-                guideGroup.addView(view, layoutParams);
-                guideViewList.add(view);
-            }
+    private void addGuideView(TextView guidePercent, int startPos, ArrayList<String> imgUrls) {
+        if (imgUrls != null && imgUrls.size() > 0) {
+            guidePercent.setText((startPos + 1) + "/" + imgUrls.size());
         }
     }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        try{
+        try {
             return super.dispatchTouchEvent(ev);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    private static class ImageAdapter extends PagerAdapter {
+    private class ImageAdapter extends PagerAdapter {
 
         private List<String> datas = new ArrayList<String>();
         private LayoutInflater inflater;
@@ -137,21 +133,22 @@ public class ImagePagerActivity extends AppBarActivity{
         private ImageView smallImageView = null;
 
         public void setDatas(List<String> datas) {
-            if(datas != null )
+            if (datas != null)
                 this.datas = datas;
         }
-        public void setImageSize(ImageSize imageSize){
+
+        public void setImageSize(ImageSize imageSize) {
             this.imageSize = imageSize;
         }
 
-        public ImageAdapter(Context context){
+        public ImageAdapter(Context context) {
             this.context = context;
             this.inflater = LayoutInflater.from(context);
         }
 
         @Override
         public int getCount() {
-            if(datas == null) return 0;
+            if (datas == null) return 0;
             return datas.size();
         }
 
@@ -159,17 +156,24 @@ public class ImagePagerActivity extends AppBarActivity{
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             View view = inflater.inflate(R.layout.item_pager_image, container, false);
-            if(view != null){
-                final ImageView imageView = (ImageView) view.findViewById(R.id.image);
+            if (view != null) {
+                final PhotoView imageView = (PhotoView) view.findViewById(R.id.image);
+                imageView.setOnPhotoTapListener(new OnPhotoTapListener() {
+                    @Override
+                    public void onPhotoTap(ImageView view, float x, float y) {
+                        ImagePagerActivity.this.finish();
+                    }
+                });
 
-                if(imageSize!=null){
+
+                if (imageSize != null) {
                     //预览imageView
                     smallImageView = new ImageView(context);
                     FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(imageSize.getWidth(), imageSize.getHeight());
                     layoutParams.gravity = Gravity.CENTER;
                     smallImageView.setLayoutParams(layoutParams);
                     smallImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                    ((FrameLayout)view).addView(smallImageView);
+                    ((FrameLayout) view).addView(smallImageView);
                 }
 
                 //loading
@@ -178,7 +182,7 @@ public class ImagePagerActivity extends AppBarActivity{
                         ViewGroup.LayoutParams.WRAP_CONTENT);
                 loadingLayoutParams.gravity = Gravity.CENTER;
                 loading.setLayoutParams(loadingLayoutParams);
-                ((FrameLayout)view).addView(loading);
+                ((FrameLayout) view).addView(loading);
 
                 final String imgurl = datas.get(position);
 
@@ -186,8 +190,8 @@ public class ImagePagerActivity extends AppBarActivity{
                         .load(imgurl)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存多个尺寸
                         .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
-                        .error(R.mipmap.ic_launcher)
-                        .into(new GlideDrawableImageViewTarget(imageView){
+                        .error(R.drawable.ic_error_pictrue)
+                        .into(new GlideDrawableImageViewTarget(imageView) {
                             @Override
                             public void onLoadStarted(Drawable placeholder) {
                                 super.onLoadStarted(placeholder);
@@ -246,16 +250,16 @@ public class ImagePagerActivity extends AppBarActivity{
 
     @Override
     protected void onDestroy() {
-        guideViewList.clear();
+
         super.onDestroy();
     }
 
-    public static class ImageSize implements Serializable{
+    public static class ImageSize implements Serializable {
 
         private int width;
         private int height;
 
-        public ImageSize(int width, int height){
+        public ImageSize(int width, int height) {
             this.width = width;
             this.height = height;
         }

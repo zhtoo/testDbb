@@ -61,7 +61,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         ParticularBean.ResDataBean.CoborrowBean coborrow = bean.getResData().getCoborrow();
         ParticularBean.ResDataBean.CarInfoBean carInfo = bean.getResData().getCarInfo();
         List<ParticularBean.ResDataBean.BorrowContantsBean> borrowContants = bean.getResData().getBorrowContants();
-        List<ParticularBean.ResDataBean.ApprovesBean> approves = bean.getResData().getApproves();
+        ParticularBean.ResDataBean.ApprovesBean approves = bean.getResData().getApproves();
 
         mTitles.add("贷款类别");
         Map<String,String> map1 = new LinkedHashMap<>();
@@ -154,8 +154,12 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map5.put("车辆品牌",carInfo.getBrand());
         map5.put("车辆颜色",carInfo.getColor());
         map5.put("车辆号码",carInfo.getCardid());
-        map5.put("车辆状况",carInfo.getStatus()==0?"有车无贷款":"有车有贷款");
-        map5.put("裸车价",carInfo.getPrice()+"元");
+        String status = "";
+        if(carInfo.getStatus()!=-1){
+            status= carInfo.getStatus()==0?"有车无贷款":"有车有贷款";
+        }
+        map5.put("车辆状况",status);
+        map5.put("裸车价",carInfo.getPrice() == 0?"":(carInfo.getPrice()+"元"));
         map5.put("车辆购买日期",carInfo.getBuyDate());
         map5.put("其他车辆信息",carInfo.getOtherInfo());
         mMap.add(map5);
@@ -211,13 +215,13 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map8.put("line1","line");
         map8.put("面审情况及意见",customerInfo.getOpinion());
         map8.put("line2","line");
-        map8.put("家访客户情况汇总","");
+        map8.put("家访客户情况汇总",approves.getHomeVisitContent());
         map8.put("line3","line");
-        map8.put("风控意见","");
-        map8.put("风控定额","");
+        map8.put("风控意见",approves.getRiskControlContent());
+        map8.put("风控定额",approves.getRiskControl()>0?(approves.getRiskControl()+"元"):"");
         map8.put("line4","line");
-        map8.put("总经理意见","");
-        map8.put("总经理定额","");
+        map8.put("总经理意见",approves.getManagerContent());
+        map8.put("总经理定额",approves.getManagerRation()>0?(approves.getManagerRation()+"元"):"");
         mMap.add(map8);
 
 
