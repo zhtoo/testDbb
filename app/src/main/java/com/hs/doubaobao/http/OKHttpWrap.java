@@ -39,6 +39,7 @@ public class OKHttpWrap {
     private static OkHttpClient okHttpClient;
     private final Handler handler;
 
+
     public static OKHttpWrap getOKHttpWrap() {
 
         if (okHttpManager == null) {
@@ -135,6 +136,7 @@ public class OKHttpWrap {
      * @return
      */
     public void requestPost(String url, Map<String, String> paramsMap, final CallBack callback) {
+
         //同步锁
         synchronized (MyApplication.getContext()) {
             //添加通用参数
@@ -231,6 +233,7 @@ public class OKHttpWrap {
         handler.post(new Runnable() {
             @Override
             public void run() {
+
                 callback.onResponse(object);
                 callback.onAfter();
             }

@@ -40,6 +40,7 @@
         <activity android:name=".model.invalid.InvalidReasonActivity"/>
         <activity android:name=".model.detail.DetailActivity"/>
         <activity android:name=".model.detail.pictrue.ImagePagerActivity"/>
+        <activity android:name=".model.Approval.ApprovalActivity"/>
 
     </application>
 

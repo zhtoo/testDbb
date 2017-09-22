@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.utils.LoadWaiting;
 
 import java.lang.reflect.Field;
 
@@ -50,10 +51,12 @@ public class AppBarActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView mBarRightImage;
     //标题文字
     private TextView mBarTitle;
+    public LoadWaiting loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loading = LoadWaiting.createDialog(this);
         initViews();
         initState();
     }

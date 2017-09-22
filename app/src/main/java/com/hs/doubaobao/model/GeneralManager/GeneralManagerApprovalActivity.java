@@ -1,5 +1,6 @@
 package com.hs.doubaobao.model.GeneralManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import com.hs.doubaobao.adapter.ManagerAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.adapter.ListAdapter;
+import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.main.ListBean;
 
 import java.util.ArrayList;
@@ -102,6 +104,9 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
 
     @Override
     public void onItemClick(int postion) {
-
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("ID",listBeen.get(postion).getId()+"");
+        intent.putExtra("ShowRightType","MANAGER");
+        startActivity(intent);
     }
 }

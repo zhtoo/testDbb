@@ -2,8 +2,6 @@ package com.hs.doubaobao.model.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -42,17 +40,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
     private EditText loginPwd;
     private Button loginBtnSure;
 
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    Toast.makeText(LoginActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +52,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
         //将Presenter和View进行绑定
         new LoginPresener(this);
-
 
     }
 
@@ -103,7 +89,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         BaseParams.USER_ID = String.valueOf(bean.getResData().getId());
         BaseParams.OPERATOR_NAME= bean.getResData().getName();
 
-
+        loading.dismiss();
         //跳转到主界面
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("name", BaseParams.OPERATOR_NAME);
@@ -113,6 +99,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
     @Override
     public void setError(String text) {
+        loading.dismiss();
         Toast.makeText(MyApplication.getContext(), "网络不给力", Toast.LENGTH_SHORT).show();
         LogWrap.e(TAG,text);
     }
@@ -142,6 +129,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
             map.put("id", name);
             map.put("pwd", Base64Util.encode(password));
             //获取数据
+            loading.show();
             presenter.getData(map);
         }
     }

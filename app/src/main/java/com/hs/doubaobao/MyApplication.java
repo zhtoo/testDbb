@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *  全局单例
+ * 全局单例
  * Created by zhanghaitao on 2017/5/18.
  */
 
@@ -23,11 +23,12 @@ public class MyApplication extends Application {
     private Map<String, String> mMemProtocolCacheMap = new HashMap<>();
 
 
-
     private Resources mResources;
+
 
     /**
      * 获取MEM协议缓存集合
+     *
      * @return
      */
     public Map<String, String> getMemProtocolCacheMap() {
@@ -36,6 +37,7 @@ public class MyApplication extends Application {
 
     /**
      * 得到上下文
+     *
      * @return
      */
     public static Context getContext() {
@@ -44,6 +46,7 @@ public class MyApplication extends Application {
 
     /**
      * 得到主线程里面的创建的一个hanlder
+     *
      * @return
      */
     public static Handler getMainThreadHandler() {
@@ -52,6 +55,7 @@ public class MyApplication extends Application {
 
     /**
      * 得到主线程的线程id
+     *
      * @return
      */
     public static int getMainThreadId() {
@@ -60,6 +64,7 @@ public class MyApplication extends Application {
 
     /**
      * 获取资源文件
+     *
      * @return
      */
     public static int getcolor(int id) {
@@ -91,7 +96,7 @@ public class MyApplication extends Application {
     /**
      * 存放Activity的对象
      */
-    private static Map<String,Activity> destoryMap = new HashMap<>();
+    private static Map<String, Activity> destoryMap = new HashMap<>();
 
     /**
      * 添加到销毁队列
@@ -99,27 +104,28 @@ public class MyApplication extends Application {
      * @param activity 要销毁的activity
      */
 
-    public static void addDestoryActivity(Activity activity,String activityName) {
-        destoryMap.put(activityName,activity);
+    public static void addDestoryActivity(Activity activity, String activityName) {
+        destoryMap.put(activityName, activity);
     }
+
     /**
-     *销毁指定Activity
+     * 销毁指定Activity
      */
     public static void destoryActivity(String activityName) {
-        Set<String> keySet=destoryMap.keySet();
-        for (String key:keySet){
+        Set<String> keySet = destoryMap.keySet();
+        for (String key : keySet) {
             destoryMap.get(key).finish();
         }
     }
 
-    public static void addActivity(Activity activity,String activityName) {
-        destoryMap.put(activityName,activity);
+    public static void addActivity(Activity activity, String activityName) {
+        destoryMap.put(activityName, activity);
     }
 
     public static Activity getActivity(String activityName) {
-        Set<String> keySet=destoryMap.keySet();
-        for (String key:keySet){
-          return   destoryMap.get(key);
+        Set<String> keySet = destoryMap.keySet();
+        for (String key : keySet) {
+            return destoryMap.get(key);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package com.hs.doubaobao.model.riskControl;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import com.hs.doubaobao.R;
 import com.hs.doubaobao.adapter.RiskAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.bean.HomeBean;
+import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.main.ListBean;
 
 import java.util.ArrayList;
@@ -104,7 +106,10 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
 
     @Override
     public void onItemClick(int postion) {
-
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("ID",listBeen.get(postion).getId()+"");
+        intent.putExtra("ShowRightType","RISK");
+        startActivity(intent);
     }
 
 }

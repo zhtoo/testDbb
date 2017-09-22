@@ -25,6 +25,7 @@ import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
+import com.hs.doubaobao.utils.LoadWaiting;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
 
@@ -61,6 +62,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
     private List<ListBean> mList = new ArrayList<>();
     private HomeAdapter adapter;
+    private LoadWaiting loading;
 
 
     @Override
@@ -90,7 +92,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 //        map.put("cusName", "6");
 //        map.put("opeName", "6");
 //        map.put("phone", "6");
-
+        loading = LoadWaiting.createDialog(this);
+        loading.show();
         presenter.getData(map);
 
     }
@@ -327,6 +330,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      */
     @Override
     public void setData(HomeBean bean) {
+        loading.dismiss();
         //角色权限
         roleIdList = bean.getResData().getRoleIdList();
         //角色的消息

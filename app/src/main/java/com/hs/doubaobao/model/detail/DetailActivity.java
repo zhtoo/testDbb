@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
+import com.hs.doubaobao.model.Approval.ApprovalActivity;
 import com.hs.doubaobao.model.detail.particulars.ParticularsFragment;
 import com.hs.doubaobao.model.detail.pictrue.PictrueFragment;
 import com.hs.doubaobao.model.detail.reference.ReferenceFragment;
@@ -18,7 +20,7 @@ import com.hs.doubaobao.model.detail.video.VideoFragment;
  * 作者：zhanghaitao on 2017/9/12 14:53
  * 邮箱：820159571@qq.com
  *
- * @describe:  管理资料查看的各个选项的显示和隐藏。不负责具体的逻辑操作（不需要再做修改）
+ * @describe: 管理资料查看的各个选项的显示和隐藏。不负责具体的逻辑操作（不需要再做修改）
  */
 
 public class DetailActivity extends AppBarActivity {
@@ -36,18 +38,29 @@ public class DetailActivity extends AppBarActivity {
     private VideoFragment mVideoFragment;
     private ReferenceFragment mReferenceFragment;
     public String id;
+    public String showRightType;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        setTitle(getString(R.string.read_data));
-        isShowRightView(false);
-        setStatusBarBackground(R.drawable.ic_battery_bg);
+
 
         Intent intent = getIntent();
+        showRightType = intent.getStringExtra("ShowRightType");
         id = intent.getStringExtra("ID");
+
+
+        setTitle(getString(R.string.read_data));
+        if (TextUtils.isEmpty(showRightType)) {
+            isShowRightView(false);
+        } else if (showRightType.equals("RISK")) {
+            setRightStatus(R.drawable.ic_risk_selector);
+        } else if (showRightType.equals("MANAGER")) {
+            setRightStatus(R.drawable.ic_manager_selector);
+        }
+        setStatusBarBackground(R.drawable.ic_battery_bg);
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -57,6 +70,19 @@ public class DetailActivity extends AppBarActivity {
 
     }
 
+    /**
+     * 右边的点击事件
+     *
+     * @param forwardView
+     */
+    @Override
+    public void onRightForward(View forwardView) {
+        Intent intent = new Intent(this, ApprovalActivity.class);
+        intent.putExtra("ID",id);
+        intent.putExtra("ShowRightType", showRightType);
+        startActivity(intent);
+        finish();
+    }
 
     /**
      * 显示详情
