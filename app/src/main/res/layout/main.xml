@@ -24,29 +24,29 @@
         <ImageView
             android:layout_width="@dimen/x100"
             android:layout_height="@dimen/y120"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
             android:onClick="onMenuSearchClick"
             android:padding="@dimen/x20"
-            android:src="@drawable/ic_search_selector"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"/>
+            android:src="@drawable/ic_search_selector"/>
 
         <TextView
             android:id="@+id/home_person_name"
             android:layout_width="@dimen/x236"
             android:layout_height="@dimen/y78"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x20"
             android:background="@drawable/ic_main_name_bg"
             android:gravity="center"
             android:onClick="onMenuToggleClick"
-            android:text="客服大倩"
-            android:layout_centerVertical="true"/>
+            android:text="客服大倩"/>
 
         <com.hs.doubaobao.view.DotView
             android:id="@+id/main_dot"
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/y20"
-            android:layout_alignTop="@+id/home_person_name"
-            android:layout_alignEnd="@+id/home_person_name"/>
+            android:layout_alignEnd="@+id/home_person_name"
+            android:layout_alignTop="@+id/home_person_name"/>
 
     </RelativeLayout>
     <!--分割线-->
@@ -54,6 +54,7 @@
     <!--内容-->
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/grayBackground"
         android:layout_height="1dp"
         android:layout_weight="1">
 
@@ -62,13 +63,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/main_recycler_view"
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@+id/main_ptr"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/grayBackground"/>
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/main_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grayBackground"/>
+
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@+id/main_ptr1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/layout_null"/>
+
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
         </LinearLayout>
+
 
         <com.hs.doubaobao.view.MyRelativeLayout
             android:id="@+id/main_search_container"
@@ -89,6 +107,7 @@
             </LinearLayout>
 
         </com.hs.doubaobao.view.MyRelativeLayout>
+
 
     </RelativeLayout>
 

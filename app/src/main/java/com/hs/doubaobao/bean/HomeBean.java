@@ -81,6 +81,8 @@ public class HomeBean {
             this.roleIdList = roleIdList;
         }
 
+
+
         public static class MessageCountBean {
             /**
              * messageRole1 : 1   平台角色（超级管理）
@@ -292,6 +294,8 @@ public class HomeBean {
                  * operName : 平台
                  * period : 1
                  * purpose : 旅游
+                 * riskControl : 0
+                 * managerRation : 0
                  * status : 30
                  * type : 3
                  */
@@ -310,6 +314,8 @@ public class HomeBean {
                 private String purpose;
                 private String status;
                 private String type;
+                private double riskControl;
+                private double managerRation ;
 
                 public double getAccount() {
                     return account;
@@ -421,6 +427,21 @@ public class HomeBean {
 
                 public void setType(String type) {
                     this.type = type;
+                }
+                public double getRiskControl() {
+                    return riskControl;
+                }
+
+                public void setRiskControl(double riskControl) {
+                    this.riskControl = riskControl;
+                }
+
+                public double getManagerRation() {
+                    return managerRation;
+                }
+
+                public void setManagerRation(double managerRation) {
+                    this.managerRation = managerRation;
                 }
             }
         }

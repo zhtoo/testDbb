@@ -48,11 +48,12 @@
                     style="@style/referenceItem">
 
                     <TextView
-                        android:id="@+id/reference_manager"
+
                         style="@style/referenceText1"
                         android:text="客户经理:"/>
 
                     <TextView
+                        android:id="@+id/reference_manager"
                         style="@style/referenceText2"
                         android:text="李四"/>
 

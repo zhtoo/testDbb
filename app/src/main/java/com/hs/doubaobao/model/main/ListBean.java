@@ -27,7 +27,8 @@ public class ListBean {
     private String status ;
     //列表显示类型
     private int showType = 0 ;//0: 首页  ； 1 风控  2 总经理
-
+    //按钮的状态
+    private int approveStatus  = 0 ;//0:审批;1:继续;2:等待上级审核
 
     public String getName() {
         return name;
@@ -101,10 +102,13 @@ public class ListBean {
         this.showType = showType;
     }
 
+    public int getApproveStatus() {
+        return approveStatus;
+    }
 
-
-
-
+    public void setApproveStatus(int approveStatus) {
+        this.approveStatus = approveStatus;
+    }
 
 
 }

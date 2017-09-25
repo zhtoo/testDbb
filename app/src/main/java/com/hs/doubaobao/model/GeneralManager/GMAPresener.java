@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.GeneralManager;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -22,17 +24,19 @@ public class GMAPresener implements GMAContract.Presenter {
 
     private static final String TAG ="LoginPresener" ;
     GMAContract.View viewRoot;
+    private Context context;
 
-    public GMAPresener(GMAContract.View viewRoot) {
+    public GMAPresener(GMAContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
+
 
     @Override
     public void getData(Map mapParameter) {
 
-
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.MANAGER_URL, mapParameter, new requestCallBack() {
 
                     private HomeBean bean;

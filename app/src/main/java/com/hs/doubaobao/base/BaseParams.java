@@ -66,8 +66,14 @@ public class BaseParams {
     public static final String INVALID_REASON_URL = BASE_URL + "app/common/disableDetail.html";
     //详情地址
     public static final String PARTICULARS_URL = BASE_URL + "app/common/infoDetail.html";
+    //图片地址
+    public static final String PICTRUE_URL = BASE_URL + "app/common/picList.html";
+    //图片地址
+    public static final String VIDEO_URL = BASE_URL + "app/common/vedioList.html";
     //参考表
     public static final String REFRERNCE_URL = BASE_URL + "app/common/reference.html";
+    //审批
+    public static final String APPROVAL_URL = BASE_URL + "app/approval.html";
 
 
 

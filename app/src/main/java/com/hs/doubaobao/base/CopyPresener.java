@@ -1,5 +1,7 @@
 package com.hs.doubaobao.base;
 
+import android.content.Context;
+
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
@@ -22,16 +24,18 @@ public class CopyPresener implements CopyContract.Presenter {
     private static final String TAG ="LoginPresener" ;
     CopyContract.View viewRoot;
 
-    public CopyPresener(CopyContract.View viewRoot) {
+
+    private Context context;
+
+    public CopyPresener(CopyContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
 
     @Override
     public void getData(Map mapParameter) {
-
-
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.MANAGER_URL, mapParameter, new requestCallBack() {
 
                     private HomeBean bean;

@@ -8,23 +8,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.adapter.InvalidAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
+import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.model.main.ListBean;
+import com.hs.doubaobao.utils.PullToRefresh;
 import com.hs.doubaobao.view.MyRelativeLayout;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 
 /**
  * 作者：zhanghaitao on 2017/9/11 17:44
@@ -33,10 +39,10 @@ import java.util.Map;
  * @describe:
  */
 
-public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, InvalidAdapter.onItemClickListener {
+public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, InvalidAdapter.onItemClickListener, PullToRefresh.PullToRefreshListener {
 
     private InvalidListContract.Presenter presenter;
-    private RecyclerView mRecycler;
+    private RecyclerView mRecyclerView;
     private MyRelativeLayout mSearchContainer;
     private LinearLayout mSearch;
     private boolean isShowing = false;
@@ -46,6 +52,15 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     private List<ListBean> mList = new ArrayList<>();
     private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
+
+    private PtrClassicFrameLayout ptrFrame;
+    private Map<String, Object> map;
+    private int page = 1;
+    private int pages = 1;
+    private EditText mSearchName;
+    private EditText mSearchOpeName;
+    private EditText mSearchPhone;
+    private PtrClassicFrameLayout ptrFrame1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,33 +74,43 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
 
         initView();
 
-        new InvalidListPresenter(this);
-        /**
-         page	否	int	当前页数
-         rows	否	int	每页总数
-         cusName	否	String	客户姓名
-         opeName	否	String	客户经理
-         phone	否	String	客户电话
-         */
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("page", "1");
-        map.put("rows", "10");
-        map.put("cusName", "");
-        map.put("opeName", "");
-        map.put("phone", "");
-        presenter.getData(map);
+        new InvalidListPresenter(this,this);
 
+        map = new LinkedHashMap<>();
+        loadData("", "", "");
+    }
+
+    private void loadData(String name, String opeName, String phone) {
+        map.put("userId", BaseParams.USER_ID);
+        map.put("page", page);
+        map.put("rows", "10");
+        if (!TextUtils.isEmpty(name)) {
+            map.put("cusName", name);
+        } else {
+            map.put("cusName", "");
+        }
+        if (!TextUtils.isEmpty(opeName)) {
+            map.put("opeName", opeName);
+        } else {
+            map.put("opeName", "");
+        }
+        if (!TextUtils.isEmpty(phone)) {
+            map.put("phone", phone);
+        } else {
+            map.put("phone", "");
+        }
+        presenter.getData(map);
     }
 
     private void initView() {
-        mRecycler = (RecyclerView) findViewById(R.id.invalid_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.invalid_recycler_view);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayout.VERTICAL);
-        mRecycler.setLayoutManager(llm);
+        mRecyclerView.setLayoutManager(llm);
 
         adapter = new InvalidAdapter(this, mList, 4);
         adapter.setOnItemClickListener(this);
-        mRecycler.setAdapter(adapter);
+        mRecyclerView.setAdapter(adapter);
 
         mSearch = (LinearLayout) findViewById(R.id.invalid_search);
         mSearchContainer = (MyRelativeLayout) findViewById(R.id.invalid_search_container);
@@ -94,6 +119,13 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         reset = (Button) findViewById(R.id.search_reset);
         start = (Button) findViewById(R.id.search_start);
 
+        ptrFrame = (PtrClassicFrameLayout) findViewById(R.id.invalid_ptr);
+        ptrFrame1 = (PtrClassicFrameLayout) findViewById(R.id.invalid_ptr1);
+        mSearchName = (EditText) findViewById(R.id.search_name);
+        mSearchOpeName = (EditText) findViewById(R.id.search_opename);
+        mSearchPhone = (EditText) findViewById(R.id.search_phone);
+        initPtrClassicFrameLayout();
+
         //设置状态栏的背景
         mSearch.setOnClickListener(this);
         mSearchContainer.setOnClickListener(this);
@@ -101,12 +133,25 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         start.setOnClickListener(this);
     }
 
+    /**
+     * 初始化上拉加载下拉刷新的布局
+     * 注意：adapter的初始化在 PullToRefresh 之前
+     */
+    private void initPtrClassicFrameLayout() {
+        //注意：adapter的初始化在 PullToRefresh 之前
+        //创建PtrClassicFrameLayout的包装类对象
+        PullToRefresh refresh = new PullToRefresh();
+        //初始化PtrClassicFrameLayout
+        refresh.initPTR(this, ptrFrame, adapter);
+        refresh.initPTR(this, ptrFrame1, adapter);
+        //设置监听
+        refresh.setPullToRefreshListener(this);
+    }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
         int viewID = v.getId();
-
         switch (viewID) {
             case R.id.invalid_search_container:
                 hideInput(v);
@@ -116,14 +161,27 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 }
                 break;
             case R.id.search_reset:
-                Toast.makeText(this, "无效列表的重置", Toast.LENGTH_SHORT).show();
+                mSearchName.setText("");
+                mSearchOpeName.setText("");
+                mSearchPhone.setText("");
+                //Toast.makeText(this, "无效列表的重置", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search_start:
-                Toast.makeText(this, "无效列表的完成", Toast.LENGTH_SHORT).show();
+                hideInput(v);
+                if (isShowing) {
+                    isShowing = false;
+                    ShowSearchAnimator(1f, 0f);
+                }
+                mList.clear();
+                page = 1;
+                String name = mSearchName.getText().toString().trim();
+                String opeName = mSearchOpeName.getText().toString().trim();
+                String phone = mSearchPhone.getText().toString().trim();
+                loadData(name, opeName, phone);
+               // Toast.makeText(this, "无效列表的完成", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
 
     @Override
     public void onRightForward(View forwardView) {
@@ -132,13 +190,15 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
             isShowing = false;
             ShowSearchAnimator(1f, 0f);
         } else {
+            mSearchName.setText("");
+            mSearchOpeName.setText("");
+            mSearchPhone.setText("");
             isShowing = true;
             mSearchContainer.setVisibility(View.VISIBLE);
             mSearch.setVisibility(View.VISIBLE);
             ShowSearchAnimator(0f, 1f);
         }
     }
-
 
     /**
      * 搜索菜单显示和隐藏的动画
@@ -190,7 +250,8 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         pageBean = bean.getResData().getPageDataList().getPage();
         //list内容
         listBeen = bean.getResData().getPageDataList().getList();
-        mList.clear();
+        pages = pageBean.getPages();
+
         if (listBeen != null && listBeen.size() > 0) {
             for (int i = 0; i < listBeen.size(); i++) {
                 ListBean mBean = new ListBean();
@@ -204,22 +265,25 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 mBean.setStatus(listBeen.get(i).getStatus());
                 mList.add(mBean);
             }
+            ptrFrame1.setVisibility(View.GONE);
+            ptrFrame.setVisibility(View.VISIBLE);
         } else {
-            //TODO:空视图
+            ptrFrame.setVisibility(View.GONE);
+            ptrFrame1.setVisibility(View.VISIBLE);
         }
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void setError(String text) {
-
+        ptrFrame.setVisibility(View.GONE);
+        ptrFrame1.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void setPresenter(InvalidListContract.Presenter presenter) {
         this.presenter = presenter;
     }
-
 
     /**
      * 隐藏软键盘
@@ -236,12 +300,35 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         }
     }
 
-
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, InvalidReasonActivity.class);
         intent.putExtra("invalidId", "" + listBeen.get(postion).getId());
         startActivity(intent);
-        // Alert  dialog
+
+    }
+
+    /**
+     * 下拉刷新
+     */
+    @Override
+    public void pullToRefresh() {
+        //清空数据
+        mList.clear();
+        page = 1;
+        loadData("", "", "");
+    }
+
+    /**
+     * 上拉刷新
+     */
+    @Override
+    public void pullToLoadMore() {
+        if (page >= pages) {
+            Toast.makeText(this, "没有更多数据", Toast.LENGTH_SHORT).show();
+        } else {
+            page += 1;
+            loadData("", "", "");
+        }
     }
 }

@@ -80,15 +80,11 @@ public class ReferenceFragment extends BaseFragment implements ReferenceContract
        mFinalRation =(TextView)view.findViewById(R.id.reference_final_ration);
 
 
-
-
-
-
         DetailActivity activity = (DetailActivity) getActivity();
         String id = activity.id;
 
         //将Presenter和View进行绑定
-        new ReferencePresener(this);
+        new ReferencePresener(this,getContext());
         //获取数据
 
         Map<String, String> map = new LinkedHashMap<>();

@@ -8,9 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
+import com.hs.doubaobao.bean.ApprovalBean;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 作者：zhanghaitao on 2017/9/15 15:50
@@ -19,8 +24,10 @@ import com.hs.doubaobao.base.AppBarActivity;
  * @describe:
  */
 
-public class ApprovalActivity extends AppBarActivity {
+public class ApprovalActivity extends AppBarActivity implements ApprovalContract.View {
 
+    private ApprovalContract.Presenter presenter;
+    private Map<String, Object> map;
 
     private Button mNotPass;
     private EditText mText;
@@ -29,11 +36,17 @@ public class ApprovalActivity extends AppBarActivity {
     private LinearLayout dialogView;
     private String showRightType;
     private String id;
+    private int type;
     private TextView mOpinion;
     private TextView mQuota;
     private EditText mOpinionText;
     private Button mPass;
     private Button mSave;
+    private EditText mQuotaText;
+    private String mApproveContent;
+    private String mRiskControl;
+    private String mManagerRation;
+    private int mApproveStatus;
 
 
     @Override
@@ -48,17 +61,32 @@ public class ApprovalActivity extends AppBarActivity {
         initView();
         Intent intent = getIntent();
         showRightType = intent.getStringExtra("ShowRightType");
+
+        mApproveStatus = intent.getIntExtra("ApproveStatus",0);
+        mApproveContent = intent.getStringExtra("Content");
+        mRiskControl = intent.getStringExtra("riskControl");
+        mManagerRation = intent.getStringExtra("managerRation");
+
         id = intent.getStringExtra("ID");
         if (TextUtils.isEmpty(showRightType)) {
         } else if (showRightType.equals("RISK")) {
             setTitle(getString(R.string.risk_control));
             mOpinion.setText("风控意见");
             mQuota.setText("风控定额");
-
+            if (mApproveStatus == 1) {
+                mOpinionText.setText(mApproveContent);
+                mQuotaText.setText(mRiskControl);
+            }
+            type = 3;
         } else if (showRightType.equals("MANAGER")) {
             setTitle(getString(R.string.general_manager));
             mOpinion.setText("总经理意见");
             mQuota.setText("总经理定额");
+            if (mApproveStatus == 1) {
+                mOpinionText.setText(mApproveContent);
+                mQuotaText.setText(mManagerRation);
+            }
+            type = 4;
         }
 
         mClose.setOnClickListener(this);
@@ -67,13 +95,35 @@ public class ApprovalActivity extends AppBarActivity {
         mPass.setOnClickListener(this);
         mSave.setOnClickListener(this);
 
+        //将Presenter和View进行绑定
+        new ApprovalPresener(this, this);
+        //获取数据
+
+
+    }
+
+    private void loadData(int status, String content, String riskControl, String remark) {
+        map = new LinkedHashMap<>();
+        map.put("id", id);//借款id
+        map.put("type", type);//1：初审人员审批，2：家访审批，3：风控人员审批，:4：总经理审批
+        map.put("status", status);//1：同意，2：不同意，3：保存
+        if (!TextUtils.isEmpty(content)) {
+            map.put("content", content);//通过审批内容
+        }
+        if (!TextUtils.isEmpty(riskControl)) {
+            map.put("riskControl", riskControl);//通过的定额
+        }
+        if (!TextUtils.isEmpty(remark)) {
+            map.put("remark", remark);//不通过的理由
+        }
+        presenter.getData(map);
     }
 
     private void initView() {
         mOpinion = (TextView) findViewById(R.id.approval_opinion);
         mQuota = (TextView) findViewById(R.id.approval_quota);
         mOpinionText = (EditText) findViewById(R.id.approval_opinion_text);
-        mOpinionText = (EditText) findViewById(R.id.approval_quota_text);
+        mQuotaText = (EditText) findViewById(R.id.approval_quota_text);
         mPass = (Button) findViewById(R.id.approval_pass);
         mSave = (Button) findViewById(R.id.approval_save);
         mNotPass = (Button) findViewById(R.id.approval_not_pass);
@@ -87,23 +137,59 @@ public class ApprovalActivity extends AppBarActivity {
     public void onClick(View v) {
         super.onClick(v);
         int id = v.getId();
-        switch (id){
+        String content = mOpinionText.getText().toString().trim();
+        String riskControl = mQuotaText.getText().toString().trim();
+        String remark = mText.getText().toString().trim();
+        switch (id) {
             case R.id.approval_pass:
-                //TODO:通过联网提交
+                //通过
+                checkNull(1, content, riskControl);
                 break;
             case R.id.approval_save:
-                //TODO:保存
+                //保存
+                // loadData(3,content,riskControl,"");
+                checkNull(3, content, riskControl);
                 break;
             case R.id.approval_not_pass:
                 dialogView.setVisibility(View.VISIBLE);
                 mText.setFocusable(true);
                 break;
             case R.id.dialog_submit:
-                //TODO:不通过联网提交
+                //不通过
+                if (TextUtils.isEmpty(remark)) {
+                    Toast.makeText(this, "请填写不通过理由", Toast.LENGTH_SHORT).show();
+                } else {
+                    loadData(2, "", "", remark);
+                }
                 break;
             case R.id.dialog_close:
                 dialogView.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    void checkNull(int status, String content, String riskControl) {
+        if (TextUtils.isEmpty(content)) {
+            Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(riskControl)) {
+            Toast.makeText(this, "金额", Toast.LENGTH_SHORT).show();
+        } else {
+            loadData(status, content, riskControl, "");
+        }
+    }
+
+    @Override
+    public void setData(ApprovalBean bean) {
+        Toast.makeText(this, "审批成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setError(String text) {
+        Toast.makeText(this, "审批失败，请稍后再试", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setPresenter(ApprovalContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 }

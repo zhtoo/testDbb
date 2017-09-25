@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.detail.particulars;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.ParticularBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -23,16 +25,20 @@ public class ParticularsPresener implements ParticularsContract.Presenter {
     private static final String TAG ="ParticularsPresener" ;
     ParticularsContract.View viewRoot;
 
-    public ParticularsPresener(ParticularsContract.View viewRoot) {
+
+
+    private Context context;
+
+    public ParticularsPresener(ParticularsContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
 
     @Override
     public void getData(Map mapParameter) {
 
-
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.PARTICULARS_URL, mapParameter, new requestCallBack() {
 
                     private ParticularBean bean;

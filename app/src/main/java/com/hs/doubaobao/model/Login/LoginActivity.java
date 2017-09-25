@@ -51,7 +51,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         initListener();
 
         //将Presenter和View进行绑定
-        new LoginPresener(this);
+        new LoginPresener(this,this);
 
     }
 

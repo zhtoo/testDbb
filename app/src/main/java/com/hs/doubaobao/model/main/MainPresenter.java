@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.main;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -22,17 +24,18 @@ public class MainPresenter implements MainContract.Presenter {
 
     private static final String TAG = "MainPresenter";
     MainContract.View viewRoot;
-    private String result;
     private HomeBean bean;
+    private Context context;
 
-    public MainPresenter(MainContract.View viewRoot) {
+    public MainPresenter(MainContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
 
     @Override
     public void getData(final Map mapParameter) {
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.HOME_URL, mapParameter, new requestCallBack() {
             @Override
             public void onError(Call call, Exception e) {

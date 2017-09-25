@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.invalid;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -23,14 +25,17 @@ public class InvalidListPresenter implements InvalidListContract.Presenter {
     private static final String TAG ="InvalidListPresenter" ;
     InvalidListContract.View viewRoot;
 
-    public InvalidListPresenter(InvalidListContract.View viewRoot) {
+    private Context context;
+
+    public InvalidListPresenter(InvalidListContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
 
     @Override
     public void getData(Map mapParameter) {
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.INVALID_URL, mapParameter, new requestCallBack() {
 
                     private HomeBean bean;

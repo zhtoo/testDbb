@@ -42,10 +42,8 @@ public class InvalidListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-
         return aar.length;
     }
-
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 

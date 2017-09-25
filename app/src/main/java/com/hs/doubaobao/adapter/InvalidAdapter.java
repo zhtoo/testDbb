@@ -99,27 +99,21 @@ public class InvalidAdapter extends RecyclerView.Adapter {
         public void setData(final int position) {
             ListBean listBean = mList.get(position);
 
-            if (type == 4) {
-                time.setBackgroundResource(R.drawable.bg_invalid_time);
-                main.setImageResource(R.drawable.ic_invalid_arrow_selector);
-                int grayColor = MyApplication.getcolor(R.color.textGray);
-                name.setTextColor(grayColor);
-                purpose.setTextColor(grayColor);
-                loanAmount.setTextColor(grayColor);
-                customPhone.setTextColor(grayColor);
-                loanPeriods.setTextColor(grayColor);
-                customManager.setTextColor(grayColor);
-                status.setTextColor(grayColor);
-            }
-            if (type == 0 || type == 4) {
-                main.setVisibility(View.VISIBLE);
-                approval.setVisibility(View.GONE);
-            }
 
-            if (type == 1) {
-                main.setVisibility(View.GONE);
-                approval.setVisibility(View.VISIBLE);
-            }
+            time.setBackgroundResource(R.drawable.bg_invalid_time);
+            main.setImageResource(R.drawable.ic_invalid_arrow_selector);
+            int grayColor = MyApplication.getcolor(R.color.textGray);
+            name.setTextColor(grayColor);
+            purpose.setTextColor(grayColor);
+            loanAmount.setTextColor(grayColor);
+            customPhone.setTextColor(grayColor);
+            loanPeriods.setTextColor(grayColor);
+            customManager.setTextColor(grayColor);
+            status.setTextColor(grayColor);
+
+            main.setVisibility(View.VISIBLE);
+            approval.setVisibility(View.GONE);
+
             name.setText(listBean.getName());
             time.setText(listBean.getTime());
             purpose.setText(listBean.getPurpose());
@@ -128,12 +122,6 @@ public class InvalidAdapter extends RecyclerView.Adapter {
             loanPeriods.setText(listBean.getLoanPeriods() + "期");
             customManager.setText(listBean.getCustomManager());
             status.setText(listBean.getStatus());
-
-            if (1 == listBean.getShowType()) {
-                // TODO: 2017/9/19  风控视图
-            } else if (2 == listBean.getShowType()) {
-                // TODO: 2017/9/19  总经理视图
-            }
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override

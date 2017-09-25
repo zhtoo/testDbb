@@ -43,7 +43,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         String id = activity.id;
 
         //将Presenter和View进行绑定
-        new ParticularsPresener(this);
+        new ParticularsPresener(this,getContext());
         //获取数据
 
         Map<String,String> map = new LinkedHashMap<>();

@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.invalid;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.InvalidReasonBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -23,8 +25,11 @@ public class InvalidReasonPresener implements InvalidReasonContract.Presenter {
     private static final String TAG ="InvalidReasonPresener" ;
     InvalidReasonContract.View viewRoot;
 
-    public InvalidReasonPresener(InvalidReasonContract.View viewRoot) {
+    private Context context;
+
+    public InvalidReasonPresener(InvalidReasonContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
 
@@ -32,7 +37,7 @@ public class InvalidReasonPresener implements InvalidReasonContract.Presenter {
     public void getData(Map mapParameter) {
 
 
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.INVALID_REASON_URL, mapParameter, new requestCallBack() {
 
                     private InvalidReasonBean bean;

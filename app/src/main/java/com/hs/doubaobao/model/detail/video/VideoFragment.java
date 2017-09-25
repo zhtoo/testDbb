@@ -9,9 +9,13 @@ import android.widget.Toast;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.BaseFragment;
+import com.hs.doubaobao.bean.ApprovalBean;
+import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.utils.log.LogWrap;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 作者：zhanghaitao on 2017/9/12 15:12
@@ -20,7 +24,10 @@ import java.util.ArrayList;
  * @describe:
  */
 
-public class VideoFragment extends BaseFragment implements VideoAdapter.onItemClickListener {
+public class VideoFragment extends BaseFragment implements VideoContract.View, VideoAdapter.onItemClickListener {
+
+
+    private VideoContract.Presenter presenter;
 
     private ArrayList<String> mList;
     private RecyclerView mRecycler;
@@ -57,6 +64,18 @@ public class VideoFragment extends BaseFragment implements VideoAdapter.onItemCl
         mRecycler.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
 
+
+        DetailActivity activity = (DetailActivity) getActivity();
+        String id = activity.id;
+
+        //将Presenter和View进行绑定
+        new VideoPresener(this,getContext());
+        //获取数据
+
+        Map<String,String> map = new LinkedHashMap<>();
+        map.put("id",id);
+        presenter.getData(map);
+
     }
 
     @Override
@@ -73,5 +92,20 @@ public class VideoFragment extends BaseFragment implements VideoAdapter.onItemCl
             Toast.makeText(getContext(), "没有默认的播放器", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setData(ApprovalBean bean) {
+
+    }
+
+    @Override
+    public void setError(String text) {
+
+    }
+
+    @Override
+    public void setPresenter(VideoContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 }

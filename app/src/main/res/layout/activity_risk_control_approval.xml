@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/risk_recycler_view"
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/risk_ptr"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grayBackground"/>
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/risk_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grayBackground"/>
+
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/risk_ptr1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_null"/>
+
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
 </LinearLayout>

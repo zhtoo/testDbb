@@ -12,12 +12,13 @@
 
     <ImageView
         android:id="@+id/loadingImageView"
-        android:layout_width="@dimen/x260"
-        android:layout_height="@dimen/y260"
+        android:layout_width="@dimen/x242"
+        android:layout_height="@dimen/y252"
         android:background="@drawable/load_wait"
         android:contentDescription="" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/loadingMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

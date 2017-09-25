@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.Login;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.LoginBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -23,16 +25,19 @@ public class LoginPresener implements LoginContract.Presenter {
     private static final String TAG ="LoginPresener" ;
     LoginContract.View viewRoot;
     private LoginBean bean;
+    private Context context;
 
 
-    public LoginPresener(LoginContract.View viewRoot) {
+    public LoginPresener(LoginContract.View viewRoot , Context context) {
         this.viewRoot = viewRoot;
         viewRoot.setPresenter(this);
+        this.context = context;
+
     }
 
     @Override
     public void getData(final Map mapParameter) {
-        OKHttpWrap.getOKHttpWrap().requestPost(BaseParams.LOGIN_URL, mapParameter, new requestCallBack() {
+        OKHttpWrap.getOKHttpWrap(context).requestPost(BaseParams.LOGIN_URL, mapParameter, new requestCallBack() {
             @Override
             public void onError(Call call, Exception e) {
                 viewRoot.setError(e.getLocalizedMessage());

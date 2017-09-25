@@ -1,5 +1,7 @@
 package com.hs.doubaobao.model.riskControl;
 
+import android.content.Context;
+
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
@@ -24,16 +26,19 @@ public class RiskApprovalPresenter implements RiskApprovalContract.Presenter {
     RiskApprovalContract.View viewRoot;
     private HomeBean bean;
 
-    public RiskApprovalPresenter(RiskApprovalContract.View viewRoot) {
+
+    private Context context;
+
+    public RiskApprovalPresenter(RiskApprovalContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
+        this.context = context;
         viewRoot.setPresenter(this);
     }
-
 
     @Override
     public void getData(Map mapParameter) {
 
-        OKHttpWrap.getOKHttpWrap()
+        OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.RISK_URL, mapParameter, new requestCallBack() {
                     @Override
                     public void onError(Call call, Exception e) {

@@ -136,7 +136,8 @@ public class VideoAdapter extends RecyclerView.Adapter {
             //根据url获取缩略图
             retriever.setDataSource(videoUrl, new HashMap());
             //获得第一帧图片
-            bitmap = retriever.getFrameAtTime(1);
+            //Bitmap bitmap = retriever.getFrameAtTime(timeMs * 1000, MediaMetadataRetriever.OPTION_CLOSEST);
+            bitmap = retriever.getFrameAtTime(1,MediaMetadataRetriever.OPTION_CLOSEST);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

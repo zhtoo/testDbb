@@ -1,5 +1,6 @@
 package com.hs.doubaobao.http;
 
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -7,6 +8,7 @@ import android.os.Handler;
 
 import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.base.BaseParams;
+import com.hs.doubaobao.utils.LoadWaiting;
 import com.hs.doubaobao.utils.MD5Util;
 import com.hs.doubaobao.utils.log.LogWrap;
 
@@ -37,11 +39,12 @@ public class OKHttpWrap {
     private static OKHttpWrap okHttpManager;
     //创建okHttpClient对象
     private static OkHttpClient okHttpClient;
+    private static LoadWaiting loading;
     private final Handler handler;
 
 
-    public static OKHttpWrap getOKHttpWrap() {
-
+    public static OKHttpWrap getOKHttpWrap(Context context) {
+        loading = LoadWaiting.createDialog(context);
         if (okHttpManager == null) {
 
             synchronized (OKHttpWrap.class) {
@@ -53,6 +56,7 @@ public class OKHttpWrap {
         }
         return okHttpManager;
     }
+
 
     private OKHttpWrap() {
         okHttpClient = new OkHttpClient();
@@ -74,6 +78,7 @@ public class OKHttpWrap {
 
     /**
      * 添加公共参数
+     *
      * @param paramsMap
      * @param <T>
      * @return
@@ -82,11 +87,11 @@ public class OKHttpWrap {
         // 时间戳
         String ts = String.valueOf(System.currentTimeMillis() / 1000);
         Map<String, T> mParamsMap = new HashMap<>();
-        mParamsMap.put("appkey",(T) BaseParams.APP_KEY);
-        mParamsMap.put("signa", (T)getSigna(ts));
-        mParamsMap.put("ts", (T)ts);
-        mParamsMap.put("mobileType", (T)BaseParams.MOBILE_TYPE);
-        mParamsMap.put("versionNumber",(T) getVersion());
+        mParamsMap.put("appkey", (T) BaseParams.APP_KEY);
+        mParamsMap.put("signa", (T) getSigna(ts));
+        mParamsMap.put("ts", (T) ts);
+        mParamsMap.put("mobileType", (T) BaseParams.MOBILE_TYPE);
+        mParamsMap.put("versionNumber", (T) getVersion());
         mParamsMap.putAll(paramsMap);
         return mParamsMap;
     }
@@ -111,7 +116,7 @@ public class OKHttpWrap {
                 pos++;
             }
             //生成参数
-            LogWrap.e("请求参数", tempParams.toString().replaceAll("&","\n"));
+            LogWrap.e("请求参数", tempParams.toString().replaceAll("&", "\n"));
             return tempParams.toString();
         } catch (Exception e) {
             LogWrap.e(TAG, e.toString());
@@ -123,7 +128,7 @@ public class OKHttpWrap {
                 tempParams.append(String.format("%s=%s", key, mParamsMap.get(key)));
                 pos++;
             }
-            LogWrap.e("请求参数", tempParams.toString().replaceAll("&","\n"));
+            LogWrap.e("请求参数", tempParams.toString().replaceAll("&", "\n"));
             return tempParams.toString();
         }
     }
@@ -136,6 +141,9 @@ public class OKHttpWrap {
      * @return
      */
     public void requestPost(String url, Map<String, String> paramsMap, final CallBack callback) {
+        if (loading != null) {
+            loading.show();
+        }
 
         //同步锁
         synchronized (MyApplication.getContext()) {
@@ -171,7 +179,7 @@ public class OKHttpWrap {
 //            mParamsMap.putAll(paramsMap);
 //            Log.e(TAG, mParamsMap.toString());
             Map<String, Object> mParamsMap = getRequestMap(paramsMap);
-            LogWrap.e("请求参数", mParamsMap.toString().replaceAll(",","\n"));
+            LogWrap.e("请求参数", mParamsMap.toString().replaceAll(",", "\n"));
             MultipartBody.Builder builder = new MultipartBody.Builder();
             //设置类型
             builder.setType(MultipartBody.FORM);
@@ -221,6 +229,7 @@ public class OKHttpWrap {
             }
         });
     }
+
     /**
      * 发送成功的结果
      *
@@ -233,12 +242,15 @@ public class OKHttpWrap {
         handler.post(new Runnable() {
             @Override
             public void run() {
-
+                if (loading != null) {
+                    loading.dismiss();
+                }
                 callback.onResponse(object);
                 callback.onAfter();
             }
         });
     }
+
     /**
      * 发送失败结果
      *
@@ -251,6 +263,9 @@ public class OKHttpWrap {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                if (loading != null) {
+                    loading.dismiss();
+                }
                 callback.onAfter();
                 callback.onError(call, e);
             }

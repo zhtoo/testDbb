@@ -1,9 +1,9 @@
-package com.hs.doubaobao.model.detail.reference;
+package com.hs.doubaobao.model.detail.pictrue;
 
 import android.content.Context;
 
 import com.hs.doubaobao.base.BaseParams;
-import com.hs.doubaobao.bean.ReferenceBean;
+import com.hs.doubaobao.bean.PictrueBean;
 import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
 import com.hs.doubaobao.http.requestCallBack;
@@ -20,16 +20,15 @@ import okhttp3.Call;
  * @describe:
  */
 
-public class ReferencePresener implements ReferenceContract.Presenter {
+public class PictruePresener implements PictrueContract.Presenter {
 
-    private static final String TAG ="ReferencePresener" ;
-    ReferenceContract.View viewRoot;
-
+    private static final String TAG ="PictruePresener" ;
+    PictrueContract.View viewRoot;
 
 
     private Context context;
 
-    public ReferencePresener(ReferenceContract.View viewRoot, Context context) {
+    public PictruePresener(PictrueContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
         this.context = context;
         viewRoot.setPresenter(this);
@@ -37,12 +36,10 @@ public class ReferencePresener implements ReferenceContract.Presenter {
 
     @Override
     public void getData(Map mapParameter) {
-
-
         OKHttpWrap.getOKHttpWrap(context)
-                .requestPost(BaseParams.REFRERNCE_URL, mapParameter, new requestCallBack() {
+                .requestPost(BaseParams.PICTRUE_URL, mapParameter, new requestCallBack() {
 
-                    private ReferenceBean bean;
+                    private PictrueBean bean;
 
                     @Override
                     public void onError(Call call, Exception e) {
@@ -51,7 +48,7 @@ public class ReferencePresener implements ReferenceContract.Presenter {
                     @Override
                     public void onResponse(String response) {
                         LogWrap.e(TAG,response);
-                        bean = JsonWrap.getObject(response, ReferenceBean.class);
+                        bean = JsonWrap.getObject(response, PictrueBean.class);
                         //回到不能在子线程中
                         if(bean !=null){
                             if(bean.getResCode() == 1){

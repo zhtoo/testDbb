@@ -46,7 +46,7 @@ public class InvalidReasonActivity extends AppBarActivity implements InvalidReas
 
         initView();
 
-        new InvalidReasonPresener(this);
+        new InvalidReasonPresener(this,this);
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", invalidId);
         presenter.getData(map);

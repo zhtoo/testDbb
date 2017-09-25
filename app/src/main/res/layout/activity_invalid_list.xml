@@ -12,11 +12,35 @@
         android:layout_height="1dp"
         android:layout_weight="1">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/invalid_recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/grayBackground"/>
+            android:orientation="vertical">
+
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@+id/invalid_ptr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/invalid_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grayBackground"/>
+
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@+id/invalid_ptr1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/layout_null"/>
+
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+        </LinearLayout>
+
 
         <com.hs.doubaobao.view.MyRelativeLayout
             android:id="@+id/invalid_search_container"

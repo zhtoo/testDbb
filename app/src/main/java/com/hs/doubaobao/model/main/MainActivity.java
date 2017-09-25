@@ -10,9 +10,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,7 @@ import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
-import com.hs.doubaobao.utils.LoadWaiting;
+import com.hs.doubaobao.utils.PullToRefresh;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
 
@@ -35,11 +37,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+
 /**
  * 主界面
  * rectification by zht on 2017/9/11  16:51
  */
-public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener {
+public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener {
 
 
     private static final String TAG = "MainActivity";
@@ -62,8 +66,15 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
     private List<ListBean> mList = new ArrayList<>();
     private HomeAdapter adapter;
-    private LoadWaiting loading;
 
+    private PtrClassicFrameLayout ptrFrame;
+    private Map<String, Object> map;
+    private int page = 1;
+    private int pages = 1;
+    private EditText mSearchName;
+    private EditText mSearchOpeName;
+    private EditText mSearchPhone;
+    private PtrClassicFrameLayout ptrFrame1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,26 +87,33 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         String name = intent.getStringExtra("name");
         mName.setText(name);
         mMenuName.setText(name);
-/**
- * userId	是	long	操作员id
- page	否	Int	当前页数
- rows	否	int	每页总数
- cusName	否	String	搜索客户姓名
- opeName	否	String	搜索客户经理名
- phone	否	String	搜索客户电话
- */
-        new MainPresenter(this);
-        Map<String, String> map = new LinkedHashMap<>();
-        map.put("userId", BaseParams.USER_ID);
-//        map.put("page", "6");
-//        map.put("rows", "6");
-//        map.put("cusName", "6");
-//        map.put("opeName", "6");
-//        map.put("phone", "6");
-        loading = LoadWaiting.createDialog(this);
-        loading.show();
-        presenter.getData(map);
 
+        new MainPresenter(this, this);
+        map = new LinkedHashMap<>();
+        loadData("", "", "");
+    }
+
+    private void loadData(String name, String opeName, String phone) {
+        map.put("userId", BaseParams.USER_ID);
+        map.put("page", page);
+        map.put("rows", "10");
+        if (!TextUtils.isEmpty(name)) {
+            map.put("cusName", name);
+        } else {
+            map.put("cusName", "");
+        }
+        if (!TextUtils.isEmpty(opeName)) {
+            map.put("opeName", opeName);
+        } else {
+            map.put("opeName", "");
+        }
+        if (!TextUtils.isEmpty(phone)) {
+            map.put("phone", phone);
+        } else {
+            map.put("phone", "");
+        }
+
+        presenter.getData(map);
     }
 
     /**
@@ -111,6 +129,10 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
 
+        mSearchName = (EditText) findViewById(R.id.search_name);
+        mSearchOpeName = (EditText) findViewById(R.id.search_opename);
+        mSearchPhone = (EditText) findViewById(R.id.search_phone);
+
         mName = (TextView) findViewById(R.id.home_person_name);
 
         mMenuName = (TextView) findViewById(R.id.menu_person_name);
@@ -118,6 +140,9 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mMenuRisk = (TextView) findViewById(R.id.menu_risk);
         mMenuManager = (TextView) findViewById(R.id.menu_manager);
         mMenuInvalid = (TextView) findViewById(R.id.menu_invalid);
+
+        ptrFrame = (PtrClassicFrameLayout) findViewById(R.id.main_ptr);
+        ptrFrame1 = (PtrClassicFrameLayout) findViewById(R.id.main_ptr1);
 
         mSearchContainer.setVisibility(View.GONE);
         initState();
@@ -165,12 +190,27 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
         mRecyclerView.setLayoutManager(llm);
 
-        adapter = new HomeAdapter(this,mList,0);
+        adapter = new HomeAdapter(this, mList, 0);
 
         adapter.setOnItemClickListener(this);
 
         mRecyclerView.setAdapter(adapter);
+        initPtrClassicFrameLayout();
+    }
 
+    /**
+     * 初始化上拉加载下拉刷新的布局
+     * 注意：adapter的初始化在 PullToRefresh 之前
+     */
+    private void initPtrClassicFrameLayout() {
+        //注意：adapter的初始化在 PullToRefresh 之前
+        //创建PtrClassicFrameLayout的包装类对象
+        PullToRefresh refresh = new PullToRefresh();
+        //初始化PtrClassicFrameLayout
+        refresh.initPTR(this, ptrFrame, adapter);
+        refresh.initPTR(this, ptrFrame1, adapter);
+        //设置监听
+        refresh.setPullToRefreshListener(this);
     }
 
     /**
@@ -197,6 +237,9 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
             isShowing = false;
             ShowSearchAnimator(1f, 0f);
         } else {
+            mSearchName.setText("");
+            mSearchOpeName.setText("");
+            mSearchPhone.setText("");
             isShowing = true;
             mSearchContainer.setVisibility(View.VISIBLE);
             mSearch.setVisibility(View.VISIBLE);
@@ -205,7 +248,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     }
 
     /**
-     * 主界面的筛选按钮被点击
+     * 主界面的灰色部分被点击
      */
     public void onMenuSearchContainerClick(final View view) {
         hideInput(view);
@@ -287,7 +330,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         }
     }
 
-
     public void onRiskClick(View v) {
         onMenuItemClick(0);
     }
@@ -304,16 +346,27 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 开始搜索
      */
     public void startSearch(View v) {
-        Toast.makeText(this, "完成", Toast.LENGTH_SHORT).show();
+        hideInput(v);
+        if (isShowing) {
+            isShowing = false;
+            ShowSearchAnimator(1f, 0f);
+        }
+        mList.clear();
+        page = 1;
+        String name = mSearchName.getText().toString().trim();
+        String opeName = mSearchOpeName.getText().toString().trim();
+        String phone = mSearchPhone.getText().toString().trim();
+        loadData(name, opeName, phone);
     }
 
     /**
      * 重置搜索
      */
     public void resetSearch(View v) {
-        Toast.makeText(this, "重置", Toast.LENGTH_SHORT).show();
+        mSearchName.setText("");
+        mSearchOpeName.setText("");
+        mSearchPhone.setText("");
     }
-
 
     /**
      * 退出
@@ -322,7 +375,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
     }
 
-
     /**
      * 请求回来的数据处理
      *
@@ -330,16 +382,19 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      */
     @Override
     public void setData(HomeBean bean) {
-        loading.dismiss();
+
         //角色权限
         roleIdList = bean.getResData().getRoleIdList();
         //角色的消息
         messageCount = bean.getResData().getMessageCount();
         //分页
         pageBean = bean.getResData().getPageDataList().getPage();
+        pages = pageBean.getPages();
+        //每页总数
+        pageBean.getPernum();
         //list内容
         listBeen = bean.getResData().getPageDataList().getList();
-        mList.clear();
+        //mList.clear();
         if (listBeen != null && listBeen.size() > 0) {
             for (int i = 0; i < listBeen.size(); i++) {
                 ListBean mBean = new ListBean();
@@ -353,8 +408,11 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
                 mBean.setStatus(listBeen.get(i).getStatus());
                 mList.add(mBean);
             }
-        }else{
-            //TODO:空视图
+            ptrFrame.setVisibility(View.VISIBLE);
+            ptrFrame1.setVisibility(View.GONE);
+        } else {
+            ptrFrame.setVisibility(View.GONE);
+            ptrFrame1.setVisibility(View.VISIBLE);
         }
         adapter.notifyDataSetChanged();
     }
@@ -366,15 +424,15 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      */
     @Override
     public void setError(String text) {
-       // LogWrap.e(TAG, text);
         Toast.makeText(this, "网络不给力", Toast.LENGTH_SHORT).show();
+        ptrFrame.setVisibility(View.GONE);
+        ptrFrame1.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void setPresenter(MainContract.Presenter presenter) {
         this.presenter = presenter;
     }
-
 
 
     @Override
@@ -385,8 +443,31 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("ID",listBeen.get(postion).getId()+"");
+        intent.putExtra("ID", listBeen.get(postion).getId() + "");
         startActivity(intent);
     }
 
+    /**
+     * 下拉刷新
+     */
+    @Override
+    public void pullToRefresh() {
+        //清空数据
+        mList.clear();
+        page = 1;
+        loadData("", "", "");
+    }
+
+    /**
+     * 上拉刷新
+     */
+    @Override
+    public void pullToLoadMore() {
+        if (page >= pages) {
+            Toast.makeText(this, "没有更多数据", Toast.LENGTH_SHORT).show();
+        } else {
+            page += 1;
+            loadData("", "", "");
+        }
+    }
 }

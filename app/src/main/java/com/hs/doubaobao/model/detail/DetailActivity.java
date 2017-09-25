@@ -40,6 +40,11 @@ public class DetailActivity extends AppBarActivity {
     public String id;
     public String showRightType;
 
+    private String mApproveContent;
+    private String mRiskControl;
+    private String mManagerRation;
+    private int mApproveStatus;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +57,25 @@ public class DetailActivity extends AppBarActivity {
         id = intent.getStringExtra("ID");
 
 
+
+
+
+        mApproveStatus = intent.getIntExtra("ApproveStatus",0);
+        mApproveContent = intent.getStringExtra("Content");
+        mRiskControl = intent.getStringExtra("riskControl");
+        mManagerRation = intent.getStringExtra("managerRation");
+
         setTitle(getString(R.string.read_data));
         if (TextUtils.isEmpty(showRightType)) {
             isShowRightView(false);
         } else if (showRightType.equals("RISK")) {
-            setRightStatus(R.drawable.ic_risk_selector);
+            if (mApproveStatus == -1 || mApproveStatus == 1) {
+                setRightStatus(R.drawable.ic_risk_selector);
+            }
         } else if (showRightType.equals("MANAGER")) {
-            setRightStatus(R.drawable.ic_manager_selector);
+            if (mApproveStatus == -1 || mApproveStatus == 1) {
+                setRightStatus(R.drawable.ic_manager_selector);
+            }
         }
         setStatusBarBackground(R.drawable.ic_battery_bg);
 
@@ -78,8 +95,12 @@ public class DetailActivity extends AppBarActivity {
     @Override
     public void onRightForward(View forwardView) {
         Intent intent = new Intent(this, ApprovalActivity.class);
-        intent.putExtra("ID",id);
+        intent.putExtra("ID", id);
         intent.putExtra("ShowRightType", showRightType);
+        intent.putExtra("ApproveStatus", mApproveStatus);
+        intent.putExtra("Content", mApproveContent);
+        intent.putExtra("riskControl", mRiskControl);
+        intent.putExtra("managerRation", mManagerRation);
         startActivity(intent);
         finish();
     }
