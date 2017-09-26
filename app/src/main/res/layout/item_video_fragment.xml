@@ -2,20 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/y5"
     android:id="@+id/detail_video_container">
 
-    <ImageView
-        android:id="@+id/detail_video_image"
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/video_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_video_pictures"/>
+        <TextView
+            android:id="@+id/video_text"
+            android:singleLine="true"
+            android:layout_toEndOf="@id/video_pic"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x9"
+            android:paddingBottom="@dimen/y12"
+            android:text="asjfdasjasddasdsadsadasdasfvsdvsdfsdfsdfafasdasdasdasdasdasdasdasdasdasdsadsadsadsadasdasdsadaas"
+            android:background="@drawable/ic_video_pictures_txt"/>
+    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/detail_video_bg"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/bg_video_start"
-        android:scaleType="centerCrop"/>
+
+
+
+
 
 </RelativeLayout>

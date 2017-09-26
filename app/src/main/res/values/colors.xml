@@ -7,7 +7,6 @@
     <color name="color1">#3333CCCC</color>
     <color name="color2">#33000000</color>
 
-
     <color name="white">#fff</color>
     <!--透明色-->
     <color name="transparent">#00000000</color>
@@ -31,9 +30,7 @@
     <color name="whiteBackground">#F9F9F9</color>
 
     <color name="grayBackground">#EEEEEE</color>
+
     <color name="RED">#FF0000</color>
-
-
-
 
 </resources>

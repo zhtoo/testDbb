@@ -34,8 +34,8 @@
 
             <ImageView
                 android:id="@+id/bar_left_image"
-                android:layout_width="@dimen/x32"
-                android:layout_height="@dimen/y49"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y36"
                 android:gravity="center"
                 android:src="@drawable/ic_arrow_left_selector"/>
 

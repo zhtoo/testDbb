@@ -21,7 +21,7 @@ import okhttp3.Call;
 
 public class CopyPresener implements CopyContract.Presenter {
 
-    private static final String TAG ="LoginPresener" ;
+    private static final String TAG ="CopyPresener" ;
     CopyContract.View viewRoot;
 
 

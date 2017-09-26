@@ -2,7 +2,7 @@ package com.hs.doubaobao.model.detail.video;
 
 import com.hs.doubaobao.base.BasePresenter;
 import com.hs.doubaobao.base.BaseView;
-import com.hs.doubaobao.bean.ApprovalBean;
+import com.hs.doubaobao.bean.VideoBean;
 
 /**
  * 作者：zhanghaitao on 2017/9/12 10:59
@@ -19,7 +19,7 @@ public interface VideoContract {
 
     interface View extends BaseView<Presenter> {
         //TODO:在此处定义需要用来更新视图的方法
-        void setData(ApprovalBean bean);
+        void setData(VideoBean bean);
         void setError(String text);
     }
 

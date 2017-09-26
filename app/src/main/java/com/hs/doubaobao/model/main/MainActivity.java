@@ -4,10 +4,13 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -23,11 +26,14 @@ import com.hs.doubaobao.R;
 import com.hs.doubaobao.adapter.HomeAdapter;
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
+import com.hs.doubaobao.bean.ListBean;
 import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
+import com.hs.doubaobao.model.Login.LoginActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
 import com.hs.doubaobao.utils.PullToRefresh;
+import com.hs.doubaobao.utils.SPHelp;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
 
@@ -90,6 +96,14 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
         new MainPresenter(this, this);
         map = new LinkedHashMap<>();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sliding_menu.startScroll(0);
+        mList.clear();
         loadData("", "", "");
     }
 
@@ -112,7 +126,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         } else {
             map.put("phone", "");
         }
-
         presenter.getData(map);
     }
 
@@ -372,7 +385,30 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 退出
      */
     public void onExit(View v) {
-        Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
+        Dialog alertDialog = new AlertDialog.Builder(this).
+                setMessage("您确定退出当前账号吗？").
+                setIcon(R.drawable.ic_launcher).
+                setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SPHelp.setData("name","");
+                        SPHelp.setData("password","");
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).
+                setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                }).create();
+        alertDialog.show();
     }
 
     /**

@@ -1,4 +1,9 @@
-package com.hs.doubaobao.model.main;
+package com.hs.doubaobao.bean;
+
+import android.text.TextUtils;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 作者：zhanghaitao on 2017/9/19 10:25
@@ -10,25 +15,25 @@ package com.hs.doubaobao.model.main;
 public class ListBean {
 
     //客户姓名
-    private String name ;
+    private String name;
     //借款时间
     private String time;
     //借款用途
-    private String purpose ;
+    private String purpose;
     //借款金额
-    private double loanAmount ;
+    private double loanAmount;
     //客户电话
-    private String customPhone ;
+    private String customPhone;
     //借款期数
     private int loanPeriods;
     //客户经理
-    private String customManager ;
+    private String customManager;
     //审批状态
-    private String status ;
+    private String status;
     //列表显示类型
-    private int showType = 0 ;//0: 首页  ； 1 风控  2 总经理
+    private int showType = 0;//0: 首页  ； 1 风控  2 总经理
     //按钮的状态
-    private int approveStatus  = 0 ;//0:审批;1:继续;2:等待上级审核
+    private int approveStatus = 0;//0:审批;1:继续;2:等待上级审核
 
     public String getName() {
         return name;
@@ -91,7 +96,28 @@ public class ListBean {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("00", "待提交");
+        map.put("01", "待初审");
+        map.put("02", "初审通过(待家访)");
+        map.put("03", "初审不通过");
+        map.put("10", "家访待提交");
+        map.put("11", "待填写风控额度");
+        map.put("12", "家访通过");
+        map.put("13", "家访不通过");
+        map.put("20", "待风控审批");
+        map.put("21", "待总经理审批");
+        map.put("22", "风控审批不通过");
+        map.put("30", "总经理审批通过");
+        map.put("31", "总经理审批不通过");
+        for (String key : map.keySet()) {
+            if (status.equals(key)) {
+                this.status = map.get(key);
+            }
+        }
+        if(TextUtils.isEmpty(this.status)){
+            this.status = "总经理审批通过";
+        }
     }
 
     public int getShowType() {

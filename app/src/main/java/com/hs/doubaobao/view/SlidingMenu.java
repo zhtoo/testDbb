@@ -21,6 +21,8 @@ public class SlidingMenu extends ViewGroup {
     private int menuWidth;//菜单的宽度
     private int downX;//手指按下的位置
     private int currentX;//当前x的坐标
+
+    public boolean mainIsShow = true;//主界面是否显示
     /**
      * 这个类专门用于模拟滚动的数值
      */
@@ -119,23 +121,34 @@ public class SlidingMenu extends ViewGroup {
                 //向右>0 ;向左<0;
                 int adsX = Math.abs(dX);
 
-                if (dX > 0) {//向右
-                    Log.e(TAG, "误伤向右");
-                    if (adsX > menuWidth / 4) {
-                        // 把菜单完全滑出来
-                        startScroll(menuWidth);
-                    } else {
-                        startScroll(0);
+//                if (dX > 0) {//向右
+//                    Log.e(TAG, "误伤向右");
+//                    if (adsX > menuWidth / 4) {
+//                        // 把菜单完全滑出来
+//                        startScroll(menuWidth);
+//                    } else {
+//                        startScroll(0);
+//                    }
+//                }
+
+                if(mainIsShow){
+                    if (dX > 0) {//向右
+                        if (adsX > menuWidth / 4) {
+                            // 把菜单完全滑出来
+                            startScroll(menuWidth);
+                        } else {
+                            startScroll(0);
+                        }
                     }
-                }
-                if (dX < 0) {//向左
-                    Log.e(TAG, "误伤向左");
-                    Log.e(TAG, "误伤向左" + "adsX-" + adsX + "menuWidth / 4-" + menuWidth / 4);
-                    if (adsX > menuWidth / 4) {
-                        //菜单完全隐藏
-                        startScroll(0);
-                    } else {
-                        startScroll(menuWidth);
+                }else {
+                    if (dX < 0) {//向左
+                        if (adsX > menuWidth / 5) {
+                            //菜单完全隐藏
+                            startScroll(0);
+                        } else {
+                            //主界面完全隐藏
+                            startScroll(menuWidth);
+                        }
                     }
                 }
                 break;
@@ -151,7 +164,12 @@ public class SlidingMenu extends ViewGroup {
      *
      * @param destX 要滑动到哪里（目标位置）
      */
-    private void startScroll(int destX) {
+    public void startScroll(int destX) {
+        if(destX == 0 ){
+            mainIsShow = true;
+        }else {
+            mainIsShow = false;
+        }
         currentX = destX;                // 界面当前的位置
         int startX = getMyScrollX();    // 指定从哪里开始滑动
         int distatnceX = destX - startX;// 要滑动的距离

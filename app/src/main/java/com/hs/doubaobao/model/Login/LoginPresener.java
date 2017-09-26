@@ -22,13 +22,13 @@ import okhttp3.Call;
 
 public class LoginPresener implements LoginContract.Presenter {
 
-    private static final String TAG ="LoginPresener" ;
+    private static final String TAG = "LoginPresener";
     LoginContract.View viewRoot;
     private LoginBean bean;
     private Context context;
 
 
-    public LoginPresener(LoginContract.View viewRoot , Context context) {
+    public LoginPresener(LoginContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
         viewRoot.setPresenter(this);
         this.context = context;
@@ -42,18 +42,19 @@ public class LoginPresener implements LoginContract.Presenter {
             public void onError(Call call, Exception e) {
                 viewRoot.setError(e.getLocalizedMessage());
             }
+
             @Override
             public void onResponse(String response) {
-                LogWrap.e(TAG,response);
+                LogWrap.e(TAG, response);
                 bean = JsonWrap.getObject(response, LoginBean.class);
                 //回到不能在子线程中
-                if(bean!=null){
-                    if(bean.getResCode() == 1){
+                if (bean != null) {
+                    if (bean.getResCode() == 1) {
                         viewRoot.setData(bean);
-                    }else {
-                        viewRoot.setError(bean.getResMsg());
+                    } else {
+                        viewRoot.setError("提示" + bean.getResMsg());
                     }
-                }else {
+                } else {
                     viewRoot.setError("Json解析异常");
                 }
             }

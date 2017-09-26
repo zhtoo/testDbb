@@ -9,8 +9,8 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.hs.doubaobao.R;
 
@@ -47,42 +47,42 @@ public class VideoAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mList != null ? mList.size() : 0;
+        return mList != null ? mList.size() : 0;  // 6;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView videoImage, bgImage;
+        private TextView videoText;
         private RelativeLayout videoContainer;
         private int scaleSize;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             videoContainer = (RelativeLayout) itemView.findViewById(R.id.detail_video_container);
-            videoImage = (ImageView) itemView.findViewById(R.id.detail_video_image);
-            bgImage = (ImageView) itemView.findViewById(R.id.detail_video_bg);
+            videoText = (TextView) itemView.findViewById(R.id.video_text);
             int screenWidth = getWidthPixels();
-            int space = dp2px(4);
-            scaleSize = (screenWidth - (4) * space) / 3;
+            scaleSize = screenWidth / 3;
             ViewGroup.LayoutParams layoutParams = videoContainer.getLayoutParams();
             layoutParams.width = scaleSize;
-            layoutParams.height = scaleSize ;
+            layoutParams.height = scaleSize * 210 / 211;
         }
 
         public void setData(final int position) {
 
-            Bitmap bitmap = getNetVideoBitmap(mList.get(position));
+            Bitmap bitmap = null;// getNetVideoBitmap(mList.get(position));
             if (bitmap != null) {
-                videoImage.setImageBitmap(bitmap);
+                //videoImage.setImageBitmap(bitmap);
             } else {
-                videoImage.setImageResource(R.mipmap.ic_launcher);
+                //videoImage.setImageResource(R.drawable.ic_error_pictrue_remind);
             }
+            //添加文字
+            videoText.setText(mList.get(position));
 
             videoContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(listener!=null){
-                        listener.onItemClick(v,position);
+                    if (listener != null) {
+                        listener.onItemClick(v, position);
                     }
                 }
             });
@@ -137,7 +137,7 @@ public class VideoAdapter extends RecyclerView.Adapter {
             retriever.setDataSource(videoUrl, new HashMap());
             //获得第一帧图片
             //Bitmap bitmap = retriever.getFrameAtTime(timeMs * 1000, MediaMetadataRetriever.OPTION_CLOSEST);
-            bitmap = retriever.getFrameAtTime(1,MediaMetadataRetriever.OPTION_CLOSEST);
+            bitmap = retriever.getFrameAtTime(1, MediaMetadataRetriever.OPTION_CLOSEST);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

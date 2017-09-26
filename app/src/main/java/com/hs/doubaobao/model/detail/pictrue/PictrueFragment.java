@@ -1,7 +1,7 @@
 package com.hs.doubaobao.model.detail.pictrue;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -40,11 +40,8 @@ public class PictrueFragment extends BaseFragment implements PictrueContract.Vie
 
         mRecycler = (RecyclerView) view.findViewById(R.id.pictrue_recycler);
 
-//        GridLayoutManager lm = new GridLayoutManager(getContext(), 4);
-//        lm.setOrientation(GridLayoutManager.VERTICAL);
-//        mRecycler.setLayoutManager(lm);
-
-        StaggeredGridLayoutManager lm = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+        GridLayoutManager lm = new GridLayoutManager(getContext(), 4);
+        lm.setOrientation(GridLayoutManager.VERTICAL);
         mRecycler.setLayoutManager(lm);
 
         mList = new ArrayList<>();
@@ -76,16 +73,14 @@ public class PictrueFragment extends BaseFragment implements PictrueContract.Vie
         mRecycler.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
 
-
         DetailActivity activity = (DetailActivity) getActivity();
         String id = activity.id;
 
         //将Presenter和View进行绑定
-        new PictruePresener(this,getContext());
+        new PictruePresener(this, getContext());
         //获取数据
-
-        Map<String,String> map = new LinkedHashMap<>();
-        map.put("id",id);
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("id", id);
         presenter.getData(map);
 
 
@@ -100,10 +95,15 @@ public class PictrueFragment extends BaseFragment implements PictrueContract.Vie
 
     @Override
     public void setData(PictrueBean bean) {
-        List<PictrueBean.ResDataBean.PicListBean> picList = bean.getResData().getPicList();
-        mList.clear();
-        for(int i = 0 ; i <picList.size();i++){
-            mList.add(picList.get(i).getPath());
+        if (bean == null || bean.getResData().getPicList() == null || bean.getResData().getPicList().size() == 0) {
+            mRecycler.setVisibility(View.GONE);
+        }else {
+            List<PictrueBean.ResDataBean.PicListBean> picList = bean.getResData().getPicList();
+            mList.clear();
+            for (int i = 0; i < picList.size(); i++) {
+                mList.add(picList.get(i).getPath());
+            }
+            mRecycler.setVisibility(View.VISIBLE);
         }
         adapter.notifyDataSetChanged();
     }

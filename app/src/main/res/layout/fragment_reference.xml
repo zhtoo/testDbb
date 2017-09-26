@@ -40,7 +40,7 @@
                     <TextView
                         android:id="@+id/reference_name"
                         style="@style/referenceText2"
-                        android:text="张三"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -55,7 +55,7 @@
                     <TextView
                         android:id="@+id/reference_manager"
                         style="@style/referenceText2"
-                        android:text="李四"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -69,12 +69,12 @@
                     <TextView
                         android:id="@+id/reference_house_loantime"
                         style="@style/referenceText2"
-                        android:text="6-12个月"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_house_loantime_values"
                         style="@style/referenceText3"
-                        android:text="20万元"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -88,12 +88,12 @@
                     <TextView
                         android:id="@+id/reference_house_address"
                         style="@style/referenceText2"
-                        android:text="合肥"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_house_address_value"
                         style="@style/referenceText3"
-                        android:text="20万元"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -107,12 +107,12 @@
                     <TextView
                         android:id="@+id/reference_house_natrue"
                         style="@style/referenceText2"
-                        android:text="张三"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_house_natrue_value"
                         style="@style/referenceText3"
-                        android:text="20万元"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -126,12 +126,12 @@
                     <TextView
                         android:id="@+id/reference_car"
                         style="@style/referenceText2"
-                        android:text="张三"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_car_value"
                         style="@style/referenceText3"
-                        android:text="20万元X1.5"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -145,12 +145,12 @@
                     <TextView
                         android:id="@+id/reference_family"
                         style="@style/referenceText2"
-                        android:text="张三"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_family_value"
                         style="@style/referenceText3"
-                        android:text="20万元"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -164,12 +164,12 @@
                     <TextView
                         android:id="@+id/reference_work_natrue"
                         style="@style/referenceText2"
-                        android:text="wqeytwqeyyeuqwyeuwyeuwqyeueywqeywqeyweyeyq三"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_work_natrue_value"
                         style="@style/referenceText3"
-                        android:text="20万元X1.5"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -183,12 +183,12 @@
                     <TextView
                         android:id="@+id/reference_proprietor"
                         style="@style/referenceText2"
-                        android:text="张三"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_proprietor_value"
                         style="@style/referenceText3"
-                        android:text="20万元"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -213,13 +213,16 @@
                     style="@style/referenceItem">
 
                     <TextView
+                        android:id="@+id/reference_creditstring"
                         style="@style/referenceText1"
                         android:text="信用卡负债:"/>
 
                     <TextView
                         android:id="@+id/reference_credit"
                         style="@style/referenceText2"
-                        android:text="50%"/>
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_toRightOf="@id/reference_creditstring"
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -235,14 +238,16 @@
                     style="@style/referenceItem">
 
                     <TextView
-
+                        android:id="@+id/reference_credit_numonestring"
                         style="@style/referenceText1"
                         android:text="近一个月(次):"/>
 
                     <TextView
                         android:id="@+id/reference_credit_numone"
                         style="@style/referenceText2"
-                        android:text="6"/>
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_toRightOf="@id/reference_credit_numonestring"
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -250,13 +255,16 @@
                     style="@style/referenceItem">
 
                     <TextView
+                        android:id="@+id/reference_credit_numthreestring"
                         style="@style/referenceText1"
                         android:text="近三个月(次):"/>
 
                     <TextView
                         android:id="@+id/reference_credit_numthree"
                         style="@style/referenceText2"
-                        android:text="18"/>
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_toRightOf="@id/reference_credit_numthreestring"
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -273,7 +281,7 @@
                         android:layout_marginLeft="@dimen/x10"
                         android:layout_toRightOf="@id/reference_credit_numperstring"
                         style="@style/referenceText2"
-                        android:text="12"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -281,18 +289,21 @@
                     style="@style/referenceItem">
 
                     <TextView
+                        android:id="@+id/reference_credit_numtotalstring"
                         style="@style/referenceText1"
                         android:text="个人查询共(次)："/>
 
                     <TextView
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_toRightOf="@id/reference_credit_numtotalstring"
                         android:id="@+id/reference_credit_numtotal"
                         style="@style/referenceText2"
-                        android:text="20"/>
+                        android:text=""/>
 
                     <TextView
                         android:id="@+id/reference_credit_final_ration"
                         style="@style/referenceText3"
-                        android:text="20万元"/>
+                        android:text=""/>
 
                 </RelativeLayout>
 
@@ -309,9 +320,11 @@
                     android:text="汇总额度："/>
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:maxWidth="@dimen/x400"
                     android:id="@+id/reference_final_ration"
                     style="@style/referenceText3"
-                    android:text="20万元"/>
+                    android:text=""/>
 
             </RelativeLayout>
 

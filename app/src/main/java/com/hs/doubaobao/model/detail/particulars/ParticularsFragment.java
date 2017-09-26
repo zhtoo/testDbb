@@ -172,6 +172,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         //与借款人关系:0:配偶 1：父母 2：子女 3：兄弟姐妹 4:亲戚 5：朋友 6：其他）
         String[] aarRelation = {"配偶","父母","子女","兄弟姐妹","亲戚","朋友","其他"};
 
+        int ContantTimes = 0;
         map6.put("空1","直属亲戚联系人");
         for(int i = 0 ;i <borrowContants.size();i++){
             if(borrowContants.get(i).getType() == 0){
@@ -180,6 +181,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
                 map6.put("手机号码"+i,borrowContants.get(i).getPhone());
                 map6.put("是否知晓贷款"+i,borrowContants.get(i).getNotice()==0?"是":"否");
                 map6.put("line"+i,"line");
+                ContantTimes ++ ;
             }
         }
 

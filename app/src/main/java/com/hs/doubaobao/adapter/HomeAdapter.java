@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hs.doubaobao.R;
-import com.hs.doubaobao.model.main.ListBean;
+import com.hs.doubaobao.bean.ListBean;
 
 import java.util.List;
 

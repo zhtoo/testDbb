@@ -51,14 +51,9 @@ public class DetailActivity extends AppBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-
         Intent intent = getIntent();
         showRightType = intent.getStringExtra("ShowRightType");
         id = intent.getStringExtra("ID");
-
-
-
-
 
         mApproveStatus = intent.getIntExtra("ApproveStatus",0);
         mApproveContent = intent.getStringExtra("Content");
@@ -71,10 +66,14 @@ public class DetailActivity extends AppBarActivity {
         } else if (showRightType.equals("RISK")) {
             if (mApproveStatus == -1 || mApproveStatus == 1) {
                 setRightStatus(R.drawable.ic_risk_selector);
+            }else {
+                isShowRightView(false);
             }
         } else if (showRightType.equals("MANAGER")) {
             if (mApproveStatus == -1 || mApproveStatus == 1) {
                 setRightStatus(R.drawable.ic_manager_selector);
+            }else {
+                isShowRightView(false);
             }
         }
         setStatusBarBackground(R.drawable.ic_battery_bg);

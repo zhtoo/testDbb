@@ -3,7 +3,8 @@ package com.hs.doubaobao.model.detail.video;
 import android.content.Context;
 
 import com.hs.doubaobao.base.BaseParams;
-import com.hs.doubaobao.bean.ApprovalBean;
+import com.hs.doubaobao.bean.VideoBean;
+import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
 import com.hs.doubaobao.http.requestCallBack;
 import com.hs.doubaobao.utils.log.LogWrap;
@@ -21,7 +22,7 @@ import okhttp3.Call;
 
 public class VideoPresener implements VideoContract.Presenter {
 
-    private static final String TAG ="LoginPresener" ;
+    private static final String TAG ="VideoPresener" ;
     VideoContract.View viewRoot;
 
 
@@ -38,7 +39,7 @@ public class VideoPresener implements VideoContract.Presenter {
         OKHttpWrap.getOKHttpWrap(context)
                 .requestPost(BaseParams.VIDEO_URL, mapParameter, new requestCallBack() {
 
-                    private ApprovalBean bean;
+                    private VideoBean bean;
 
                     @Override
                     public void onError(Call call, Exception e) {
@@ -47,17 +48,17 @@ public class VideoPresener implements VideoContract.Presenter {
                     @Override
                     public void onResponse(String response) {
                         LogWrap.e(TAG,response);
-//                        bean = JsonWrap.getObject(response, ApprovalBean.class);
-//                        //回到不能在子线程中
-//                        if(bean !=null){
-//                            if(bean.getResCode() == 1){
-//                                viewRoot.setData(bean);
-//                            }else {
-//                                viewRoot.setError(bean.getResMsg());
-//                            }
-//                        }else {
-//                            viewRoot.setError("Json解析异常");
-//                        }
+                        bean = JsonWrap.getObject(response, VideoBean.class);
+                        //回到不能在子线程中
+                        if(bean !=null){
+                            if(bean.getResCode() == 1){
+                                viewRoot.setData(bean);
+                            }else {
+                                viewRoot.setError(bean.getResMsg());
+                            }
+                        }else {
+                            viewRoot.setError("Json解析异常");
+                        }
                     }
                 });
 

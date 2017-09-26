@@ -22,7 +22,7 @@ import okhttp3.Call;
 
 public class ApprovalPresener implements ApprovalContract.Presenter {
 
-    private static final String TAG ="LoginPresener" ;
+    private static final String TAG ="ApprovalPresener" ;
     ApprovalContract.View viewRoot;
 
 

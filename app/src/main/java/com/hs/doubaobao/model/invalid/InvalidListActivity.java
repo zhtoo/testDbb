@@ -21,7 +21,7 @@ import com.hs.doubaobao.adapter.InvalidAdapter;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
-import com.hs.doubaobao.model.main.ListBean;
+import com.hs.doubaobao.bean.ListBean;
 import com.hs.doubaobao.utils.PullToRefresh;
 import com.hs.doubaobao.view.MyRelativeLayout;
 

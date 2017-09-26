@@ -38,7 +38,7 @@
             android:lines="1"
             android:paddingLeft="@dimen/x30"
             android:text=""
-            android:textSize="15sp" />
+            android:textSize="@dimen/x26" />
 
 
         <EditText
@@ -52,12 +52,12 @@
             android:lines="1"
             android:paddingLeft="@dimen/x30"
             android:text=""
-            android:textSize="15sp" />
+            android:textSize="@dimen/x26" />
 
         <Button
             android:id="@+id/login_btn_sure"
-            android:layout_width="@dimen/x528"
-            android:layout_height="@dimen/y96"
+            android:layout_width="@dimen/x545"
+            android:layout_height="@dimen/y105"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/x25"
             android:layout_marginRight="@dimen/x25"

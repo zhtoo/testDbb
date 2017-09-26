@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.base.BaseParams;
@@ -42,6 +43,12 @@ public class OKHttpWrap {
     private static LoadWaiting loading;
     private final Handler handler;
 
+    //编码格式
+    private static final String CHARSET_NAME = "UTF-8";
+
+    private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
+    private static final MediaType MEDIA_OBJECT_STREAM = MediaType.parse("text/x-markdown; charset=utf-8");//mdiatype 这个需要和服务端保持一致
+
 
     public static OKHttpWrap getOKHttpWrap(Context context) {
         loading = LoadWaiting.createDialog(context);
@@ -57,7 +64,9 @@ public class OKHttpWrap {
         return okHttpManager;
     }
 
-
+    /**
+     * 私有构造函数
+     */
     private OKHttpWrap() {
         okHttpClient = new OkHttpClient();
         okHttpClient.newBuilder().connectTimeout(10, TimeUnit.SECONDS);
@@ -69,12 +78,6 @@ public class OKHttpWrap {
 
         handler = MyApplication.getMainThreadHandler();
     }
-
-    //编码格式
-    private static final String CHARSET_NAME = "UTF-8";
-
-    private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
-    private static final MediaType MEDIA_OBJECT_STREAM = MediaType.parse("text/x-markdown; charset=utf-8");//mdiatype 这个需要和服务端保持一致
 
     /**
      * 添加公共参数
@@ -92,6 +95,9 @@ public class OKHttpWrap {
         mParamsMap.put("ts", (T) ts);
         mParamsMap.put("mobileType", (T) BaseParams.MOBILE_TYPE);
         mParamsMap.put("versionNumber", (T) getVersion());
+        if (!TextUtils.isEmpty(BaseParams.USER_ID)){
+            mParamsMap.put("userId", (T)BaseParams.USER_ID);
+        }
         mParamsMap.putAll(paramsMap);
         return mParamsMap;
     }
@@ -144,7 +150,6 @@ public class OKHttpWrap {
         if (loading != null) {
             loading.show();
         }
-
         //同步锁
         synchronized (MyApplication.getContext()) {
             //添加通用参数

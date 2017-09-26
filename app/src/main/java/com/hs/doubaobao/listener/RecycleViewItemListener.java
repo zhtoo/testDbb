@@ -1,7 +1,7 @@
 package com.hs.doubaobao.listener;
 
 /**
- * Created by yiwei on 16/4/9.
+ * Created by zhanghaitao on 17/9/4.
  */
 public interface RecycleViewItemListener {
 

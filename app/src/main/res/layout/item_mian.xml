@@ -19,7 +19,7 @@
             android:gravity="center"
             android:text="2017-09-13"
             android:textColor="@color/white"
-            android:textSize="12sp"/>
+            android:textSize="@dimen/x20"/>
 
         <LinearLayout
             android:layout_width="1dp"
@@ -45,7 +45,7 @@
                     android:layout_marginLeft="@dimen/x30"
                     android:text="借款用途"
                     android:textColor="@color/textAggravating"
-                    android:textSize="12sp"/>
+                    android:textSize="@dimen/x24"/>
 
                 <View style="@style/autoFillStyle"/>
 
@@ -56,7 +56,7 @@
                     android:layout_marginRight="@dimen/x16"
                     android:text="总经理审批通过"
                     android:textColor="@color/textGray"
-                    android:textSize="12sp"/>
+                    android:textSize="@dimen/x20"/>
 
                 <View style="@style/verticalLine"/>
             </LinearLayout>
@@ -87,16 +87,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
-                android:layout_marginTop="@dimen/y30"
+                android:layout_marginTop="@dimen/y44"
                 android:text="王伟义"
                 android:textColor="@color/textAggravating"
-                android:textSize="18sp"/>
+                android:textSize="@dimen/x28"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x30"
-                android:layout_marginTop="@dimen/y10"
+                android:layout_marginTop="@dimen/y18"
                 android:text="客户姓名"
                 android:textColor="@color/textGray"
                 android:textSize="12sp"/>
@@ -118,73 +118,81 @@
                 android:id="@+id/list_load_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_marginTop="@dimen/y1"
                 android:text="23.00万元"
                 android:textColor="@color/textOrange"
-                android:textSize="16sp"/>
+                android:textSize="@dimen/x28"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
                 android:text="借款金额"
                 android:textColor="@color/textGray"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/x20"/>
 
             <TextView
                 android:id="@+id/list_custom_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
                 android:text="13812345678"
                 android:textColor="@color/textAggravating"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/x20"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
                 android:text="客户电话"
                 android:textColor="@color/textGray"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/x20"/>
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="@dimen/x216"
+            android:layout_width="@dimen/x180"
             android:layout_height="match_parent"
             android:gravity="center|left"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/x30">
+            android:paddingLeft="@dimen/x10">
 
             <TextView
                 android:id="@+id/list_loan_periods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_marginTop="@dimen/y1"
                 android:text="18期"
                 android:textColor="@color/textAggravating"
-                android:textSize="16sp"/>
+                android:textSize="@dimen/x24"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
                 android:text="借款期数"
                 android:textColor="@color/textGray"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/x20"/>
 
-            <TextView
+            <com.hs.doubaobao.view.MarqueeTextView
+                android:maxWidth="@dimen/x210"
+                android:singleLine="true"
                 android:id="@+id/list_custom_manager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
                 android:text="李小艺"
                 android:textColor="@color/textAggravating"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/x20"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
                 android:text="客户经理"
                 android:textColor="@color/textGray"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/x20"/>
 
         </LinearLayout>
 
@@ -200,13 +208,13 @@
 
         <TextView
             android:id="@+id/list_approval"
-            android:layout_width="@dimen/x70"
-            android:layout_height="@dimen/y48"
+            android:layout_width="@dimen/x110"
+            android:layout_height="@dimen/y44"
             android:gravity="center"
-            android:layout_marginRight="@dimen/x15"
+            android:layout_marginRight="@dimen/x50"
             android:text="审批"
-            android:textSize="@dimen/x20"
-            android:textColor="@color/textAggravating"
+            android:textSize="@dimen/x24"
+            android:textColor="@drawable/approval_text_selector"
             android:background="@drawable/ic_approval_button_selector"/>
 
         <View style="@style/verticalLine"/>

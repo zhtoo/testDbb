@@ -9,17 +9,16 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/x233"
-        android:layout_height="@dimen/x209"
+        android:layout_width="@dimen/x183"
+        android:layout_height="@dimen/x157"
         android:src="@drawable/ic_null" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="@dimen/x29"
         android:text="暂无列表数据"
-        android:textColor="@color/textBrown"
-        android:textSize="18sp" />
-
+        android:textColor="@color/textGray"
+        android:textSize="@dimen/x24" />
 
 </LinearLayout>

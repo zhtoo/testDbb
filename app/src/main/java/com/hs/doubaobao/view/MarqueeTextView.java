@@ -18,6 +18,15 @@ import android.widget.TextView;
  * android:lines="1"
  * android:ellipsize="marquee"
  * android:text="C先生一房dsfsdfdsfasdfsdfafawfasfasf子抵押"/>
+ *
+ *
+ * <com.hs.doubaobao.view.MarqueeTextView
+ * android:layout_width="wrap_content"
+ * android:layout_height="wrap_content"
+ * android:maxWidth="@dimen/x450"
+ * android:lines="1"
+ * android:ellipsize="marquee"
+ * android:text="C先生一房dsfsdfdsfasdfsdfafawfasfasf子抵押"/>
  */
 
 public class MarqueeTextView extends TextView {
@@ -38,6 +47,7 @@ public class MarqueeTextView extends TextView {
     @Override
     public boolean isFocused() {
         return true;
+
     }
 
 }

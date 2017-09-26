@@ -22,7 +22,7 @@ import okhttp3.Call;
 
 public class GMAPresener implements GMAContract.Presenter {
 
-    private static final String TAG ="LoginPresener" ;
+    private static final String TAG ="GMAPresener" ;
     GMAContract.View viewRoot;
     private Context context;
 

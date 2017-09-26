@@ -52,7 +52,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
         //将Presenter和View进行绑定
         new LoginPresener(this,this);
-
     }
 
     private void initView() {
@@ -89,7 +88,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         BaseParams.USER_ID = String.valueOf(bean.getResData().getId());
         BaseParams.OPERATOR_NAME= bean.getResData().getName();
 
-        loading.dismiss();
         //跳转到主界面
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.putExtra("name", BaseParams.OPERATOR_NAME);
@@ -99,8 +97,12 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
     @Override
     public void setError(String text) {
-        loading.dismiss();
-        Toast.makeText(MyApplication.getContext(), "网络不给力", Toast.LENGTH_SHORT).show();
+        if(text.startsWith("提示")){
+            text = text.substring(2,text.length());
+            Toast.makeText(MyApplication.getContext(),text, Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(MyApplication.getContext(), "网络不给力", Toast.LENGTH_SHORT).show();
+        }
         LogWrap.e(TAG,text);
     }
 
@@ -109,7 +111,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         this.presenter = presenter;
     }
 
-
     /**
      * 点击事件
      *
@@ -117,7 +118,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
      */
     @Override
     public void onClick(View view) {
-
         if (view.getId() == R.id.login_btn_sure) {
             String name = loginUsername.getText().toString().trim();
             String password = loginPwd.getText().toString().trim();
@@ -129,7 +129,6 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
             map.put("id", name);
             map.put("pwd", Base64Util.encode(password));
             //获取数据
-            loading.show();
             presenter.getData(map);
         }
     }

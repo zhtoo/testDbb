@@ -54,7 +54,6 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approval);
 
-
         setTitleTextColor(R.color.textAggravating);
         setStatusBarBackground(R.drawable.ic_battery_bg);
         isShowRightView(false);
@@ -99,7 +98,6 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         new ApprovalPresener(this, this);
         //获取数据
 
-
     }
 
     private void loadData(int status, String content, String riskControl, String remark) {
@@ -111,6 +109,9 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
             map.put("content", content);//通过审批内容
         }
         if (!TextUtils.isEmpty(riskControl)) {
+            if(riskControl.startsWith(".")){
+                riskControl = "0"+riskControl;
+            }
             map.put("riskControl", riskControl);//通过的定额
         }
         if (!TextUtils.isEmpty(remark)) {
@@ -181,6 +182,7 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
     @Override
     public void setData(ApprovalBean bean) {
         Toast.makeText(this, "审批成功", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

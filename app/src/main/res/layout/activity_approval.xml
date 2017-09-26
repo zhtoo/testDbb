@@ -64,7 +64,7 @@
                 android:layout_marginRight="@dimen/x10"
                 android:id="@+id/approval_quota_text"
                 android:gravity="center|right"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:layout_width="@dimen/x271"
                 android:layout_height="@dimen/y73"
                 android:background="@color/whiteBackground"/>
