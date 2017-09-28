@@ -217,7 +217,6 @@ public class PermissionCheck {
      */
     private void showAskDialog(final Activity activity) {
         /**
-         * 需要修改
          * //TODO:还需要更改
          */
         new AlertDialog.Builder(activity).setMessage("为了能更好的使用本应用，请授予如下权限。")

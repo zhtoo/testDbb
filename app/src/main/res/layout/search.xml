@@ -40,29 +40,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/y30"
+        android:layout_marginTop="@dimen/y70"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <View style="@style/autoFillStyle"/>
 
         <Button
-            android:layout_width="@dimen/x181"
-            android:layout_height="@dimen/y56"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/y54"
             android:background="@drawable/ic_reset_bt_selector"
             android:onClick="resetSearch"
             android:id="@+id/search_reset"
+            android:textColor="@color/textGray"
+            android:textSize="@dimen/x24"
             android:text="重置"/>
 
         <View
             style="@style/autoFillStyle"/>
 
         <Button
-            android:layout_width="@dimen/x181"
-            android:layout_height="@dimen/y56"
+            android:layout_width="@dimen/x180"
+            android:layout_height="@dimen/y54"
             android:background="@drawable/ic_complete_bt_selector"
             android:onClick="startSearch"
             android:id="@+id/search_start"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x24"
             android:text="完成"/>
 
         <View

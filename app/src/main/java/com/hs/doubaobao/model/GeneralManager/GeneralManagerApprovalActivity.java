@@ -73,8 +73,15 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         new GMAPresener(this, this);
         //获取数据
         map = new LinkedHashMap<>();
-        loadData();
+        //loadData();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mList.clear();
+        loadData();
     }
 
     private void loadData() {
@@ -92,7 +99,7 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
-        refresh.initPTR(this, ptrFrame, adapter);
+        refresh.initPTR(this, ptrFrame);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }

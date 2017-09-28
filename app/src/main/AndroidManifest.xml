@@ -14,7 +14,6 @@
     <!-- 允许访问网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -30,18 +29,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-
+        <!--登录界面-->
         <activity android:name=".model.Login.LoginActivity"/>
+        <!--主界面-->
         <activity android:name=".model.main.MainActivity"/>
+        <!--风控审批-->
         <activity android:name=".model.riskControl.RiskControlApprovalActivity"/>
+        <!--总经理审批-->
         <activity android:name=".model.GeneralManager.GeneralManagerApprovalActivity"/>
+        <!--无效列表-->
         <activity android:name=".model.invalid.InvalidListActivity"/>
+        <!--无效原因查看-->
         <activity android:name=".model.invalid.InvalidReasonActivity"/>
+        <!--客户详情-->
         <activity android:name=".model.detail.DetailActivity"/>
+        <!--图片放大预览-->
         <activity android:name=".model.detail.pictrue.ImagePagerActivity"/>
+        <!--审批界面-->
         <activity android:name=".model.Approval.ApprovalActivity"/>
-
     </application>
 
 </manifest>

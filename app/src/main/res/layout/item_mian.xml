@@ -143,7 +143,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_marginTop="@dimen/y4"
                 android:text="客户电话"
                 android:textColor="@color/textGray"
                 android:textSize="@dimen/x20"/>
@@ -189,7 +189,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_marginTop="@dimen/y6"
                 android:text="客户经理"
                 android:textColor="@color/textGray"
                 android:textSize="@dimen/x20"/>

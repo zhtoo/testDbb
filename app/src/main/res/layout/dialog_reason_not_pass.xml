@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_marginTop="@dimen/y30"
-              android:background="#00000000"
+              android:background="@color/transparent"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -23,17 +23,19 @@
 
         <Button
             android:id="@+id/dialog_submit"
-            android:layout_width="@dimen/x300"
-            android:layout_height="@dimen/y80"
+            android:layout_width="@dimen/x344"
+            android:layout_height="@dimen/y90"
             android:text="提交理由"
             android:textColor="@color/textAggravating"
             android:background="@drawable/ic_dialog_reason_selector"
-            android:layout_marginBottom="@dimen/x32"
+            android:layout_marginBottom="@dimen/x30"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
 
         <EditText
             android:id="@+id/dailog_reason"
+            android:gravity="left"
+            android:padding="@dimen/x15"
             android:layout_width="@dimen/x685"
             android:layout_height="@dimen/y453"
             android:background="@drawable/bg_edit_text"

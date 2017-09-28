@@ -13,7 +13,7 @@ import com.hs.doubaobao.utils.DensityUtil;
 
 /**
  * 项目名称：doubaobao
- * 类描述：
+ * 类描述：小圆点
  * 创建人：zhanghaitao
  * 创建时间：2017/9/18 13:26
  * 修改人：Michael
@@ -67,14 +67,14 @@ public class DotView extends ImageView {
     /**
      * Dot默认宽度或高度
      */
-    private float defaultSize = 15;
+    private int defaultSize = 10;
 
     /**
      * 修改DoT默认尺寸
      *
      * @param circleRadius
      */
-    public void setCircleRadius(float circleRadius) {
+    public void setCircleRadius(int circleRadius) {
         if (circleRadius > 0)
             defaultSize = circleRadius * 3;
     }
@@ -114,8 +114,8 @@ public class DotView extends ImageView {
      */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = measureDimension(DensityUtil.dip2px(getContext(), defaultSize), widthMeasureSpec);
-        int height = measureDimension(DensityUtil.dip2px(getContext(), defaultSize), heightMeasureSpec);
+        int width = measureDimension(DensityUtil.dp2px(getContext(), defaultSize), widthMeasureSpec);
+        int height = measureDimension(DensityUtil.dp2px(getContext(), defaultSize), heightMeasureSpec);
         setMeasuredDimension(width, height);
     }
 

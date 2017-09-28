@@ -129,11 +129,7 @@ public class ListAdapter extends RecyclerView.Adapter {
             customManager.setText(listBean.getCustomManager());
             status.setText(listBean.getStatus());
 
-            if (1 == listBean.getShowType()) {
-                // TODO: 2017/9/19  风控视图
-            } else if (2 == listBean.getShowType()) {
-                // TODO: 2017/9/19  总经理视图
-            }
+
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override

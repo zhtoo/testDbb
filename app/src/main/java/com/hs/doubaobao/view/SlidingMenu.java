@@ -1,8 +1,9 @@
 package com.hs.doubaobao.view;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Scroller;
 public class SlidingMenu extends ViewGroup {
 
     private static final String TAG = "SlidingMenu";
+
     private final Context context;
     private View menu;//菜单
     private View main;//主界面
@@ -34,29 +36,44 @@ public class SlidingMenu extends ViewGroup {
         scroller = new Scroller(context);
     }
 
+    /**
+     * 测量
+     *
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);    // 测量容器自己的宽高
         menu = getChildAt(0); // 获取菜单容器
         main = getChildAt(1); // 获取主界面容器
-        menuWidth = 810;     // 获取菜单的宽
+        menuWidth = menu.getMeasuredWidth();     // 获取菜单的宽
         // 测量菜单
         menu.measure(menuWidth, heightMeasureSpec);
         // 测量主界面
         main.measure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    /**
+     * 布局
+     *
+     * @param changed
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     */
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         // 对菜单进行排版
-        int menuLeft = -menuWidth ;    // 菜单的left位置为菜单的宽的负数
-        int menuTop = 0;
-        int menuRight = 0;
+        int menuLeft = -menuWidth;    // 菜单的left位置为菜单的宽的负数
+        int menuTop = top;
+        int menuRight = left;
         int menuBottom = bottom - top;        // 菜单的bottom位置为容器的高
         menu.layout(menuLeft, menuTop, menuRight, menuBottom);
         // 对主界面进行排版
-        int mainLeft = 0;
-        int mainTop = 0;
+        int mainLeft = left;
+        int mainTop = top;
         int mainRight = right - left;        // 主界面的right坐标和容器的宽一样
         int mainBottom = bottom - top;        // 主界面的botton坐标和容器的高一样
         main.layout(mainLeft, mainTop, mainRight, mainBottom);
@@ -78,6 +95,12 @@ public class SlidingMenu extends ViewGroup {
         return -super.getScrollX();
     }
 
+    /**
+     * 滑动拦截
+     *
+     * @param ev
+     * @return
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
@@ -97,6 +120,12 @@ public class SlidingMenu extends ViewGroup {
         return super.onInterceptTouchEvent(ev);
     }
 
+    /**
+     * 处理点击事件
+     *
+     * @param event
+     * @return
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
@@ -112,43 +141,20 @@ public class SlidingMenu extends ViewGroup {
                 } else if (destX > menuWidth) {
                     destX = menuWidth;
                 }
-                //保证只显示菜单和主界面  presenter
+                //保证只显示菜单和主界面
                 scrollTo(destX);
                 break;
             case MotionEvent.ACTION_UP:
                 int endX = (int) event.getX();
-                int dX = endX - downX;
-                //向右>0 ;向左<0;
+                int dX = endX - downX;//向右>0 ;向左<0;
                 int adsX = Math.abs(dX);
-
-//                if (dX > 0) {//向右
-//                    Log.e(TAG, "误伤向右");
-//                    if (adsX > menuWidth / 4) {
-//                        // 把菜单完全滑出来
-//                        startScroll(menuWidth);
-//                    } else {
-//                        startScroll(0);
-//                    }
-//                }
-
-                if(mainIsShow){
+                if (mainIsShow) {
                     if (dX > 0) {//向右
-                        if (adsX > menuWidth / 4) {
-                            // 把菜单完全滑出来
-                            startScroll(menuWidth);
-                        } else {
-                            startScroll(0);
-                        }
+                        startScroll((adsX > menuWidth / 5) ? menuWidth : 0);
                     }
-                }else {
+                } else {
                     if (dX < 0) {//向左
-                        if (adsX > menuWidth / 5) {
-                            //菜单完全隐藏
-                            startScroll(0);
-                        } else {
-                            //主界面完全隐藏
-                            startScroll(menuWidth);
-                        }
+                        startScroll((adsX > menuWidth / 5) ? 0 : menuWidth);
                     }
                 }
                 break;
@@ -165,17 +171,17 @@ public class SlidingMenu extends ViewGroup {
      * @param destX 要滑动到哪里（目标位置）
      */
     public void startScroll(int destX) {
-        if(destX == 0 ){
-            mainIsShow = true;
-        }else {
-            mainIsShow = false;
+        mainIsShow = (destX == 0);//判断主界面是否显示
+        if (listener != null) {
+            listener.onMenuShow(!mainIsShow);
         }
         currentX = destX;                // 界面当前的位置
         int startX = getMyScrollX();    // 指定从哪里开始滑动
         int distatnceX = destX - startX;// 要滑动的距离
-        int duration = menuWidth;
+        int duration = 500;//指定滑动完成的时间
         scroller.startScroll(startX, 0, distatnceX, 0, duration);
         invalidate();
+        // 知识点：
         // 刷新界面，内部会调用ViewGroup的draw方法，draw方法调用dispatchDraw方法-->
         // drawChild-->子View的draw方法-->computeScroll()
     }
@@ -186,7 +192,7 @@ public class SlidingMenu extends ViewGroup {
             int currX = scroller.getCurrX();    // 模拟出来的滑动值
             scrollTo(currX);
             invalidate();
-            count++;
+            count++;//记录每次滑动的计算的次数
         }
     }
 
@@ -199,9 +205,35 @@ public class SlidingMenu extends ViewGroup {
             startScroll(0);
         } else {
             // 需要完全显示
-            Log.d("toggle", "被瞎点了");
             startScroll(menuWidth);
         }
+    }
+
+    public static onMenuShowListener listener;
+
+    public void setMenuShowListener(onMenuShowListener listener) {
+        this.listener = listener;
+    }
+
+    public interface onMenuShowListener {
+        void onMenuShow(boolean show);
+    }
+
+    /**
+     * 获取屏幕像素
+     *
+     * @return
+     */
+    public int getWidthPixels() {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        Configuration cf = context.getResources().getConfiguration();
+        int ori = cf.orientation;
+        if (ori == Configuration.ORIENTATION_LANDSCAPE) {// 横屏
+            return displayMetrics.heightPixels;
+        } else if (ori == Configuration.ORIENTATION_PORTRAIT) {// 竖屏
+            return displayMetrics.widthPixels;
+        }
+        return 0;
     }
 
 }

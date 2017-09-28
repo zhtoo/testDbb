@@ -65,13 +65,17 @@ public class DetailActivity extends AppBarActivity {
             isShowRightView(false);
         } else if (showRightType.equals("RISK")) {
             if (mApproveStatus == -1 || mApproveStatus == 1) {
-                setRightStatus(R.drawable.ic_risk_selector);
+                float width = getResources().getDimension(R.dimen.x34);
+                float height = getResources().getDimension(R.dimen.x40);
+                setRightStatus(R.drawable.ic_risk_selector,width,height);
             }else {
                 isShowRightView(false);
             }
         } else if (showRightType.equals("MANAGER")) {
             if (mApproveStatus == -1 || mApproveStatus == 1) {
-                setRightStatus(R.drawable.ic_manager_selector);
+                float width = getResources().getDimension(R.dimen.x32);
+                float height = getResources().getDimension(R.dimen.x45);
+                setRightStatus(R.drawable.ic_manager_selector,width,height);
             }else {
                 isShowRightView(false);
             }

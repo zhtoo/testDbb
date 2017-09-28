@@ -69,7 +69,10 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
 
         setTitle(getString(R.string.invalid_list));
         setTitleTextColor(R.color.textAggravating);
-        setRightStatus(R.drawable.ic_invalid_search_selector);
+
+        float width = getResources().getDimension(R.dimen.x36);
+        float height = getResources().getDimension(R.dimen.x8);
+        setRightStatus(R.drawable.ic_invalid_search_selector,width,height);
         setStatusBarBackground(R.drawable.ic_battery_bg);
 
         initView();
@@ -142,8 +145,8 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
-        refresh.initPTR(this, ptrFrame, adapter);
-        refresh.initPTR(this, ptrFrame1, adapter);
+        refresh.initPTR(this, ptrFrame);
+        refresh.initPTR(this, ptrFrame1);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }

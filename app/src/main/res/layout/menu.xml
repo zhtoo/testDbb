@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/menu"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/x590"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical">
@@ -30,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_menu"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ScrollView
@@ -51,17 +53,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x80"
                     android:layout_marginTop="@dimen/x20"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x34"
+                        android:layout_height="@dimen/y40"
+                        android:src="@drawable/ic_risk_selector"
+                       android:layout_marginLeft="@dimen/x160" />
 
                     <TextView
                         android:id="@+id/menu_risk"
                         style="@style/menu_item_text_style"
-                        android:drawableLeft="@drawable/ic_risk_selector"
                         android:text="@string/risk_control"/>
 
                     <com.hs.doubaobao.view.DotView
+                        android:visibility="gone"
                         android:id="@+id/menu_risk_dot"
-                        android:layout_marginTop="@dimen/y15"
+                        android:layout_marginBottom="@dimen/y15"
                         android:layout_width="@dimen/x20"
                         android:layout_height="@dimen/y20"/>
 
@@ -73,16 +82,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x80"
                     android:layout_marginTop="@dimen/x20"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/x32"
+                        android:layout_height="@dimen/y45"
+                        android:src="@drawable/ic_manager_selector"
+                        android:layout_marginLeft="@dimen/x160" />
 
                     <TextView
                         android:id="@+id/menu_manager"
                         style="@style/menu_item_text_style"
-                        android:drawableLeft="@drawable/ic_manager_selector"
                         android:text="@string/general_manager"/>
 
                     <com.hs.doubaobao.view.DotView
-                        android:layout_marginTop="@dimen/y15"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/y15"
                         android:id="@+id/menu_manager_dot"
                         android:layout_width="@dimen/x20"
                         android:layout_height="@dimen/y20"/>
@@ -94,12 +110,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x80"
                     android:layout_marginTop="@dimen/x20"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
 
+                    <ImageView
+                        android:layout_width="@dimen/x40"
+                        android:layout_height="@dimen/y36"
+                        android:src="@drawable/ic_invalid_selector"
+                        android:layout_marginLeft="@dimen/x160" />
                     <TextView
                         android:id="@+id/menu_invalid"
                         style="@style/menu_item_text_style"
-                        android:drawableLeft="@drawable/ic_invalid_selector"
                         android:text="@string/invalid_list"/>
                 </LinearLayout>
 
@@ -115,8 +136,7 @@
             android:padding="@dimen/x20"
             android:text="退出"
             android:textColor="@drawable/menu_text_selector"
-            android:textSize="18sp"
-            />
+            android:textSize="@dimen/x28"/>
 
     </LinearLayout>
 

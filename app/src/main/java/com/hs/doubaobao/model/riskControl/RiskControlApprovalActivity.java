@@ -72,8 +72,15 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
 
         new RiskApprovalPresenter(this,this);
         map = new LinkedHashMap<>();
-        loadData();
+        //loadData();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mList.clear();
+        loadData();
     }
 
     private void loadData() {
@@ -91,7 +98,7 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
-        refresh.initPTR(this, ptrFrame, adapter);
+        refresh.initPTR(this, ptrFrame);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }

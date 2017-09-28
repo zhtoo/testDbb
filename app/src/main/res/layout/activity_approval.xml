@@ -6,16 +6,7 @@
               android:gravity="center_horizontal"
               android:orientation="vertical">
 
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/approval_not_pass_reason"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundGrey">
 
-        <include layout="@layout/dialog_reason_not_pass"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,11 +34,12 @@
             android:layout_marginTop="@dimen/x15"
             android:background="@color/whiteBackground"
             android:padding="@dimen/x15"
+            android:layout_margin="@dimen/x5"
             android:gravity="left|top"
             android:hint="请输入"/>
 
         <LinearLayout
-            android:layout_width="@dimen/x716"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/y31"
             android:orientation="horizontal">
@@ -57,13 +49,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="风控定额："
+                android:layout_marginLeft="@dimen/x22"
                 android:textColor="@color/textAggravating"/>
 
             <EditText
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 android:layout_marginRight="@dimen/x10"
                 android:id="@+id/approval_quota_text"
                 android:gravity="center|right"
+                android:paddingRight="@dimen/x10"
                 android:inputType="numberDecimal"
                 android:layout_width="@dimen/x271"
                 android:layout_height="@dimen/y73"
@@ -79,8 +73,8 @@
 
         <Button
             android:id="@+id/approval_pass"
-            android:layout_width="@dimen/x529"
-            android:layout_height="@dimen/y97"
+            android:layout_width="@dimen/x540"
+            android:layout_height="@dimen/y108"
             android:layout_marginTop="@dimen/y80"
             android:background="@drawable/ic_pass_selector"
             android:gravity="center"
@@ -89,8 +83,8 @@
 
         <Button
             android:id="@+id/approval_save"
-            android:layout_width="@dimen/x529"
-            android:layout_height="@dimen/y97"
+            android:layout_width="@dimen/x540"
+            android:layout_height="@dimen/y108"
             android:layout_marginTop="@dimen/y15"
             android:background="@drawable/ic_save_selector"
             android:gravity="center"
@@ -99,13 +93,24 @@
 
         <Button
             android:id="@+id/approval_not_pass"
-            android:layout_width="@dimen/x529"
-            android:layout_height="@dimen/y97"
+            android:layout_width="@dimen/x540"
+            android:layout_height="@dimen/y108"
             android:layout_marginTop="@dimen/y15"
             android:background="@drawable/ic_not_pass_selector"
             android:gravity="center"
             android:text="不通过"
             android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/approval_not_pass_reason"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundGrey">
+
+        <include layout="@layout/dialog_reason_not_pass"/>
 
     </LinearLayout>
 

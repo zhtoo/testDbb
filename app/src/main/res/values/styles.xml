@@ -9,6 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--<item name="android:windowBackground">@drawable/bg_start_page</item>-->
+
     <!-- 网络加载等待动画（自定义dialog的样式） -->
     <style name="CustomDialog" parent="android:Theme.Dialog">
         <item name="android:backgroundDimAmount">0.4</item>
@@ -27,11 +29,11 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/x80</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/x28</item>
         <item name="android:textColor">@drawable/menu_text_selector</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:drawablePadding">@dimen/x22</item>
-        <item name="android:paddingLeft">@dimen/x160</item>
+        <item name="android:paddingLeft">@dimen/x20</item>
     </style>
 
     <!-- 横向线条 -->
@@ -67,7 +69,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/x25</item>
         <item name="android:layout_marginLeft">@dimen/x25</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/x28</item>
     </style>
 
     <style name="main_search_edittext_style">
@@ -77,6 +79,7 @@
         <item name="android:layout_marginLeft">@dimen/x25</item>
         <item name="android:drawableLeft">@drawable/ic_search</item>
         <item name="android:drawablePadding">@dimen/x14</item>
+        <item name="android:textSize">@dimen/x24</item>
         <item name="android:background">@drawable/bg_edit_text_corner</item>
     </style>
 

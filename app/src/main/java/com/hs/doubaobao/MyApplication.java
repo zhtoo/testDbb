@@ -3,7 +3,6 @@ package com.hs.doubaobao;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Handler;
 
 import java.util.HashMap;
@@ -21,10 +20,6 @@ public class MyApplication extends Application {
     private static Handler mMainThreadHandler;
     private static int mMainThreadId;
     private Map<String, String> mMemProtocolCacheMap = new HashMap<>();
-
-
-    private Resources mResources;
-
 
     /**
      * 获取MEM协议缓存集合
@@ -84,7 +79,6 @@ public class MyApplication extends Application {
         //主线程的线程id
         mMainThreadId = android.os.Process.myTid();
 
-        mResources = getResources();
         /**
          myTid:Thread
          myPid:Process

@@ -6,19 +6,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Button;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
 
-
 /**
  * Created by zhanghaitao on 2017/5/23.
+ * 向导界面
  */
 
 public class GuideActivity extends AppBarActivity {
-
-    private Button passed;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,10 +23,12 @@ public class GuideActivity extends AppBarActivity {
         setContentView(R.layout.activity_guide);
         hideTitleBar();
 
-        passed = (Button) findViewById(R.id.passed);
         handler.sendEmptyMessageDelayed(0,3000);
     }
 
+    /**
+     * 处理跳转
+     */
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -38,17 +37,27 @@ public class GuideActivity extends AppBarActivity {
         }
     };
 
+    /**
+     * 当Activity销毁的时候
+     */
     @Override
     protected void onDestroy() {
         handler.removeCallbacksAndMessages(null);
         super.onDestroy();
     }
 
+    /**
+     * 点击跳过
+     * @param v
+     */
     public void pass(View v) {
         handler.removeCallbacksAndMessages(null);
         skip2Login();
     }
 
+    /**
+     * 跳转到登录界面
+     */
     private void skip2Login() {
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);

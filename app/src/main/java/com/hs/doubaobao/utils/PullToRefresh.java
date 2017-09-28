@@ -12,11 +12,12 @@ import in.srain.cube.views.ptr.PtrHandler2;
 
 /**
  * Created by zhanghaitao on 2017/7/14.
+ * 下拉刷新，上拉加载的包装类
  */
 
 public class PullToRefresh {
 
-    public <T>  void initPTR(Context context, final PtrClassicFrameLayout ptrFrame, final T adapter) {
+    public <T> void initPTR(Context context, final PtrClassicFrameLayout ptrFrame) {
         //默认经典头布局
         PtrClassicDefaultHeader defaultHeader = new PtrClassicDefaultHeader(context);
         //给Ptr添加头布局
@@ -34,13 +35,9 @@ public class PullToRefresh {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 //Toast.makeText(LoanActivity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
-
-                if(listener!=null){
+                if (listener != null) {
                     listener.pullToRefresh();
                     ptrFrame.refreshComplete();
-                    if(adapter!=null){
-                        //refreshUI(adapter);
-                    }
                 }
             }
 
@@ -51,12 +48,9 @@ public class PullToRefresh {
             @Override
             public void onLoadBegin(PtrFrameLayout frame) {
                 //Toast.makeText(LoanActivity.this, "上拉加载", Toast.LENGTH_SHORT).show();
-                if(listener!=null){
+                if (listener != null) {
                     listener.pullToLoadMore();
                     ptrFrame.refreshComplete();
-                    if(adapter!=null){
-                       // refreshUI(adapter);
-                    }
                 }
             }
 
@@ -64,17 +58,15 @@ public class PullToRefresh {
                 return PtrDefaultHandler2.checkContentCanBePulledUp(frame, content, footer);
             }
         });
-
-
     }
 
-    private PullToRefreshListener listener ;
+    private PullToRefreshListener listener;
 
-    public void  setPullToRefreshListener(PullToRefreshListener listener){
-        this.listener=listener;
+    public void setPullToRefreshListener(PullToRefreshListener listener) {
+        this.listener = listener;
     }
 
-    public interface  PullToRefreshListener{
+    public interface PullToRefreshListener {
         void pullToRefresh();
         void pullToLoadMore();
     }

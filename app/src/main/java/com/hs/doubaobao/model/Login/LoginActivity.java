@@ -26,18 +26,20 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/11 17:43
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe: 登录界面
  */
 
 public class LoginActivity extends AppBarActivity implements LoginContract.View {
 
+    private static final String TAG = "LoginActivity";
+
     private LoginContract.Presenter presenter;
 
-
-    private static final String TAG = "LoginActivity";
     private ImageView appLogo;
+    //用户名和密码
     private EditText loginUsername;
     private EditText loginPwd;
+    //登录
     private Button loginBtnSure;
 
     @Override
@@ -54,6 +56,9 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         new LoginPresener(this,this);
     }
 
+    /**
+     * 初始化布局
+     */
     private void initView() {
         appLogo = (ImageView) findViewById(R.id.app_logo);
         loginPwd = (EditText) findViewById(R.id.login_pwd);
@@ -66,6 +71,9 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         loginPwd.setText(SPHelp.getData("password"));
     }
 
+    /**
+     * 初始化监听
+     */
     private void initListener() {
         loginUsername.setOnKeyListener(new View.OnKeyListener() {
 
@@ -82,6 +90,10 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         });
     }
 
+    /**
+     * 请求成功返回
+     * @param bean
+     */
     @Override
     public void setData(LoginBean bean) {
 
@@ -95,6 +107,10 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         finish();
     }
 
+    /**
+     * 请求失败返回
+     * @param text
+     */
     @Override
     public void setError(String text) {
         if(text.startsWith("提示")){
@@ -112,7 +128,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
     }
 
     /**
-     * 点击事件
+     * 点击登录
      *
      * @param view
      */

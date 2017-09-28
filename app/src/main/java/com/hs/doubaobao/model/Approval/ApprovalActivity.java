@@ -48,7 +48,6 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
     private String mManagerRation;
     private int mApproveStatus;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +69,8 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         if (TextUtils.isEmpty(showRightType)) {
         } else if (showRightType.equals("RISK")) {
             setTitle(getString(R.string.risk_control));
-            mOpinion.setText("风控意见");
-            mQuota.setText("风控定额");
+            mOpinion.setText("风控意见:");
+            mQuota.setText("风控定额:");
             if (mApproveStatus == 1) {
                 mOpinionText.setText(mApproveContent);
                 mQuotaText.setText(mRiskControl);
@@ -79,8 +78,8 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
             type = 3;
         } else if (showRightType.equals("MANAGER")) {
             setTitle(getString(R.string.general_manager));
-            mOpinion.setText("总经理意见");
-            mQuota.setText("总经理定额");
+            mOpinion.setText("总经理意见:");
+            mQuota.setText("总经理定额:");
             if (mApproveStatus == 1) {
                 mOpinionText.setText(mApproveContent);
                 mQuotaText.setText(mManagerRation);
@@ -132,6 +131,7 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         mText = (EditText) findViewById(R.id.dailog_reason);
         mClose = (Button) findViewById(R.id.dialog_close);
         mSubmit = (Button) findViewById(R.id.dialog_submit);
+
     }
 
     @Override

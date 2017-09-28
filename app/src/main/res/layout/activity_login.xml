@@ -40,7 +40,6 @@
             android:text=""
             android:textSize="@dimen/x26" />
 
-
         <EditText
             android:id="@+id/login_pwd"
             android:layout_width="@dimen/x528"

@@ -232,7 +232,7 @@ public class AppBarActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 设置左边的状态
      */
-    //只设置文字
+    //只设置图片
     public void setLeftStatus(int image) {
         if (mBarLeftImage != null) {
             int visibility = mBarLeftImage.getVisibility();
@@ -276,6 +276,28 @@ public class AppBarActivity extends AppCompatActivity implements View.OnClickLis
                 mBarRightImage.setVisibility(View.VISIBLE);
             }
             mBarRightImage.setImageResource(image);
+        }
+    }
+
+    //设置图片和图片的尺寸
+    public void setRightStatus(int image, float width, float height) {
+        if (mBarRightText != null) {
+            mBarRightText.setVisibility(View.GONE);
+        }
+        if (mBarRightImage != null) {
+            int visibility = mBarRightImage.getVisibility();
+            if (visibility == View.VISIBLE || visibility == View.INVISIBLE) {
+                mBarRightImage.setVisibility(View.GONE);
+            }
+            ImageView imageView = new ImageView(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    (int) width,
+                    (int) height);
+            int marginRight = (int) getResources().getDimension(R.dimen.x30);
+            lp.setMargins(0, 0, marginRight, 0);
+            imageView.setLayoutParams(lp);
+            mBarRightButton.addView(imageView);
+            imageView.setImageResource(image);
         }
     }
 

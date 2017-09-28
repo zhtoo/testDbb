@@ -1,29 +1,89 @@
 package com.hs.doubaobao.utils;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 
 /**
 * @ClassName: DensityUtil 
-* @Description: TODO(这里用一句话描述这个类的作用) 
+* @Description: 屏幕尺寸转换
 * @author zht
-* @date 2015-12-28 下午4:17:01 
+* @date 2017-09-27 下午4:17:01
  */
 public class DensityUtil {
 	
-	public static int dip2px(Context context, float dpValue) {
-		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (dpValue * scale + 0.5f);
+//	public static int dip2px(Context context, float dpValue) {
+//		final float scale = context.getResources().getDisplayMetrics().density;
+//		return (int) (dpValue * scale + 0.5f);
+//	}
+
+	/**
+	 * dp转px
+	 */
+	public static int dp2px(Context context, int dpVal) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, context.getResources().getDisplayMetrics());
 	}
 
-	public static int px2dip(Context context, float pxValue) {
+	/**
+	 * px转dp
+	 */
+	public static int px2dp(Context context, int pxVal) {
 		final float scale = context.getResources().getDisplayMetrics().density;
-		return (int) (pxValue / scale + 0.5f);
+		return (int)(pxVal / scale + 0.5f);
+	}
+
+	/**
+	 * sp转px
+	 */
+	public static int sp2px(Context context, int spVal) {
+		return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, context.getResources().getDisplayMetrics());
+	}
+
+	/**
+	 * px转sp
+	 */
+	public static float px2sp(Context context, int pxVal) {
+		return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
 	}
 
 	/** 获取手机的密度*/
 	public static float getDensity(Context context) {
 		DisplayMetrics dm = context.getResources().getDisplayMetrics();
 		return dm.density;
+	}
+
+	/**
+	 * 获取屏幕宽度像素
+	 *
+	 * @return
+	 */
+	public int getWidthPixels(Context context) {
+		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+		Configuration cf = context.getResources().getConfiguration();
+		int ori = cf.orientation;
+		if (ori == Configuration.ORIENTATION_LANDSCAPE) {// 横屏
+			return displayMetrics.heightPixels;
+		} else if (ori == Configuration.ORIENTATION_PORTRAIT) {// 竖屏
+			return displayMetrics.widthPixels;
+		}
+		return 0;
+	}
+
+	/**
+	 * 获取屏幕宽度像素
+	 *
+	 * @return
+	 */
+	public int getHeightPixels(Context context) {
+		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+		Configuration cf = context.getResources().getConfiguration();
+		int ori = cf.orientation;
+		if (ori == Configuration.ORIENTATION_LANDSCAPE) {// 横屏获取屏幕的宽度
+			return displayMetrics.widthPixels;
+		} else if (ori == Configuration.ORIENTATION_PORTRAIT) {// 竖屏获取屏幕的高度
+			return displayMetrics.heightPixels;
+		}
+		return 0;
 	}
 }

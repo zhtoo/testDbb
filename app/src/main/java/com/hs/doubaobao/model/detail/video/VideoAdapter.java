@@ -6,10 +6,11 @@ import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hs.doubaobao.R;
@@ -28,6 +29,9 @@ public class VideoAdapter extends RecyclerView.Adapter {
 
     private final Context context;
     private List<String> mList;
+    private TextView textView;
+    private LinearLayout mVideoContainer;
+
 
     public VideoAdapter(Context context, List<String> mList) {
         this.context = context;
@@ -36,7 +40,41 @@ public class VideoAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_video_fragment, parent, false));
+        int screenWidth = getWidthPixels();
+        int scaleSize = screenWidth / 3;
+
+        mVideoContainer = new LinearLayout(context);
+        mVideoContainer.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                scaleSize,scaleSize
+        );
+        mVideoContainer.setLayoutParams(layoutParams);
+        mVideoContainer.setGravity(Gravity.CENTER);
+
+        ImageView imageView = new ImageView(context);
+        LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
+                scaleSize,
+                scaleSize * 173 / 229
+        );
+        imageView.setLayoutParams(layoutParams1);
+        imageView.setImageResource(R.drawable.ic_video_pictures);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+        textView =   new TextView(context);
+        LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                scaleSize,
+                scaleSize * 56 / 229
+        );
+        textView.setLayoutParams(layoutParams2);
+        textView.setSingleLine(true);
+        textView.setMaxWidth(scaleSize*7/10);
+        textView.setBackgroundResource(R.drawable.ic_video_pictures_txt);
+        textView.setPadding(20,0,40,12);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        mVideoContainer.addView(imageView);
+        mVideoContainer.addView(textView);
+        return new MyViewHolder(mVideoContainer);
     }
 
     @Override
@@ -52,19 +90,45 @@ public class VideoAdapter extends RecyclerView.Adapter {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView videoText;
-        private RelativeLayout videoContainer;
-        private int scaleSize;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            videoContainer = (RelativeLayout) itemView.findViewById(R.id.detail_video_container);
-            videoText = (TextView) itemView.findViewById(R.id.video_text);
-            int screenWidth = getWidthPixels();
-            scaleSize = screenWidth / 3;
-            ViewGroup.LayoutParams layoutParams = videoContainer.getLayoutParams();
-            layoutParams.width = scaleSize;
-            layoutParams.height = scaleSize * 210 / 211;
+//            videoContainer = (RelativeLayout) itemView.findViewById(R.id.detail_video_container);
+//            videoText = (TextView) itemView.findViewById(R.id.video_text);
+//            videoPic = (ImageView) itemView.findViewById(R.id.video_pic);
+//            videoText.setVisibility(View.GONE);
+//            videoPic.setVisibility(View.GONE);
+//            int screenWidth = getWidthPixels();
+//            scaleSize = screenWidth / 3;
+//
+//            ImageView imageView = new ImageView(context);
+//            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
+//                    scaleSize,
+//                    scaleSize * 173 / 229
+//            );
+//            imageView.setLayoutParams(layoutParams1);
+//            imageView.setImageResource(R.drawable.ic_video_pictures);
+//            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//
+//            textView =   new TextView(context);
+//            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+//                    scaleSize,
+//                    scaleSize * 56 / 229
+//            );
+//            layoutParams2.setMargins(0, scaleSize * 173 / 229,0,0);
+//            textView.setLayoutParams(layoutParams2);
+//            textView.setSingleLine(true);
+//            textView.setBackgroundResource(R.drawable.ic_video_pictures_txt);
+//            textView.setPadding(20,0,9,12);
+//            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+
+//            ViewGroup.LayoutParams layoutParams = videoContainer.getLayoutParams();
+//            layoutParams.width = scaleSize;
+//            layoutParams.height = scaleSize;
+//            videoContainer.setLayoutParams(layoutParams);
+
+
         }
 
         public void setData(final int position) {
@@ -76,9 +140,9 @@ public class VideoAdapter extends RecyclerView.Adapter {
                 //videoImage.setImageResource(R.drawable.ic_error_pictrue_remind);
             }
             //添加文字
-            videoText.setText(mList.get(position));
+            textView.setText(mList.get(position));
 
-            videoContainer.setOnClickListener(new View.OnClickListener() {
+            mVideoContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {

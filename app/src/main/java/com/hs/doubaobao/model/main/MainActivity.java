@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -34,6 +35,8 @@ import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
 import com.hs.doubaobao.utils.PullToRefresh;
 import com.hs.doubaobao.utils.SPHelp;
+import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.view.DotView;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
 
@@ -49,38 +52,48 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
  * 主界面
  * rectification by zht on 2017/9/11  16:51
  */
-public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener {
-
+public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener, SlidingMenu.onMenuShowListener {
 
     private static final String TAG = "MainActivity";
+    //控件
     private SlidingMenu sliding_menu;
     private LinearLayout ll_menu;
     private LinearLayout mSearch;
-    public static boolean isShowing = false;
     private RecyclerView mRecyclerView;
     private MyRelativeLayout mSearchContainer;
     private LinearLayout mStatusBar;
-    private MainContract.Presenter presenter;
     private TextView mName;
     private TextView mMenuName;
     private TextView mMenuRisk;
     private TextView mMenuManager;
     private TextView mMenuInvalid;
-    private HomeBean.ResDataBean.MessageCountBean messageCount;
-    private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
-    private List<Integer> roleIdList;
-    private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
-    private List<ListBean> mList = new ArrayList<>();
-    private HomeAdapter adapter;
-
-    private PtrClassicFrameLayout ptrFrame;
-    private Map<String, Object> map;
-    private int page = 1;
-    private int pages = 1;
     private EditText mSearchName;
     private EditText mSearchOpeName;
     private EditText mSearchPhone;
     private PtrClassicFrameLayout ptrFrame1;
+    private DotView mMainDot;
+    private DotView mMenuRiskDot;
+    private DotView mMenuManagerDot;
+    private LinearLayout mGray;
+
+    private MainContract.Presenter presenter;
+
+    private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
+    private HomeBean.ResDataBean.MessageCountBean messageCount;
+    private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
+    private List<Integer> roleIdList;
+
+    private List<ListBean> mList = new ArrayList<>();
+    private HomeAdapter adapter;
+
+    public static boolean isShowing = false;
+    private PtrClassicFrameLayout ptrFrame;
+    //存放请求参数
+    private Map<String, Object> map;
+    //分页
+    private int page = 1;
+    private int pages = 1;
+    private LinearLayout mMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,17 +109,28 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
         new MainPresenter(this, this);
         map = new LinkedHashMap<>();
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        sliding_menu.startScroll(0);
         mList.clear();
         loadData("", "", "");
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sliding_menu.startScroll(0);
+    }
+
+    /**
+     * 联网访问数据
+     *
+     * @param name
+     * @param opeName
+     * @param phone
+     */
     private void loadData(String name, String opeName, String phone) {
         map.put("userId", BaseParams.USER_ID);
         map.put("page", page);
@@ -135,25 +159,33 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private void initView() {
         sliding_menu = (SlidingMenu) findViewById(R.id.sliding_menu);
         ll_menu = (LinearLayout) findViewById(R.id.ll_menu);
+        mMenu = (LinearLayout) findViewById(R.id.menu);
+        //全局的灰色背景
+        mGray = (LinearLayout) findViewById(R.id.main_gray_bg);
+        //状态栏
         mStatusBar = (LinearLayout) findViewById(R.id.main_status_bar);
+        //搜索栏
         mSearch = (LinearLayout) findViewById(R.id.main_search);
 
         mSearchContainer = (MyRelativeLayout) findViewById(R.id.main_search_container);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
-
+        //刷选栏的三个条件
         mSearchName = (EditText) findViewById(R.id.search_name);
         mSearchOpeName = (EditText) findViewById(R.id.search_opename);
         mSearchPhone = (EditText) findViewById(R.id.search_phone);
-
+        //用户名称
         mName = (TextView) findViewById(R.id.home_person_name);
-
         mMenuName = (TextView) findViewById(R.id.menu_person_name);
-
+        //菜单的三个条目
         mMenuRisk = (TextView) findViewById(R.id.menu_risk);
         mMenuManager = (TextView) findViewById(R.id.menu_manager);
         mMenuInvalid = (TextView) findViewById(R.id.menu_invalid);
-
+        //消息小红点
+        mMainDot = (DotView) findViewById(R.id.main_dot);
+        mMenuRiskDot = (DotView) findViewById(R.id.menu_risk_dot);
+        mMenuManagerDot = (DotView) findViewById(R.id.menu_manager_dot);
+        //下拉刷新，上拉加载
         ptrFrame = (PtrClassicFrameLayout) findViewById(R.id.main_ptr);
         ptrFrame1 = (PtrClassicFrameLayout) findViewById(R.id.main_ptr1);
 
@@ -163,6 +195,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mStatusBar.setBackgroundResource(R.drawable.ic_battery_bg);
         initRecyclerView();
         mSearch.setOnClickListener(this);
+        sliding_menu.setMenuShowListener(this);
     }
 
     /**
@@ -200,13 +233,9 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private void initRecyclerView() {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayout.VERTICAL);
-
         mRecyclerView.setLayoutManager(llm);
-
         adapter = new HomeAdapter(this, mList, 0);
-
         adapter.setOnItemClickListener(this);
-
         mRecyclerView.setAdapter(adapter);
         initPtrClassicFrameLayout();
     }
@@ -220,8 +249,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
-        refresh.initPTR(this, ptrFrame, adapter);
-        refresh.initPTR(this, ptrFrame1, adapter);
+        refresh.initPTR(this, ptrFrame);
+        refresh.initPTR(this, ptrFrame1);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }
@@ -379,10 +408,12 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mSearchName.setText("");
         mSearchOpeName.setText("");
         mSearchPhone.setText("");
+        LogWrap.d(TAG,mMenu.getWidth()+"");
+        mMenu.getWidth();
     }
 
     /**
-     * 退出
+     * 退出当前账号
      */
     public void onExit(View v) {
         // Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
@@ -393,8 +424,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SPHelp.setData("name","");
-                        SPHelp.setData("password","");
+                        SPHelp.setData("name", "");
+                        SPHelp.setData("password", "");
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -418,11 +449,17 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      */
     @Override
     public void setData(HomeBean bean) {
-
         //角色权限
         roleIdList = bean.getResData().getRoleIdList();
         //角色的消息
         messageCount = bean.getResData().getMessageCount();
+        int messageRole7 = messageCount.getMessageRole7();
+        int messageRole8 = messageCount.getMessageRole8();
+
+        mMainDot.setVisibility((messageRole7 == 1 || messageRole8 == 1) ? View.VISIBLE : View.GONE);
+        mMenuRiskDot.setVisibility(messageRole7 == 1 ? View.VISIBLE : View.GONE);
+        mMenuManagerDot.setVisibility(messageRole8 == 1 ? View.VISIBLE : View.GONE);
+
         //分页
         pageBean = bean.getResData().getPageDataList().getPage();
         pages = pageBean.getPages();
@@ -470,7 +507,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         this.presenter = presenter;
     }
 
-
     @Override
     public void onClick(View v) {
 
@@ -506,4 +542,40 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
             loadData("", "", "");
         }
     }
+
+    /**
+     * 当菜单显示的时候  onGrayClick
+     *
+     * @param show
+     */
+    @Override
+    public void onMenuShow(boolean show) {
+        mGray.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    public void onGrayClick(View v) {
+        sliding_menu.toggle();
+    }
+
+
+    //--------------使用onKeyDown()完成双击退出程序--------------
+
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (System.currentTimeMillis() - firstTime > 2000) {
+                Toast.makeText(MainActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                firstTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
