@@ -96,11 +96,8 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
                         container += "万元";
                     }
 
-
-
-
                     if (TextUtils.isEmpty(itemMap.get(key))) {
-                        container = "暂无数据";
+                        container = "未填写";
                     }
                     mContainer.addView(setNewItem(key, container));
                 }

@@ -15,6 +15,8 @@
     <string name="detail_pictrue">照片</string>
     <string name="detail_video">视频</string>
     <string name="detail_reference">参考</string>
+    <string name="customer_name">客户姓名</string>
+    <string name="customer_phone">客户电话</string>
 
 
 </resources>

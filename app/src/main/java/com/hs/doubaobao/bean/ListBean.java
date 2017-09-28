@@ -25,7 +25,7 @@ public class ListBean {
     //客户电话
     private String customPhone;
     //借款期数
-    private int loanPeriods;
+    private String loanPeriods;
     //客户经理
     private String customManager;
     //审批状态
@@ -75,12 +75,18 @@ public class ListBean {
         this.customPhone = customPhone;
     }
 
-    public int getLoanPeriods() {
+    public String getLoanPeriods() {
         return loanPeriods;
     }
 
     public void setLoanPeriods(int loanPeriods) {
-        this.loanPeriods = loanPeriods;
+        //1：12期，2：18期，3：24期，4：36期，5：48期，6：60期
+        String[] aar = {"", "12期", "18期", "24期", "36期", "48期", "60期"};
+        if (loanPeriods > 0 && loanPeriods < 7) {
+            this.loanPeriods = aar[loanPeriods];
+        }else {
+            this.loanPeriods = "";
+        }
     }
 
     public String getCustomManager() {
@@ -115,7 +121,7 @@ public class ListBean {
                 this.status = map.get(key);
             }
         }
-        if(TextUtils.isEmpty(this.status)){
+        if (TextUtils.isEmpty(this.status)) {
             this.status = "总经理审批通过";
         }
     }

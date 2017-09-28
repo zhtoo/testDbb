@@ -114,9 +114,9 @@ public class ManagerAdapter extends RecyclerView.Adapter {
             name.setText(listBean.getName());
             time.setText(listBean.getTime());
             purpose.setText(listBean.getPurpose());
-            loanAmount.setText(((int) listBean.getLoanAmount() / 10000) + "万元");
+            loanAmount.setText(((double) listBean.getLoanAmount() / 10000d) + "万元");
             customPhone.setText(listBean.getCustomPhone());
-            loanPeriods.setText(listBean.getLoanPeriods() + "期");
+            loanPeriods.setText(listBean.getLoanPeriods());
             customManager.setText(listBean.getCustomManager());
             status.setText(listBean.getStatus());
 

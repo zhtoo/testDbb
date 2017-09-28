@@ -25,6 +25,7 @@ import java.util.Map;
 public class ParticularsFragment extends BaseFragment implements ParticularsContract.View {
     private ParticularsContract.Presenter presenter;
     private RecyclerView mRecycler;
+    private ParticularsAdapter adapter;
 
     @Override
     protected int setLayout() {
@@ -67,7 +68,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         Map<String, String> map1 = new LinkedHashMap<>();
         //01:汇民消费贷，02：汇民经营贷，03：汇业贷，04：汇车贷，05：汇农贷
         String type = borrow.getType();
-        String[] aarType = {"汇民消费贷", "汇民经营贷", "汇业贷", "汇车贷", "汇农贷"};
+        String[] aarType = {"", "汇民消费贷", "汇民经营贷", "汇业贷", "汇车贷", "汇农贷"};
         for (int i = 1; i <= aarType.length; i++) {
             if (type.equals("0" + i)) {
                 type = aarType[i];
@@ -82,7 +83,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         //贷款期限：1:12期;2:18期;3:24期;4:36期;5:48期;6:60期)
         String period = "";
         int periodInt = borrow.getPeriod();
-        String[] aarPeriod = {"12期", "18期", "24期", "36期", "48期", "60期"};
+        String[] aarPeriod = {"", "12期", "18期", "24期", "36期", "48期", "60期"};
         for (int i = 1; i <= aarPeriod.length; i++) {
             if (periodInt == i) {
                 period = aarPeriod[i];
@@ -112,12 +113,20 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map3.put("现住房居住时间", customerInfo.getExitingBuildLivetime());
         map3.put("其他房产信息", customerInfo.getOtherBuildInfo());
         map3.put("其他房产面积", customerInfo.getOtherBuildAcreage() + "");
-        map3.put("房产性质", customerInfo.getOwnBuildPropertyString());
+        map3.put("其他房产性质", customerInfo.getOtherBuildProperty());
         map3.put("line2", "line");
         map3.put("单位名称", customerInfo.getWorkunitName());
         map3.put("部门及职务", customerInfo.getJobdepartment());
         map3.put("工资月收入", customerInfo.getMonthlyWage() + "元");
-        map3.put("是否企业主/个体户", customerInfo.getIsBusinessOwner() == 1 ? "否" : "是");
+        //是否是企业主/个体户 1:否 2：是
+        int isBusinessOwner = customerInfo.getIsBusinessOwner();
+        if (isBusinessOwner == 1) {
+            map3.put("是否企业主/个体户", "否");
+        } else if (isBusinessOwner == 2) {
+            map3.put("是否企业主/个体户", "是");
+        } else {
+            map3.put("是否企业主/个体户", "");
+        }
         map3.put("单位性质", customerInfo.getWorkunitNatureString());
         map3.put("单位电话", customerInfo.getWorkunitPhone());
         map3.put("分机", customerInfo.getWorkunitExtPhone());
@@ -128,7 +137,15 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         mTitles.add("共同借款人信息");
         Map<String, String> map4 = new LinkedHashMap<>();
         map4.put("姓名", coborrow.getConame());
-        map4.put("性别", coborrow.getSex() == 1 ? "男" : "女");
+        //性别 1:男  0:女）
+        int sex = coborrow.getSex();
+        if (sex == 1) {
+            map4.put("性别", "男");
+        } else if (sex == 0) {
+            map4.put("性别", "女");
+        } else {
+            map4.put("性别", "");
+        }
         map4.put("与借款人关系", coborrow.getCrelationship());
         map4.put("出生日期", coborrow.getBirth());
         map4.put("身份证号码", coborrow.getCardid());
@@ -139,14 +156,21 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map4.put("单位名称", coborrow.getWorkunitName());
         map4.put("部门及职务", coborrow.getWorkunitDepartment());
         map4.put("工资月收入", coborrow.getMonthlyIncome() + "元");
-        map4.put("是否企业主/个体户", coborrow.getIsBusinessOwner() == 1 ? "否" : "是");
+        //是否是企业主/个体户 1:否 2：是
+        int isBusinessOwner1 = coborrow.getIsBusinessOwner();
+        if (isBusinessOwner1 == 1) {
+            map4.put("是否企业主/个体户", "否");
+        } else if (isBusinessOwner1 == 2) {
+            map4.put("是否企业主/个体户", "是");
+        } else {
+            map4.put("是否企业主/个体户", "");
+        }
         map4.put("单位性质", coborrow.getWorkunitNatureString());
         map4.put("单位电话", coborrow.getPhone());
         map4.put("分机", coborrow.getExtPhone());
         map4.put("累计工作年限", coborrow.getWorkunitAge());
         map4.put("单位地址", coborrow.getWorkunitAddr());
         mMap.add(map4);
-
 
         mTitles.add("借款车辆信息");
         Map<String, String> map5 = new LinkedHashMap<>();
@@ -155,7 +179,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map5.put("车辆颜色", carInfo.getColor());
         map5.put("车辆号码", carInfo.getCardid());
         String status = "";
-        if (carInfo.getStatus() != -1) {
+        if (carInfo.getStatus() >= 0 && carInfo.getStatus() <= 1) {
             status = carInfo.getStatus() == 0 ? "有车无贷款" : "有车有贷款";
         }
         map5.put("车辆状况", status);
@@ -170,7 +194,6 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
 
         //与借款人关系:0:配偶 1：父母 2：子女 3：兄弟姐妹 4:亲戚 5：朋友 6：其他）
         String[] aarRelation = {"配偶", "父母", "子女", "兄弟姐妹", "亲戚", "朋友", "其他"};
-
         int ContantTimes = 0;
         map6.put("空1", "直属亲戚联系人");// 0 1
         for (int i = 0; i < 2; i++) {
@@ -185,7 +208,12 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
                 map6.put("姓名" + ContantTimes, borrowContants.get(i).getName());
                 map6.put("关系" + ContantTimes, borrowContants.get(i).getRelation());
                 map6.put("手机号码" + ContantTimes, borrowContants.get(i).getPhone());
-                map6.put("是否知晓贷款" + ContantTimes, borrowContants.get(i).getNotice() == 0 ? "是" : "否");
+                //是否知晓贷款  0：是 1：否
+                String notice = "";
+                if (borrowContants.get(i).getNotice() >= 0 && borrowContants.get(i).getNotice() <= 1) {
+                    notice = borrowContants.get(i).getNotice() == 0 ? "是" : "否";
+                }
+                map6.put("是否知晓贷款" + ContantTimes, notice);
                 ContantTimes++;
             }
         }
@@ -206,17 +234,16 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
                 map6.put("姓名" + ContantTimes, borrowContants.get(i).getName());
                 map6.put("关系" + ContantTimes, borrowContants.get(i).getRelation());
                 map6.put("手机号码" + ContantTimes, borrowContants.get(i).getPhone());
-                map6.put("是否知晓贷款" + ContantTimes, borrowContants.get(i).getNotice() == 0 ? "是" : "否");
+                //TODO:
+                //是否知晓贷款  0：是 1：否
+                String notice = "";
+                if (borrowContants.get(i).getNotice() >= 0 && borrowContants.get(i).getNotice() <= 1) {
+                    notice = borrowContants.get(i).getNotice() == 0 ? "是" : "否";
+                }
+                map6.put("是否知晓贷款" + ContantTimes, notice);
                 ContantTimes++;
             }
         }
-
-
-//        map6.put("姓名2","");
-//        map6.put("关系2","");
-//        map6.put("手机号码2","");
-//        map6.put("是否知晓贷款2","");
-
         mMap.add(map6);
 
         mTitles.add("借款人互联网信息");
@@ -233,17 +260,19 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map8.put("line1", "line");
         map8.put("面审情况及意见", customerInfo.getOpinion());
         map8.put("line2", "line");
-        map8.put("家访客户情况汇总", approves.getHomeVisitContent());
+
+        map8.put("资料", approves.getBorrowData());
         map8.put("line3", "line");
+        map8.put("家访客户情况汇总", approves.getHomeVisitContent());
+        map8.put("line4", "line");
         map8.put("风控意见", approves.getRiskControlContent());
         map8.put("风控定额", approves.getRiskControl() > 0 ? (approves.getRiskControl() + "元") : "");
-        map8.put("line4", "line");
+        map8.put("line5", "line");
         map8.put("总经理意见", approves.getManagerContent());
         map8.put("总经理定额", approves.getManagerRation() > 0 ? (approves.getManagerRation() + "元") : "");
         mMap.add(map8);
 
-
-        ParticularsAdapter adapter = new ParticularsAdapter(getContext(), mTitles, mMap);
+        adapter = new ParticularsAdapter(getContext(), mTitles, mMap);
         mRecycler.setAdapter(adapter);
     }
 

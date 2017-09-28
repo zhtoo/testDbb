@@ -121,6 +121,7 @@ public class ParticularBean {
              */
 
             private String homeVisitContent;
+            private String borrowData;
             private String managerContent;
             private int managerRation;
             private int riskControl;
@@ -164,6 +165,13 @@ public class ParticularBean {
 
             public void setRiskControlContent(String riskControlContent) {
                 this.riskControlContent = riskControlContent;
+            }
+            public String getBorrowData() {
+                return borrowData;
+            }
+
+            public void setBorrowData(String borrowData) {
+                this.borrowData = borrowData;
             }
         }
 

@@ -9,8 +9,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!--<item name="android:windowBackground">@drawable/bg_start_page</item>-->
-
     <!-- 网络加载等待动画（自定义dialog的样式） -->
     <style name="CustomDialog" parent="android:Theme.Dialog">
         <item name="android:backgroundDimAmount">0.4</item>
@@ -22,7 +20,6 @@
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
-
 
     <!--菜单条目文字-->
     <style name="menu_item_text_style">
@@ -42,7 +39,6 @@
         <item name="android:layout_height">1dip</item>
         <item name="android:background">@color/lineBackground</item>
     </style>
-
 
     <!-- 横向线条 -->
     <style name="verticalLine">
@@ -127,6 +123,5 @@
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:textColor">@color/textOrange</item>
     </style>
-
 
 </resources>

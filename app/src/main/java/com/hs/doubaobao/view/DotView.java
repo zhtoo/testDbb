@@ -13,7 +13,7 @@ import com.hs.doubaobao.utils.DensityUtil;
 
 /**
  * 项目名称：doubaobao
- * 类描述：小圆点
+ * 类描述：消息小圆点
  * 创建人：zhanghaitao
  * 创建时间：2017/9/18 13:26
  * 修改人：Michael
