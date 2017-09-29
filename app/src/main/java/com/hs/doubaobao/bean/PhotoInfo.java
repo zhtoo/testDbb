@@ -1,7 +1,7 @@
 package com.hs.doubaobao.bean;
 
 /**
- * Created by suneee on 2016/11/17.
+ * Created by zht on 2016/11/17.
  */
 public class PhotoInfo {
 

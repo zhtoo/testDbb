@@ -10,16 +10,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +38,7 @@ import com.hs.doubaobao.model.invalid.InvalidListActivity;
 import com.hs.doubaobao.model.riskControl.RiskControlApprovalActivity;
 import com.hs.doubaobao.utils.PullToRefresh;
 import com.hs.doubaobao.utils.SPHelp;
-import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.utils.log.Logger;
 import com.hs.doubaobao.view.DotView;
 import com.hs.doubaobao.view.MyRelativeLayout;
 import com.hs.doubaobao.view.SlidingMenu;
@@ -94,12 +97,15 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private int page = 1;
     private int pages = 1;
     private LinearLayout mMenu;
+    private RelativeLayout mMenuLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        Logger.e(TAG, "当前线程的进程的ID：" + Process.myPid());
+
         initView();
 
         Intent intent = getIntent();
@@ -133,7 +139,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      */
     private void loadData(String name, String opeName, String phone) {
         map.put("userId", BaseParams.USER_ID);
-        map.put("page", page);
+        map.put("page", page + "");
         map.put("rows", "10");
         if (!TextUtils.isEmpty(name)) {
             map.put("cusName", name);
@@ -166,6 +172,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mStatusBar = (LinearLayout) findViewById(R.id.main_status_bar);
         //搜索栏
         mSearch = (LinearLayout) findViewById(R.id.main_search);
+        //菜单的背景图标
+        mMenuLogo = (RelativeLayout) findViewById(R.id.menu_logo_bg);
 
         mSearchContainer = (MyRelativeLayout) findViewById(R.id.main_search_container);
 
@@ -196,6 +204,13 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         initRecyclerView();
         mSearch.setOnClickListener(this);
         sliding_menu.setMenuShowListener(this);
+        mName.setOnClickListener(this);
+
+        ViewGroup.LayoutParams layoutParams = mMenuLogo.getLayoutParams();
+        layoutParams.width = sliding_menu.getWidthPixels()*59/72;
+
+        layoutParams.height = sliding_menu.getWidthPixels()*42/72;
+        mMenuLogo.setLayoutParams(layoutParams);
     }
 
     /**
@@ -245,7 +260,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 注意：adapter的初始化在 PullToRefresh 之前
      */
     private void initPtrClassicFrameLayout() {
-        //注意：adapter的初始化在 PullToRefresh 之前
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
@@ -259,15 +273,15 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 主界面上的菜单按钮被单击了
      */
     public void onMenuToggleClick(View v) {
-        if (v.getId() == R.id.home_person_name) {
-            hideInput(v);
-            if (isShowing) {
-                isShowing = false;
-                mSearch.setVisibility(View.GONE);
-                mSearchContainer.setVisibility(View.GONE);
-            }
-            sliding_menu.toggle();
-        }
+        //if (v.getId() == R.id.home_person_name) {
+//        hideInput(v);
+//        if (isShowing) {
+//            isShowing = false;
+//            mSearch.setVisibility(View.GONE);
+//            mSearchContainer.setVisibility(View.GONE);
+//        }
+//        sliding_menu.toggle();
+        //}
     }
 
     /**
@@ -398,7 +412,11 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         String name = mSearchName.getText().toString().trim();
         String opeName = mSearchOpeName.getText().toString().trim();
         String phone = mSearchPhone.getText().toString().trim();
-        loadData(name, opeName, phone);
+        if (!TextUtils.isEmpty(name)
+                || !TextUtils.isEmpty(opeName) ||
+                !TextUtils.isEmpty(phone)) {
+            loadData(name, opeName, phone);
+        }
     }
 
     /**
@@ -408,7 +426,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mSearchName.setText("");
         mSearchOpeName.setText("");
         mSearchPhone.setText("");
-        LogWrap.d(TAG,mMenu.getWidth()+"");
         mMenu.getWidth();
     }
 
@@ -416,7 +433,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 退出当前账号
      */
     public void onExit(View v) {
-        // Toast.makeText(this, "退出", Toast.LENGTH_SHORT).show();
         Dialog alertDialog = new AlertDialog.Builder(this).
                 setMessage("您确定退出当前账号吗？").
                 setIcon(R.drawable.ic_launcher).
@@ -509,7 +525,15 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
     @Override
     public void onClick(View v) {
-
+        if (v.getId() == R.id.home_person_name) {
+            hideInput(v);
+            if (isShowing) {
+                isShowing = false;
+                mSearch.setVisibility(View.GONE);
+                mSearchContainer.setVisibility(View.GONE);
+            }
+            sliding_menu.toggle();
+        }
     }
 
     @Override

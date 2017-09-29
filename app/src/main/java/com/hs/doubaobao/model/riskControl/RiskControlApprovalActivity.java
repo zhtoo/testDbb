@@ -72,8 +72,6 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
 
         new RiskApprovalPresenter(this,this);
         map = new LinkedHashMap<>();
-        //loadData();
-
     }
 
     @Override
@@ -84,7 +82,7 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
     }
 
     private void loadData() {
-        map.put("page",page);
+        map.put("page",page+"");
         map.put("rows","10");
         presenter.getData(map);
     }
@@ -102,7 +100,6 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
         //设置监听
         refresh.setPullToRefreshListener(this);
     }
-
 
     @Override
     public void setData(HomeBean bean) {

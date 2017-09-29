@@ -26,10 +26,11 @@ import java.util.Date;
 
 /**
  * Description: 异常退出管理类
+ * @instructions:在MyApplication的onCreate()方法中调用--->CrashHandler.getInstance().init(this);
  */
 public class CrashHandler implements UncaughtExceptionHandler {
     private static final String TAG              = "CrashHandler";
-    private static final boolean DEBUG            = true;
+    private static final boolean DEBUG            = BaseParams.isDebug;
     private static final String PATH             = BaseParams.CRASH_PATH;
     private static final String FILE_NAME        = "crash-";
     // log文件的后缀名

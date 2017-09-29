@@ -46,29 +46,6 @@ public class PictrueFragment extends BaseFragment implements PictrueContract.Vie
 
         mList = new ArrayList<>();
 
-//        String URL = "http://192.168.1.244:8080/pictrue/";
-//        mList.add(URL + "testPictrue0.png");
-//        mList.add(URL + "testPictrue1.png");
-//        mList.add(URL + "testPictrue2.png");
-//        mList.add(URL + "testPictrue3.png");
-//        mList.add(URL + "testPictrue4.png");
-//        mList.add(URL + "testPictrue5.png");
-//        mList.add(URL + "testPictrue6.png");
-//        mList.add(URL + "testPictrue7.png");
-//        mList.add(URL + "testPictrue8.png");
-//        mList.add(URL + "testPictrue9.png");
-//        mList.add(URL + "testPictrue10.png");
-//        mList.add(URL + "testPictrue11.png");
-//        mList.add(URL + "testPictrue12.png");
-//        mList.add(URL + "testPictrue13.png");
-//        mList.add(URL + "testPictrue14.png");
-//        mList.add(URL + "testPictrue15.png");
-//        mList.add(URL + "testPictrue16.png");
-//        mList.add(URL + "testPictrue17.png");
-//        mList.add(URL + "testPictrue18.png");
-//        mList.add(URL + "testPictrue19.png");
-//        mList.add(URL + "testPictrue20.png");
-//        mList.add(URL + "testPictrue21.png");
         adapter = new PictrueAdapter(getContext(), mList);
         mRecycler.setAdapter(adapter);
         adapter.setOnItemClickListener(this);

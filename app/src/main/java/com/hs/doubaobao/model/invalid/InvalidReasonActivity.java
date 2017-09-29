@@ -3,7 +3,9 @@ package com.hs.doubaobao.model.invalid;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.bean.InvalidReasonBean;
@@ -34,12 +36,10 @@ public class InvalidReasonActivity extends AppBarActivity implements InvalidReas
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invalid_reason);
 
-
         setTitle(getString(R.string.invalid_reason));
         setTitleTextColor(R.color.textAggravating);
         isShowRightView(false);
         setStatusBarBackground(R.drawable.ic_battery_bg);
-
 
         Intent intent = getIntent();
         String invalidId = intent.getStringExtra("invalidId");
@@ -50,7 +50,6 @@ public class InvalidReasonActivity extends AppBarActivity implements InvalidReas
         Map<String, String> map = new LinkedHashMap<>();
         map.put("id", invalidId);
         presenter.getData(map);
-
     }
 
     private void initView() {
@@ -70,13 +69,11 @@ public class InvalidReasonActivity extends AppBarActivity implements InvalidReas
         mWriter.setText(detail.getAuditor());
         mTime.setText(detail.getAuditorTime());
         mReason.setText(detail.getRemark());
-
-
     }
 
     @Override
     public void setError(String text) {
-
+        Toast.makeText(MyApplication.getContext(), "网络不给力", Toast.LENGTH_SHORT).show();
     }
 
     @Override

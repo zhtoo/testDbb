@@ -223,5 +223,4 @@ public class DetailActivity extends AppBarActivity {
         }
     }
 
-
 }

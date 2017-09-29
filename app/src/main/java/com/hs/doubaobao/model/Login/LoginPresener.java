@@ -7,7 +7,7 @@ import com.hs.doubaobao.bean.LoginBean;
 import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
 import com.hs.doubaobao.http.requestCallBack;
-import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.Map;
 
@@ -45,7 +45,7 @@ public class LoginPresener implements LoginContract.Presenter {
 
             @Override
             public void onResponse(String response) {
-                LogWrap.e(TAG, response);
+                Logger.e(TAG, response);
                 bean = JsonWrap.getObject(response, LoginBean.class);
                 //回到不能在子线程中
                 if (bean != null) {

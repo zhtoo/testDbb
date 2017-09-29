@@ -47,6 +47,7 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
     private String mRiskControl;
     private String mManagerRation;
     private int mApproveStatus;
+    private int mApprove = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         Intent intent = getIntent();
         showRightType = intent.getStringExtra("ShowRightType");
 
-        mApproveStatus = intent.getIntExtra("ApproveStatus",0);
+        mApproveStatus = intent.getIntExtra("ApproveStatus", 0);
         mApproveContent = intent.getStringExtra("Content");
         mRiskControl = intent.getStringExtra("riskControl");
         mManagerRation = intent.getStringExtra("managerRation");
@@ -108,8 +109,8 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
             map.put("content", content);//通过审批内容
         }
         if (!TextUtils.isEmpty(riskControl)) {
-            if(riskControl.startsWith(".")){
-                riskControl = "0"+riskControl;
+            if (riskControl.startsWith(".")) {
+                riskControl = "0" + riskControl;
             }
             map.put("riskControl", riskControl);//通过的定额
         }
@@ -144,11 +145,13 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         switch (id) {
             case R.id.approval_pass:
                 //通过
+                mApprove = 1;
                 checkNull(1, content, riskControl);
                 break;
             case R.id.approval_save:
                 //保存
                 // loadData(3,content,riskControl,"");
+                mApprove = 3;
                 checkNull(3, content, riskControl);
                 break;
             case R.id.approval_not_pass:
@@ -160,6 +163,7 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
                 if (TextUtils.isEmpty(remark)) {
                     Toast.makeText(this, "请填写不通过理由", Toast.LENGTH_SHORT).show();
                 } else {
+                    mApprove = 2;
                     loadData(2, "", "", remark);
                 }
                 break;
@@ -181,13 +185,15 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
 
     @Override
     public void setData(ApprovalBean bean) {
-        Toast.makeText(this, "审批成功", Toast.LENGTH_SHORT).show();
+        String[] aar = {"您没有任何操作", "审批成功", "审批成功", "保存成功"};
+        Toast.makeText(this, aar[mApprove], Toast.LENGTH_SHORT).show();
         finish();
     }
 
     @Override
     public void setError(String text) {
-        Toast.makeText(this, "审批失败，请稍后再试", Toast.LENGTH_SHORT).show();
+        String[] aar = {"您没有任何操作", "审批失败", "审批失败", "保存成功"};
+        Toast.makeText(this, aar[mApprove] + "，请稍后再试", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -165,7 +165,6 @@ public class ImagePagerActivity extends AppBarActivity {
                     }
                 });
 
-
                 if (imageSize != null) {
                     //预览imageView
                     smallImageView = new ImageView(context);

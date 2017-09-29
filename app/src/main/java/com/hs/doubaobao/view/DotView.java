@@ -15,9 +15,9 @@ import com.hs.doubaobao.utils.DensityUtil;
  * 项目名称：doubaobao
  * 类描述：消息小圆点
  * 创建人：zhanghaitao
- * 创建时间：2017/9/18 13:26
+ * 创建时间：2017/7/18 13:26
  * 修改人：Michael
- * 修改时间：2017/3/18 13:26
+ * 修改时间：2017/9/18 14:26
  * 修改备注：
  */
 public class DotView extends ImageView {

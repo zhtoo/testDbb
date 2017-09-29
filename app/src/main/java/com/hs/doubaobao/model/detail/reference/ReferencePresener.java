@@ -7,7 +7,7 @@ import com.hs.doubaobao.bean.ReferenceBean;
 import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
 import com.hs.doubaobao.http.requestCallBack;
-import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.Map;
 
@@ -24,8 +24,6 @@ public class ReferencePresener implements ReferenceContract.Presenter {
 
     private static final String TAG ="ReferencePresener" ;
     ReferenceContract.View viewRoot;
-
-
 
     private Context context;
 
@@ -50,7 +48,7 @@ public class ReferencePresener implements ReferenceContract.Presenter {
                     }
                     @Override
                     public void onResponse(String response) {
-                        LogWrap.e(TAG,response);
+                        Logger.e(TAG,response);
                         bean = JsonWrap.getObject(response, ReferenceBean.class);
                         //回到不能在子线程中
                         if(bean !=null){

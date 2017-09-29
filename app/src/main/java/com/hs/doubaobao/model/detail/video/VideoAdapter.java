@@ -93,52 +93,10 @@ public class VideoAdapter extends RecyclerView.Adapter {
 
         public MyViewHolder(View itemView) {
             super(itemView);
-//            videoContainer = (RelativeLayout) itemView.findViewById(R.id.detail_video_container);
-//            videoText = (TextView) itemView.findViewById(R.id.video_text);
-//            videoPic = (ImageView) itemView.findViewById(R.id.video_pic);
-//            videoText.setVisibility(View.GONE);
-//            videoPic.setVisibility(View.GONE);
-//            int screenWidth = getWidthPixels();
-//            scaleSize = screenWidth / 3;
-//
-//            ImageView imageView = new ImageView(context);
-//            LinearLayout.LayoutParams layoutParams1 = new LinearLayout.LayoutParams(
-//                    scaleSize,
-//                    scaleSize * 173 / 229
-//            );
-//            imageView.setLayoutParams(layoutParams1);
-//            imageView.setImageResource(R.drawable.ic_video_pictures);
-//            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-//
-//            textView =   new TextView(context);
-//            LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
-//                    scaleSize,
-//                    scaleSize * 56 / 229
-//            );
-//            layoutParams2.setMargins(0, scaleSize * 173 / 229,0,0);
-//            textView.setLayoutParams(layoutParams2);
-//            textView.setSingleLine(true);
-//            textView.setBackgroundResource(R.drawable.ic_video_pictures_txt);
-//            textView.setPadding(20,0,9,12);
-//            textView.setGravity(Gravity.CENTER_HORIZONTAL);
-
-
-//            ViewGroup.LayoutParams layoutParams = videoContainer.getLayoutParams();
-//            layoutParams.width = scaleSize;
-//            layoutParams.height = scaleSize;
-//            videoContainer.setLayoutParams(layoutParams);
-
-
         }
 
         public void setData(final int position) {
 
-            Bitmap bitmap = null;// getNetVideoBitmap(mList.get(position));
-            if (bitmap != null) {
-                //videoImage.setImageBitmap(bitmap);
-            } else {
-                //videoImage.setImageResource(R.drawable.ic_error_pictrue_remind);
-            }
             //添加文字
             textView.setText(mList.get(position));
 

@@ -27,7 +27,7 @@ import com.hs.doubaobao.MyApplication;
  * //查询数据
  * sp.getString("name", "")
  * <p>
- * Created by AndroidStudio on 2017/6/24.
+ * Created by zhtoo on 2017/6/24.
  */
 
 public class SPHelp {

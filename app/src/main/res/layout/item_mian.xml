@@ -100,7 +100,7 @@
                 android:layout_marginTop="@dimen/y18"
                 android:text="@string/customer_name"
                 android:textColor="@color/textGray"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/x20"/>
 
         </LinearLayout>
 
@@ -136,7 +136,7 @@
                 android:id="@+id/list_custom_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y10"
+                android:layout_marginTop="@dimen/y5"
                 android:text="13812345678"
                 android:textColor="@color/textAggravating"
                 android:textSize="@dimen/x20"/>
@@ -182,7 +182,7 @@
                 android:id="@+id/list_custom_manager"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y10"
+                android:layout_marginTop="@dimen/y5"
                 android:text="李小艺"
                 android:textColor="@color/textAggravating"
                 android:textSize="@dimen/x20"/>

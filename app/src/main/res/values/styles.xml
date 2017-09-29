@@ -36,13 +36,13 @@
     <!-- 横向线条 -->
     <style name="horizontalLine">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_height">@dimen/x1</item>
         <item name="android:background">@color/lineBackground</item>
     </style>
 
     <!-- 横向线条 -->
     <style name="verticalLine">
-        <item name="android:layout_width">1dip</item>
+        <item name="android:layout_width">@dimen/x1</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/lineBackground</item>
     </style>
@@ -75,8 +75,9 @@
         <item name="android:layout_marginLeft">@dimen/x25</item>
         <item name="android:drawableLeft">@drawable/ic_search</item>
         <item name="android:drawablePadding">@dimen/x14</item>
+        <item name="android:paddingLeft">@dimen/x24</item>
         <item name="android:textSize">@dimen/x24</item>
-        <item name="android:background">@drawable/bg_edit_text_corner</item>
+        <item name="android:background">@drawable/bg_edit_text_bg</item>
     </style>
 
     <style name="autoFillStyle">

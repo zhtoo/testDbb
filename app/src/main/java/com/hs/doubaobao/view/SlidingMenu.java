@@ -29,6 +29,8 @@ public class SlidingMenu extends ViewGroup {
      * 这个类专门用于模拟滚动的数值
      */
     private Scroller scroller;
+    private int widthPixels;
+    private int heightPixels;
 
     public SlidingMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -48,6 +50,10 @@ public class SlidingMenu extends ViewGroup {
         menu = getChildAt(0); // 获取菜单容器
         main = getChildAt(1); // 获取主界面容器
         menuWidth = menu.getMeasuredWidth();     // 获取菜单的宽
+        widthPixels = getWidthPixels();
+        heightPixels = getHeightPixels();
+        menuWidth = (widthPixels *59/72)>=menuWidth?menuWidth:(widthPixels *59/72);
+
         // 测量菜单
         menu.measure(menuWidth, heightMeasureSpec);
         // 测量主界面
@@ -71,6 +77,7 @@ public class SlidingMenu extends ViewGroup {
         int menuRight = left;
         int menuBottom = bottom - top;        // 菜单的bottom位置为容器的高
         menu.layout(menuLeft, menuTop, menuRight, menuBottom);
+
         // 对主界面进行排版
         int mainLeft = left;
         int mainTop = top;
@@ -232,6 +239,23 @@ public class SlidingMenu extends ViewGroup {
             return displayMetrics.heightPixels;
         } else if (ori == Configuration.ORIENTATION_PORTRAIT) {// 竖屏
             return displayMetrics.widthPixels;
+        }
+        return 0;
+    }
+
+    /**
+     * 获取屏幕像素
+     *
+     * @return
+     */
+    public int getHeightPixels() {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        Configuration cf = context.getResources().getConfiguration();
+        int ori = cf.orientation;
+        if (ori == Configuration.ORIENTATION_LANDSCAPE) {// 横屏
+            return displayMetrics.widthPixels;
+        } else if (ori == Configuration.ORIENTATION_PORTRAIT) {// 竖屏
+            return displayMetrics.heightPixels;
         }
         return 0;
     }

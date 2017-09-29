@@ -3,6 +3,7 @@ package com.hs.doubaobao.utils.log;
 import android.Manifest;
 import android.content.Context;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -23,13 +24,16 @@ import java.util.Date;
  */
 public final class Logger {
     private static final String TAG = "Logger";
+
+    //每次截取的长度
+    private static int printLength = 4000;
     private static final String SAVE_PATH;
     protected static final String LOG_PREFIX;
     protected static final String LOG_DIR;
     // Log switch open - development; close - released
-    public static boolean debug = true;
+    public static boolean debug = BaseParams.isDebug;
     // Write file level
-    public static int     level = Log.ERROR;
+    public static int level = Log.ERROR;
 
     static {
         // SAVE_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
@@ -39,58 +43,86 @@ public final class Logger {
     }
 
     public static void v(String tag, String msg) {
-        trace(Log.VERBOSE, tag, msg);
+        piecewisePrint(Log.VERBOSE, tag, msg);
     }
 
     public static void v(String tag, String msg, Throwable tr) {
-        trace(Log.VERBOSE, tag, msg, tr);
+        piecewisePrint(Log.VERBOSE, tag, msg, tr);
     }
 
     public static void d(String tag, String msg) {
-        trace(Log.DEBUG, tag, msg);
+        piecewisePrint(Log.DEBUG, tag, msg);
     }
 
     public static void d(String tag, String msg, Throwable tr) {
-        trace(Log.DEBUG, tag, msg, tr);
+        piecewisePrint(Log.DEBUG, tag, msg, tr);
     }
 
     public static void i(String tag, String msg) {
-        trace(Log.INFO, tag, msg);
+        piecewisePrint(Log.INFO, tag, msg);
     }
 
     public static void i(String tag, String msg, Throwable tr) {
-        trace(Log.INFO, tag, msg, tr);
+        piecewisePrint(Log.INFO, tag, msg, tr);
     }
 
     public static void w(String tag, String msg) {
-        trace(Log.WARN, tag, msg);
+        piecewisePrint(Log.WARN, tag, msg);
     }
 
     public static void w(String tag, String msg, Throwable tr) {
-        trace(Log.WARN, tag, msg, tr);
+        piecewisePrint(Log.WARN, tag, msg, tr);
     }
 
     public static void e(String tag, String msg) {
-        trace(Log.ERROR, tag, msg);
+        piecewisePrint(Log.ERROR, tag, msg);
     }
 
     public static void e(String tag, String msg, Throwable tr) {
-        trace(Log.ERROR, tag, msg, tr);
+        piecewisePrint(Log.ERROR, tag, msg, tr);
     }
 
-    private static void trace(final int type, String tag, final String msg) {
-        trace(type, tag, msg, null);
+    /**
+     * 过长分段打印
+     *
+     * @param type
+     * @param tag
+     * @param msg
+     */
+    private static void piecewisePrint(int type, String tag, String msg, final Throwable tr) {
+        if (!TextUtils.isEmpty(msg) && msg.length() > printLength) {
+            for (int i = 0; i < msg.length(); i += printLength) {
+                if (i + printLength < msg.length()) {
+                    trace(type, tag + i + "-" + (i + printLength), msg.substring(i, i + printLength), tr);
+                } else {
+                    trace(type, tag + i + "-" + msg.length(), msg.substring(i, msg.length()), tr);
+                }
+            }
+        } else {
+            trace(type, tag, TextUtils.isEmpty(msg)?"空数据":msg , tr);
+        }
+    }
+
+    private static void piecewisePrint(int type, String tag, String msg) {
+        if (!TextUtils.isEmpty(msg)&&msg.length() > printLength) {
+            for (int i = 0; i < msg.length(); i += printLength) {
+                if (i + printLength < msg.length()) {
+                    trace(type, tag + i + "-" + (i + printLength), msg.substring(i, i + printLength), null);
+                } else {
+                    trace(type, tag + i + "-" + msg.length(), msg.substring(i, msg.length()), null);
+                }
+            }
+        } else {
+            trace(type, tag, msg, null);
+        }
     }
 
     /**
      * Custom Log output style
      *
-     * @param type
-     *         Log type
-     * @param tag
-     *         TAG
-     * @param msg
-     *         Log message
+     * @param type Log type
+     * @param tag  TAG
+     * @param msg  Log message
      */
     private static void trace(final int type, final String tag, final String msg, final Throwable tr) {
         // LogCat
@@ -128,11 +160,9 @@ public final class Logger {
         if (null != context && !PermissionCheck.getInstance().checkPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             return;
         }
-
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return;
         }
-
         try {
             SparseArray<String> logMap = new SparseArray<>();
             logMap.put(Log.VERBOSE, " VERBOSE ");
@@ -164,14 +194,10 @@ public final class Logger {
     /**
      * Write log
      *
-     * @param logDir
-     *         Log path to save
-     * @param fileName
-     *         Log file name
-     * @param msg
-     *         Log content
-     * @param append
-     *         Save as type, false override save, true before file add save
+     * @param logDir   Log path to save
+     * @param fileName Log file name
+     * @param msg      Log content
+     * @param append   Save as type, false override save, true before file add save
      */
     private static void recordLog(String logDir, String fileName, String msg, boolean append) {
         try {
@@ -251,8 +277,7 @@ public final class Logger {
     /**
      * 设置日志文件名前缀
      *
-     * @param prefix
-     *         (prefix-20121212.log)
+     * @param prefix (prefix-20121212.log)
      */
     public static String setLogPrefix(final String prefix) {
         return prefix.length() == 0 ? "logger-" : prefix + "-";
@@ -261,8 +286,7 @@ public final class Logger {
     /**
      * 设置日志文件存放路径
      *
-     * @param subPath
-     *         子路径("/Downloads/subPath")
+     * @param subPath 子路径("/Downloads/subPath")
      */
     public static String setLogPath(final String subPath) {
         return subPath.length() == 0 ? SAVE_PATH + "/logs" : subPath;

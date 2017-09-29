@@ -4,38 +4,68 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 
+import com.hs.doubaobao.base.BaseParams;
+
 /**
  * Description: 手机设备信息
  */
 public class DeviceInfo {
 
-    /** 全局唯一标识符（安卓传IMEI，IOS传UDID） */
+    /**
+     * 全局唯一标识符（安卓传IMEI，IOS传UDID）
+     */
     private String dev_guid;
-    /** 终端设备ip */
+    /**
+     * 终端设备ip
+     */
     private String dev_add_ip;
-    /** 终端设备机型 */
+    /**
+     * 终端设备机型
+     */
     private String dev_model;
-    /** 设备操作系统类型 */
+    /**
+     * 设备操作系统类型
+     */
     private String dev_os;
-    /** 设备操作系统版本号 */
+    /**
+     * 设备操作系统版本号
+     */
     private String dev_version;
-    /** App应用id（安卓传应用包名，IOS传BundleID） */
+    /**
+     * App应用id（安卓传应用包名，IOS传BundleID）
+     */
     private String app_id;
-    /** 渠道id */
+    /**
+     * 渠道id
+     */
     private String app_channel_id;
-    /** 应用版本号（版本号+Build号） */
+    /**
+     * 应用版本号（版本号+Build号）
+     */
     private String app_version;
-    /** 操作模块 */
+    /**
+     * 操作模块
+     */
     private String app_module;
-    /** 操作功能 */
+    /**
+     * 操作功能
+     */
     private String app_func;
-    /** 操作类型 */
+    /**
+     * 操作类型
+     */
     private String app_type;
-    /** 备注（可为空） */
+    /**
+     * 备注（可为空）
+     */
     private String app_memo;
-    /** 操作用户id(可为空) */
+    /**
+     * 操作用户id(可为空)
+     */
     private String app_user_id;
-    /** 操作用户名(可为空) */
+    /**
+     * 操作用户名(可为空)
+     */
     private String app_user_name;
 
     public DeviceInfo(Context context) throws NameNotFoundException {
@@ -49,9 +79,9 @@ public class DeviceInfo {
         this.app_channel_id = DeviceInfoUtils.getAppMetaData(context, "UMENG_CHANNEL");
         this.app_version = DeviceInfoUtils.getVersionName(context) + " - " + DeviceInfoUtils.getVersionCode(context);
 
-       //获取用户ID和姓名
-        this.app_user_id = "";
-        this.app_user_name ="";
+        //获取用户ID和姓名
+        this.app_user_id = BaseParams.USER_ID;
+        this.app_user_name = "";
 
     }
 

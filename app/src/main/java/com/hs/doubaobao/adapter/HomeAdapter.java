@@ -75,7 +75,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         public TextView customManager;
         //审批状态
         public TextView status;
-
+        //审批
         public TextView approval;
         public ImageView main;
 

@@ -4,7 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * Description: BASE64加密工具类
- * 备注：尚不能对文字进行解密
+ * 备注：不能对文字进行解密
  */
 public class Base64Util {
     private static char[] base64EncodeChars = new char[]{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',

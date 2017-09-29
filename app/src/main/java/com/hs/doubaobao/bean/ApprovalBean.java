@@ -4,7 +4,7 @@ package com.hs.doubaobao.bean;
  * 作者：zhanghaitao on 2017/9/25 14:20
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:审批返回的BEAN
  */
 
 public class ApprovalBean {

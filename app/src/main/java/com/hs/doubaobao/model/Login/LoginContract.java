@@ -14,11 +14,9 @@ import com.hs.doubaobao.bean.LoginBean;
 public interface LoginContract {
 
     interface Presenter extends BasePresenter {
-        //TODO:需要哪些获取数据的方法，就在此处定义
     }
 
     interface View extends BaseView<Presenter> {
-        //TODO:在此处定义需要用来更新视图的方法
         void setData(LoginBean bean);
         void setError(String text);
     }

@@ -3,6 +3,7 @@ package com.hs.doubaobao.base;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.utils.LoadWaiting;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.lang.reflect.Field;
 
@@ -30,6 +32,7 @@ import java.lang.reflect.Field;
  */
 public class AppBarActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String TAG = "AppBarActivity";
     //子类的视图
     private FrameLayout mContentLayout;
 
@@ -56,6 +59,7 @@ public class AppBarActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logger.e(TAG,"当前线程的进程的ID："+ Process.myPid());
         loading = LoadWaiting.createDialog(this);
         initViews();
         initState();

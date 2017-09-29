@@ -11,7 +11,7 @@ import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.utils.LoadWaiting;
 import com.hs.doubaobao.utils.MD5Util;
-import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,52 +31,60 @@ import okhttp3.Response;
 
 /**
  * Created by zhanghaitao on 2017/6/15.
+ *
+ * @describe:OKHttp解析框架的封装
  */
 
 public class OKHttpWrap {
 
     private static final String TAG = "OKHttpWrap";
 
-    private static OKHttpWrap okHttpManager;
+    private static OKHttpWrap okHttpWrap;
     //创建okHttpClient对象
     private static OkHttpClient okHttpClient;
+    //联网加载动画
     private static LoadWaiting loading;
     private final Handler handler;
 
     //编码格式
     private static final String CHARSET_NAME = "UTF-8";
-
+    //传输的数据类型
     private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
     private static final MediaType MEDIA_OBJECT_STREAM = MediaType.parse("text/x-markdown; charset=utf-8");//mdiatype 这个需要和服务端保持一致
 
-
     public static OKHttpWrap getOKHttpWrap(Context context) {
         loading = LoadWaiting.createDialog(context);
-        if (okHttpManager == null) {
+        if (okHttpWrap == null) {
 
             synchronized (OKHttpWrap.class) {
 
-                if (okHttpManager == null) {
-                    okHttpManager = new OKHttpWrap();
+                if (okHttpWrap == null) {
+                    okHttpWrap = new OKHttpWrap();
                 }
             }
         }
-        return okHttpManager;
+        return okHttpWrap;
     }
 
     /**
      * 私有构造函数
      */
     private OKHttpWrap() {
-        okHttpClient = new OkHttpClient();
-        okHttpClient.newBuilder().connectTimeout(10, TimeUnit.SECONDS);
-        okHttpClient.newBuilder().readTimeout(10, TimeUnit.SECONDS);
-        okHttpClient.newBuilder().writeTimeout(10, TimeUnit.SECONDS);
+        // 创建一个OkHttpClient
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        //设置连接超时时间
+        builder.connectTimeout(10, TimeUnit.SECONDS);
+        builder.readTimeout(10, TimeUnit.SECONDS);
+        builder.writeTimeout(10, TimeUnit.SECONDS);
+        // 打印参数
+        builder.addInterceptor(new HttpLogging().setLevel(HttpLogging.Level.BODY));
+        // 创建一个OkHttpClient
+        okHttpClient = builder.build();
 
         //获取主线程的handler
         // handler = new Handler(Looper.getMainLooper());
-
         handler = MyApplication.getMainThreadHandler();
+
     }
 
     /**
@@ -90,13 +98,19 @@ public class OKHttpWrap {
         // 时间戳
         String ts = String.valueOf(System.currentTimeMillis() / 1000);
         Map<String, T> mParamsMap = new HashMap<>();
+        //AppKey
         mParamsMap.put("appkey", (T) BaseParams.APP_KEY);
+        //签名
         mParamsMap.put("signa", (T) getSigna(ts));
+        //时间戳
         mParamsMap.put("ts", (T) ts);
+        //手机型号
         mParamsMap.put("mobileType", (T) BaseParams.MOBILE_TYPE);
+        //APP版本号
         mParamsMap.put("versionNumber", (T) getVersion());
-        if (!TextUtils.isEmpty(BaseParams.USER_ID)){
-            mParamsMap.put("userId", (T)BaseParams.USER_ID);
+        //上传非空的userId
+        if (!TextUtils.isEmpty(BaseParams.USER_ID)) {
+            mParamsMap.put("userId", (T) BaseParams.USER_ID);
         }
         mParamsMap.putAll(paramsMap);
         return mParamsMap;
@@ -122,10 +136,11 @@ public class OKHttpWrap {
                 pos++;
             }
             //生成参数
-            LogWrap.e("请求参数", tempParams.toString().replaceAll("&", "\n"));
             return tempParams.toString();
         } catch (Exception e) {
-            LogWrap.e(TAG, e.toString());
+            Logger.e(TAG, "getStringParams---" + e.toString());
+            Logger.e(TAG, "getStringParams---" + tempParams);
+            /*StringBuilder*/ tempParams = new StringBuilder();
             int pos = 0;
             for (String key : mParamsMap.keySet()) {
                 if (pos > 0) {
@@ -134,7 +149,6 @@ public class OKHttpWrap {
                 tempParams.append(String.format("%s=%s", key, mParamsMap.get(key)));
                 pos++;
             }
-            LogWrap.e("请求参数", tempParams.toString().replaceAll("&", "\n"));
             return tempParams.toString();
         }
     }
@@ -147,9 +161,7 @@ public class OKHttpWrap {
      * @return
      */
     public void requestPost(String url, Map<String, String> paramsMap, final CallBack callback) {
-        if (loading != null) {
-            loading.show();
-        }
+        if (loading != null) loading.show();
         //同步锁
         synchronized (MyApplication.getContext()) {
             //添加通用参数
@@ -157,7 +169,7 @@ public class OKHttpWrap {
             //创建一个请求实体对象 RequestBody
             RequestBody body = RequestBody.create(MEDIA_TYPE_JSON, params);
             //创建一个请求
-            Request.Builder builder = new Request.Builder();
+            Request.Builder builder = new  Request.Builder();
             //发起请求
             Request request = builder.url(url).post(body).build();
             //请求回来的响应
@@ -184,7 +196,7 @@ public class OKHttpWrap {
 //            mParamsMap.putAll(paramsMap);
 //            Log.e(TAG, mParamsMap.toString());
             Map<String, Object> mParamsMap = getRequestMap(paramsMap);
-            LogWrap.e("请求参数", mParamsMap.toString().replaceAll(",", "\n"));
+            Logger.e("请求参数", mParamsMap.toString().replaceAll(",", "\n"));
             MultipartBody.Builder builder = new MultipartBody.Builder();
             //设置类型
             builder.setType(MultipartBody.FORM);
@@ -243,7 +255,6 @@ public class OKHttpWrap {
      */
     private void sendSuccessfulCallBack(final Object object, final CallBack callback) {
         if (callback == null) return;
-
         handler.post(new Runnable() {
             @Override
             public void run() {

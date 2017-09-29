@@ -2,6 +2,7 @@ package com.hs.doubaobao.model.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +18,7 @@ import com.hs.doubaobao.bean.LoginBean;
 import com.hs.doubaobao.model.main.MainActivity;
 import com.hs.doubaobao.utils.Base64Util;
 import com.hs.doubaobao.utils.SPHelp;
-import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -113,13 +114,13 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
      */
     @Override
     public void setError(String text) {
-        if(text.startsWith("提示")){
+        if(!TextUtils.isEmpty(text)&&text.startsWith("提示")){
             text = text.substring(2,text.length());
             Toast.makeText(MyApplication.getContext(),text, Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(MyApplication.getContext(), "网络不给力", Toast.LENGTH_SHORT).show();
         }
-        LogWrap.e(TAG,text);
+        Logger.e(TAG,text);
     }
 
     @Override

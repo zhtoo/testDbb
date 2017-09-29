@@ -30,7 +30,7 @@ public class BaseParams {
     //测试地址
     public static final String TEST_URL = "http://192.168.1.246:8081/";
     //真实测试
-    public static final String TRUE_URL = "http://manage.ahbabybean.com:8081/";
+    public static final String TRUE_URL = "http://192.168.1.246:8081/";
     //http路径
     public static final String BASE_URL = isDebug ? TEST_URL : TRUE_URL;
 

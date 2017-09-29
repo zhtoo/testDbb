@@ -45,7 +45,6 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
     private Map<String, Object> map;
     private PtrClassicFrameLayout ptrFrame1;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +65,12 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
 
-
         initPtrClassicFrameLayout();
 
         //将Presenter和View进行绑定
         new GMAPresener(this, this);
         //获取数据
         map = new LinkedHashMap<>();
-        //loadData();
-
     }
 
     @Override
@@ -85,7 +81,7 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
     }
 
     private void loadData() {
-        map.put("page", page);
+        map.put("page", page+"");
         map.put("rows", "10");
         presenter.getData(map);
     }
@@ -95,7 +91,6 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
      * 注意：adapter的初始化在 PullToRefresh 之前
      */
     private void initPtrClassicFrameLayout() {
-        //注意：adapter的初始化在 PullToRefresh 之前
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
@@ -144,7 +139,6 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
     public void setPresenter(GMAContract.Presenter presenter) {
         this.presenter = presenter;
     }
-
 
     @Override
     public void onItemClick(int postion) {

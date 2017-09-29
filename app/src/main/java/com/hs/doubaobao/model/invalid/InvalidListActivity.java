@@ -85,7 +85,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
 
     private void loadData(String name, String opeName, String phone) {
         map.put("userId", BaseParams.USER_ID);
-        map.put("page", page);
+        map.put("page", page+"");
         map.put("rows", "10");
         if (!TextUtils.isEmpty(name)) {
             map.put("cusName", name);
@@ -141,7 +141,6 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
      * 注意：adapter的初始化在 PullToRefresh 之前
      */
     private void initPtrClassicFrameLayout() {
-        //注意：adapter的初始化在 PullToRefresh 之前
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
@@ -167,7 +166,6 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 mSearchName.setText("");
                 mSearchOpeName.setText("");
                 mSearchPhone.setText("");
-                //Toast.makeText(this, "无效列表的重置", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.search_start:
                 hideInput(v);
@@ -180,8 +178,11 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 String name = mSearchName.getText().toString().trim();
                 String opeName = mSearchOpeName.getText().toString().trim();
                 String phone = mSearchPhone.getText().toString().trim();
-                loadData(name, opeName, phone);
-               // Toast.makeText(this, "无效列表的完成", Toast.LENGTH_SHORT).show();
+                if(!TextUtils.isEmpty(name)
+                        ||!TextUtils.isEmpty(opeName)||
+                        !TextUtils.isEmpty(phone)){
+                    loadData(name, opeName, phone);
+                }
                 break;
         }
     }
@@ -308,7 +309,6 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         Intent intent = new Intent(this, InvalidReasonActivity.class);
         intent.putExtra("invalidId", "" + listBeen.get(postion).getId());
         startActivity(intent);
-
     }
 
     /**

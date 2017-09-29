@@ -26,6 +26,8 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
     private ParticularsContract.Presenter presenter;
     private RecyclerView mRecycler;
     private ParticularsAdapter adapter;
+    private List<String> mTitles;
+    private List<Map> mMap;
 
     @Override
     protected int setLayout() {
@@ -39,6 +41,11 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         llm.setOrientation(LinearLayout.VERTICAL);
 
         mRecycler.setLayoutManager(llm);
+
+        mTitles = new ArrayList<>();
+        mMap = new ArrayList<>();
+        adapter = new ParticularsAdapter(getContext(), mTitles, mMap);
+        mRecycler.setAdapter(adapter);
 
         DetailActivity activity = (DetailActivity) getActivity();
         String id = activity.id;
@@ -55,8 +62,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
 
     @Override
     public void setData(ParticularBean bean) {
-        List<String> mTitles = new ArrayList<>();
-        List<Map> mMap = new ArrayList<>();
+
         ParticularBean.ResDataBean.BorrowBean borrow = bean.getResData().getBorrow();
         ParticularBean.ResDataBean.CustomerInfoBean customerInfo = bean.getResData().getCustomerInfo();
         ParticularBean.ResDataBean.CoborrowBean coborrow = bean.getResData().getCoborrow();
@@ -272,8 +278,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map8.put("总经理定额", approves.getManagerRation() > 0 ? (approves.getManagerRation() + "元") : "");
         mMap.add(map8);
 
-        adapter = new ParticularsAdapter(getContext(), mTitles, mMap);
-        mRecycler.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

@@ -18,11 +18,11 @@
         <Button
             android:onClick="pass"
             android:text="跳过"
-            android:textSize="14sp"
+            android:textSize="@dimen/x24"
             android:textColor="@color/textBrown"
             android:layout_width="@dimen/x99"
             android:layout_height="@dimen/y58"
-            android:background="@drawable/bg_guide_passed_bt"
+            android:background="@drawable/ic_guide_text"
             android:layout_marginBottom="@dimen/y63"
             android:layout_marginRight="@dimen/x24"
             android:id="@+id/passed"

@@ -13,12 +13,9 @@ import com.hs.doubaobao.bean.HomeBean;
 
 public interface InvalidListContract {
 
-    interface Presenter extends BasePresenter {
-        //TODO:需要哪些获取数据的方法，就在此处定义
-    }
+    interface Presenter extends BasePresenter {}
 
     interface View extends BaseView<Presenter> {
-        //TODO:在此处定义需要用来更新视图的方法
         void setData(HomeBean bean);
         void setError(String text);
     }

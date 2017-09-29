@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/menu_logo_bg"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y420"
         android:background="@drawable/ic_menu_header"
@@ -60,7 +61,7 @@
                         android:layout_width="@dimen/x34"
                         android:layout_height="@dimen/y40"
                         android:src="@drawable/ic_risk_selector"
-                       android:layout_marginLeft="@dimen/x160" />
+                       android:layout_marginLeft="@dimen/x188" />
 
                     <TextView
                         android:id="@+id/menu_risk"
@@ -89,7 +90,7 @@
                         android:layout_width="@dimen/x32"
                         android:layout_height="@dimen/y45"
                         android:src="@drawable/ic_manager_selector"
-                        android:layout_marginLeft="@dimen/x160" />
+                        android:layout_marginLeft="@dimen/x188" />
 
                     <TextView
                         android:id="@+id/menu_manager"
@@ -117,7 +118,7 @@
                         android:layout_width="@dimen/x40"
                         android:layout_height="@dimen/y36"
                         android:src="@drawable/ic_invalid_selector"
-                        android:layout_marginLeft="@dimen/x160" />
+                        android:layout_marginLeft="@dimen/x188" />
                     <TextView
                         android:id="@+id/menu_invalid"
                         style="@style/menu_item_text_style"

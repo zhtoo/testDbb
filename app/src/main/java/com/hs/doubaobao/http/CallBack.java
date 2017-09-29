@@ -7,6 +7,7 @@ import okhttp3.Response;
  * Created by zhanghaitao
  * Date  2017/9/3.
  * Email 820159571@qq.com
+ * @DES：okhttp的回到封装
  */
 public abstract class CallBack<T> {
 

@@ -1,13 +1,13 @@
 package com.hs.doubaobao.http;
 
 import com.google.gson.Gson;
-import com.hs.doubaobao.utils.log.LogWrap;
+import com.hs.doubaobao.utils.log.Logger;
 
 /**
  * 作者：zhanghaitao on 2017/9/19 14:29
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:GAON解析框架的封装
  */
 
 public class JsonWrap {
@@ -25,7 +25,7 @@ public class JsonWrap {
             Gson gson = new Gson();
             t = gson.fromJson(jsonString, cls);
         } catch (Exception e) {
-            LogWrap.e("Json解析", e.toString());
+            Logger.e("Json解析", e.toString());
         }
         return t;
     }
@@ -42,10 +42,10 @@ public class JsonWrap {
         try {
             Gson gson = new Gson();
             tojson = gson.toJson(t);
-            LogWrap.e("Json解析", tojson);
+            Logger.d("Json解析", tojson);
             return tojson;
         } catch (Exception e) {
-            LogWrap.e("Json解析", e.toString());
+            Logger.e("Json解析错误", e.toString());
             return tojson;
         }
     }
