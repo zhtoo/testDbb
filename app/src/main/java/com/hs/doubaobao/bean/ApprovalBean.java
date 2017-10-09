@@ -9,7 +9,6 @@ package com.hs.doubaobao.bean;
 
 public class ApprovalBean {
 
-
     /**
      * resCode : 1
      * resMsg :

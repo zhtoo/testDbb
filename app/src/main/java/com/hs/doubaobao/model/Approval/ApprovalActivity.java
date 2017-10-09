@@ -21,7 +21,7 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/15 15:50
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:审批界面
  */
 
 public class ApprovalActivity extends AppBarActivity implements ApprovalContract.View {
@@ -93,10 +93,11 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
         mNotPass.setOnClickListener(this);
         mPass.setOnClickListener(this);
         mSave.setOnClickListener(this);
+        dialogView.setOnClickListener(this);
 
         //将Presenter和View进行绑定
         new ApprovalPresener(this, this);
-        //获取数据
+
 
     }
 
@@ -156,7 +157,7 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
                 break;
             case R.id.approval_not_pass:
                 dialogView.setVisibility(View.VISIBLE);
-                mText.setFocusable(true);
+                mText.requestFocus();
                 break;
             case R.id.dialog_submit:
                 //不通过
@@ -168,6 +169,9 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
                 }
                 break;
             case R.id.dialog_close:
+                dialogView.setVisibility(View.GONE);
+                break;
+            case R.id.approval_not_pass_reason:
                 dialogView.setVisibility(View.GONE);
                 break;
         }

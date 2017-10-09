@@ -13,12 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
 /**
  * 全局单例
  * Created by zhanghaitao on 2017/5/18.
  */
-
 public class MyApplication extends Application {
 
     private final static String TAG = "MyApplication";

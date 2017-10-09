@@ -18,7 +18,7 @@ import java.util.List;
  * 作者：zhanghaitao on 2017/9/20 09:15
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:首页的适配器(写多个重复的adapter是为了避免点击冲突，这种情况待优化)
  */
 
 public class HomeAdapter extends RecyclerView.Adapter {
@@ -104,7 +104,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             name.setText(listBean.getName());
             time.setText(listBean.getTime());
             purpose.setText(listBean.getPurpose());
-            loanAmount.setText(((double) listBean.getLoanAmount() / 10000d) + "万元");
+            loanAmount.setText((listBean.getLoanAmount()) + "万元");
             customPhone.setText(listBean.getCustomPhone());
             loanPeriods.setText(listBean.getLoanPeriods());
             customManager.setText(listBean.getCustomManager());

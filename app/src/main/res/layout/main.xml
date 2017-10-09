@@ -9,7 +9,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <!--这个是隐藏的布局，然后通过动态的设置高度达到效果-->
         <LinearLayout
             android:id="@+id/main_status_bar"
@@ -21,12 +20,12 @@
 
         <!-- 标题 -->
         <RelativeLayout
+            android:id="@+id/main_title_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y128"
             android:background="@color/whiteBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal">
-
 
             <LinearLayout
                 android:layout_width="@dimen/x120"
@@ -126,8 +125,6 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
 
     <LinearLayout
         android:id="@+id/main_gray_bg"

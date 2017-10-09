@@ -4,7 +4,7 @@ package com.hs.doubaobao.bean;
  * 作者：zhanghaitao on 2017/9/18 14:38
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:登录返回的bean
  */
 
 public class LoginBean {

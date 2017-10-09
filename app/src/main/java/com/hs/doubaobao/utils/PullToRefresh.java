@@ -12,7 +12,7 @@ import in.srain.cube.views.ptr.PtrHandler2;
 
 /**
  * Created by zhanghaitao on 2017/7/14.
- * 下拉刷新，上拉加载的包装类
+ * @description：下拉刷新，上拉加载的包装类
  */
 
 public class PullToRefresh {

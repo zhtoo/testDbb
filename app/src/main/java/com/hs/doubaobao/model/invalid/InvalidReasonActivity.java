@@ -17,7 +17,7 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/11 17:44
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:无效原因查看
  */
 
 public class InvalidReasonActivity extends AppBarActivity implements InvalidReasonContract.View {

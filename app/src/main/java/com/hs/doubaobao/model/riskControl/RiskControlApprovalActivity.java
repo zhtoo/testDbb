@@ -27,7 +27,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
  * 作者：zhanghaitao on 2017/9/11 17:42
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:风控审批界面
  */
 
 public  class RiskControlApprovalActivity extends AppBarActivity implements RiskApprovalContract.View, RiskAdapter.onItemClickListener, PullToRefresh.PullToRefreshListener {
@@ -121,6 +121,9 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
                 mBean.setLoanPeriods(listBeen.get(i).getPeriod());
                 mBean.setStatus(listBeen.get(i).getStatus());
                 mBean.setApproveStatus(listBeen.get(i).getApproveStatus());
+                mBean.setId(listBeen.get(i).getId());
+                mBean.setContent(listBeen.get(i).getContent());
+                mBean.setRiskControl(listBeen.get(i).getRiskControl());
                 mList.add(mBean);
             }
             ptrFrame.setVisibility(View.VISIBLE);
@@ -146,12 +149,12 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("ID",listBeen.get(postion).getId()+"");
+        intent.putExtra("ID",mList.get(postion).getId()+"");
         intent.putExtra("ShowRightType","RISK");
-        intent.putExtra("ApproveStatus",listBeen.get(postion).getApproveStatus());
+        intent.putExtra("ApproveStatus",mList.get(postion).getApproveStatus());
         if(listBeen.get(postion).getApproveStatus() == 1){
-            intent.putExtra("Content",listBeen.get(postion).getContent());
-            intent.putExtra("riskControl",((int)listBeen.get(postion).getRiskControl())+"");
+            intent.putExtra("Content",mList.get(postion).getContent());
+            intent.putExtra("riskControl",((int)mList.get(postion).getRiskControl())+"");
         }
         startActivity(intent);
     }

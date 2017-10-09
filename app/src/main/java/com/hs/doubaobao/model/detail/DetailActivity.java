@@ -20,7 +20,7 @@ import com.hs.doubaobao.model.detail.video.VideoFragment;
  * 作者：zhanghaitao on 2017/9/12 14:53
  * 邮箱：820159571@qq.com
  *
- * @describe: 管理资料查看的各个选项的显示和隐藏。不负责具体的逻辑操作（不需要再做修改）
+ * @describe:管理资料查看的各个选项的显示和隐藏。不负责具体的逻辑操作（不需要再做修改）
  */
 
 public class DetailActivity extends AppBarActivity {

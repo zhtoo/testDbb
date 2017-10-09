@@ -57,7 +57,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Description: 运行时权限校验工具类
+ * @Description:运行时权限校验工具类
  */
 public class PermissionCheck {
     // 存储相关权限

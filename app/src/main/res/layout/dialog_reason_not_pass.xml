@@ -2,24 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginTop="@dimen/y30"
-              android:background="@color/transparent"
+              android:visibility="gone"
+              android:gravity="center_horizontal"
+              android:id="@+id/approval_not_pass_reason"
+              android:background="@color/backgroundGrey"
               android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:background="#00000000"
-        android:layout_height="@dimen/y600">
+        android:layout_marginTop="@dimen/y120"
+        android:layout_width="@dimen/x711"
+        android:background="@color/transparent"
+        android:layout_height="@dimen/y507">
 
+        <EditText
+            android:id="@+id/dailog_reason"
+            android:gravity="left"
+            android:padding="@dimen/x15"
+            android:layout_width="@dimen/x655"
+            android:layout_height="@dimen/y430"
+            android:background="@drawable/bg_edit_text"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
         <Button
             android:id="@+id/dialog_close"
+            android:layout_marginTop="@dimen/x6"
             android:layout_width="@dimen/x65"
             android:layout_height="@dimen/x65"
             android:background="@drawable/ic_close_dialog_selector"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="@dimen/y45"
-            />
+            android:layout_alignParentEnd="true"/>
 
         <Button
             android:id="@+id/dialog_submit"
@@ -28,20 +39,7 @@
             android:text="提交理由"
             android:textColor="@color/textAggravating"
             android:background="@drawable/ic_dialog_reason_selector"
-            android:layout_marginBottom="@dimen/x30"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
-
-        <EditText
-            android:id="@+id/dailog_reason"
-            android:gravity="left"
-            android:padding="@dimen/x15"
-            android:layout_width="@dimen/x685"
-            android:layout_height="@dimen/y453"
-            android:background="@drawable/bg_edit_text"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
-
     </RelativeLayout>
-
 </LinearLayout>

@@ -2,11 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="@dimen/x467"
               android:layout_height="@dimen/x652"
-              android:layout_marginBottom="@dimen/x10"
-              android:layout_marginLeft="@dimen/x10"
               android:layout_marginRight="@dimen/x10"
               android:background="@drawable/ic_search_menu_bg"
               android:focusable="true"
+              android:id="@+id/search_container"
               android:focusableInTouchMode="true"
               android:orientation="vertical">
 

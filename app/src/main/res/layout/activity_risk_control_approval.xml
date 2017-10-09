@@ -4,6 +4,9 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <!--分割线-->
+    <View style="@style/horizontalLine"/>
+
     <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/risk_ptr"
         android:layout_width="match_parent"

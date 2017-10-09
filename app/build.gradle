@@ -1,21 +1,107 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd_HH_mm_ss", TimeZone.getTimeZone("GMT+8"))
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
+    // 移除lint检查的error
+    lintOptions.abortOnError = false
+
     defaultConfig {
         applicationId "com.hs.doubaobao"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        // dex突破65535的限制
+        multiDexEnabled true
     }
-    buildTypes {
+
+    signingConfigs {
+        debug {
+            // No debug config
+        }
+
+        // 正式版
         release {
+            // 签名store文件路径
+            storeFile file("../jks")
+            // 签名store文件的密码
+            storePassword "huisheng"
+            // 别名
+            keyAlias "hskey01"
+            // 别名的密码
+            keyPassword "huisheng"
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            signingConfig signingConfigs.debug
+
+            // versionNameSuffix "-debug"
             minifyEnabled false
+            zipAlignEnabled false
+            debuggable true
+            shrinkResources false
+        }
+
+
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            signingConfig signingConfigs.release
+
+            // 是否混淆
+            minifyEnabled true
+//           zipAlign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件,
+            shrinkResources true
+            // 混淆配置文件的位置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为 Ultron_v1.0_2017-08-15_doubaobao.apk
+                        // 保留基础签名版本
+                        def fileName
+                        if (variant.productFlavors[0].name == 'app') {
+                            fileName = "doubaoabo.apk"
+                        } else {
+                            fileName = "doubaoabo_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        }
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
+        }
+    }
+
+    // 多渠道打包
+    productFlavors {
+//         GooglePlay {}
+//         umeng {}
+//         wandoujia {}
+//         qihu360 {}
+//         baidu {}
+//         xiaomi {}
+//         tencent {}
+//         uc {}
+        app {}
+//        expandRegister{}
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
     }
 

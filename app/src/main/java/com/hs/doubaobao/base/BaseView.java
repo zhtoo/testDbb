@@ -4,7 +4,7 @@ package com.hs.doubaobao.base;
  * 作者：zhanghaitao on 2017/9/12 10:45
  * 邮箱：820159571@qq.com
  *
- * @describe: View的基类
+ * @describe:View的基类
  */
 
 public interface BaseView<T> {

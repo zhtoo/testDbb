@@ -6,7 +6,7 @@ import java.util.List;
  * 作者：zhanghaitao on 2017/9/25 17:49
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:图片bean
  */
 
 public class PictrueBean {

@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
  * 一些基础的处理可以在该类处理
  * 不建议在该类处理较为复杂的逻辑
  *
- * @author zhanghaitao
+ * @author：zhanghaitao
  */
 public class AppBarActivity extends AppCompatActivity implements View.OnClickListener {
 

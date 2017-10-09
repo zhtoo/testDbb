@@ -135,6 +135,7 @@
             android:gravity="center"
             android:onClick="onExit"
             android:padding="@dimen/x20"
+            android:layout_marginBottom="@dimen/y30"
             android:text="退出"
             android:textColor="@drawable/menu_text_selector"
             android:textSize="@dimen/x28"/>

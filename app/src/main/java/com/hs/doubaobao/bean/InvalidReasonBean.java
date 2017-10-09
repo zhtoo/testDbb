@@ -4,7 +4,7 @@ package com.hs.doubaobao.bean;
  * 作者：zhanghaitao on 2017/9/20 17:49
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:无效列表的BEAN
  */
 
 public class InvalidReasonBean {

@@ -14,8 +14,7 @@ import com.hs.doubaobao.R;
  * Author: zhanghaitao
  * E-mail: 820159571@qq.com
  * Date: 2017/9/19 16:04
- * <p/>
- * Description: 网络请求等待动画
+ * @Description:网络请求等待动画
  */
 public class LoadWaiting extends Dialog {
     private static LoadWaiting loadWaiting = null;

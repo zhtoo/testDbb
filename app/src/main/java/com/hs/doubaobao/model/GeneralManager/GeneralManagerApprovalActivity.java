@@ -28,7 +28,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
  * 作者：zhanghaitao on 2017/9/11 17:43
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:总经理审批
  */
 
 public class GeneralManagerApprovalActivity extends AppBarActivity implements GMAContract.View, ManagerAdapter.onItemClickListener, ListAdapter.onItemClickListener, PullToRefresh.PullToRefreshListener {
@@ -105,7 +105,7 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         pageBean = bean.getResData().getPageDataList().getPage();
         //list内容
         listBeen = bean.getResData().getPageDataList().getList();
-
+        //将请求回来的数据存放到列表集合中
         if (listBeen != null && listBeen.size() > 0) {
             for (int i = 0; i < listBeen.size(); i++) {
                 ListBean mBean = new ListBean();
@@ -118,6 +118,9 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
                 mBean.setLoanPeriods(listBeen.get(i).getPeriod());
                 mBean.setStatus(listBeen.get(i).getStatus());
                 mBean.setApproveStatus(listBeen.get(i).getApproveStatus());
+                mBean.setId(listBeen.get(i).getId());
+                mBean.setContent(listBeen.get(i).getContent());
+                mBean.setManagerRation(listBeen.get(i).getManagerRation());
                 mList.add(mBean);
             }
             ptrFrame.setVisibility(View.VISIBLE);
@@ -143,12 +146,12 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("ID", listBeen.get(postion).getId() + "");
+        intent.putExtra("ID", mList.get(postion).getId() + "");
         intent.putExtra("ShowRightType", "MANAGER");
-        intent.putExtra("ApproveStatus",listBeen.get(postion).getApproveStatus());
+        intent.putExtra("ApproveStatus",mList.get(postion).getApproveStatus());
         if(listBeen.get(postion).getApproveStatus() == 1){
-            intent.putExtra("Content",listBeen.get(postion).getContent());
-            intent.putExtra("managerRation",((int)listBeen.get(postion).getManagerRation())+"");
+            intent.putExtra("Content",mList.get(postion).getContent());
+            intent.putExtra("managerRation",((int)mList.get(postion).getManagerRation())+"");
         }
         startActivity(intent);
     }

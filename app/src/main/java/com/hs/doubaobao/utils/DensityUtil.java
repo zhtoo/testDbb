@@ -7,7 +7,7 @@ import android.util.TypedValue;
 
 /**
 * @ClassName: DensityUtil 
-* @Description: 屏幕尺寸转换
+* @Description:屏幕尺寸转换工具类
 * @author zht
 * @date 2017-09-27 下午4:17:01
  */
@@ -58,7 +58,7 @@ public class DensityUtil {
 	 *
 	 * @return
 	 */
-	public int getWidthPixels(Context context) {
+	public static int getWidthPixels(Context context) {
 		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 		Configuration cf = context.getResources().getConfiguration();
 		int ori = cf.orientation;

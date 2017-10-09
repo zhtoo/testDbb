@@ -13,7 +13,7 @@ import java.io.File;
  * 作者：zhanghaitao on 2017/9/12 16:46
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:基本参数类，存放：联网地址、通用参数...
  */
 
 public class BaseParams {

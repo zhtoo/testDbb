@@ -23,7 +23,8 @@
                 android:onClick="showParticulars"
                 android:text="@string/detail_particulars"/>
 
-            <View style="@style/verticalLine"
+            <View
+                style="@style/verticalLine"
                 android:layout_width="1px"/>
 
             <RadioButton
@@ -31,16 +32,18 @@
                 android:onClick="showPictrue"
                 android:text="@string/detail_pictrue"/>
 
-            <View style="@style/verticalLine"
-                  android:layout_width="1px"/>
+            <View
+                style="@style/verticalLine"
+                android:layout_width="1px"/>
 
             <RadioButton
                 style="@style/detail_item_style"
                 android:onClick="showVideo"
                 android:text="@string/detail_video"/>
 
-            <View style="@style/verticalLine"
-                  android:layout_width="1px"/>
+            <View
+                style="@style/verticalLine"
+                android:layout_width="1px"/>
 
             <RadioButton
                 style="@style/detail_item_style"
@@ -49,14 +52,15 @@
         </RadioGroup>
     </LinearLayout>
 
-    <View style="@style/horizontalLine"
+    <View
+        style="@style/horizontalLine"
+        android:layout_height="@dimen/x3"
         android:background="@color/textOrange"/>
 
     <FrameLayout
         android:id="@+id/preview_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_weight="1"/>
 
 </LinearLayout>

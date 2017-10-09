@@ -6,7 +6,7 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/12 10:45
  * 邮箱：820159571@qq.com
  *
- * @describe: 接口的基类
+ * @describe:接口的基类
  */
 
 

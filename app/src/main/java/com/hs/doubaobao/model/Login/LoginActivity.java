@@ -27,7 +27,7 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/11 17:43
  * 邮箱：820159571@qq.com
  *
- * @describe: 登录界面
+ * @describe:登录界面
  */
 
 public class LoginActivity extends AppBarActivity implements LoginContract.View {
@@ -69,7 +69,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
         //初始化数据（不想单独写一个方法）
         loginUsername.setText(SPHelp.getData("name"));
-        loginPwd.setText(SPHelp.getData("password"));
+       // loginPwd.setText(SPHelp.getData("password"));
     }
 
     /**
@@ -141,12 +141,16 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
             //保存用户名和密码
             SPHelp.setData("name", name);
             SPHelp.setData("password", password);
-            //存放参数
-            Map<String, String> map = new LinkedHashMap<>();
-            map.put("id", name);
-            map.put("pwd", Base64Util.encode(password));
-            //获取数据
-            presenter.getData(map);
+            if(TextUtils.isEmpty(password)){
+                Toast.makeText(MyApplication.getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
+            }else {
+                //存放参数
+                Map<String, String> map = new LinkedHashMap<>();
+                map.put("id", name);
+                map.put("pwd", Base64Util.encode(password));
+                //获取数据
+                presenter.getData(map);
+            }
         }
     }
 

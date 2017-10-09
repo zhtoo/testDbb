@@ -36,7 +36,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
  * 作者：zhanghaitao on 2017/9/11 17:44
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:无效列表
  */
 
 public class InvalidListActivity extends AppBarActivity implements InvalidListContract.View, InvalidAdapter.onItemClickListener, PullToRefresh.PullToRefreshListener {
@@ -211,10 +211,13 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
      * @param end
      */
     private void ShowSearchAnimator(float start, float end) {
+        //设置缩放的相对位置
+        mSearch.setPivotX(getResources().getDimension(R.dimen.x477));//相对于控件的位子
+        mSearch.setPivotY(0);
         ObjectAnimator anim = ObjectAnimator//
-                .ofFloat(mSearch, "zht", start, end)//
-                .setDuration(300);//
-        anim.start();
+                .ofFloat(mSearch, "invalid_search", start, end)//设置变化目标值
+                .setDuration(500);//设置动画时间
+        anim.start();//开启动画
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -224,7 +227,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 mSearch.setScaleY(cVal);
             }
         });
-
+        //设置监听
         anim.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -267,6 +270,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
                 mBean.setCustomManager(listBeen.get(i).getOperName());
                 mBean.setLoanPeriods(listBeen.get(i).getPeriod());
                 mBean.setStatus(listBeen.get(i).getStatus());
+                mBean.setId(listBeen.get(i).getId());
                 mList.add(mBean);
             }
             ptrFrame1.setVisibility(View.GONE);
@@ -307,7 +311,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, InvalidReasonActivity.class);
-        intent.putExtra("invalidId", "" + listBeen.get(postion).getId());
+        intent.putExtra("invalidId", "" + mList.get(postion).getId());
         startActivity(intent);
     }
 

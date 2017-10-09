@@ -78,17 +78,19 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private DotView mMenuRiskDot;
     private DotView mMenuManagerDot;
     private LinearLayout mGray;
+    private LinearLayout mMenu;
+    private RelativeLayout mMenuLogo;
+    private RelativeLayout mTitleBar;
 
     private MainContract.Presenter presenter;
-
     private HomeBean.ResDataBean.PageDataListBean.PageBean pageBean;
     private HomeBean.ResDataBean.MessageCountBean messageCount;
     private List<HomeBean.ResDataBean.PageDataListBean.ListBean> listBeen;
+
     private List<Integer> roleIdList;
-
     private List<ListBean> mList = new ArrayList<>();
-    private HomeAdapter adapter;
 
+    private HomeAdapter adapter;
     public static boolean isShowing = false;
     private PtrClassicFrameLayout ptrFrame;
     //存放请求参数
@@ -96,8 +98,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     //分页
     private int page = 1;
     private int pages = 1;
-    private LinearLayout mMenu;
-    private RelativeLayout mMenuLogo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,6 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         Logger.e(TAG, "当前线程的进程的ID：" + Process.myPid());
 
         initView();
-
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         mName.setText(name);
@@ -172,8 +172,11 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mStatusBar = (LinearLayout) findViewById(R.id.main_status_bar);
         //搜索栏
         mSearch = (LinearLayout) findViewById(R.id.main_search);
+
         //菜单的背景图标
         mMenuLogo = (RelativeLayout) findViewById(R.id.menu_logo_bg);
+        //标题栏
+        mTitleBar = (RelativeLayout) findViewById(R.id.main_title_bar);
 
         mSearchContainer = (MyRelativeLayout) findViewById(R.id.main_search_container);
 
@@ -207,9 +210,9 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mName.setOnClickListener(this);
 
         ViewGroup.LayoutParams layoutParams = mMenuLogo.getLayoutParams();
-        layoutParams.width = sliding_menu.getWidthPixels()*59/72;
+        layoutParams.width = sliding_menu.getWidthPixels() * 59 / 72;
 
-        layoutParams.height = sliding_menu.getWidthPixels()*42/72;
+        layoutParams.height = sliding_menu.getWidthPixels() * 42 / 72;
         mMenuLogo.setLayoutParams(layoutParams);
     }
 
@@ -336,9 +339,13 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * @param end
      */
     private void ShowSearchAnimator(float start, float end) {
+//设置缩放的相对位置
+        mSearch.setPivotX(getResources().getDimension(R.dimen.x477));//相对于控件的位子
+        mSearch.setPivotY(0);
+
         ObjectAnimator anim = ObjectAnimator//
-                .ofFloat(mSearch, "zht", start, end)//
-                .setDuration(300);//
+                .ofFloat(mSearch, "main_search", start, end)//设置变化目标值
+                .setDuration(500);//设置动画时间
         anim.start();
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -350,6 +357,20 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
             }
         });
 
+//        int width = mSearch.getWidth();
+//        int height = mSearch.getHeight();
+//
+//        ObjectAnimator anim = new ObjectAnimator();
+//        PropertyValuesHolder a1 = PropertyValuesHolder.ofFloat("alpha", start, end);//透明度
+//        PropertyValuesHolder a2 = PropertyValuesHolder.ofFloat("translationX", start == 0 ? 0 : -width, start == 0 ? width : 0);
+//        PropertyValuesHolder a3 = PropertyValuesHolder.ofFloat("translationY", start == 0 ? 0 : -height, start == 0 ? height : 0);
+//        anim.ofPropertyValuesHolder(mSearch, a1, a2, a3).setDuration(300).start();
+/**
+ * PropertyValuesHolder a1 = PropertyValuesHolder.ofFloat("alpha", 0f, 1f);
+ PropertyValuesHolder a2 = PropertyValuesHolder.ofFloat("translationY", 0, viewWidth);
+ ......
+ ObjectAnimator.ofPropertyValuesHolder(view, a1, a2, ......).setDuration(1000).start();
+ */
         anim.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -361,6 +382,10 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
                     mSearch.setVisibility(View.GONE);
                     mSearchContainer.setVisibility(View.GONE);
                 }
+                int width = mSearch.getWidth();
+                int height = mSearch.getHeight();
+                Logger.e(TAG, "width---->" + width);
+                Logger.e(TAG, "height---->" + height);
             }
 
             @Override
@@ -495,6 +520,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
                 mBean.setCustomManager(listBeen.get(i).getOperName());
                 mBean.setLoanPeriods(listBeen.get(i).getPeriod());
                 mBean.setStatus(listBeen.get(i).getStatus());
+                mBean.setId(listBeen.get(i).getId());
                 mList.add(mBean);
             }
             ptrFrame.setVisibility(View.VISIBLE);
@@ -539,7 +565,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     @Override
     public void onItemClick(int postion) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("ID", listBeen.get(postion).getId() + "");
+        intent.putExtra("ID", mList.get(postion).getId() + "");
         startActivity(intent);
     }
 

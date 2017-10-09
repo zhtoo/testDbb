@@ -95,7 +95,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
                 period = aarPeriod[i];
             }
         }
-        map2.put("申请贷款金额", borrow.getAccount() + "元");
+        map2.put("申请贷款金额", borrow.getAccount() + "万元");
         map2.put("申请期限", period);
         map2.put("借款用途", borrow.getPurpose());
         map2.put("客户经理名称/机构名称", borrow.getOperatorName());
@@ -113,12 +113,12 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map3.put("line1", "line");
         map3.put("居住地址", customerInfo.getExitingBuildAddr());
         map3.put("居住面积", customerInfo.getExitingBuildAcreage() + "m²");
-        map3.put("供养人数", customerInfo.getJobdepartmentCount());
+        map3.put("供养人数", customerInfo.getJobdepartmentCount()+"人");
         map3.put("自有房产地址", customerInfo.getOwnBuildAddr());
         map3.put("自有房产面积", customerInfo.getOwnBuildAcreage() + "");
         map3.put("现住房居住时间", customerInfo.getExitingBuildLivetime());
         map3.put("其他房产信息", customerInfo.getOtherBuildInfo());
-        map3.put("其他房产面积", customerInfo.getOtherBuildAcreage() + "");
+        map3.put("其他房产面积", customerInfo.getOtherBuildAcreage() + "m²");
         map3.put("其他房产性质", customerInfo.getOtherBuildProperty());
         map3.put("line2", "line");
         map3.put("单位名称", customerInfo.getWorkunitName());
@@ -136,7 +136,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map3.put("单位性质", customerInfo.getWorkunitNatureString());
         map3.put("单位电话", customerInfo.getWorkunitPhone());
         map3.put("分机", customerInfo.getWorkunitExtPhone());
-        map3.put("累计工作年限", customerInfo.getWorkunitAge());
+        map3.put("累计工作年限", customerInfo.getWorkunitAge()+"年");
         map3.put("单位地址", customerInfo.getWorkunitAddr());
         mMap.add(map3);
 
@@ -174,7 +174,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map4.put("单位性质", coborrow.getWorkunitNatureString());
         map4.put("单位电话", coborrow.getPhone());
         map4.put("分机", coborrow.getExtPhone());
-        map4.put("累计工作年限", coborrow.getWorkunitAge());
+        map4.put("累计工作年限", coborrow.getWorkunitAge() +"年");
         map4.put("单位地址", coborrow.getWorkunitAddr());
         mMap.add(map4);
 

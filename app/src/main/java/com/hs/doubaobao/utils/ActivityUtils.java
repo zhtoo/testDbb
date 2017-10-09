@@ -8,6 +8,9 @@ import com.hs.doubaobao.utils.log.Logger;
 import java.lang.ref.WeakReference;
 import java.util.Stack;
 
+/**
+ * @DES:ACTIVITY管理类
+ */
 public final class ActivityUtils {
     private static final String TAG   = "ActivityUtils";
     // 堆栈管理对象

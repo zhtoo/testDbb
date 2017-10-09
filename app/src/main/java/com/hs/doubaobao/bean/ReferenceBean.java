@@ -4,7 +4,7 @@ package com.hs.doubaobao.bean;
  * 作者：zhanghaitao on 2017/9/20 16:56
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:参考bean
  */
 
 public class ReferenceBean {

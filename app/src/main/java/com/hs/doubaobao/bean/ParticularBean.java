@@ -6,7 +6,7 @@ import java.util.List;
  * 作者：zhanghaitao on 2017/9/20 11:13
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:详情bean
  */
 
 public class ParticularBean {

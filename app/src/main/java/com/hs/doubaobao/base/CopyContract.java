@@ -6,7 +6,7 @@ import com.hs.doubaobao.bean.HomeBean;
  * 作者：zhanghaitao on 2017/9/12 10:59
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:复制粘贴类
  */
 
 public interface CopyContract {

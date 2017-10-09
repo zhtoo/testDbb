@@ -3,7 +3,7 @@ package com.hs.doubaobao.utils;
 import java.io.UnsupportedEncodingException;
 
 /**
- * Description: BASE64加密工具类
+ * @Description:BASE64加密工具类
  * 备注：不能对文字进行解密
  */
 public class Base64Util {

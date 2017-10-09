@@ -19,7 +19,7 @@ import java.util.List;
  * 作者：zhanghaitao on 2017/9/8 14:36
  * 邮箱：820159571@qq.com
  *
- * @describe: 主界面列表的适配器
+ * @describe:主界面列表的适配器，写着好玩的
  */
 
 public class ListAdapter extends RecyclerView.Adapter {
@@ -123,7 +123,7 @@ public class ListAdapter extends RecyclerView.Adapter {
             name.setText(listBean.getName());
             time.setText(listBean.getTime());
             purpose.setText(listBean.getPurpose());
-            loanAmount.setText(((double) listBean.getLoanAmount() / 10000d) + "万元");
+            loanAmount.setText(( listBean.getLoanAmount()) + "万元");
             customPhone.setText(listBean.getCustomPhone());
             loanPeriods.setText(listBean.getLoanPeriods());
             customManager.setText(listBean.getCustomManager());

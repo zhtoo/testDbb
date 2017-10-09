@@ -9,7 +9,7 @@ import java.util.Map;
  * 作者：zhanghaitao on 2017/9/19 10:25
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:用于相似的list条目的bean
  */
 
 public class ListBean {
@@ -34,6 +34,18 @@ public class ListBean {
     private int showType = 0;//0: 首页  ； 1 风控  2 总经理
     //按钮的状态
     private int approveStatus = 0;//0:审批;1:继续;2:等待上级审核
+    //客户id
+    private int id;
+
+
+
+    //内容
+    private String content;
+    //风控定额
+    private double riskControl;
+    //总经理定额
+    private double managerRation ;
+
 
     public String getName() {
         return name;
@@ -140,6 +152,39 @@ public class ListBean {
 
     public void setApproveStatus(int approveStatus) {
         this.approveStatus = approveStatus;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public double getRiskControl() {
+        return riskControl;
+    }
+
+    public void setRiskControl(double riskControl) {
+        this.riskControl = riskControl;
+    }
+
+    public double getManagerRation() {
+        return managerRation;
+    }
+
+    public void setManagerRation(double managerRation) {
+        this.managerRation = managerRation;
     }
 
 

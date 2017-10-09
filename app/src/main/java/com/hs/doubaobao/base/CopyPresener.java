@@ -16,7 +16,7 @@ import okhttp3.Call;
  * 作者：zhanghaitao on 2017/9/12 11:03
  * 邮箱：820159571@qq.com
  *
- * @describe:
+ * @describe:复制粘贴类
  */
 
 public class CopyPresener implements CopyContract.Presenter {

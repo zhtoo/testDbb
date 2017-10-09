@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/item_all"
               android:layout_width="match_parent"
-              android:layout_height="@dimen/y205"
+              android:layout_height="wrap_content"
               android:layout_margin="@dimen/x10"
               android:orientation="vertical">
 
@@ -32,7 +32,7 @@
                 android:layout_marginTop="@dimen/y12"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:background="@color/whiteBackground"
@@ -71,8 +71,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/y151"
         android:background="@color/whiteBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal">
@@ -109,48 +108,49 @@
             android:layout_height="@dimen/y88"/>
 
         <LinearLayout
-            android:layout_width="@dimen/x230"
-            android:layout_height="match_parent"
-            android:gravity="center|left"
+            android:layout_width="@dimen/x214"
+            android:layout_height="@dimen/y151"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingLeft="@dimen/x30">
 
             <TextView
                 android:id="@+id/list_load_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y1"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y43"
+                android:gravity="bottom"
+                android:paddingBottom="@dimen/y3"
+                android:singleLine="true"
                 android:text="23.00万元"
                 android:textColor="@color/textOrange"
                 android:textSize="@dimen/x28"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y23"
+                android:gravity="bottom"
                 android:text="借款金额"
                 android:textColor="@color/textGray"
                 android:textSize="@dimen/x20"/>
 
             <TextView
                 android:id="@+id/list_custom_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y30"
+                android:gravity="bottom"
                 android:text="13812345678"
                 android:textColor="@color/textAggravating"
                 android:textSize="@dimen/x20"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y4"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y23"
+                android:gravity="bottom"
                 android:text="@string/customer_phone"
                 android:textColor="@color/textGray"
                 android:textSize="@dimen/x20"/>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="@dimen/x180"
@@ -161,36 +161,37 @@
 
             <TextView
                 android:id="@+id/list_loan_periods"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y1"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y43"
+                android:gravity="bottom"
+                android:paddingBottom="@dimen/y3"
                 android:text="18期"
                 android:textColor="@color/textAggravating"
                 android:textSize="@dimen/x24"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y23"
+                android:gravity="bottom"
                 android:text="借款期数"
                 android:textColor="@color/textGray"
                 android:textSize="@dimen/x20"/>
 
             <com.hs.doubaobao.view.MarqueeTextView
-                android:maxWidth="@dimen/x210"
+                android:maxWidth="@dimen/x180"
                 android:singleLine="true"
                 android:id="@+id/list_custom_manager"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y5"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y30"
+                android:gravity="bottom"
                 android:text="李小艺"
                 android:textColor="@color/textAggravating"
                 android:textSize="@dimen/x20"/>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y6"
+                android:layout_width="@dimen/x184"
+                android:layout_height="@dimen/y23"
+                android:gravity="bottom"
                 android:text="客户经理"
                 android:textColor="@color/textGray"
                 android:textSize="@dimen/x20"/>
