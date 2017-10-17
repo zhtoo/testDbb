@@ -52,6 +52,7 @@ public class HttpLogging implements Interceptor {
         };
     }
 
+
     public enum Level {
         /**
          * No logs.

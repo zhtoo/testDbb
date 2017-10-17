@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/null_imageView"
         android:layout_width="@dimen/x183"
         android:layout_height="@dimen/x157"
         android:src="@drawable/ic_null" />
@@ -20,5 +20,12 @@
         android:text="暂无列表数据"
         android:textColor="@color/textGray"
         android:textSize="@dimen/x24" />
+    <Button
+        android:visibility="gone"
+        android:id="@+id/null_reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="点击重新加载"
+        android:textSize="@dimen/x24"/>
 
 </LinearLayout>

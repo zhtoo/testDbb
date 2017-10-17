@@ -45,7 +45,7 @@ public class LoadWaiting extends Dialog {
     }
 
     /**
-     * 标题
+     * 设置标题
      */
     public LoadWaiting setTitle(String strTitle) {
         super.setTitle(strTitle);

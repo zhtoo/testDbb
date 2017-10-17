@@ -154,7 +154,7 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
         intent.putExtra("ApproveStatus",mList.get(postion).getApproveStatus());
         if(listBeen.get(postion).getApproveStatus() == 1){
             intent.putExtra("Content",mList.get(postion).getContent());
-            intent.putExtra("riskControl",((int)mList.get(postion).getRiskControl())+"");
+            intent.putExtra("riskControl",(mList.get(postion).getRiskControl())+"");
         }
         startActivity(intent);
     }

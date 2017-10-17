@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         android:gravity="center"/>
 
-    <include layout="@layout/layout_null"/>
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/pictrue_ptr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_null"/>
+
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
 </LinearLayout>

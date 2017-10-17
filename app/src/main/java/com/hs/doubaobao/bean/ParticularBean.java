@@ -123,8 +123,8 @@ public class ParticularBean {
             private String homeVisitContent;
             private String borrowData;
             private String managerContent;
-            private int managerRation;
-            private int riskControl;
+            private double managerRation;
+            private double riskControl;
             private String riskControlContent;
 
             public String getHomeVisitContent() {
@@ -143,19 +143,19 @@ public class ParticularBean {
                 this.managerContent = managerContent;
             }
 
-            public int getManagerRation() {
+            public double getManagerRation() {
                 return managerRation;
             }
 
-            public void setManagerRation(int managerRation) {
+            public void setManagerRation(double managerRation) {
                 this.managerRation = managerRation;
             }
 
-            public int getRiskControl() {
+            public double getRiskControl() {
                 return riskControl;
             }
 
-            public void setRiskControl(int riskControl) {
+            public void setRiskControl(double riskControl) {
                 this.riskControl = riskControl;
             }
 
@@ -190,7 +190,7 @@ public class ParticularBean {
              * type : 03
              */
 
-            private int account;
+            private double account;
             private String applydate;
             private String finishdate;
             private int fundStatus;
@@ -202,11 +202,11 @@ public class ParticularBean {
             private String status;
             private String type;
 
-            public int getAccount() {
+            public double getAccount() {
                 return account;
             }
 
-            public void setAccount(int account) {
+            public void setAccount(double account) {
                 this.account = account;
             }
 
@@ -310,10 +310,10 @@ public class ParticularBean {
             private String cardid;
             private String color;
             private int id;
-            private int monthlyMoney;
+            private double monthlyMoney;
             private String otherInfo;
             private String owner;
-            private int price;
+            private double price;
             private int status;
 
             public String getBrand() {
@@ -356,11 +356,11 @@ public class ParticularBean {
                 this.id = id;
             }
 
-            public int getMonthlyMoney() {
+            public double getMonthlyMoney() {
                 return monthlyMoney;
             }
 
-            public void setMonthlyMoney(int monthlyMoney) {
+            public void setMonthlyMoney(double monthlyMoney) {
                 this.monthlyMoney = monthlyMoney;
             }
 
@@ -380,11 +380,11 @@ public class ParticularBean {
                 this.owner = owner;
             }
 
-            public int getPrice() {
+            public double getPrice() {
                 return price;
             }
 
-            public void setPrice(int price) {
+            public void setPrice(double price) {
                 this.price = price;
             }
 
@@ -429,7 +429,7 @@ public class ParticularBean {
             private int id;
             private int isBusinessOwner;
             private String mobilephone;
-            private int monthlyIncome;
+            private double monthlyIncome;
             private String phone;
             private int sex;
             private String workunitAddr;
@@ -437,6 +437,10 @@ public class ParticularBean {
             private String workunitDepartment;
             private String workunitName;
             private String workunitNatureString;
+
+
+            private String socialSecurity;
+            private String reservedFunds;
 
             public String getBirth() {
                 return birth;
@@ -518,11 +522,11 @@ public class ParticularBean {
                 this.mobilephone = mobilephone;
             }
 
-            public int getMonthlyIncome() {
+            public double getMonthlyIncome() {
                 return monthlyIncome;
             }
 
-            public void setMonthlyIncome(int monthlyIncome) {
+            public void setMonthlyIncome(double monthlyIncome) {
                 this.monthlyIncome = monthlyIncome;
             }
 
@@ -581,6 +585,22 @@ public class ParticularBean {
             public void setWorkunitNatureString(String workunitNatureString) {
                 this.workunitNatureString = workunitNatureString;
             }
+
+            public String getSocialSecurity() {
+                return socialSecurity;
+            }
+
+            public void setSocialSecurity(String socialSecurity) {
+                this.socialSecurity = socialSecurity;
+            }
+
+            public String getReservedFunds() {
+                return reservedFunds;
+            }
+
+            public void setReservedFunds(String reservedFunds) {
+                this.reservedFunds = reservedFunds;
+            }
         }
 
         public static class CustomerInfoBean {
@@ -617,6 +637,9 @@ public class ParticularBean {
              * workunitName : 汇生科技
              * workunitNatureString : 国有企业/上市公司
              * workunitPhone : 055155555555
+             *
+             * socialSecurity     reservedFunds
+
              */
 
             private String alipay;
@@ -626,7 +649,7 @@ public class ParticularBean {
             private String cardId;
             private String cname;
             private String domicile;
-            private int exitingBuildAcreage;
+            private double exitingBuildAcreage;
             private String exitingBuildAddr;
             private String exitingBuildLivetime;
             private int id;
@@ -635,12 +658,12 @@ public class ParticularBean {
             private String jobdepartmentCount;
             private String marriageString;
             private String mobilephone;
-            private int monthlyWage;
+            private double monthlyWage;
             private String opinion;
-            private int otherBuildAcreage;
+            private double otherBuildAcreage;
             private String otherBuildInfo;
             private String otherBuildProperty;
-            private int ownBuildAcreage;
+            private double ownBuildAcreage;
             private String ownBuildAddr;
             private String ownBuildPropertyString;
             private String qq;
@@ -651,6 +674,9 @@ public class ParticularBean {
             private String workunitName;
             private String workunitNatureString;
             private String workunitPhone;
+
+            private String socialSecurity;
+            private String reservedFunds;
 
             public String getAlipay() {
                 return alipay;
@@ -708,11 +734,11 @@ public class ParticularBean {
                 this.domicile = domicile;
             }
 
-            public int getExitingBuildAcreage() {
+            public double getExitingBuildAcreage() {
                 return exitingBuildAcreage;
             }
 
-            public void setExitingBuildAcreage(int exitingBuildAcreage) {
+            public void setExitingBuildAcreage(double exitingBuildAcreage) {
                 this.exitingBuildAcreage = exitingBuildAcreage;
             }
 
@@ -780,11 +806,11 @@ public class ParticularBean {
                 this.mobilephone = mobilephone;
             }
 
-            public int getMonthlyWage() {
+            public double getMonthlyWage() {
                 return monthlyWage;
             }
 
-            public void setMonthlyWage(int monthlyWage) {
+            public void setMonthlyWage(double monthlyWage) {
                 this.monthlyWage = monthlyWage;
             }
 
@@ -796,11 +822,11 @@ public class ParticularBean {
                 this.opinion = opinion;
             }
 
-            public int getOtherBuildAcreage() {
+            public double getOtherBuildAcreage() {
                 return otherBuildAcreage;
             }
 
-            public void setOtherBuildAcreage(int otherBuildAcreage) {
+            public void setOtherBuildAcreage(double otherBuildAcreage) {
                 this.otherBuildAcreage = otherBuildAcreage;
             }
 
@@ -820,11 +846,11 @@ public class ParticularBean {
                 this.otherBuildProperty = otherBuildProperty;
             }
 
-            public int getOwnBuildAcreage() {
+            public double getOwnBuildAcreage() {
                 return ownBuildAcreage;
             }
 
-            public void setOwnBuildAcreage(int ownBuildAcreage) {
+            public void setOwnBuildAcreage(double ownBuildAcreage) {
                 this.ownBuildAcreage = ownBuildAcreage;
             }
 
@@ -906,6 +932,22 @@ public class ParticularBean {
 
             public void setWorkunitPhone(String workunitPhone) {
                 this.workunitPhone = workunitPhone;
+            }
+
+            public String getSocialSecurity() {
+                return socialSecurity;
+            }
+
+            public void setSocialSecurity(String socialSecurity) {
+                this.socialSecurity = socialSecurity;
+            }
+
+            public String getReservedFunds() {
+                return reservedFunds;
+            }
+
+            public void setReservedFunds(String reservedFunds) {
+                this.reservedFunds = reservedFunds;
             }
         }
 

@@ -16,7 +16,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 2
-        versionName "1.0.1"
+        versionName "2.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         // dex突破65535的限制
         multiDexEnabled true
@@ -47,7 +47,6 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             signingConfig signingConfigs.debug
 
-            // versionNameSuffix "-debug"
             minifyEnabled false
             zipAlignEnabled false
             debuggable true
@@ -61,13 +60,13 @@ android {
             signingConfig signingConfigs.release
 
             // 是否混淆
-            minifyEnabled true
+        //    minifyEnabled true
 //           zipAlign优化
             zipAlignEnabled true
             // 移除无用的resource文件,
-            shrinkResources true
+//            shrinkResources true
             // 混淆配置文件的位置
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+           // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             applicationVariants.all { variant ->
                 variant.outputs.each { output ->
@@ -77,9 +76,9 @@ android {
                         // 保留基础签名版本
                         def fileName
                         if (variant.productFlavors[0].name == 'app') {
-                            fileName = "doubaoabo.apk"
+                            fileName = "apk-release.apk"
                         } else {
-                            fileName = "doubaoabo_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                            fileName = "dbb_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
                         }
                         output.outputFile = new File(outputFile.parent, fileName)
                     }

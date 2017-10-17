@@ -69,8 +69,7 @@ public class PermissionCheck {
     // 申请所有授权
     public static final int REQUEST_CODE_ALL     = 0xAAAA;
 
-    private PermissionCheck() {
-    }
+    private PermissionCheck() {}
 
     public static PermissionCheck getInstance() {
         return PermissionCheckInstance.instance;

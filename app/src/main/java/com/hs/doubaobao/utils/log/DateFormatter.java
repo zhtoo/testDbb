@@ -1,8 +1,7 @@
 package com.hs.doubaobao.utils.log;
 
 /**
-
- * Description:
+ * @Description:日期格式枚举类
  */
 public enum DateFormatter {
     NORMAL("yyyy-MM-dd HH:mm"),

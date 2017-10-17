@@ -57,6 +57,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/x16"
                     android:text="总经理审批通过"
+                    android:singleLine="true"
                     android:textColor="@color/textGray"
                     android:textSize="@dimen/x20"/>
 
@@ -89,7 +90,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y44"
-                android:text="王伟义"
+                android:text="王伟义eqwewqeqwewqe"
+                android:singleLine="true"
                 android:textColor="@color/textAggravating"
                 android:textSize="@dimen/x28"/>
 

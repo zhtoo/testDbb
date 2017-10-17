@@ -67,9 +67,9 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     private LinearLayout mStatusBar;
     private TextView mName;
     private TextView mMenuName;
-    private TextView mMenuRisk;
-    private TextView mMenuManager;
-    private TextView mMenuInvalid;
+    private LinearLayout mMenuRisk;
+    private LinearLayout mMenuManager;
+    private LinearLayout mMenuInvalid;
     private EditText mSearchName;
     private EditText mSearchOpeName;
     private EditText mSearchPhone;
@@ -188,10 +188,10 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         //用户名称
         mName = (TextView) findViewById(R.id.home_person_name);
         mMenuName = (TextView) findViewById(R.id.menu_person_name);
-        //菜单的三个条目
-        mMenuRisk = (TextView) findViewById(R.id.menu_risk);
-        mMenuManager = (TextView) findViewById(R.id.menu_manager);
-        mMenuInvalid = (TextView) findViewById(R.id.menu_invalid);
+        //菜单的三个条目(根据权限控制显示和隐藏)
+        mMenuRisk = (LinearLayout) findViewById(R.id.menu_risk);
+        mMenuManager = (LinearLayout) findViewById(R.id.menu_manager);
+        mMenuInvalid = (LinearLayout) findViewById(R.id.menu_invalid);
         //消息小红点
         mMainDot = (DotView) findViewById(R.id.main_dot);
         mMenuRiskDot = (DotView) findViewById(R.id.menu_risk_dot);
@@ -492,6 +492,35 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     public void setData(HomeBean bean) {
         //角色权限
         roleIdList = bean.getResData().getRoleIdList();
+
+        int size = roleIdList.size();
+
+        String vlues = "";
+        //将所有的权限拼接成字符串
+        for (int key : roleIdList) {
+            vlues += key;
+        }
+
+        if(TextUtils.isEmpty(vlues)){
+            mMenuRisk.setVisibility(View.GONE);
+            mMenuManager.setVisibility(View.GONE);
+        }else
+        if (vlues.contains("9")) {
+            mMenuRisk.setVisibility(View.VISIBLE);
+            mMenuManager.setVisibility(View.VISIBLE);
+        } else {
+            if (vlues.contains("7")) {
+                mMenuRisk.setVisibility(View.VISIBLE);
+            } else {
+                mMenuRisk.setVisibility(View.GONE);
+            }
+            if (vlues.contains("8")) {
+                mMenuManager.setVisibility(View.VISIBLE);
+            } else {
+                mMenuManager.setVisibility(View.GONE);
+            }
+        }
+
         //角色的消息
         messageCount = bean.getResData().getMessageCount();
         int messageRole7 = messageCount.getMessageRole7();

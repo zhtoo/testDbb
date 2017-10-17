@@ -4,335 +4,357 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x69"
-        android:background="@color/grayBackground"
-        android:gravity="center"
-        android:text="放款金额参考表"
-        android:textColor="@color/textAggravating"/>
 
-    <View style="@style/horizontalLine"/>
-
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/reference_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grayBackground">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x69"
+            android:background="@color/grayBackground"
+            android:gravity="center"
+            android:text="放款金额参考表"
+            android:textColor="@color/textAggravating"/>
+
+        <View style="@style/horizontalLine"/>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@color/grayBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/whiteBackground"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/whiteBackground"
+                    android:orientation="vertical">
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="客户姓名:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_name"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="客户姓名:"/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_name"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                        style="@style/referenceText1"
-                        android:text="客户经理:"/>
+                        <TextView
 
-                    <TextView
-                        android:id="@+id/reference_manager"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                            style="@style/referenceText1"
+                            android:text="客户经理:"/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_manager"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="房贷时间:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_house_loantime"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="房贷时间:"/>
 
-                    <TextView
-                        android:id="@+id/reference_house_loantime_values"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_house_loantime"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_house_loantime_values"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="房产位置:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_house_address"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="房产位置:"/>
 
-                    <TextView
-                        android:id="@+id/reference_house_address_value"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_house_address"
+                            style="@style/referenceText2"
+                            android:maxWidth="@dimen/x500"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_house_address_value"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="房产性质:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_house_natrue"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="房产性质:"/>
 
-                    <TextView
-                        android:id="@+id/reference_house_natrue_value"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_house_natrue"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_house_natrue_value"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="车辆:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_car"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="车辆:"/>
 
-                    <TextView
-                        android:id="@+id/reference_car_value"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_car"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_car_value"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="家庭情况:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_family"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="家庭情况:"/>
 
-                    <TextView
-                        android:id="@+id/reference_family_value"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_family"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_family_value"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="单位性质:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_work_natrue"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="单位性质:"/>
 
-                    <TextView
-                        android:id="@+id/reference_work_natrue_value"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_work_natrue"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_work_natrue_value"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-                <RelativeLayout
-                    style="@style/referenceItem">
+                    </RelativeLayout>
 
-                    <TextView
-                        style="@style/referenceText1"
-                        android:text="私人业主:"/>
+                    <RelativeLayout
+                        style="@style/referenceItem">
 
-                    <TextView
-                        android:id="@+id/reference_proprietor"
-                        style="@style/referenceText2"
-                        android:text=""/>
+                        <TextView
+                            style="@style/referenceText1"
+                            android:text="私人业主:"/>
 
-                    <TextView
-                        android:id="@+id/reference_proprietor_value"
-                        style="@style/referenceText3"
-                        android:text=""/>
+                        <TextView
+                            android:id="@+id/reference_proprietor"
+                            style="@style/referenceText2"
+                            android:text=""/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/reference_proprietor_value"
+                            style="@style/referenceText3"
+                            android:text=""/>
 
-            </LinearLayout>
+                    </RelativeLayout>
 
-            <View style="@style/horizontalLine"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/y22"
-                android:background="@color/whiteBackground"
-                android:orientation="vertical">
+                </LinearLayout>
 
                 <View style="@style/horizontalLine"/>
 
-                <TextView
-                    style="@style/referenceText1"
-                    android:text="征信报告"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y22"
+                    android:background="@color/whiteBackground"
+                    android:orientation="vertical">
+
+                    <View style="@style/horizontalLine"/>
+
+                    <TextView
+                        style="@style/referenceText1"
+                        android:text="征信报告"/>
+
+                    <RelativeLayout
+                        style="@style/referenceItem">
+
+                        <TextView
+                            android:id="@+id/reference_creditstring"
+                            style="@style/referenceText1"
+                            android:text="信用卡负债:"/>
+
+                        <TextView
+                            android:id="@+id/reference_credit"
+                            style="@style/referenceText2"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:layout_toRightOf="@id/reference_creditstring"
+                            android:text=""/>
+
+                        <TextView
+                            android:id="@+id/reference_credit_final_ration"
+                            style="@style/referenceText3"
+                            android:text=""/>
+
+                    </RelativeLayout>
+
+                    <View
+                        style="@style/horizontalLine"
+                        android:layout_marginLeft="@dimen/x36"/>
+
+                    <TextView
+                        style="@style/referenceText1"
+                        android:text="查询次数"/>
+
+                    <RelativeLayout
+                        style="@style/referenceItem">
+
+                        <TextView
+                            android:id="@+id/reference_credit_numonestring"
+                            style="@style/referenceText1"
+                            android:text="近一个月(次):"/>
+
+                        <TextView
+                            android:id="@+id/reference_credit_numone"
+                            style="@style/referenceText2"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:layout_toRightOf="@id/reference_credit_numonestring"
+                            android:text=""/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        style="@style/referenceItem">
+
+                        <TextView
+                            android:id="@+id/reference_credit_numthreestring"
+                            style="@style/referenceText1"
+                            android:text="近三个月(次):"/>
+
+                        <TextView
+                            android:id="@+id/reference_credit_numthree"
+                            style="@style/referenceText2"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:layout_toRightOf="@id/reference_credit_numthreestring"
+                            android:text=""/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        style="@style/referenceItem">
+
+                        <TextView
+                            android:id="@+id/reference_credit_numperstring"
+                            style="@style/referenceText1"
+                            android:text="个人查询近三个月(次)："/>
+
+                        <TextView
+                            android:id="@+id/reference_credit_numper"
+                            style="@style/referenceText2"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:layout_toRightOf="@id/reference_credit_numperstring"
+                            android:text=""/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        style="@style/referenceItem">
+
+                        <TextView
+                            android:id="@+id/reference_credit_numtotalstring"
+                            style="@style/referenceText1"
+                            android:text="个人查询共(次)："/>
+
+                        <TextView
+                            android:id="@+id/reference_credit_numtotal"
+                            style="@style/referenceText2"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:layout_toRightOf="@id/reference_credit_numtotalstring"
+                            android:text=""/>
+
+
+                    </RelativeLayout>
+
+                    <View style="@style/horizontalLine"/>
+
+                </LinearLayout>
 
                 <RelativeLayout
-                    style="@style/referenceItem">
+                    style="@style/referenceItem"
+                    android:background="@color/grayBackground">
 
                     <TextView
-                        android:id="@+id/reference_creditstring"
                         style="@style/referenceText1"
-                        android:text="信用卡负债:"/>
+                        android:text="汇总额度："/>
 
                     <TextView
-                        android:id="@+id/reference_credit"
-                        style="@style/referenceText2"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:layout_toRightOf="@id/reference_creditstring"
-                        android:text=""/>
-
-                </RelativeLayout>
-
-                <View
-                    style="@style/horizontalLine"
-                    android:layout_marginLeft="@dimen/x36"/>
-
-                <TextView
-                    style="@style/referenceText1"
-                    android:text="查询次数"/>
-
-                <RelativeLayout
-                    style="@style/referenceItem">
-
-                    <TextView
-                        android:id="@+id/reference_credit_numonestring"
-                        style="@style/referenceText1"
-                        android:text="近一个月(次):"/>
-
-                    <TextView
-                        android:id="@+id/reference_credit_numone"
-                        style="@style/referenceText2"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:layout_toRightOf="@id/reference_credit_numonestring"
-                        android:text=""/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    style="@style/referenceItem">
-
-                    <TextView
-                        android:id="@+id/reference_credit_numthreestring"
-                        style="@style/referenceText1"
-                        android:text="近三个月(次):"/>
-
-                    <TextView
-                        android:id="@+id/reference_credit_numthree"
-                        style="@style/referenceText2"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:layout_toRightOf="@id/reference_credit_numthreestring"
-                        android:text=""/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    style="@style/referenceItem">
-
-                    <TextView
-                        android:id="@+id/reference_credit_numperstring"
-                        style="@style/referenceText1"
-                        android:text="个人查询近三个月(次)："/>
-
-                    <TextView
-                        android:id="@+id/reference_credit_numper"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:layout_toRightOf="@id/reference_credit_numperstring"
-                        style="@style/referenceText2"
-                        android:text=""/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    style="@style/referenceItem">
-
-                    <TextView
-                        android:id="@+id/reference_credit_numtotalstring"
-                        style="@style/referenceText1"
-                        android:text="个人查询共(次)："/>
-
-                    <TextView
-                        android:layout_marginLeft="@dimen/x10"
-                        android:layout_toRightOf="@id/reference_credit_numtotalstring"
-                        android:id="@+id/reference_credit_numtotal"
-                        style="@style/referenceText2"
-                        android:text=""/>
-
-                    <TextView
-                        android:id="@+id/reference_credit_final_ration"
+                        android:id="@+id/reference_final_ration"
                         style="@style/referenceText3"
+                        android:layout_width="wrap_content"
+                        android:maxWidth="@dimen/x400"
                         android:text=""/>
 
                 </RelativeLayout>
 
                 <View style="@style/horizontalLine"/>
 
+                <RelativeLayout
+                    style="@style/referenceItem"/>
+
             </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
-            <RelativeLayout
-                style="@style/referenceItem"
-                android:background="@color/grayBackground">
 
-                <TextView
-                    style="@style/referenceText1"
-                    android:text="汇总额度："/>
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/reference_ptr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:maxWidth="@dimen/x400"
-                    android:id="@+id/reference_final_ration"
-                    style="@style/referenceText3"
-                    android:text=""/>
+        <include layout="@layout/layout_null"/>
 
-            </RelativeLayout>
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
-            <View style="@style/horizontalLine"/>
 
-            <RelativeLayout
-                style="@style/referenceItem"/>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>

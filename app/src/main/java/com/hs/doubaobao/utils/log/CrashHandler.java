@@ -26,13 +26,14 @@ import java.util.Date;
 
 /**
  * Description: 异常退出管理类
+ *
  * @instructions:在MyApplication的onCreate()方法中调用--->CrashHandler.getInstance().init(this);
  */
 public class CrashHandler implements UncaughtExceptionHandler {
-    private static final String TAG              = "CrashHandler";
-    private static final boolean DEBUG            = BaseParams.isDebug;
-    private static final String PATH             = BaseParams.CRASH_PATH;
-    private static final String FILE_NAME        = "crash-";
+    private static final String TAG = "CrashHandler";
+    private static final boolean DEBUG = BaseParams.isDebug;
+    private static final String PATH = BaseParams.CRASH_PATH;
+    private static final String FILE_NAME = "crash-";
     // log文件的后缀名
     private static final String FILE_NAME_SUFFIX = ".trace";
     // 系统默认的异常处理（默认情况下，系统会终止当前的异常程序）
@@ -43,6 +44,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     private CrashHandler() {
     }
 
+    //对外提供获取对象的方法
     public static CrashHandler getInstance() {
         return CrashHandlerInstance.instance;
     }
@@ -64,6 +66,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     /**
      * 这个是最关键的函数，当程序中有未被捕获的异常，系统将会自动调用#uncaughtException方法
      * thread为出现未捕获异常的线程，ex为未捕获的异常，有了这个ex，我们就可以得到异常信息。
+     * 未被捕获的异常：在程序出现异常的时候APP并未捕获的异常
      */
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
@@ -80,9 +83,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
                 Logger.e(TAG, "error : ", e);
             }
             // 退出程序
-           // ActivityUtils.onExit();
-
-
+            // ActivityUtils.onExit();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }
@@ -136,8 +137,8 @@ public class CrashHandler implements UncaughtExceptionHandler {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        long   current = System.currentTimeMillis();
-        String time    = new SimpleDateFormat(DateFormatter.SS.getValue()).format(new Date(current));
+        long current = System.currentTimeMillis();
+        String time = new SimpleDateFormat(DateFormatter.SS.getValue()).format(new Date(current));
         // 以当前时间创建log文件
         File file = new File(PATH + File.separator + FILE_NAME + time + FILE_NAME_SUFFIX);
 
@@ -209,5 +210,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
      */
     private void uploadExceptionToServer() {
         // TODO Upload Exception Message To Your Web Server
+        // TODO: 2017/10/12  上传异常信息到你的服务器上
+
     }
 }

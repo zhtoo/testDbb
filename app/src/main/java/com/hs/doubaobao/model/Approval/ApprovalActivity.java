@@ -178,10 +178,10 @@ public class ApprovalActivity extends AppBarActivity implements ApprovalContract
     }
 
     void checkNull(int status, String content, String riskControl) {
-        if (TextUtils.isEmpty(content)) {
+        if (status != 3 && TextUtils.isEmpty(content)) {
             Toast.makeText(this, "请填写意见", Toast.LENGTH_SHORT).show();
-        } else if (TextUtils.isEmpty(riskControl)) {
-            Toast.makeText(this, "金额", Toast.LENGTH_SHORT).show();
+        } else if (status != 3 && TextUtils.isEmpty(riskControl)) {
+            Toast.makeText(this, "请填写金额", Toast.LENGTH_SHORT).show();
         } else {
             loadData(status, content, riskControl, "");
         }

@@ -108,7 +108,7 @@
         <item name="android:layout_marginLeft">@dimen/x200</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:maxWidth">@dimen/x250</item>
+        <item name="android:maxWidth">@dimen/x320</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:minHeight">@dimen/y60</item>
         <item name="android:textColor">@color/textAggravating</item>
@@ -120,7 +120,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:minHeight">@dimen/y60</item>
         <item name="android:layout_marginRight">@dimen/x36</item>
-        <item name="android:maxWidth">@dimen/x100</item>
+        <item name="android:maxWidth">@dimen/x150</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:textColor">@color/textOrange</item>
     </style>

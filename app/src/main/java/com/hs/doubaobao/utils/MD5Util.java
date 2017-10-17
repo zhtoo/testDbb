@@ -85,7 +85,11 @@ public class MD5Util {
         return resultString;
     }
 
-
+    /**
+     * 加密（一般使用该方法）
+     * @param charsetname
+     * @return
+     */
     public static String encode(String charsetname) {
         String resultString = null;
         try {

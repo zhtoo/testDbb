@@ -24,7 +24,7 @@ public class LoginPresener implements LoginContract.Presenter {
 
     private static final String TAG = "LoginPresener";
     LoginContract.View viewRoot;
-    private LoginBean bean;
+
     private Context context;
 
 
@@ -43,6 +43,7 @@ public class LoginPresener implements LoginContract.Presenter {
                 viewRoot.setError(e.getLocalizedMessage());
             }
 
+            private LoginBean bean;
             @Override
             public void onResponse(String response) {
                 Logger.e(TAG, response);
@@ -55,7 +56,7 @@ public class LoginPresener implements LoginContract.Presenter {
                         viewRoot.setError("提示" + bean.getResMsg());
                     }
                 } else {
-                    viewRoot.setError("Json解析异常");
+                    viewRoot.setError("Json解析异常"+"是不是这里");
                 }
             }
         });

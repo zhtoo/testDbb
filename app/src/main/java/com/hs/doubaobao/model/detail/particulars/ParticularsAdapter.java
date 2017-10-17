@@ -80,21 +80,21 @@ public class ParticularsAdapter extends RecyclerView.Adapter {
                 for (String key : itemMap.keySet()) {
                     String container = itemMap.get(key);
 
-                    if (key.equals("现住房居住时间") || key.equals("现单位工龄") || key.equals("建筑年限")) {
-                        container += "年";
-                    } else if (key.equals("现住房面积") || key.equals("自有房产面积") || key.equals("房屋建筑面积")) {
-                        container += "m²";
-                    } else if (key.equals("所在楼层") || key.equals("总楼层")) {
-                        container += "层";
-                    } else if (key.equals("月均工资收入")) {
-                        container += "元";
-                    } else if (key.equals("部门人数")) {
-                        container += "人";
-                    } else if (key.equals("所在部门")) {
-                        container += "部";
-                    } else if (key.equals("*申请借款金额")) {
-                        container += "万元";
-                    }
+//                    if (key.equals("现住房居住时间") || key.equals("现单位工龄") || key.equals("建筑年限")) {
+//                        container += "年";
+//                    } else if (key.equals("现住房面积") || key.equals("自有房产面积") || key.equals("房屋建筑面积")) {
+//                        container += "m²";
+//                    } else if (key.equals("所在楼层") || key.equals("总楼层")) {
+//                        container += "层";
+//                    } else if (key.equals("月均工资收入")) {
+//                        container += "元";
+//                    } else if (key.equals("部门人数")) {
+//                        container += "人";
+//                    } else if (key.equals("所在部门")) {
+//                        container += "部";
+//                    } else if (key.equals("*申请借款金额")) {
+//                        container += "万元";
+//                    }
 
                     if (TextUtils.isEmpty(itemMap.get(key))) {
                         container = "未填写";

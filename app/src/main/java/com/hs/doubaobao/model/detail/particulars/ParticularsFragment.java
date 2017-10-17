@@ -2,6 +2,7 @@ package com.hs.doubaobao.model.detail.particulars;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -9,11 +10,14 @@ import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.BaseFragment;
 import com.hs.doubaobao.bean.ParticularBean;
 import com.hs.doubaobao.model.detail.DetailActivity;
+import com.hs.doubaobao.utils.PullToRefresh;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 
 /**
  * 作者：zhanghaitao on 2017/9/12 15:11
@@ -22,12 +26,15 @@ import java.util.Map;
  * @describe:
  */
 
-public class ParticularsFragment extends BaseFragment implements ParticularsContract.View {
+public class ParticularsFragment extends BaseFragment implements ParticularsContract.View, PullToRefresh.PullToRefreshListener {
     private ParticularsContract.Presenter presenter;
     private RecyclerView mRecycler;
     private ParticularsAdapter adapter;
     private List<String> mTitles;
     private List<Map> mMap;
+    private PtrClassicFrameLayout ptrFrame;
+    private String id;
+    private Map<String, String> map;
 
     @Override
     protected int setLayout() {
@@ -36,6 +43,10 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
 
     @Override
     protected void initView(View view) {
+        //无数据刷新
+        ptrFrame = (PtrClassicFrameLayout) view.findViewById(R.id.particulars_ptr);
+        initPtrClassicFrameLayout();
+
         mRecycler = (RecyclerView) view.findViewById(R.id.particulars_recycler);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayout.VERTICAL);
@@ -48,16 +59,31 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         mRecycler.setAdapter(adapter);
 
         DetailActivity activity = (DetailActivity) getActivity();
-        String id = activity.id;
+        id = activity.id;
 
         //将Presenter和View进行绑定
         new ParticularsPresener(this, getContext());
         //获取数据
 
-        Map<String, String> map = new LinkedHashMap<>();
+        map = new LinkedHashMap<>();
         map.put("id", id);
         presenter.getData(map);
 
+    }
+
+
+    /**
+     * 初始化上拉加载下拉刷新的布局
+     * 注意：adapter的初始化在 PullToRefresh 之前
+     */
+    private void initPtrClassicFrameLayout() {
+        //注意：adapter的初始化在 PullToRefresh 之前
+        //创建PtrClassicFrameLayout的包装类对象
+        PullToRefresh refresh = new PullToRefresh();
+        //初始化PtrClassicFrameLayout
+        refresh.initPTR(getContext(), ptrFrame);
+        //设置监听
+        refresh.setPullToRefreshListener(this);
     }
 
     @Override
@@ -84,6 +110,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         mMap.add(map1);
 
         mTitles.add("借款人贷款事项");
+
         Map<String, String> map2 = new LinkedHashMap<>();
 
         //贷款期限：1:12期;2:18期;3:24期;4:36期;5:48期;6:60期)
@@ -95,13 +122,14 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
                 period = aarPeriod[i];
             }
         }
-        map2.put("申请贷款金额", borrow.getAccount() + "万元");
+        map2.put("申请贷款金额", checkDouble(borrow.getAccount(), "万元"));
         map2.put("申请期限", period);
         map2.put("借款用途", borrow.getPurpose());
         map2.put("客户经理名称/机构名称", borrow.getOperatorName());
         mMap.add(map2);
 
         mTitles.add("借款人信息");
+
         Map<String, String> map3 = new LinkedHashMap<>();
         map3.put("姓名", customerInfo.getCname());
         map3.put("性别", customerInfo.getSexString());
@@ -112,18 +140,19 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map3.put("移动电话", customerInfo.getMobilephone());
         map3.put("line1", "line");
         map3.put("居住地址", customerInfo.getExitingBuildAddr());
-        map3.put("居住面积", customerInfo.getExitingBuildAcreage() + "m²");
-        map3.put("供养人数", customerInfo.getJobdepartmentCount()+"人");
+        map3.put("居住面积", checkDouble(customerInfo.getExitingBuildAcreage(), "m²"));
+        map3.put("供养人数", TextUtils.isEmpty(customerInfo.getJobdepartmentCount()) ? "" : customerInfo.getJobdepartmentCount() + "人");
         map3.put("自有房产地址", customerInfo.getOwnBuildAddr());
-        map3.put("自有房产面积", customerInfo.getOwnBuildAcreage() + "");
+        map3.put("自有房产面积", checkDouble(customerInfo.getOwnBuildAcreage(), "m²"));
+        map3.put("自有房产性质", customerInfo.getOwnBuildPropertyString());
         map3.put("现住房居住时间", customerInfo.getExitingBuildLivetime());
         map3.put("其他房产信息", customerInfo.getOtherBuildInfo());
-        map3.put("其他房产面积", customerInfo.getOtherBuildAcreage() + "m²");
+        map3.put("其他房产面积", checkDouble(customerInfo.getOtherBuildAcreage(), "m²"));
         map3.put("其他房产性质", customerInfo.getOtherBuildProperty());
         map3.put("line2", "line");
         map3.put("单位名称", customerInfo.getWorkunitName());
         map3.put("部门及职务", customerInfo.getJobdepartment());
-        map3.put("工资月收入", customerInfo.getMonthlyWage() + "元");
+        map3.put("工资月收入", checkDouble(customerInfo.getMonthlyWage(), "元"));
         //是否是企业主/个体户 1:否 2：是
         int isBusinessOwner = customerInfo.getIsBusinessOwner();
         if (isBusinessOwner == 1) {
@@ -136,11 +165,20 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map3.put("单位性质", customerInfo.getWorkunitNatureString());
         map3.put("单位电话", customerInfo.getWorkunitPhone());
         map3.put("分机", customerInfo.getWorkunitExtPhone());
-        map3.put("累计工作年限", customerInfo.getWorkunitAge()+"年");
+
+        String workAge = checkString(customerInfo.getWorkunitAge(), "年")
+                + checkString(customerInfo.getSocialSecurity())
+                + checkString(customerInfo.getReservedFunds());
+        if (!TextUtils.isEmpty(workAge) && !workAge.contains("年") && workAge.length() > 1) {
+            workAge = workAge.substring(1, workAge.length());
+        }
+
+        map3.put("累计工作年限", workAge);
         map3.put("单位地址", customerInfo.getWorkunitAddr());
         mMap.add(map3);
 
         mTitles.add("共同借款人信息");
+
         Map<String, String> map4 = new LinkedHashMap<>();
         map4.put("姓名", coborrow.getConame());
         //性别 1:男  0:女）
@@ -161,7 +199,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map4.put("line", "line");
         map4.put("单位名称", coborrow.getWorkunitName());
         map4.put("部门及职务", coborrow.getWorkunitDepartment());
-        map4.put("工资月收入", coborrow.getMonthlyIncome() + "元");
+        map4.put("工资月收入", checkDouble(coborrow.getMonthlyIncome(), "元"));
         //是否是企业主/个体户 1:否 2：是
         int isBusinessOwner1 = coborrow.getIsBusinessOwner();
         if (isBusinessOwner1 == 1) {
@@ -174,7 +212,15 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map4.put("单位性质", coborrow.getWorkunitNatureString());
         map4.put("单位电话", coborrow.getPhone());
         map4.put("分机", coborrow.getExtPhone());
-        map4.put("累计工作年限", coborrow.getWorkunitAge() +"年");
+
+        String workAge1 = checkString(coborrow.getWorkunitAge(), "年")
+                + checkString(coborrow.getSocialSecurity())
+                + checkString(coborrow.getReservedFunds());
+        if (!TextUtils.isEmpty(workAge1) && !workAge1.contains("年") && workAge1.length() > 1) {
+            workAge1 = workAge1.substring(1, workAge1.length());
+        }
+
+        map4.put("累计工作年限", workAge1);
         map4.put("单位地址", coborrow.getWorkunitAddr());
         mMap.add(map4);
 
@@ -186,7 +232,7 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map5.put("车辆号码", carInfo.getCardid());
         String status = "";
         if (carInfo.getStatus() >= 0 && carInfo.getStatus() <= 1) {
-            status = carInfo.getStatus() == 0 ? "有车无贷款" : "有车有贷款";
+            status = carInfo.getStatus() == 0 ? "有车无贷款" : "有车有贷款" + "（月还" + carInfo.getMonthlyMoney() + " 元人民币）";
         }
         map5.put("车辆状况", status);
         map5.put("裸车价", carInfo.getPrice() == 0 ? "" : (carInfo.getPrice() + "元"));
@@ -272,22 +318,51 @@ public class ParticularsFragment extends BaseFragment implements ParticularsCont
         map8.put("家访客户情况汇总", approves.getHomeVisitContent());
         map8.put("line4", "line");
         map8.put("风控意见", approves.getRiskControlContent());
-        map8.put("风控定额", approves.getRiskControl() > 0 ? (approves.getRiskControl() + "元") : "");
+        map8.put("风控定额", checkDouble(approves.getRiskControl(), "万元"));
         map8.put("line5", "line");
         map8.put("总经理意见", approves.getManagerContent());
-        map8.put("总经理定额", approves.getManagerRation() > 0 ? (approves.getManagerRation() + "元") : "");
+        map8.put("总经理定额", checkDouble(approves.getManagerRation(), "万元"));
         mMap.add(map8);
-
+        mRecycler.setVisibility(View.VISIBLE);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void setError(String text) {
-
+        mRecycler.setVisibility(View.GONE);
     }
 
     @Override
     public void setPresenter(ParticularsContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+
+    public String checkDouble(double value, String text) {
+        return value > 0 ? (value + text) : "";
+    }
+
+
+    public String checkString(String value, String text) {
+        return TextUtils.isEmpty(value) ? "" : (value + text);
+    }
+
+    public String checkString(String value) {
+        return TextUtils.isEmpty(value) ? "" : ("," + value);
+    }
+
+    public String checkInt(int value, String text) {
+        return value > 0 ? (value + text) : "";
+    }
+
+
+    @Override
+    public void pullToRefresh() {
+        presenter.getData(map);
+    }
+
+    @Override
+    public void pullToLoadMore() {
+        presenter.getData(map);
     }
 }

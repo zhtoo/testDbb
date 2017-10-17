@@ -11,6 +11,13 @@
         android:layout_marginTop="@dimen/y6"
         android:gravity="center"/>
 
-    <include layout="@layout/layout_null"/>
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
+        android:id="@+id/video_ptr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/layout_null"/>
+
+    </in.srain.cube.views.ptr.PtrClassicFrameLayout>
 
 </LinearLayout>

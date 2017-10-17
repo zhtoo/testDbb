@@ -50,6 +50,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/menu_risk"
                     android:onClick="onRiskClick"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x80"
@@ -64,7 +65,6 @@
                        android:layout_marginLeft="@dimen/x188" />
 
                     <TextView
-                        android:id="@+id/menu_risk"
                         style="@style/menu_item_text_style"
                         android:text="@string/risk_control"/>
 
@@ -79,6 +79,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/menu_manager"
                     android:onClick="onManagerClick"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x80"
@@ -93,7 +94,6 @@
                         android:layout_marginLeft="@dimen/x188" />
 
                     <TextView
-                        android:id="@+id/menu_manager"
                         style="@style/menu_item_text_style"
                         android:text="@string/general_manager"/>
 
@@ -107,6 +107,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/menu_invalid"
                     android:onClick="onInvalidClick"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x80"
@@ -120,7 +121,6 @@
                         android:src="@drawable/ic_invalid_selector"
                         android:layout_marginLeft="@dimen/x188" />
                     <TextView
-                        android:id="@+id/menu_invalid"
                         style="@style/menu_item_text_style"
                         android:text="@string/invalid_list"/>
                 </LinearLayout>

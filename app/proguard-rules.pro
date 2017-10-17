@@ -190,10 +190,10 @@
 
 # 实体类 混淆keep规则
 -keep class com.google.common.base.**{*;}
--keep class com.hs.doubaobao.base.** { *; }
--keep class com.hs.doubaobao.module.** { *; }
--keep class com.hs.doubaobao.view.** { *; }
--keep class com.hs.doubaobao.ui.** { *; }
+#-keep class com.hs.doubaobao.base.** { *; }
+#-keep class com.hs.doubaobao.bean.** { *; }
+#-keep class com.hs.doubaobao.view.** { *; }
+#-keep class com.hs.doubaobao.ui.** { *; }
 
 # gilde 混淆keep规则
 -keep class com.bumptech.glide.integration.okhttp.OkHttpGlideModule

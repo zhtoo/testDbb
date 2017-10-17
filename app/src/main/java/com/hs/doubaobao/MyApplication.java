@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Process;
 
 import com.hs.doubaobao.utils.log.CrashHandler;
-import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,15 +44,15 @@ public class MyApplication extends Application {
 
         // Process.getThreadPriority(mMainThreadId);//获取指定ID的线程的优先级。
 
-        Logger.e(TAG, "当前线程的优先级：" + Process.getThreadPriority(mMainThreadId));
-        Logger.e(TAG, "当前线程的线程的ID：" + Process.myTid());
-        Logger.e(TAG, "当前进程的ID：" + Process.myPid());
-        Logger.e(TAG, "当前进程的用户ID：" + Process.myUid());
-        Logger.e(TAG, Process.supportsProcesses() ? "支持多进程" : "不支持多进程");
-        Logger.e(TAG, "当前系统中数据文件夹环境变量：" + android.os.Environment.getDataDirectory());
-        Logger.e(TAG, "当前系统中下载缓存文件环境变量：" + android.os.Environment.getDownloadCacheDirectory());
-        Logger.e(TAG, "当前系统中外部存储文件环境变量：" + android.os.Environment.getExternalStorageDirectory());
-        Logger.e(TAG, "当前系统中根文件环境变量：" + android.os.Environment.getRootDirectory());
+//        Logger.e(TAG, "当前线程的优先级：" + Process.getThreadPriority(mMainThreadId));
+//        Logger.e(TAG, "当前线程的线程的ID：" + Process.myTid());
+//        Logger.e(TAG, "当前进程的ID：" + Process.myPid());
+//        Logger.e(TAG, "当前进程的用户ID：" + Process.myUid());
+//        Logger.e(TAG, Process.supportsProcesses() ? "支持多进程" : "不支持多进程");
+//        Logger.e(TAG, "当前系统中数据文件夹环境变量：" + android.os.Environment.getDataDirectory());
+//        Logger.e(TAG, "当前系统中下载缓存文件环境变量：" + android.os.Environment.getDownloadCacheDirectory());
+//        Logger.e(TAG, "当前系统中外部存储文件环境变量：" + android.os.Environment.getExternalStorageDirectory());
+//        Logger.e(TAG, "当前系统中根文件环境变量：" + android.os.Environment.getRootDirectory());
 
         int threadPriorityBackground = Process.THREAD_PRIORITY_BACKGROUND;
         /**
@@ -94,18 +93,13 @@ public class MyApplication extends Application {
          //getExternalStorageDirectory()：获取当前系统中外部存储文件环境变量。
          //getRootDirectory()：获取当前系统中根文件环境变量。
          */
-        /**
-         myTid:Thread
-         myPid:Process
-         myUid:User
-         */
         super.onCreate();
     }
 
     /**
      * 获取MEM协议缓存集合
      *
-     * @return
+     * @return:Map集合
      */
     public Map<String, String> getMemProtocolCacheMap() {
         return mMemProtocolCacheMap;

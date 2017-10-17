@@ -227,7 +227,7 @@ public class SlidingMenu extends ViewGroup {
     }
 
     /**
-     * 获取屏幕像素
+     * 获取屏幕宽度像素
      *
      * @return
      */
@@ -244,7 +244,7 @@ public class SlidingMenu extends ViewGroup {
     }
 
     /**
-     * 获取屏幕像素
+     * 获取屏幕高度像素
      *
      * @return
      */

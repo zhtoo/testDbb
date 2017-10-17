@@ -24,6 +24,7 @@ public class PullToRefresh {
         ptrFrame.setHeaderView(defaultHeader);
         //使头布局的状态和刷新状态同步
         ptrFrame.addPtrUIHandler(defaultHeader);
+
         //默认经典脚布局
         PtrClassicDefaultFooter defaultFooter = new PtrClassicDefaultFooter(context);
         //给Ptr添加脚布局
@@ -34,7 +35,7 @@ public class PullToRefresh {
         ptrFrame.setPtrHandler(new PtrHandler2() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                //Toast.makeText(LoanActivity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Activity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
                 if (listener != null) {
                     listener.pullToRefresh();
                     ptrFrame.refreshComplete();
@@ -47,7 +48,7 @@ public class PullToRefresh {
 
             @Override
             public void onLoadBegin(PtrFrameLayout frame) {
-                //Toast.makeText(LoanActivity.this, "上拉加载", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Activity.this, "上拉加载", Toast.LENGTH_SHORT).show();
                 if (listener != null) {
                     listener.pullToLoadMore();
                     ptrFrame.refreshComplete();

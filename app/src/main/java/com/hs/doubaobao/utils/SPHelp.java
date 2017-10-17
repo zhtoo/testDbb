@@ -32,8 +32,6 @@ import com.hs.doubaobao.MyApplication;
 
 public class SPHelp {
 
-    private SharedPreferences sp = MyApplication.getContext().getSharedPreferences("config", Context.MODE_PRIVATE);
-
     private static SharedPreferences.Editor edit;
 
     /**
@@ -55,8 +53,7 @@ public class SPHelp {
      */
     public static String getData(String key) {
         SharedPreferences sp = MyApplication.getContext().getSharedPreferences("config", Context.MODE_PRIVATE);
-        String values = sp.getString(key, "");
-        return values;
+        return sp.getString(key, "");
     }
 
 

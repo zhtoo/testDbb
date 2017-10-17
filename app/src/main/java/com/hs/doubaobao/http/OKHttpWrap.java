@@ -73,9 +73,9 @@ public class OKHttpWrap {
         // 创建一个OkHttpClient
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         //设置连接超时时间
-        builder.connectTimeout(10, TimeUnit.SECONDS);
-        builder.readTimeout(10, TimeUnit.SECONDS);
-        builder.writeTimeout(10, TimeUnit.SECONDS);
+        builder.connectTimeout(15, TimeUnit.SECONDS);
+        builder.readTimeout(15, TimeUnit.SECONDS);
+        builder.writeTimeout(15, TimeUnit.SECONDS);
         // 打印参数
         builder.addInterceptor(new HttpLogging().setLevel(HttpLogging.Level.BODY));
         // 创建一个OkHttpClient

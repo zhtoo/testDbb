@@ -28,16 +28,15 @@ public class BaseParams {
     // App端类型  ios:1  Android:2
     public static final String MOBILE_TYPE = "2";
     //测试地址
-    public static final String TEST_URL = "http://192.168.1.246:8081/";
+    public static final String TEST_URL =// "http://manage.ahbabybean.com:8081/";
+            "http://192.168.1.246:8081/";
     //真实测试
-    public static final String TRUE_URL = "http://192.168.1.246:8081/";
+    public static final String TRUE_URL = "http://manage.ahbabybean.com:8081/";
     //http路径
     public static final String BASE_URL = isDebug ? TEST_URL : TRUE_URL;
 
-
     public static String USER_ID = "";
     public static String OPERATOR_NAME = "";
-
 
     /**
      * 根路径
@@ -49,11 +48,10 @@ public class BaseParams {
     public static final String CRASH_PATH = ROOT_PATH + "/crashLog";
 
 
-/*--URL常量--------------------------------------------------------------------------------------------------*/
+/*--URL--------------------------------------------------------------------------------------------------*/
 
     //登陆地址
     public static final String LOGIN_URL = BASE_URL + "app/user/doLogin.html";
-
     //首页地址
     public static final String HOME_URL = BASE_URL + "app/common/list.html";
     //风控列表地址
@@ -74,8 +72,6 @@ public class BaseParams {
     public static final String REFRERNCE_URL = BASE_URL + "app/common/reference.html";
     //审批
     public static final String APPROVAL_URL = BASE_URL + "app/approval.html";
-
-
 
 
 

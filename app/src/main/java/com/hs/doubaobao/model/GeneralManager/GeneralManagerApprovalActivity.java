@@ -151,7 +151,7 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         intent.putExtra("ApproveStatus",mList.get(postion).getApproveStatus());
         if(listBeen.get(postion).getApproveStatus() == 1){
             intent.putExtra("Content",mList.get(postion).getContent());
-            intent.putExtra("managerRation",((int)mList.get(postion).getManagerRation())+"");
+            intent.putExtra("managerRation",(mList.get(postion).getManagerRation())+"");
         }
         startActivity(intent);
     }

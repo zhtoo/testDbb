@@ -14,25 +14,26 @@ import java.util.concurrent.FutureTask;
 
 /**
  * Originally from RoboGuice: https://github.com/roboguice/roboguice/blob/master/roboguice/src/main/java/roboguice/util/SafeAsyncTask.java
- * <p/>
+ * 来源于RoboGuice 地址：https://github.com/roboguice/roboguice/blob/master/roboguice/src/main/java/roboguice/util/SafeAsyncTask.java
  * A class similar but unrelated to android's {@link android.os.AsyncTask}.
- * <p/>
+ * 一个类似于AsyncTask但与之不相关的类
  * Unlike AsyncTask, this class properly propagates exceptions.
- * <p/>
+ * 不同于AsyncTask的是这个类能正确的传递异常。
  * If you're familiar with AsyncTask and are looking for {@link android.os.AsyncTask#doInBackground(Object[])},
  * we've named it {@link #call()} here to conform with java 1.5's {@link java.util.concurrent.Callable} interface.
- * <p/>
- * Current limitations: does not yet handle progress, although it shouldn't be
- * hard to add.
- * <p/>
+ * 如果你熟悉AsyncTask类，并且正在寻找（调用）其中的doInBackground(Object[])方法
+ * 我们将它命名为call()，以符合java 1.5的{@link java.util.concurrent}接口。
+ * Current limitations: does not yet handle progress, although it shouldn't be hard to add.
+ * 当前的限制:还没有处理进度，尽管它不应该很难添加
  * If using your own executor, you must call future() to get a runnable you can execute.
+ * 如果使用自己的executor，则必须调用future()以获得可运行的可运行程序。
  *
  * @param <ResultT>
  */
 public abstract class SafeAsyncTask<ResultT> implements Callable<ResultT> {
-    private static final String TAG               = "SafeAsyncTask";
-    public static final    int      DEFAULT_POOL_SIZE = 25;
-    protected static final Executor DEFAULT_EXECUTOR  = Executors.newFixedThreadPool(DEFAULT_POOL_SIZE);
+    private static final String TAG = "SafeAsyncTask";
+    public static final int DEFAULT_POOL_SIZE = 25;
+    protected static final Executor DEFAULT_EXECUTOR = Executors.newFixedThreadPool(DEFAULT_POOL_SIZE);
     protected Handler handler;
     protected Executor executor;
     protected StackTraceElement[] launchLocation;
@@ -106,18 +107,14 @@ public abstract class SafeAsyncTask<ResultT> implements Callable<ResultT> {
     }
 
     /**
-     * @throws Exception,
-     *         captured on passed to onException() if present.
+     * @throws Exception, captured on passed to onException() if present.
      */
     protected void onPreExecute() throws Exception {
     }
 
     /**
-     * @param t
-     *         the result of {@link #call()}
-     *
-     * @throws Exception,
-     *         captured on passed to onException() if present.
+     * @param t the result of {@link #call()}
+     * @throws Exception, captured on passed to onException() if present.
      */
     @SuppressWarnings({"UnusedDeclaration"})
     protected void onSuccess(ResultT t) throws Exception {
@@ -131,8 +128,7 @@ public abstract class SafeAsyncTask<ResultT> implements Callable<ResultT> {
      * may be overridden to handle interruptions differently than other
      * exceptions.
      *
-     * @param e
-     *         an InterruptedException or InterruptedIOException
+     * @param e an InterruptedException or InterruptedIOException
      */
     protected void onInterrupted(Exception e) {
         onException(e);
@@ -142,11 +138,8 @@ public abstract class SafeAsyncTask<ResultT> implements Callable<ResultT> {
      * Logs the exception as an Error by default, but this method may
      * be overridden by subclasses.
      *
-     * @param e
-     *         the exception thrown from {@link #onPreExecute()}, {@link #call()}, or {@link #onSuccess(Object)}
-     *
-     * @throws RuntimeException,
-     *         ignored
+     * @param e the exception thrown from {@link #onPreExecute()}, {@link #call()}, or {@link #onSuccess(Object)}
+     * @throws RuntimeException, ignored
      */
     protected void onException(Exception e) throws RuntimeException {
         onThrowable(e);
@@ -157,8 +150,7 @@ public abstract class SafeAsyncTask<ResultT> implements Callable<ResultT> {
     }
 
     /**
-     * @throws RuntimeException,
-     *         ignored
+     * @throws RuntimeException, ignored
      */
     protected void onFinally() throws RuntimeException {
     }
@@ -268,15 +260,12 @@ public abstract class SafeAsyncTask<ResultT> implements Callable<ResultT> {
          * and waits for operation to finish.  If there's an exception,
          * it captures it and rethrows it.
          *
-         * @param c
-         *         the callable to post
-         *
-         * @throws Exception
-         *         on error
+         * @param c the callable to post
+         * @throws Exception on error
          */
         protected void postToUiThreadAndWait(final Callable c) throws Exception {
-            final CountDownLatch latch      = new CountDownLatch(1);
-            final Exception[]    exceptions = new Exception[1];
+            final CountDownLatch latch = new CountDownLatch(1);
+            final Exception[] exceptions = new Exception[1];
 
             // Execute onSuccess in the UI thread, but wait
             // for it to complete.

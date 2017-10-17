@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
     private EditText mSearchOpeName;
     private EditText mSearchPhone;
     private PtrClassicFrameLayout ptrFrame1;
+    private ImageView nullImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +126,10 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
 
         ptrFrame = (PtrClassicFrameLayout) findViewById(R.id.invalid_ptr);
         ptrFrame1 = (PtrClassicFrameLayout) findViewById(R.id.invalid_ptr1);
+
+        nullImageView = (ImageView) findViewById(R.id.null_imageView);
+        nullImageView.setImageResource(R.drawable.ic_null1);
+
         mSearchName = (EditText) findViewById(R.id.search_name);
         mSearchOpeName = (EditText) findViewById(R.id.search_opename);
         mSearchPhone = (EditText) findViewById(R.id.search_phone);
@@ -278,6 +284,7 @@ public class InvalidListActivity extends AppBarActivity implements InvalidListCo
         } else {
             ptrFrame.setVisibility(View.GONE);
             ptrFrame1.setVisibility(View.VISIBLE);
+
         }
         adapter.notifyDataSetChanged();
     }

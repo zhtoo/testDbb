@@ -11,12 +11,15 @@ import com.hs.doubaobao.R;
 import com.hs.doubaobao.base.BaseFragment;
 import com.hs.doubaobao.bean.VideoBean;
 import com.hs.doubaobao.model.detail.DetailActivity;
+import com.hs.doubaobao.utils.PullToRefresh;
 import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 
 /**
  * 作者：zhanghaitao on 2017/9/12 15:12
@@ -25,7 +28,7 @@ import java.util.Map;
  * @describe:
  */
 
-public class VideoFragment extends BaseFragment implements VideoContract.View, VideoAdapter.onItemClickListener {
+public class VideoFragment extends BaseFragment implements VideoContract.View, VideoAdapter.onItemClickListener, PullToRefresh.PullToRefreshListener {
 
     private VideoContract.Presenter presenter;
 
@@ -33,6 +36,8 @@ public class VideoFragment extends BaseFragment implements VideoContract.View, V
     private RecyclerView mRecycler;
     private VideoAdapter adapter;
     private List<VideoBean.ResDataBean.PicListBean> picList;
+    private PtrClassicFrameLayout ptrFrame;
+    private Map<String, String> map;
 
     @Override
     protected int setLayout() {
@@ -41,6 +46,12 @@ public class VideoFragment extends BaseFragment implements VideoContract.View, V
 
     @Override
     protected void initView(View view) {
+
+
+        //无数据刷新
+        ptrFrame = (PtrClassicFrameLayout) view.findViewById(R.id.video_ptr);
+        initPtrClassicFrameLayout();
+
         mRecycler = (RecyclerView) view.findViewById(R.id.video_recycler);
 
         GridLayoutManager lm = new GridLayoutManager(getContext(), 3);
@@ -61,10 +72,24 @@ public class VideoFragment extends BaseFragment implements VideoContract.View, V
         new VideoPresener(this,getContext());
         //获取数据
 
-        Map<String,String> map = new LinkedHashMap<>();
+        map = new LinkedHashMap<>();
         map.put("id",id);
         presenter.getData(map);
 
+    }
+
+    /**
+     * 初始化上拉加载下拉刷新的布局
+     * 注意：adapter的初始化在 PullToRefresh 之前
+     */
+    private void initPtrClassicFrameLayout() {
+        //注意：adapter的初始化在 PullToRefresh 之前
+        //创建PtrClassicFrameLayout的包装类对象
+        PullToRefresh refresh = new PullToRefresh();
+        //初始化PtrClassicFrameLayout
+        refresh.initPTR(getContext(), ptrFrame);
+        //设置监听
+        refresh.setPullToRefreshListener(this);
     }
 
     @Override
@@ -100,11 +125,22 @@ public class VideoFragment extends BaseFragment implements VideoContract.View, V
 
     @Override
     public void setError(String text) {
+        mRecycler.setVisibility(View.GONE);
         Toast.makeText(getContext(), "访问数据失败", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setPresenter(VideoContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    @Override
+    public void pullToRefresh() {
+        presenter.getData(map);
+    }
+
+    @Override
+    public void pullToLoadMore() {
+        presenter.getData(map);
     }
 }
