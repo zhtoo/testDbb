@@ -23,6 +23,8 @@ import com.hs.doubaobao.utils.log.Logger;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
+
 /**
  * 作者：zhanghaitao on 2017/9/11 17:43
  * 邮箱：820159571@qq.com
@@ -141,6 +143,9 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
             //保存用户名和密码
             SPHelp.setData("name", name);
             SPHelp.setData("password", password);
+            //获取极光用户的id(在此处获取是可行的)
+            String registrationID = JPushInterface.getRegistrationID(MyApplication.getContext());
+            Logger.e(TAG,registrationID);
             if(TextUtils.isEmpty(password)){
                 Toast.makeText(MyApplication.getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
             }else {

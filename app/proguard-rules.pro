@@ -86,8 +86,10 @@
 # 打印匹配的-keep家族处理的 类和类成员列表，到标准输出。
 # -printseeds [filename]
 
+
 # ************************************************************************************************
 # *******************************************  COMMON  *******************************************
+# *******************************************  常用模块  *******************************************
 # ************************************************************************************************
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
@@ -160,7 +162,7 @@
 }
 
 # ************************************************************************************************
-# *******************************************  CUSTOM  *******************************************
+# *******************************************  CUSTOM（自定义）  *******************************************
 # ************************************************************************************************
 #添加自己的混淆规则:
 #1. 代码中使用了反射，如一些ORM框架的使用，需要保证类名 方法不变，不然混淆后，就反射不了
@@ -174,24 +176,38 @@
 #-dontwarn com.xx.yy.**
 #-keep class com.xx.yy.** { *;}
 
--dontwarn com.pgyersdk.**
--keep class com.pgyersdk.** { *; }
-
 # 指定无需混淆的jar包和so库
 #-libraryjars libs/aaa.jar
 
+
+#蒲公英
+-dontwarn com.pgyersdk.**
+-keep class com.pgyersdk.** { *; }
+
+##---------------Begin: proguard configuration for Gson  ----------
 ## GSON 2.2.4 specific rules ##
+## GSON 2.2.4 代码混淆规则 ##
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
 -keepattributes EnclosingMethod
+#-keepattributes Signature
 # Gson specific classes
 -keep class sun.misc.Unsafe { *; }
 -keep class com.google.gson.stream.** { *; }
 
+#-keep class com.google.gson.**{*;}
+#-keep class com.google.common.**{*;}
+#-keep class com.google.gson.examples.android.model.** { *; }
+#-keep class org.json.**{*;}
+##---------------End: proguard configuration for Gson  ----------
+
+
+
 # 实体类 混淆keep规则
 -keep class com.google.common.base.**{*;}
 #-keep class com.hs.doubaobao.base.** { *; }
-#-keep class com.hs.doubaobao.bean.** { *; }
+#在有Gson依赖的时候，bean类不能进行混淆，因为gson解析式根据bean类的字段进行解析的，bean类混淆后字段会发生改变
+-keep class com.hs.doubaobao.bean.** { *; }
 #-keep class com.hs.doubaobao.view.** { *; }
 #-keep class com.hs.doubaobao.ui.** { *; }
 

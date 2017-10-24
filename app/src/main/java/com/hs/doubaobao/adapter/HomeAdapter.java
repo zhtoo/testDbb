@@ -28,8 +28,9 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private int type = 0;
 
     public HomeAdapter(Context context, List<ListBean> mList) {
-        this.context = context;
+        this.context= context;
         this.mList = mList;
+
     }
 
     public HomeAdapter(Context context, List<ListBean> mList, int type) {

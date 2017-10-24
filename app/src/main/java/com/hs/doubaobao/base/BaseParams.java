@@ -29,7 +29,7 @@ public class BaseParams {
     public static final String MOBILE_TYPE = "2";
     //测试地址
     public static final String TEST_URL =// "http://manage.ahbabybean.com:8081/";
-            "http://192.168.1.246:8081/";
+            "http://192.168.1.209:8081/";
     //真实测试
     public static final String TRUE_URL = "http://manage.ahbabybean.com:8081/";
     //http路径

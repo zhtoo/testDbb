@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 /**
  * 作者：zhanghaitao on 2017/9/12 15:12
@@ -114,7 +115,7 @@ public class ReferenceFragment extends BaseFragment implements ReferenceContract
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
-        refresh.initPTR(getContext(), ptrFrame);
+        refresh.initPTR(getContext(), ptrFrame, PtrFrameLayout.Mode.REFRESH);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }

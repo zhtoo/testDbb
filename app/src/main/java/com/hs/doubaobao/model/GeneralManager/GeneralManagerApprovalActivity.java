@@ -95,6 +95,7 @@ public class GeneralManagerApprovalActivity extends AppBarActivity implements GM
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
         refresh.initPTR(this, ptrFrame);
+        refresh.initPTR(this, ptrFrame1);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }

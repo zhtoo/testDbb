@@ -6,11 +6,17 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Process;
 
+import com.hs.doubaobao.utils.SPHelp;
 import com.hs.doubaobao.utils.log.CrashHandler;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * 全局单例
@@ -35,6 +41,22 @@ public class MyApplication extends Application {
         mMainThreadId = android.os.Process.myTid();
         // 抓取异常LOG，保存在本地
         CrashHandler.getInstance().init(this);
+
+        //极光推送start
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+
+
+        if(!SPHelp.getData("IsSetAlias").equals("true")){
+            //设置别名
+            setAlias();
+        }
+
+
+        //极光推送end
+
+
+
 
         // long elapsedCpuTime = Process.getElapsedCpuTime();
         // int myPid = Process.myPid();//获取该进程的ID
@@ -95,6 +117,65 @@ public class MyApplication extends Application {
          */
         super.onCreate();
     }
+
+    //极光推送设置别名start
+    private void setAlias() {
+        String tag= "tag2";
+        // 调用 Handler 来异步设置别名
+        mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, tag));
+    }
+
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Logger.i(TAG, logs);
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    SPHelp.setData("IsSetAlias","true");
+                    break;
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Logger.i(TAG, logs);
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Logger.e(TAG, logs);
+            }
+
+        }
+    };
+    private static final int MSG_SET_ALIAS = 1001;
+
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Logger.d(TAG, "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    Set<String>  tags = new HashSet<>();
+                    tags.add("tag2");
+                    JPushInterface.setAliasAndTags(getContext(),
+                            (String) msg.obj,
+                            tags,
+                            mAliasCallback);
+                    break;
+                default:
+                    Logger.i(TAG, "Unhandled msg - " + msg.what);
+            }
+        }
+    };
+    //极光推送设置别名end
+
+
+
+
 
     /**
      * 获取MEM协议缓存集合

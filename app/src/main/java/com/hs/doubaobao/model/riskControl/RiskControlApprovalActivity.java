@@ -97,6 +97,7 @@ public  class RiskControlApprovalActivity extends AppBarActivity implements Risk
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
         refresh.initPTR(this, ptrFrame);
+        refresh.initPTR(this, ptrFrame1);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }
