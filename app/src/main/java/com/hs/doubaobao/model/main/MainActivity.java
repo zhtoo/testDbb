@@ -17,7 +17,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -41,7 +40,7 @@ import com.hs.doubaobao.utils.SPHelp;
 import com.hs.doubaobao.utils.log.Logger;
 import com.hs.doubaobao.view.DotView;
 import com.hs.doubaobao.view.MyRelativeLayout;
-import com.hs.doubaobao.view.SlidingMenu;
+import com.hs.doubaobao.view.ResideLayout;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -55,11 +54,11 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
  * 主界面
  * rectification by zht on 2017/9/11  16:51
  */
-public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener, SlidingMenu.onMenuShowListener {
+public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener{
 
     private static final String TAG = "MainActivity";
     //控件
-    private SlidingMenu sliding_menu;
+    //private SlidingMenu sliding_menu;
     private LinearLayout ll_menu;
     private LinearLayout mSearch;
     private RecyclerView mRecyclerView;
@@ -98,6 +97,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     //分页
     private int page = 1;
     private int pages = 1;
+    private ResideLayout mResideLayout;
 
 
     @Override
@@ -127,7 +127,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     @Override
     protected void onPause() {
         super.onPause();
-        sliding_menu.startScroll(0);
+       // sliding_menu.startScroll(0);
     }
 
     /**
@@ -163,7 +163,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 初始化视图
      */
     private void initView() {
-        sliding_menu = (SlidingMenu) findViewById(R.id.sliding_menu);
+        mResideLayout = (ResideLayout) findViewById(R.id.resideLayout);
         ll_menu = (LinearLayout) findViewById(R.id.ll_menu);
         mMenu = (LinearLayout) findViewById(R.id.menu);
         //全局的灰色背景
@@ -206,14 +206,13 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mStatusBar.setBackgroundResource(R.drawable.ic_battery_bg);
         initRecyclerView();
         mSearch.setOnClickListener(this);
-        sliding_menu.setMenuShowListener(this);
+    //    sliding_menu.setMenuShowListener(this);
         mName.setOnClickListener(this);
 
-        ViewGroup.LayoutParams layoutParams = mMenuLogo.getLayoutParams();
-        layoutParams.width = sliding_menu.getWidthPixels() * 59 / 72;
-
-        layoutParams.height = sliding_menu.getWidthPixels() * 42 / 72;
-        mMenuLogo.setLayoutParams(layoutParams);
+        //ViewGroup.LayoutParams layoutParams = mMenuLogo.getLayoutParams();
+        //layoutParams.width = sliding_menu.getWidthPixels() * 59 / 72;
+        //layoutParams.height = sliding_menu.getWidthPixels() * 42 / 72;
+        //mMenuLogo.setLayoutParams(layoutParams);
     }
 
     /**
@@ -582,12 +581,13 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     public void onClick(View v) {
         if (v.getId() == R.id.home_person_name) {
             hideInput(v);
+            mResideLayout.openPane();
             if (isShowing) {
                 isShowing = false;
                 mSearch.setVisibility(View.GONE);
                 mSearchContainer.setVisibility(View.GONE);
             }
-            sliding_menu.toggle();
+           // sliding_menu.toggle();
         }
     }
 
@@ -627,7 +627,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      *
      * @param show
      */
-    @Override
+   /* @Override
     public void onMenuShow(boolean show) {
         mGray.setVisibility(show ? View.VISIBLE : View.GONE);
     }
@@ -635,7 +635,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     public void onGrayClick(View v) {
         sliding_menu.toggle();
     }
-
+*/
 
     //--------------使用onKeyDown()完成双击退出程序--------------
 
@@ -655,6 +655,15 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mResideLayout.isOpen()) {
+            mResideLayout.closePane();
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }

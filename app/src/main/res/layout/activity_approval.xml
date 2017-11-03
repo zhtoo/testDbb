@@ -17,7 +17,8 @@
             android:layout_toEndOf="@+id/approval_not_pass_reason"
             android:background="@color/grayBackground"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/approval_not_pass_reason">
 
             <TextView
                 android:id="@+id/approval_opinion"

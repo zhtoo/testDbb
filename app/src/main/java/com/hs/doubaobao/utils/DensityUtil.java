@@ -12,11 +12,6 @@ import android.util.TypedValue;
 * @date 2017-09-27 下午4:17:01
  */
 public class DensityUtil {
-	
-//	public static int dip2px(Context context, float dpValue) {
-//		final float scale = context.getResources().getDisplayMetrics().density;
-//		return (int) (dpValue * scale + 0.5f);
-//	}
 
 	/**
 	 * dp转px

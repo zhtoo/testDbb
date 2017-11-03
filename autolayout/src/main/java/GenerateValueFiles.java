@@ -157,6 +157,7 @@ public class GenerateValueFiles {
      * @param args
      */
     public static void main(String[] args) {
+        System.out.print('I'+'T');
         int baseW = 720;
         int baseH = 1280;
         String addition = "";

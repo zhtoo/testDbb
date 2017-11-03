@@ -71,7 +71,8 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
 
         //初始化数据（不想单独写一个方法）
         loginUsername.setText(SPHelp.getData("name"));
-       // loginPwd.setText(SPHelp.getData("password"));
+        //正式环境需要注释掉
+        loginPwd.setText(SPHelp.getData("password"));
     }
 
     /**
