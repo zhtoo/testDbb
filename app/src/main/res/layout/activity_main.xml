@@ -1,4 +1,4 @@
-<com.hs.doubaobao.view.ResideLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.hs.doubaobao.view.MyResideLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                    android:id="@+id/resideLayout"
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent">
@@ -9,4 +9,4 @@
     <!-- 在SlidingMenu中的索引1 -->
     <include layout="@layout/main"/>
 
-</com.hs.doubaobao.view.ResideLayout>
+</com.hs.doubaobao.view.MyResideLayout>

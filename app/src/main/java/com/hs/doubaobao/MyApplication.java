@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Process;
 
 import com.hs.doubaobao.utils.SPHelp;
-import com.hs.doubaobao.utils.log.CrashHandler;
 import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public class MyApplication extends Application {
         //主线程的线程id
         mMainThreadId = android.os.Process.myTid();
         // 抓取异常LOG，保存在本地
-        CrashHandler.getInstance().init(this);
+     //   CrashHandler.getInstance().init(this);
 
         //极光推送start
         JPushInterface.setDebugMode(true);

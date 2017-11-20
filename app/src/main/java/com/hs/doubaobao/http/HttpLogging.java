@@ -24,7 +24,6 @@ import okio.BufferedSource;
 /**
  * 作者：zhanghaitao on 2017/9/29 11:48
  * 邮箱：820159571@qq.com
- *
  * @describe:联网请求信息打印类
  */
 
@@ -55,11 +54,11 @@ public class HttpLogging implements Interceptor {
 
     public enum Level {
         /**
-         * No logs.
+         * 不打印日志
          */
         NONE,
         /**
-         * Logs request and response lines.
+         * 日志请求和响应行。
          * <p/>
          * <p>Example:
          * <pre>{@code
@@ -70,7 +69,7 @@ public class HttpLogging implements Interceptor {
          */
         BASIC,
         /**
-         * Logs request and response lines and their respective headers.
+         * 日志请求和响应行和它们各自的头信息
          * <p/>
          * <p>Example:
          * <pre>{@code
@@ -88,7 +87,7 @@ public class HttpLogging implements Interceptor {
          */
         HEADERS,
         /**
-         * Logs request and response lines and their respective headers and bodies (if present).
+         * 日志请求和响应行以及它们各自的头信息和主体(如果存在的话)。
          * <p/>
          * <p>Example:
          * <pre>{@code
@@ -114,7 +113,7 @@ public class HttpLogging implements Interceptor {
     private volatile Level level = Level.NONE;
 
     /**
-     * Change the level at which this interceptor logs.
+     * 更改拦截器日志的级别。
      */
     public HttpLogging setLevel(Level level) {
         if (level == null)
@@ -258,6 +257,7 @@ public class HttpLogging implements Interceptor {
     /**
      * Returns true if the body in question probably contains human readable text. Uses a small sample
      * of code points to detect unicode control characters commonly used in binary file signatures.
+     * 如果问题主体可能包含人类可读的文本，则返回true。使用一小段代码点来检测常用的二进制文件签名中的unicode控制字符。
      */
     static boolean isPlaintext(Buffer buffer) throws EOFException {
         try {

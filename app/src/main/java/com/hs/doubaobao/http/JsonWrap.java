@@ -25,7 +25,7 @@ public class JsonWrap {
             Gson gson = new Gson();
             t = gson.fromJson(jsonString, cls);
         } catch (Exception e) {
-            Logger.e("Json解析", e.toString());
+            Logger.e("Json解析错误", e.toString());
         }
         return t;
     }

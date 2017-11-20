@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +31,7 @@ import com.hs.doubaobao.adapter.HomeAdapter;
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.bean.ListBean;
+import com.hs.doubaobao.model.ApplyLoad.ApplyLoadActivity;
 import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
 import com.hs.doubaobao.model.Login.LoginActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
@@ -40,7 +42,8 @@ import com.hs.doubaobao.utils.SPHelp;
 import com.hs.doubaobao.utils.log.Logger;
 import com.hs.doubaobao.view.DotView;
 import com.hs.doubaobao.view.MyRelativeLayout;
-import com.hs.doubaobao.view.ResideLayout;
+import com.hs.doubaobao.view.MyResideLayout;
+import com.hs.doubaobao.view.main.Indicator;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -53,8 +56,18 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 /**
  * 主界面
  * rectification by zht on 2017/9/11  16:51
+ * █████▒█    ██  ▄████▄   ██ ▄█▀       ██████╗ ██╗   ██╗ ██████╗
+ * ▓██   ▒ ██  ▓██▒▒██▀ ▀█   ██▄█▒        ██╔══██╗██║   ██║██╔════╝
+ * ▒████ ░▓██  ▒██░▒▓█    ▄ ▓███▄░        ██████╔╝██║   ██║██║  ███╗
+ * ░▓█▒  ░▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄        ██╔══██╗██║   ██║██║   ██║
+ * ░▒█░   ▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄       ██████╔╝╚██████╔╝╚██████╔╝
+ * ▒ ░   ░▒▓▒ ▒ ▒ ░ ░▒ ▒  ░▒ ▒▒ ▓▒       ╚═════╝  ╚═════╝  ╚═════╝
+ * ░     ░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░
+ * ░ ░    ░░░ ░ ░ ░        ░ ░░ ░
+ * ░     ░ ░      ░  ░
+ * ░
  */
-public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener{
+public class MainActivity extends Activity implements MainContract.View, HomeAdapter.onItemClickListener, View.OnClickListener, PullToRefresh.PullToRefreshListener {
 
     private static final String TAG = "MainActivity";
     //控件
@@ -97,7 +110,9 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     //分页
     private int page = 1;
     private int pages = 1;
-    private ResideLayout mResideLayout;
+    private MyResideLayout mResideLayout;
+    private ViewPager viewPager;
+    private Indicator indicator;
 
 
     @Override
@@ -121,13 +136,14 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     protected void onStart() {
         super.onStart();
         mList.clear();
-        loadData("", "", "");
+        //TODO:为方便界面的书写注释
+        /*loadData("", "", "");*/
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-       // sliding_menu.startScroll(0);
+        // sliding_menu.startScroll(0);
     }
 
     /**
@@ -163,7 +179,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
      * 初始化视图
      */
     private void initView() {
-        mResideLayout = (ResideLayout) findViewById(R.id.resideLayout);
+        mResideLayout = (MyResideLayout) findViewById(R.id.resideLayout);
         ll_menu = (LinearLayout) findViewById(R.id.ll_menu);
         mMenu = (LinearLayout) findViewById(R.id.menu);
         //全局的灰色背景
@@ -191,7 +207,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         //菜单的三个条目(根据权限控制显示和隐藏)
         mMenuRisk = (LinearLayout) findViewById(R.id.menu_risk);
         mMenuManager = (LinearLayout) findViewById(R.id.menu_manager);
-        mMenuInvalid = (LinearLayout) findViewById(R.id.menu_invalid);
+        mMenuInvalid = (LinearLayout) findViewById(R.id.menu_authentication);
         //消息小红点
         mMainDot = (DotView) findViewById(R.id.main_dot);
         mMenuRiskDot = (DotView) findViewById(R.id.menu_risk_dot);
@@ -206,13 +222,64 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         mStatusBar.setBackgroundResource(R.drawable.ic_battery_bg);
         initRecyclerView();
         mSearch.setOnClickListener(this);
-    //    sliding_menu.setMenuShowListener(this);
+        //    sliding_menu.setMenuShowListener(this);
         mName.setOnClickListener(this);
 
         //ViewGroup.LayoutParams layoutParams = mMenuLogo.getLayoutParams();
         //layoutParams.width = sliding_menu.getWidthPixels() * 59 / 72;
         //layoutParams.height = sliding_menu.getWidthPixels() * 42 / 72;
         //mMenuLogo.setLayoutParams(layoutParams);
+
+        /**第三版的柱状图加VeiwPager*/
+
+
+        List<MainViewPagerDataBean> list = new ArrayList<>();
+
+        MainViewPagerDataBean bean = new MainViewPagerDataBean();
+        bean.setTitle("贷款个数最近7天统计");
+        bean.setTitleY("个数(个)");
+        bean.setRefreshNumber("1301每个月");
+        bean.setRefreshDate("最近更新：今天");
+        bean.setDate(new String[]{"10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06"});
+        bean.setValues(new int[]{12, 15, 86, 94, 53, 27, 65});
+
+        MainViewPagerDataBean bean1 = new MainViewPagerDataBean();
+        bean1.setTitle("贷款金额最近7天统计");
+        bean1.setTitleY("金额(万元)");
+        bean1.setRefreshNumber("1031每个月");
+        bean1.setRefreshDate("最近更新：昨天");
+        bean1.setDate(new String[]{"10-31", "11-01", "11-02", "11-03", "11-04", "11-05", "11-06"});
+        bean1.setValues(new int[]{56, 48, 65, 35, 48, 95, 55});
+
+        list.add(bean);
+        list.add(bean1);
+
+        viewPager = (ViewPager) findViewById(R.id.main_viewpager);
+        indicator = (Indicator) findViewById(R.id.indicator);
+        //设置ViewPager适配器
+        viewPager.setAdapter(new MainPagerAdapter(this, list));
+        //设置ViewPager的监听器
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                indicator.setoffset(position, positionOffset);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        mResideLayout.setViewPager(viewPager);
+        initPtrClassicFrameLayout();
+
+
     }
 
     /**
@@ -254,7 +321,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         adapter = new HomeAdapter(this, mList, 0);
         adapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(adapter);
-        initPtrClassicFrameLayout();
+
     }
 
     /**
@@ -265,8 +332,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         //创建PtrClassicFrameLayout的包装类对象
         PullToRefresh refresh = new PullToRefresh();
         //初始化PtrClassicFrameLayout
-        refresh.initPTR(this, ptrFrame);
-        refresh.initPTR(this, ptrFrame1);
+        refresh.initPTR(this, ptrFrame, viewPager);
+        refresh.initPTR(this, ptrFrame1, viewPager);
         //设置监听
         refresh.setPullToRefreshListener(this);
     }
@@ -410,17 +477,67 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
         }
     }
 
+    public void onLoadList(View v) {
+        Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onCustomManager(View v) {
+        Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onApplyLoad(View v) {
+        Intent intent = new Intent(this, ApplyLoadActivity.class);
+        startActivity(intent);
+    }
+
+    public void onVisit(View v) {
+        Toast.makeText(this, "3", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onLoanEvaluation(View v) {
+        Toast.makeText(this, "4", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onTrial(View v) {
+        Toast.makeText(this, "5", Toast.LENGTH_SHORT).show();
+    }
+
     public void onRiskClick(View v) {
+        Toast.makeText(this, "6", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onManagerClick(View v) {
+        Toast.makeText(this, "7", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onSignUp(View v) {
+        Toast.makeText(this, "8", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onLending(View v) {
+        Toast.makeText(this, "9", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onFinancialBlacklist(View v) {
+        Toast.makeText(this, "10", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onCommonWarningQuery(View v) {
+        Toast.makeText(this, "11", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onAuthentication(View v) {
+        Toast.makeText(this, "12", Toast.LENGTH_SHORT).show();
+    }
+
+    /*public void onRiskClick(View v) {
         onMenuItemClick(0);
     }
 
     public void onManagerClick(View v) {
         onMenuItemClick(1);
-    }
+    }*/
 
-    public void onInvalidClick(View v) {
-        onMenuItemClick(2);
-    }
 
     /**
      * 开始搜索
@@ -459,8 +576,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     public void onExit(View v) {
         Dialog alertDialog = new AlertDialog.Builder(this).
                 setMessage("您确定退出当前账号吗？").
-                setIcon(R.drawable.ic_launcher).
-                setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                //  setIcon(R.drawable.ic_launcher).
+                        setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -471,14 +588,14 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
                         finish();
                     }
                 }).
-                setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        setNegativeButton("取消", new DialogInterface.OnClickListener() {
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
 
-                    }
-                }).create();
+                            }
+                        }).create();
         alertDialog.show();
     }
 
@@ -500,11 +617,10 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
             vlues += key;
         }
 
-        if(TextUtils.isEmpty(vlues)){
+        if (TextUtils.isEmpty(vlues)) {
             mMenuRisk.setVisibility(View.GONE);
             mMenuManager.setVisibility(View.GONE);
-        }else
-        if (vlues.contains("9")) {
+        } else if (vlues.contains("9")) {
             mMenuRisk.setVisibility(View.VISIBLE);
             mMenuManager.setVisibility(View.VISIBLE);
         } else {
@@ -554,8 +670,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
             ptrFrame.setVisibility(View.VISIBLE);
             ptrFrame1.setVisibility(View.GONE);
         } else {
-            ptrFrame.setVisibility(View.GONE);
-            ptrFrame1.setVisibility(View.VISIBLE);
+            // ptrFrame.setVisibility(View.GONE);
+            // ptrFrame1.setVisibility(View.VISIBLE);
         }
         adapter.notifyDataSetChanged();
     }
@@ -568,8 +684,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     @Override
     public void setError(String text) {
         Toast.makeText(this, "网络不给力", Toast.LENGTH_SHORT).show();
-        ptrFrame.setVisibility(View.GONE);
-        ptrFrame1.setVisibility(View.VISIBLE);
+        // ptrFrame.setVisibility(View.GONE);
+        // ptrFrame1.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -587,7 +703,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
                 mSearch.setVisibility(View.GONE);
                 mSearchContainer.setVisibility(View.GONE);
             }
-           // sliding_menu.toggle();
+            // sliding_menu.toggle();
         }
     }
 

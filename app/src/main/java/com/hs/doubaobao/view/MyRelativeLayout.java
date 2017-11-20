@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
  * 作者：zhanghaitao on 2017/9/8 15:19
  * 邮箱：820159571@qq.com
  * rectification by zht on 2017/9/11  16:51
- * @describe:
+ * @describe:滑动事件拦截
  */
 
 public class MyRelativeLayout extends RelativeLayout {

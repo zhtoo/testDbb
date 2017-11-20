@@ -52,6 +52,7 @@ public class OKHttpWrap {
     private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");//mdiatype 这个需要和服务端保持一致
     private static final MediaType MEDIA_OBJECT_STREAM = MediaType.parse("text/x-markdown; charset=utf-8");//mdiatype 这个需要和服务端保持一致
 
+
     public static OKHttpWrap getOKHttpWrap(Context context) {
         loading = LoadWaiting.createDialog(context);
         if (okHttpWrap == null) {
@@ -82,7 +83,6 @@ public class OKHttpWrap {
         okHttpClient = builder.build();
 
         //获取主线程的handler
-        // handler = new Handler(Looper.getMainLooper());
         handler = MyApplication.getMainThreadHandler();
 
     }
@@ -185,18 +185,8 @@ public class OKHttpWrap {
      */
     public void upLoadFile(String url, HashMap<String, Object> paramsMap, final CallBack callback) {
         synchronized (MyApplication.getContext()) {
-            // 时间戳
-//            final String ts = String.valueOf(System.currentTimeMillis() / 1000);
-//            Map<String, Object> mParamsMap = new HashMap<>();
-//            mParamsMap.put("appkey", BaseParams.APP_KEY);
-//            mParamsMap.put("signa", getSigna(ts));
-//            mParamsMap.put("ts", ts);
-//            mParamsMap.put("mobileType", BaseParams.MOBILE_TYPE);
-//            mParamsMap.put("versionNumber", getVersion());
-//            mParamsMap.putAll(paramsMap);
-//            Log.e(TAG, mParamsMap.toString());
             Map<String, Object> mParamsMap = getRequestMap(paramsMap);
-            Logger.e("请求参数", mParamsMap.toString().replaceAll(",", "\n"));
+           // Logger.e("请求参数", mParamsMap.toString().replaceAll(",", "\n"));
             MultipartBody.Builder builder = new MultipartBody.Builder();
             //设置类型
             builder.setType(MultipartBody.FORM);

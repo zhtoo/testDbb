@@ -1,7 +1,8 @@
-package com.hs.doubaobao.base;
+package com.hs.doubaobao.model.ApplyLoad;
 
 import android.content.Context;
 
+import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
@@ -19,15 +20,15 @@ import okhttp3.Call;
  * @describe:复制粘贴类
  */
 
-public class CopyPresener implements CopyContract.Presenter {
+public class ApplyLoadPresener implements ApplyLoadContract.Presenter {
 
     private static final String TAG ="ApplyLoadPresener" ;
-    CopyContract.View viewRoot;
+    ApplyLoadContract.View viewRoot;
 
 
     private Context context;
 
-    public CopyPresener(CopyContract.View viewRoot, Context context) {
+    public ApplyLoadPresener(ApplyLoadContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
         this.context = context;
         viewRoot.setPresenter(this);

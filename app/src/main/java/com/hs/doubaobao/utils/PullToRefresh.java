@@ -1,6 +1,7 @@
 package com.hs.doubaobao.utils;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
@@ -17,11 +18,25 @@ import in.srain.cube.views.ptr.PtrHandler2;
 public class PullToRefresh {
 
     public <T> void initPTR(Context context, final PtrClassicFrameLayout ptrFrame) {
-        this.initPTR(context, ptrFrame, null);
+        this.initPTR(context, ptrFrame, null,null);
     }
 
-    public <T> void initPTR(Context context, final PtrClassicFrameLayout ptrFrame, PtrFrameLayout.Mode mode) {
+    public <T> void initPTR(Context context, final PtrClassicFrameLayout ptrFrame, ViewPager viewPager) {
+        this.initPTR(context, ptrFrame, null,viewPager);
+    }
+
+    public <T> void initPTR(Context context, final PtrClassicFrameLayout ptrFrame,  PtrFrameLayout.Mode mode) {
+        this.initPTR(context, ptrFrame, mode,null);
+    }
+
+
+    public <T> void initPTR(Context context, final PtrClassicFrameLayout ptrFrame, PtrFrameLayout.Mode mode, ViewPager viewPager) {
         ptrFrame.setEnabled(true);
+        ptrFrame.disableWhenHorizontalMove(true);
+        if (viewPager != null) {
+            ptrFrame.setView(viewPager);
+        }
+
 
         ptrFrame.setPtrHandler(new PtrHandler2() {
             @Override

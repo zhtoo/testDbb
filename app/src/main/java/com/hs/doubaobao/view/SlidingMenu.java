@@ -12,6 +12,7 @@ import android.widget.Scroller;
 /**
  * 首页的侧滑菜单控制器
  * rectification by zht on 2017/9/11  16:51
+ * @des：已经废弃，后期可以删除
  */
 public class SlidingMenu extends ViewGroup {
 

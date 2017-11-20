@@ -294,3 +294,12 @@
 -dontwarn android.webkit.WebView
 -dontwarn android.net.http.SslError
 -dontwarn Android.webkit.WebViewClient
+
+
+#使用了webview和js交互时的配置：
+#-keepclassmembers class com.hs.xx.Activity$AppAndroid {
+#  public *;
+#}
+#
+#-keepattributes *Annotation*
+#-keepattributes *JavascriptInterface*

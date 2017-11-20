@@ -32,6 +32,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+/**
+ * 带3D效果的侧滑菜单控件
+ */
 public class ResideLayout extends ViewGroup {
     private static final String TAG = "ResideLayout";
 
@@ -41,7 +44,7 @@ public class ResideLayout extends ViewGroup {
      * This indicates that there is more content available and provides
      * a "physical" edge to grab to pull it closed.
      */
-    private static final int DEFAULT_OVERHANG_SIZE = 100; // dp;
+    private static final int DEFAULT_OVERHANG_SIZE = 80; // dp;决定菜单展开的时候main界面的宽度
 
     /**
      * If no fade color is given by default it will fade to 80% gray.

@@ -16,14 +16,8 @@ import com.hs.doubaobao.base.AppBarActivity;
 import com.hs.doubaobao.base.BaseParams;
 import com.hs.doubaobao.bean.LoginBean;
 import com.hs.doubaobao.model.main.MainActivity;
-import com.hs.doubaobao.utils.Base64Util;
 import com.hs.doubaobao.utils.SPHelp;
 import com.hs.doubaobao.utils.log.Logger;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 作者：zhanghaitao on 2017/9/11 17:43
@@ -56,7 +50,8 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
         initListener();
 
         //将Presenter和View进行绑定
-        new LoginPresener(this,this);
+        //TODO:为方便界面的书写注释
+        /*new LoginPresener(this,this);*/
     }
 
     /**
@@ -139,7 +134,15 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.login_btn_sure) {
-            String name = loginUsername.getText().toString().trim();
+
+            //TODO:为方便界面的书写注释
+            //跳转到主界面
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.putExtra("name", "测试界面");
+            startActivity(intent);
+            finish();
+
+           /* String name = loginUsername.getText().toString().trim();
             String password = loginPwd.getText().toString().trim();
             //保存用户名和密码
             SPHelp.setData("name", name);
@@ -156,7 +159,7 @@ public class LoginActivity extends AppBarActivity implements LoginContract.View 
                 map.put("pwd", Base64Util.encode(password));
                 //获取数据
                 presenter.getData(map);
-            }
+            }*/
         }
     }
 
