@@ -24,7 +24,7 @@ import okio.BufferedSource;
 /**
  * 作者：zhanghaitao on 2017/9/29 11:48
  * 邮箱：820159571@qq.com
- * @describe:联网请求信息打印类
+ * @describe:拦截器----用于联网请求信息打印类。
  */
 
 public class HttpLogging implements Interceptor {
@@ -113,7 +113,7 @@ public class HttpLogging implements Interceptor {
     private volatile Level level = Level.NONE;
 
     /**
-     * 更改拦截器日志的级别。
+     * 设置拦截器日志的级别。
      */
     public HttpLogging setLevel(Level level) {
         if (level == null)
@@ -257,7 +257,7 @@ public class HttpLogging implements Interceptor {
     /**
      * Returns true if the body in question probably contains human readable text. Uses a small sample
      * of code points to detect unicode control characters commonly used in binary file signatures.
-     * 如果问题主体可能包含人类可读的文本，则返回true。使用一小段代码点来检测常用的二进制文件签名中的unicode控制字符。
+     * 如果问题主体可能包含可读的文本，则返回true。使用一小段代码点来检测常用的二进制文件签名中的unicode控制字符。
      */
     static boolean isPlaintext(Buffer buffer) throws EOFException {
         try {

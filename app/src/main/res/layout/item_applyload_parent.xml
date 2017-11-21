@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/parent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/parent"
+              android:layout_width="wrap_content"
+              android:layout_height="@dimen/y120"
+              android:background="@android:color/white"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/y22"
+              android:layout_marginLeft="@dimen/x10"
+              android:layout_marginRight="@dimen/x10"
+              android:orientation="horizontal">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/parent_name"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="12dp"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="张三"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/x36"
+        android:layout_marginLeft="@dimen/x35"/>
 
-        <TextView
-            android:id="@+id/parent_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="张三"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="18sp"
-            />
+    <TextView
+        android:id="@+id/parent_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2017-11-01"
+        android:textColor="#808080"
+        android:textSize="@dimen/x28"
+        android:layout_marginLeft="@dimen/x35"/>
 
-        <TextView
-            android:id="@+id/parent_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这是父item"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="18sp"
-            />
+    <View
+        style="@style/autoFillStyle"/>
 
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/arrow_expand_imageview"
+        android:layout_width="@dimen/x60"
+        android:layout_height="@dimen/y57"
+        android:layout_marginRight="@dimen/x22"
+        android:src="@drawable/selector_arrow_down"/>
 
 
-</RelativeLayout>
+</LinearLayout>

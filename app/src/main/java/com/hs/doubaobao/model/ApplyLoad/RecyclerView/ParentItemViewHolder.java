@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 
-import com.hs.doubaobao.MyApplication;
+import com.hs.doubaobao.R;
 import com.zht.expandablerecyclerview.ParentViewHolder;
 
 /**
@@ -28,14 +28,11 @@ public class ParentItemViewHolder extends ParentViewHolder {
 
     public ParentItemViewHolder(@NonNull View itemView) {
         super(itemView);
-       // mArrowExpandImageView = (ImageView) itemView.findViewById(R.id.arrow_expand_imageview);
-        mArrowExpandImageView = new ImageView(MyApplication.getContext());
+        mArrowExpandImageView = (ImageView) itemView.findViewById(R.id.arrow_expand_imageview);
     }
 
-    public void bind(ParentItem parentItem) {
-
+    public void bind(ParentItem parentItem, int parentPosition) {
     }
-
 
     @SuppressLint("NewApi")
     @Override
@@ -72,6 +69,7 @@ public class ParentItemViewHolder extends ParentViewHolder {
             mArrowExpandImageView.startAnimation(rotateAnimation);
         }
     }
+
 
 
 }

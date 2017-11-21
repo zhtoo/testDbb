@@ -1,123 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/parent"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/parent"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/y350"
+              android:layout_marginLeft="@dimen/x10"
+              android:layout_marginRight="@dimen/x10"
+              android:background="@android:color/white"
+              android:gravity="center_vertical"
+              android:orientation="vertical">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="性别："
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+        android:layout_marginTop="@dimen/y10"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:text="ID："
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                style="@style/expandableListChildItem1"
+                android:text="贷款用途："/>
+
+            <TextView
+                style="@style/expandableListChildItem1"
+                android:text="电话号码："/>
+
+            <TextView
+                style="@style/expandableListChildItem1"
+                android:text="门店名称："
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:text="个性签名："
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_load_use"
+                style="@style/expandableListChildItem2"
+                android:text="买小黄车撒大受打击撒大声大坏蛋"
+                />
+
+            <TextView
+                android:id="@+id/item_telphone"
+                style="@style/expandableListChildItem2"
+                android:text="13517194559"
+                />
+
+            <TextView
+                android:id="@+id/item_store_name"
+                style="@style/expandableListChildItem2"
+                android:text="合肥总部"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/expandableListChildItem1"
+                android:text="贷款类别："
+                />
+
+            <TextView
+                style="@style/expandableListChildItem1"
+                android:text="申请期限："
+                />
+
+            <TextView
+                style="@style/expandableListChildItem1"
+                android:text="贷款金额："
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_loan_categories"
+                style="@style/expandableListChildItem2"
+                android:text="网汇贷"
+                />
+
+            <TextView
+                android:id="@+id/item_application_period"
+                style="@style/expandableListChildItem2"
+                android:text="11期"
+                />
+
+
+            <TextView
+                android:id="@+id/item_loan_amount"
+                style="@style/expandableListChildItem2"
+                android:text="12万"
+                />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/linearLayout1"
-        android:orientation="vertical">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="女"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="42154564"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-        <TextView
-            android:id="@+id/child_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="这是子item"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
+    <Button
+        android:id="@+id/item_particulars"
+        android:layout_width="@dimen/x150"
+        android:layout_height="@dimen/y80"
+        android:layout_gravity="right"
+        android:layout_marginBottom="@dimen/y20"
+        android:layout_marginRight="@dimen/x22"
+        android:text="详情"/>
 
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_toRightOf="@id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_marginLeft="30dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="位置："
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="加入时间："
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_toRightOf="@id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="合肥"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2017-11-01"
-            android:textColor="@android:color/black"
-            android:textSize="14sp" />
-
-
-    </LinearLayout>
-
-
-
-
-
-</RelativeLayout>
+</LinearLayout>
