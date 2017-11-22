@@ -67,7 +67,7 @@ public class DotView extends ImageView {
     /**
      * Dot默认宽度或高度
      */
-    private int defaultSize = 10;
+    private int defaultSize = DensityUtil.getPixels(R.dimen.x12);
 
     /**
      * 修改DoT默认尺寸

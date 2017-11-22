@@ -63,6 +63,8 @@
         <activity android:name=".model.Login.LoginActivity"/>
         <!--主界面-->
         <activity android:name=".model.main.MainActivity"/>
+        <!--贷款列表-->
+        <activity android:name=".model.LoanList.LoadListActivity"/>
         <!--借款申请-->
         <activity android:name=".model.ApplyLoad.ApplyLoadActivity"/>
         <!--风控审批-->

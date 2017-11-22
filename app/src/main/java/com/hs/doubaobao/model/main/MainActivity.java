@@ -33,6 +33,7 @@ import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.bean.ListBean;
 import com.hs.doubaobao.model.ApplyLoad.ApplyLoadActivity;
 import com.hs.doubaobao.model.GeneralManager.GeneralManagerApprovalActivity;
+import com.hs.doubaobao.model.LoanList.LoadListActivity;
 import com.hs.doubaobao.model.Login.LoginActivity;
 import com.hs.doubaobao.model.detail.DetailActivity;
 import com.hs.doubaobao.model.invalid.InvalidListActivity;
@@ -478,7 +479,8 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     }
 
     public void onLoadList(View v) {
-        Toast.makeText(this, "0", Toast.LENGTH_SHORT).show();
+       // LoadListActivity
+        startActivity(LoadListActivity.class);
     }
 
     public void onCustomManager(View v) {
@@ -486,8 +488,7 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
     }
 
     public void onApplyLoad(View v) {
-        Intent intent = new Intent(this, ApplyLoadActivity.class);
-        startActivity(intent);
+        startActivity(ApplyLoadActivity.class);
     }
 
     public void onVisit(View v) {
@@ -524,6 +525,11 @@ public class MainActivity extends Activity implements MainContract.View, HomeAda
 
     public void onCommonWarningQuery(View v) {
         Toast.makeText(this, "11", Toast.LENGTH_SHORT).show();
+    }
+
+    public void startActivity(Class clazz){
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
     }
 
     public void onAuthentication(View v) {

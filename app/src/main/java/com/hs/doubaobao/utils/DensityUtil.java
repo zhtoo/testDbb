@@ -5,6 +5,8 @@ import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
+import com.hs.doubaobao.MyApplication;
+
 /**
 * @ClassName: DensityUtil 
 * @Description:屏幕尺寸转换工具类
@@ -70,7 +72,7 @@ public class DensityUtil {
 	 *
 	 * @return
 	 */
-	public int getHeightPixels(Context context) {
+	public static int getHeightPixels(Context context) {
 		DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
 		Configuration cf = context.getResources().getConfiguration();
 		int ori = cf.orientation;
@@ -81,4 +83,11 @@ public class DensityUtil {
 		}
 		return 0;
 	}
+
+
+	public static int getPixels(int dimenResId) {
+		return (int) MyApplication.getContext().getResources().getDimension(dimenResId);
+	}
+
+
 }

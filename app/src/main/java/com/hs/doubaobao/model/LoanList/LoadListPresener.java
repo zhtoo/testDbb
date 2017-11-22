@@ -3,7 +3,6 @@ package com.hs.doubaobao.model.LoanList;
 import android.content.Context;
 
 import com.hs.doubaobao.base.BaseParams;
-import com.hs.doubaobao.base.CopyContract;
 import com.hs.doubaobao.bean.HomeBean;
 import com.hs.doubaobao.http.JsonWrap;
 import com.hs.doubaobao.http.OKHttpWrap;
@@ -21,15 +20,15 @@ import okhttp3.Call;
  * @describe:复制粘贴类
  */
 
-public class LoadListPresener implements CopyContract.Presenter {
+public class LoadListPresener implements LoadListContract.Presenter {
 
     private  final String TAG =getClass().getSimpleName();
-    CopyContract.View viewRoot;
+    LoadListContract.View viewRoot;
 
 
     private Context context;
 
-    public LoadListPresener(CopyContract.View viewRoot, Context context) {
+    public LoadListPresener(LoadListContract.View viewRoot, Context context) {
         this.viewRoot = viewRoot;
         this.context = context;
         viewRoot.setPresenter(this);
