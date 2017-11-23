@@ -67,6 +67,7 @@
         <activity android:name=".model.LoanList.LoadListActivity"/>
         <!--借款申请-->
         <activity android:name=".model.ApplyLoad.ApplyLoadActivity"/>
+                <activity android:name=".model.AddLoanTable.AddLoanTableActivity"/>
         <!--风控审批-->
         <activity android:name=".model.riskControl.RiskControlApprovalActivity"/>
         <!--总经理审批-->

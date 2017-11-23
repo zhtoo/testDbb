@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.hs.doubaobao.R;
-import com.hs.doubaobao.view.CircleImageView;
 
 import java.util.List;
 
@@ -51,14 +50,12 @@ public class ColumnAdapter extends ArrayAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.first_column, null);
             holder = new ViewHolder();
-          //  holder.icon = (CircleImageView) convertView.findViewById(R.id.custom_image);
             holder.text = (TextView) convertView.findViewById(R.id.custom_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-      //  holder.icon.setImageResource(holder.images[position%4]);
         holder.text.setText(columnDataList.get(position));
 
         if (position%2==0){
@@ -71,8 +68,6 @@ public class ColumnAdapter extends ArrayAdapter {
     }
 
     class ViewHolder {
-        private int[] images = {R.drawable.test0,R.drawable.test1,R.drawable.test2,R.drawable.test3};
-        CircleImageView icon;
         TextView text;
     }
 

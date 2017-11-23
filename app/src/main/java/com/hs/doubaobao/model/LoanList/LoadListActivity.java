@@ -103,15 +103,15 @@ public class LoadListActivity extends AppCompatActivity implements LoadListContr
     private void initContentDataList() {
         for (int i = 1; i < 21; i++) {
             Map<String, String> data = new HashMap<>();
-            data.put("1", i+"贷款金额");
-            data.put("2", i+"状态");
-            data.put("3", i+"申请期限");
-            data.put("4", i+"贷款类别");
-            data.put("5", i+"放款金额");
-            data.put("6", i+"贷款用途");
-            data.put("7", i+"电话号码");
-            data.put("8", i+"门店名称");
-            data.put("9", i+"贷款时间");
+            data.put("1", "贷款金额"+i);
+            data.put("2", "贷款状态"+i);
+            data.put("3", "申请期限"+i);
+            data.put("4", "贷款类别"+i);
+            data.put("5", "放款金额"+i);
+            data.put("6", "贷款用途"+i);
+            data.put("7", "电话号码"+i);
+            data.put("8", "门店名称"+i);
+            data.put("9", "贷款时间"+i);
             contentList.add(data);
         }
     }

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.hs.doubaobao.R;
 import com.hs.doubaobao.utils.DensityUtil;
+import com.hs.doubaobao.utils.log.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public abstract class PanelListAdapter {
      */
 
     private int titleHeight = DensityUtil.getPixels(R.dimen.y75);
-    private int titleWidth = DensityUtil.getPixels(R.dimen.x200);//像素
+    private int titleWidth = DensityUtil.getPixels(R.dimen.x206);//像素
     private int columnItemHeight;//左边列表的行高取决于内容列表的行高
 
     private String title = "";
@@ -88,15 +89,15 @@ public abstract class PanelListAdapter {
     private HorizontalScrollListener horizontalScrollListener = new HorizontalScrollListener();
     private VerticalScrollListener verticalScrollListener = new VerticalScrollListener();
     private int[] textWidths = {
-            DensityUtil.getPixels(R.dimen.x222),
-            DensityUtil.getPixels(R.dimen.x298),
-            DensityUtil.getPixels(R.dimen.x168),
-            DensityUtil.getPixels(R.dimen.x207),
-            DensityUtil.getPixels(R.dimen.x145),
-            DensityUtil.getPixels(R.dimen.x292),
-            DensityUtil.getPixels(R.dimen.x228),
-            DensityUtil.getPixels(R.dimen.x325),
-            DensityUtil.getPixels(R.dimen.x195)};
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257)};
     private int lenth;
 
 
@@ -124,6 +125,7 @@ public abstract class PanelListAdapter {
         for (int i = 0; i < textWidths.length; i++) {
             lenth += textWidths[i];
             coordinate[i + 1] = lenth;
+            Logger.e(TAG, "" + lenth);
         }
 
 
@@ -350,7 +352,7 @@ public abstract class PanelListAdapter {
         // clear root viewGroup
         pl_root.removeView(lv_content);
 
-        /*dot*/
+        /**dot*/
         LinearLayout layout = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -388,13 +390,14 @@ public abstract class PanelListAdapter {
         titlePaint.setColor(context.getResources().getColor(R.color.Orange));
         titlePaint.setTextSize(DensityUtil.getPixels(R.dimen.x28));
 
-        tv_title.setGravity(Gravity.CENTER);
+        tv_title.setGravity(Gravity.CENTER_VERTICAL);
         tv_title.setBackgroundColor(context.getResources().getColor(R.color.white));
         tv_title.setTextColor(context.getResources().getColor(R.color.Orange));
         tv_title.setId(View.generateViewId());//设置一个随机id，这样可以保证不冲突
-        RelativeLayout.LayoutParams lp_tv_title = new RelativeLayout.LayoutParams(titleWidth, titleHeight);
+        tv_title.setPadding(DensityUtil.getPixels(R.dimen.x24), 0, 0, 0);
+        RelativeLayout.LayoutParams lp_tv_title = new RelativeLayout.LayoutParams(
+                titleWidth, titleHeight);
         lp_tv_title.addRule(RelativeLayout.BELOW, layout.getId());
-        /**添加到pl_root*/
         pl_root.addView(tv_title, lp_tv_title);
 
 
@@ -415,7 +418,6 @@ public abstract class PanelListAdapter {
         lp_mhsv_row.addRule(RelativeLayout.RIGHT_OF, tv_title.getId());
 
         pl_root.addView(mhsv_row, lp_mhsv_row);
-
 
         /*line*/
         LinearLayout view = new LinearLayout(context);
@@ -440,7 +442,8 @@ public abstract class PanelListAdapter {
 
         lv_column.setId(View.generateViewId());
         lv_column.setVerticalScrollBarEnabled(false);//去掉滚动条
-        final RelativeLayout.LayoutParams lp_lv_column = new RelativeLayout.LayoutParams(titleWidth, ViewGroup.LayoutParams.MATCH_PARENT);
+        final RelativeLayout.LayoutParams lp_lv_column =
+                new RelativeLayout.LayoutParams(titleWidth, ViewGroup.LayoutParams.MATCH_PARENT);
         lp_lv_column.addRule(RelativeLayout.BELOW, view.getId());
         pl_root.addView(lv_column, lp_lv_column);
 
@@ -513,12 +516,15 @@ public abstract class PanelListAdapter {
         List<String> rowDataList1 = getRowDataList(rowCount);
 
         //在这里获取可以滑动的View在什么位置
-
-        Showlength = (int) (DensityUtil.getWidthPixels(context) - mhsv_row.getX());
+        /**初始化小圆球*/
+        Showlength = (int) (DensityUtil.getWidthPixels(context) - titleWidth);
         firstShowItem = 0;
         lastShowItem = 0;
         for (int i = 0; i < coordinate.length - 1; i++) {
-            if (Showlength > coordinate[i] && Showlength <= coordinate[i + 1]) {
+            if (Showlength == coordinate[i]) {
+                lastShowItem = i - 1;
+                break;
+            } else if (Showlength > coordinate[i] + 10 && Showlength < coordinate[i + 1]) {
                 lastShowItem = i;
                 break;
             }
@@ -527,7 +533,6 @@ public abstract class PanelListAdapter {
 
 
         //分隔线的设置，如果content的item设置了分割线，那row使用相同的分割线，除非单独给row设置了分割线
-//        ll_row.setBackgroundColor(Color.parseColor(rowColor));
         if (rowDivider == null) {
             ll_row.setDividerDrawable(ll_contentItem.getDividerDrawable());
         } else {
@@ -543,7 +548,8 @@ public abstract class PanelListAdapter {
             rowPaint.setFakeBoldText(false);
             rowPaint.setTextSize(DensityUtil.getPixels(R.dimen.x28));
             rowItem.setTextColor(context.getResources().getColor(R.color.Orange));
-            rowItem.setWidth(textWidths[i]);//设置宽度
+           // rowItem.setWidth(textWidths[i]);//设置宽度
+            rowItem.setWidth(contentItem.getWidth());//设置宽度
             rowItem.setHeight(titleHeight);//设置高度
             rowItem.setGravity(Gravity.CENTER_VERTICAL);
             TextView line = new TextView(context);
@@ -557,6 +563,9 @@ public abstract class PanelListAdapter {
         }
     }
 
+    /**
+     * 根据显示的条目改变小圆点的状态
+     */
     private void changeDotBackground() {
         for (int i = 0; i < dotList.size() - 1; i++) {
             if (firstShowItem <= i && i <= lastShowItem) {
@@ -626,22 +635,29 @@ public abstract class PanelListAdapter {
             } else {
                 mhsv_content.scrollTo(l, t);
             }
-            int StartCoordinate = l;
-            int LastCoordinate = l + Showlength;
-
-            for (int i = 0; i < coordinate.length; i++) {
-                if (StartCoordinate > coordinate[i] && StartCoordinate < coordinate[i + 1]) {
-                    firstShowItem = i;
-                    break;
-                }
-            }
-            for (int i = 0; i < coordinate.length - 1; i++) {
-                if (LastCoordinate > coordinate[i] && LastCoordinate < coordinate[i + 1]) {
-                    lastShowItem = i;
-                    break;
-                }
-            }
+            changShowItremPosition(l);
             changeDotBackground();
+        }
+    }
+
+    /**
+     * 动态获取展示条目的位置
+     * @param l
+     */
+    private void changShowItremPosition(int l) {
+        int StartCoordinate = l;
+        int LastCoordinate = l + Showlength;
+        for (int i = 0; i < coordinate.length; i++) {
+            if (StartCoordinate > coordinate[i]-20 && StartCoordinate < coordinate[i + 1]) {
+                firstShowItem = i;
+                break;
+            }
+        }
+        for (int i = 0; i < coordinate.length - 1; i++) {
+            if (LastCoordinate > coordinate[i] && LastCoordinate < coordinate[i + 1]) {
+                lastShowItem = i;
+                break;
+            }
         }
     }
 

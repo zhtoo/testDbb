@@ -1,14 +1,22 @@
 package com.hs.doubaobao.model.ApplyLoad;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.hs.doubaobao.R;
+import com.hs.doubaobao.base.TransparentBarActivity;
 import com.hs.doubaobao.bean.HomeBean;
+import com.hs.doubaobao.model.AddLoanTable.AddLoanTableActivity;
 import com.hs.doubaobao.model.ApplyLoad.RecyclerView.ApplyLoadAdapter;
 import com.hs.doubaobao.model.ApplyLoad.RecyclerView.ChildItem;
 import com.hs.doubaobao.model.ApplyLoad.RecyclerView.ParentItem;
@@ -25,11 +33,14 @@ import java.util.List;
  * @describe:
  */
 
-public class ApplyLoadActivity extends AppCompatActivity implements ApplyLoadContract.View {
+public class ApplyLoadActivity extends TransparentBarActivity implements ApplyLoadContract.View {
 
 
     private ApplyLoadContract.Presenter presenter;
     private RecyclerView recyclerView;
+    private RelativeLayout test;
+    private EditText editText;
+    private ImageView image;
 
 
     @Override
@@ -39,8 +50,32 @@ public class ApplyLoadActivity extends AppCompatActivity implements ApplyLoadCon
         setContentView(R.layout.activity_apply_load);
 
         recyclerView = (RecyclerView) findViewById(R.id.applyload_recyclerview);
+        test = (RelativeLayout) findViewById(R.id.apply_list_test);
+        editText = (EditText) findViewById(R.id.apply_list_edit);
+        image = (ImageView) findViewById(R.id.apply_list_search);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setVisibility(View.VISIBLE);
+                ShowSearchAnimator(0f, 1f);
+            }
+        });
+
+        setBarAlpha(100);
+        initData();
+
+        //将Presenter和View进行绑定
+        new ApplyLoadPresener(this, this);
+        //presenter.getData(new LinkedHashMap());
+    }
+
+    /**
+     * 初始化数据（temp）
+     */
+    private void initData() {
         final List<ParentItem> parentItems = new ArrayList<>();
 
         for (int i = 1; i < 21; i++) {
@@ -78,12 +113,38 @@ public class ApplyLoadActivity extends AppCompatActivity implements ApplyLoadCon
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-        //将Presenter和View进行绑定
-        new ApplyLoadPresener(this, this);
-        //presenter.getData(new LinkedHashMap());
     }
 
+
+    private void ShowSearchAnimator(float start, float end) {
+        //设置缩放的相对位置
+        test.setPivotX(editText.getWidth());//相对于控件的位子
+        test.setPivotY(0);
+
+        ObjectAnimator anim = ObjectAnimator//
+                .ofFloat(test, "apply_load", start, end)//设置变化目标值
+                .setDuration(500);//设置动画时间
+        anim.start();
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float cVal = (Float) animation.getAnimatedValue();
+               // test.setAlpha(cVal);
+                test.setScaleX(cVal);
+               // editText.setScaleY(cVal);
+            }
+        });
+
+    }
+
+    /**
+     * 跳转到创建新表界面
+     * @param view
+     */
+    public void onAddNewTable(View view) {
+        Intent intent = new Intent(this,AddLoanTableActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void setData(HomeBean bean) {
@@ -98,5 +159,8 @@ public class ApplyLoadActivity extends AppCompatActivity implements ApplyLoadCon
     @Override
     public void setPresenter(ApplyLoadContract.Presenter presenter) {
         this.presenter = presenter;
+    }
+
+    public void onAddNewable(View view) {
     }
 }

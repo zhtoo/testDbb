@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
+apply plugin: 'com.jakewharton.butterknife'
 
 def releaseTime() {
     return new Date().format("yyyy-MM-dd_HH_mm_ss", TimeZone.getTimeZone("GMT+8"))
@@ -143,8 +143,8 @@ dependencies {
     //okHttp3的依赖
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     // butterknife 库的引用
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //上拉加载，下拉刷新
     compile(name: 'UltraPTR', ext: 'aar')
     //可扩展的RecyclerView
