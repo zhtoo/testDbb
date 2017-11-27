@@ -19,4 +19,12 @@
     <string name="customer_phone">客户电话</string>
 
 
+    <!--基本信息填写（必填项）-->
+    <string-array name="fillout_tab_item">
+        <item>基本信息</item>
+        <item>居住信息</item>
+        <item>资产信息</item>
+    </string-array>
+
+
 </resources>

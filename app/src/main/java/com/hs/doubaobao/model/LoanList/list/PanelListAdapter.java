@@ -352,7 +352,7 @@ public abstract class PanelListAdapter {
         // clear root viewGroup
         pl_root.removeView(lv_content);
 
-        /**dot*/
+        /**dot小圆点*/
         LinearLayout layout = new LinearLayout(context);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -368,7 +368,7 @@ public abstract class PanelListAdapter {
                         DensityUtil.getPixels(R.dimen.x40));
         for (int i = 0; i < textWidths.length + 1; i++) {
             ImageView dot = new ImageView(context);
-            dot.setBackgroundResource(R.drawable.ic_dot_orange);
+            dot.setBackgroundResource(R.drawable.ic_orange_dot);
             LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(
                     DensityUtil.getPixels(R.dimen.x12),
                     DensityUtil.getPixels(R.dimen.x12));
@@ -569,9 +569,9 @@ public abstract class PanelListAdapter {
     private void changeDotBackground() {
         for (int i = 0; i < dotList.size() - 1; i++) {
             if (firstShowItem <= i && i <= lastShowItem) {
-                dotList.get(i + 1).setBackgroundResource(R.drawable.ic_dot_orange);
+                dotList.get(i + 1).setBackgroundResource(R.drawable.ic_orange_dot);
             } else {
-                dotList.get(i + 1).setBackgroundResource(R.drawable.ic_dot_gray);
+                dotList.get(i + 1).setBackgroundResource(R.drawable.ic_gray_dot);
             }
         }
     }
