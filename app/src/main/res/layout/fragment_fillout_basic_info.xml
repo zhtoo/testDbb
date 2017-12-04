@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:scrollIndicators="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundGrey"
+        android:orientation="vertical">
+
+        <View
+            style="@style/horizontalLine"
+            android:layout_marginTop="@dimen/y10"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_name"
+                style="@style/filloutItemText"
+                android:text="贷款人姓名："/>
+
+            <View
+                style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_name_edit"
+                style="@style/filloutItemEdit"
+                android:hint="请输入姓名"/>
+
+        </LinearLayout>
+
+        <View
+            style="@style/horizontalLine"
+            android:layout_marginLeft="@dimen/y22"/>
+
+        <LinearLayout style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_id_card"
+                style="@style/filloutItemText"
+                android:text="身份证号码："/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <EditText
+                android:theme="@style/MyEditText"
+                android:id="@+id/lender_id_card_edit"
+                style="@style/filloutItemEdit"
+                android:hint="请输入身份证号码"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"/>
+
+        <View
+            style="@style/horizontalLine"
+            android:layout_marginTop="@dimen/y10"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_sex"
+                style="@style/filloutItemText"
+                android:text="性别："/>
+
+            <View
+                style="@style/autoFillStyle"/>
+
+            <RadioGroup
+                android:id="@+id/lender_sex_group"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/lender_sex_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_button_style"
+                    android:text="男"
+                    android:textSize="@dimen/x28"/>
+
+                <RadioButton
+                    android:id="@+id/lender_sex_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/radio_button_style"
+                    android:text="女"
+                    android:textSize="@dimen/x28"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"
+            android:layout_marginLeft="@dimen/x22"/>
+
+        <LinearLayout
+            android:id="@+id/lender_marital_status_edit"
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_marital_status"
+                style="@style/filloutItemText"
+                android:text="婚姻状况："/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <TextView
+                android:id="@+id/lender_marital_status_text"
+                style="@style/filloutItemEdit"
+                android:text="请选择"/>
+
+            <ImageView style="@style/filloutImageStyle"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"
+            android:layout_marginLeft="@dimen/x22"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_domicile"
+                style="@style/filloutItemText"
+                android:text="户籍所在地："/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_domicile_edit"
+                style="@style/filloutItemEdit"
+                android:hint="请输入户籍所在地"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"
+              android:layout_marginLeft="@dimen/x22"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_phone"
+                style="@style/filloutItemText"
+                android:text="移动电话："/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_phone_edit"
+                style="@style/filloutItemEdit"
+                android:hint="请输入手机号码"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"/>
+
+    </LinearLayout>
+</ScrollView>

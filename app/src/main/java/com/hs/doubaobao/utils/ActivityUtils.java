@@ -1,8 +1,11 @@
 package com.hs.doubaobao.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
+import com.hs.doubaobao.MyApplication;
 import com.hs.doubaobao.utils.log.Logger;
 
 import java.lang.ref.WeakReference;
@@ -17,7 +20,7 @@ public final class ActivityUtils {
     private static final ActivityStack STACK = new ActivityStack();
 
     /**
-     * push this activity to stack
+     * 将activity推到堆栈中
      */
     public static void push(Activity activity) {
         Logger.i(TAG, "push = " + activity);
@@ -25,7 +28,7 @@ public final class ActivityUtils {
     }
 
     /**
-     * pop top activity from stack
+     * 从堆栈中弹出顶部activity
      */
     public static void pop() {
         Activity activity = STACK.popFromStack();
@@ -34,7 +37,7 @@ public final class ActivityUtils {
     }
 
     /**
-     * remove this activity from stack, maybe is null
+     * 从堆栈中删除该activity，可能是null
      */
     public static void remove(Activity activity) {
         Logger.i(TAG, "remove = " + activity);
@@ -81,20 +84,20 @@ public final class ActivityUtils {
     /**
      * 退出APP
      */
-//    public static void onExit() {
-//        final long now = System.currentTimeMillis();
-//        if (now <= lastExitPressedMills + MAX_DOUBLE_EXIT_MILLS) {
-//            finishAll();
-//            MyApplication.getContext().watcher.stopWatch();
-//            System.exit(0);
-//        } else {
-//            Context context = peek();
-//            if (context != null) {
-//                Toast.makeText(context, context.getString(R.string.app_exit), Toast.LENGTH_SHORT).show();
-//            }
-//            lastExitPressedMills = now;
-//        }
-//    }
+    public static void onExit() {
+        final long now = System.currentTimeMillis();
+        if (now <= lastExitPressedMills + MAX_DOUBLE_EXIT_MILLS) {
+            finishAll();
+            MyApplication.getWatcher().stopWatch();
+            System.exit(0);
+        } else {
+            Context context = peek();
+            if (context != null) {
+                Toast.makeText(context, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            }
+            lastExitPressedMills = now;
+        }
+    }
 
     /**
      * 退出APP

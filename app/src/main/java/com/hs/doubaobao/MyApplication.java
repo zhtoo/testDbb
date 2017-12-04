@@ -30,6 +30,12 @@ public class MyApplication extends Application {
     private static int mMainThreadId;
     private Map<String, String> mMemProtocolCacheMap = new HashMap<>();
 
+    /**
+     * 用于监听APP是否到后台
+     */
+    private static GestureLockWatcher watcher;
+
+
     @Override
     public void onCreate() {//程序的入口方法
         //上下文
@@ -41,6 +47,17 @@ public class MyApplication extends Application {
         // 抓取异常LOG，保存在本地
      //   CrashHandler.getInstance().init(this);
 
+        // 监听APP是否到后台
+        watcher = new GestureLockWatcher(this);
+        watcher.setOnScreenPressedListener(new GestureLockWatcher.OnScreenPressedListener() {
+            @Override
+            public void onPressed() {
+                //LockLogic.getInstance().start();
+                //TODO:锁屏开始
+            }
+        });
+        watcher.startWatch();
+
         //极光推送start
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
@@ -50,6 +67,7 @@ public class MyApplication extends Application {
             //设置别名
             setAlias();
         }
+
 
 
         //极光推送end
@@ -172,9 +190,13 @@ public class MyApplication extends Application {
     };
     //极光推送设置别名end
 
-
-
-
+    /**
+     * 获取监听APP是否到后台的监听器
+     * @return
+     */
+    public static GestureLockWatcher getWatcher() {
+        return watcher;
+    }
 
     /**
      * 获取MEM协议缓存集合

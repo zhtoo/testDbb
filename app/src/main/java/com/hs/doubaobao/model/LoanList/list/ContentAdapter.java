@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,15 +37,15 @@ public class ContentAdapter extends ArrayAdapter {
     private int resourceId;
     private int itemHeight = 80;//单位dp
     private int[] textWidths = {
-            DensityUtil.getPixels(R.dimen.x222),
-            DensityUtil.getPixels(R.dimen.x298),
-            DensityUtil.getPixels(R.dimen.x168),
-            DensityUtil.getPixels(R.dimen.x207),
-            DensityUtil.getPixels(R.dimen.x145),
-            DensityUtil.getPixels(R.dimen.x292),
-            DensityUtil.getPixels(R.dimen.x228),
-            DensityUtil.getPixels(R.dimen.x325),
-            DensityUtil.getPixels(R.dimen.x195)};
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257),
+            DensityUtil.getPixels(R.dimen.x257)};
     ;
 
     ContentAdapter(Context context, int resourceId, List<Map<String, String>> contentList, ListView lv_content) {
@@ -70,16 +71,13 @@ public class ContentAdapter extends ArrayAdapter {
             convertView = LayoutInflater.from(parent.getContext()).inflate(resourceId, parent, false);
             viewHolder.linearLayout = (LinearLayout) convertView.findViewById(R.id.linear_root);
 
-
             for (int i = 0; i < data.size(); i++) {
                 TextView item = new TextView(context);
-
+                TextPaint paint = item.getPaint();
+                paint.setTextSize(DensityUtil.getPixels(R.dimen.x28));
                 item.setWidth(textWidths[i]);//设置宽度
                 item.setSingleLine(true);
                 item.setGravity(Gravity.CENTER_VERTICAL);
-                item.setTextSize(15);
-                //item.setTextColor(context.getResources().getColor(R.color.color_323232));
-                //item.setPadding(5, 5, 5, 5);
                 viewHolder.linearLayout.addView(item);
             }
             convertView.setTag(viewHolder);

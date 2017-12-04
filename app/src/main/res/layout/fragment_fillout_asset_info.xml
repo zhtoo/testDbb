@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/backgroundGrey"
+            android:orientation="vertical"
+            android:scrollIndicators="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundGrey"
+        android:orientation="vertical">
+
+        <View style="@style/horizontalLine"
+              android:layout_marginTop="@dimen/y10"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_own_house_address"
+                android:text="自有房产地址："
+                style="@style/filloutItemText"/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_own_address_edit"
+                android:hint="小箭头"
+                style="@style/filloutItemEdit"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"
+              android:layout_marginLeft="@dimen/y22"/>
+
+        <LinearLayout style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_own_street"
+                android:text="街道："
+                style="@style/filloutItemText"/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_own_street_edit"
+                android:hint="乡镇/街道/小区/楼"
+                style="@style/filloutItemEdit"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"/>
+
+        <View style="@style/horizontalLine"
+              android:layout_marginTop="@dimen/y10"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_own_house_area"
+                android:text="自有房产建筑面积："
+                style="@style/filloutItemText"/>
+
+            <View
+                style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_own_house_area_edit"
+                android:hint="请输入面积"
+                style="@style/filloutItemEdit"/>
+
+            <TextView
+                android:text="m²"
+                style="@style/filloutItemText"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"
+              android:layout_marginLeft="@dimen/y22"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_own_house_property"
+                android:text="自有房产性质："
+                style="@style/filloutItemText"/>
+
+            <View style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_own_house_property_edit"
+                android:hint="小箭头"
+                style="@style/filloutItemEdit"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"
+              android:layout_marginLeft="@dimen/y22"/>
+
+        <LinearLayout
+            style="@style/filloutItemLayout">
+
+            <TextView
+                android:id="@+id/lender_monthly_income"
+                android:text="工资月收入："
+                style="@style/filloutItemText"/>
+
+            <View
+                style="@style/autoFillStyle"/>
+
+            <EditText
+                android:id="@+id/lender_monthly_income_edit"
+                android:hint="请输入人数"
+                style="@style/filloutItemEdit"/>
+
+            <TextView
+                android:text="元"
+                style="@style/filloutItemText"/>
+
+        </LinearLayout>
+
+        <View style="@style/horizontalLine"/>
+
+    </LinearLayout>
+</ScrollView>

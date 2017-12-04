@@ -86,7 +86,7 @@ public class DensityUtil {
 
 
 	public static int getPixels(int dimenResId) {
-		return (int) MyApplication.getContext().getResources().getDimension(dimenResId);
+		return (int) (MyApplication.getContext().getResources().getDimension(dimenResId)+0.5);
 	}
 
 

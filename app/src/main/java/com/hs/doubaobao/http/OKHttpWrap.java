@@ -178,7 +178,7 @@ public class OKHttpWrap {
     }
 
     /**
-     * 上传文件
+     * 上传文件（可多文件）
      *
      * @param url       接口地址
      * @param paramsMap 参数

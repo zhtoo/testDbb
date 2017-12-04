@@ -29,4 +29,16 @@
         <attr name="border_color" format="color" />
     </declare-styleable>
 
+    <!--ArcProgressView-->
+    <declare-styleable name="ArcProgressView">
+        <attr name="arcCircleWidth" format="float"/>
+        <attr name="arcProgress" format="float"/>
+        <attr name="arcProgressMax" format="float"/>
+        <attr name="arcStartAngle" format="float"/>
+        <attr name="arcMaxAngle" format="float"/>
+        <attr name="arcBackgroundColor" format="color"/>
+        <attr name="arcProgressColor" format="color"/>
+    </declare-styleable>
+
+
 </resources>

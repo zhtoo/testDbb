@@ -6,10 +6,59 @@
               android:orientation="vertical">
 
     <!--标题-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y128"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="@dimen/x26"
+                android:layout_height="@dimen/x49"
+                android:layout_marginLeft="@dimen/x31"
+                android:background="@drawable/ic_arrow_left_selector"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="贷款申请"/>
+
+        <SearchView
+            android:layout_gravity="center_vertical|right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="true"
+            android:queryHint="请输入搜索内容"/>
+
+        <LinearLayout
+            android:onClick="onAddNewTable"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <Button
+                android:onClick="onAddNewTable"
+                android:layout_width="@dimen/x26"
+                android:layout_height="@dimen/x49"
+                android:layout_marginLeft="@dimen/x31"
+                android:layout_marginRight="@dimen/x44"
+                android:background="@drawable/ic_right_arrow_selector"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <!--列表-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/applyload_recyclerview"
         android:layout_width="match_parent"

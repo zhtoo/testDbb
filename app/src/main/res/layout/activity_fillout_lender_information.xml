@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:gravity="center"
+        android:background="@color/color2"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/fillout_basic_info_tab"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <com.hs.doubaobao.view.ArcProgressView
+                android:id="@+id/fillout_basic_info_progress"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:layout_gravity="center|bottom"
+                app:arcCircleWidth="@dimen/x3"/>
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="@dimen/y10"
+                android:src="@drawable/ic_basic_info_finish"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fillout_live_info_tab"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <com.hs.doubaobao.view.ArcProgressView
+                android:id="@+id/fillout_live_info_progress"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:layout_gravity="center|bottom"
+                app:arcCircleWidth="@dimen/x3"/>
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="@dimen/y10"
+                android:src="@drawable/ic_live_info"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fillout_asset_info_tab"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <com.hs.doubaobao.view.ArcProgressView
+                android:id="@+id/fillout_asset_info_progress"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:layout_gravity="center|bottom"
+                app:arcCircleWidth="@dimen/x3"/>
+
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="@dimen/y10"
+                android:src="@drawable/ic_asset_info"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/lender_info_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y35"
+        android:background="@color/white"
+        app:tabBackground="@color/color1"
+        app:tabIndicatorColor="@color/Orange"
+        app:tabIndicatorHeight="@dimen/y2"
+        app:tabSelectedTextColor="@color/Orange"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/lender_info_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <Button
+        android:id="@+id/fillout_lender_info_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:gravity="center"
+        android:text="保存并下一步"
+        android:textSize="@dimen/x36"/>
+
+</LinearLayout>
