@@ -32,31 +32,12 @@
             android:layout_weight="1"
             android:text="贷款申请"/>
 
-        <RelativeLayout
-            android:id="@+id/apply_list_test"
+        <SearchView
+            android:layout_gravity="center_vertical|right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/Orange">
-
-            <ImageView
-                android:id="@+id/apply_list_search"
-                android:layout_width="@dimen/x46"
-                android:layout_height="@dimen/x46"
-                android:src="@drawable/ic_search"
-                android:layout_centerVertical="true"/>
-
-            <EditText
-                android:background="@color/backgroundGrey"
-                android:visibility="gone"
-                android:id="@+id/apply_list_edit"
-                android:layout_toRightOf="@id/apply_list_search"
-                android:layout_width="@dimen/x300"
-                android:layout_height="match_parent"/>
-
-        </RelativeLayout>
-
-
-
+            android:iconifiedByDefault="true"
+            android:queryHint="请输入搜索内容"/>
 
         <LinearLayout
             android:onClick="onAddNewTable"

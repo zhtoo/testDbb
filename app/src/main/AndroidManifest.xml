@@ -70,7 +70,8 @@
                 <!--添加新表-->
                 <activity android:name=".model.AddLoanTable.AddLoanTableActivity"/>
                 <!--贷款人信息-->
-                <activity android:name=".model.AddLoanTable.uploadMessage.FilloutLenderInformationActivity"/>
+                <activity android:name=".model.AddLoanTable.uploadMessage.FilloutLenderInformationActivity"
+                          android:windowSoftInputMode="adjustPan"/>
         <!--风控审批-->
         <activity android:name=".model.riskControl.RiskControlApprovalActivity"/>
         <!--总经理审批-->

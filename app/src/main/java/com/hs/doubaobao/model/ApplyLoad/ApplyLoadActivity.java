@@ -1,7 +1,5 @@
 package com.hs.doubaobao.model.ApplyLoad;
 
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -50,19 +48,19 @@ public class ApplyLoadActivity extends TransparentBarActivity implements ApplyLo
         setContentView(R.layout.activity_apply_load);
 
         recyclerView = (RecyclerView) findViewById(R.id.applyload_recyclerview);
-        test = (RelativeLayout) findViewById(R.id.apply_list_test);
+       /* test = (RelativeLayout) findViewById(R.id.apply_list_test);
         editText = (EditText) findViewById(R.id.apply_list_edit);
-        image = (ImageView) findViewById(R.id.apply_list_search);
+        image = (ImageView) findViewById(R.id.apply_list_search);*/
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+/*
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editText.setVisibility(View.VISIBLE);
                 ShowSearchAnimator(0f, 1f);
             }
-        });
+        });*/
 
         setBarAlpha(100);
         initData();
@@ -116,7 +114,7 @@ public class ApplyLoadActivity extends TransparentBarActivity implements ApplyLo
     }
 
 
-    private void ShowSearchAnimator(float start, float end) {
+   /* private void ShowSearchAnimator(float start, float end) {
         //设置缩放的相对位置
         test.setPivotX(editText.getWidth());//相对于控件的位子
         test.setPivotY(0);
@@ -135,7 +133,7 @@ public class ApplyLoadActivity extends TransparentBarActivity implements ApplyLo
             }
         });
 
-    }
+    }*/
 
     /**
      * 跳转到创建新表界面

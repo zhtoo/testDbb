@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGrey"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/dailog_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/dailog_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dailog_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="其他"
+                android:textColor="@color/dialogText"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/dailog_edittext"
+                android:layout_width="@dimen/x300"
+                android:layout_height="wrap_content"
+                android:hint="请输入"
+                android:textColor="@color/dialogText"
+                android:textColorHint="@color/dialogText"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dailog_has_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元)"
+                android:textColor="@color/dialogText"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View style="@style/horizontalLine" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dailog_bt_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x25"
+                android:textSize="18sp"
+                android:text="取消"
+                android:textColor="@color/textBrown" />
+
+            <TextView
+                android:id="@+id/dailog_bt_ensure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x88"
+                android:textSize="18sp"
+                android:padding="@dimen/x25"
+                android:text="确定"
+                android:textColor="@color/textOrange" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

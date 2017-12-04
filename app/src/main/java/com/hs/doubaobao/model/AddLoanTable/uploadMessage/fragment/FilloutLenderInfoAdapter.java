@@ -16,13 +16,9 @@ import java.util.List;
 
 public class FilloutLenderInfoAdapter extends FragmentPagerAdapter {
 
-    /**
-     * fragment集合
-     */
+    /**fragment集合*/
     private List<Fragment> mFragmentList = null;
-    /**
-     * 标题集合
-     */
+    /**标题集合*/
     private String[] titles;
 
     public FilloutLenderInfoAdapter(FragmentManager mFragmentManager,
@@ -48,7 +44,7 @@ public class FilloutLenderInfoAdapter extends FragmentPagerAdapter {
     /**
      * 获取数量
      *
-     * @return the count
+     * @return page的数量
      * @see android.support.v4.view.PagerAdapter#getCount()
      */
     @Override
@@ -78,8 +74,8 @@ public class FilloutLenderInfoAdapter extends FragmentPagerAdapter {
     /**
      * 将标题设置到相对应的位置
      *
-     * @param position
-     * @return
+     * @param position the position
+     * @return the page's title
      */
     @Override
     public CharSequence getPageTitle(int position) {
